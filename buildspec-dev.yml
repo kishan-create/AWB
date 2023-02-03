@@ -1,1 +1,22 @@
-test 
+version: 0.2
+run-as: root 
+phases:
+    install:
+        commands:
+            - apt-get update
+            - echo Installing app dependencies...
+            - curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+            - sudo apt-get install -y nodejs
+    pre_build:
+        commands:
+            - echo Start...
+    build:
+        commands:
+            - echo Buildig nodejs package
+            - npm install
+            - aws s3 mb s3://ui-react-cok-dev-bucket
+            - npm run build && aws s3 sync build/ s3://ui-react-cok-dev-bucket
+    post_build:
+        commands:
+            - echo Build completed on `date`
+            - sleep 5
