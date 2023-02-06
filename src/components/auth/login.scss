@@ -1,0 +1,19 @@
+@mixin background-size ($string: contain) {
+    -webkit-background-size: $string;
+    -moz-background-size: $string;
+    -o-background-size: $string;
+    background-size: $string;
+}
+ 
+    
+	.auth-background-holder {
+		background: url("../../images/background/background-2.jpg") no-repeat center center;
+		@include background-size(cover);
+		height: 100vh;
+		min-height: 100%;
+	}
+
+
+    
+
+
