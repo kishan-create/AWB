@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -22,81 +21,23 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import EditIcon from "@mui/icons-material/Edit";
-import { Link } from "react-router-dom";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { FaSearch } from "react-icons/fa";
+import Grouphooks from "./Grouphooks";
+import Userhooks from "../users/functions/Userhooks";
+import AddUserstogroup from "../users/AddUserstogroup";
+import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
+import swal from "sweetalert";
+import Groupheader from "./includes/Groupheader";
+import Tabledata from "../../components/common/Tabledata";
+const {
+  descendingComparator,
+  getComparator,
+  stableSort,
+ 
+  
+} = Tabledata();
 
-import "./usergroup.scss";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function createData(groupname, groupdescription, userGroupCode, action) {
-  return {
-    groupname,
-    groupdescription,
-    userGroupCode,
-    action,
-  };
-}
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
-
-const headCells = [
-  {
-    id: "groupname",
-    numeric: false,
-    disablePadding: true,
-    label: "Group Name",
-  },
-  {
-    id: "groupdescription",
-    numeric: true,
-    disablePadding: false,
-    label: "Group Description",
-  },
-  {
-    id: "groupcode",
-    numeric: true,
-    disablePadding: false,
-    label: "Group Code",
-  },
-
-  {
-    id: "action",
-    numeric: true,
-    disablePadding: false,
-    label: "Action",
-  },
-];
 
 function EnhancedTableHead(props) {
   const {
@@ -110,51 +51,49 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
+ 
   return (
-   
-   
     <TableHead>
+      
       <TableRow>
-        <TableCell padding="checkbox">
-          <div className="form-check">
-            <Checkbox
-              color="primary"
-              size="extrasmall"
-              className="form-check-input"
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{
-                "aria-label": "select all desserts",
-              }}
-            />
-          </div>
+      <TableCell padding="checkbox">
+          <Checkbox
+            color="primary"
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{
+              'aria-label': 'select all users',
+            }}
+          />
         </TableCell>
-        {headCells.map((headCell) => (
+        <TableCell>User Name</TableCell>
+        <TableCell>User FullName</TableCell>
+        <TableCell>User Email</TableCell>
+        
+        {/*  {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
-            padding={headCell.disablePadding ? "none" : "normal"}
+            align={headCell.numeric ? 'right' : 'left'}
+            padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
+              direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
+                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
               ) : null}
             </TableSortLabel>
           </TableCell>
-        ))}
+        ))}*/}
       </TableRow>
     </TableHead>
-   
   );
 }
 
@@ -169,6 +108,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
+  const data = [props.selectRow];
 
   return (
     <Toolbar
@@ -200,14 +140,14 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Users List
+          List Users
         </Typography>
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
+        <Tooltip title="Add To Group">
           <IconButton>
-            <DeleteIcon />
+            <DeleteIcon onClick={(e) => DeleteUsers(e, data)} />
           </IconButton>
         </Tooltip>
       ) : (
@@ -225,52 +165,37 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function List() {
+const DeleteUsers = async (e, data) => {
+  e.preventDefault();
+    const thisclickrow = e.currentTarget;
+    thisclickrow.innerText = "Deleting";
+    const res = await axios.delete(`http://localhost:8000/api/usergroupmembers/${data}`);
+    if (res.data.status == 200) {
+      thisclickrow.closest("tr").remove();
+      alert("Branch Deleted successfully");
+    }
+  
+};
+export default function ViewGroupDetails(props) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const [rows, setUserrows] = useState([]);
-  const [searchInput, setSearchInput] = React.useState("");
-
-  useEffect(() => {
-    getGrouplists();
-  }, []);
-  const handleChange = (e) => {
-    console.log("ji");
-    e.preventDefault();
-    var lowerCase = e.target.value.toLowerCase();
-    setSearchInput(lowerCase);
-  };
-
-  const handleSubmitSearch = async (e) => {
-    console.log(searchInput);
-    e.preventDefault();
-    const response = await axios.get(
-      `https://29eff349-9f6e-4979-a531-bed3ac4fb033.mock.pstmn.io/searchGroup?searchGroupquery=Team=${searchInput}`
-    );
-  };
-
-  const getGrouplists = async () => {
-    const response = await fetch(
-      "https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group"
-    );
-    const data = await response.json();
-    setUserrows(data);
-  };
-
+  const [rowsCheck, SetRowsCheck] = React.useState([]);
+  const [active, setActive] = React.useState('First');
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
+  useEffect(() => {
+    SetRowsCheck(selected);
+  }, [selected]);
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.userId);
       setSelected(newSelected);
       return;
     }
@@ -278,6 +203,8 @@ export default function List() {
   };
 
   const handleClick = (event, name) => {
+    
+    // alert("hii");
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -315,27 +242,27 @@ export default function List() {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const { rows } = Userhooks();
 
+  const handleClickAddView=()=>{
+
+   props.method(false);
+  }
+ 
   return (
     <Box sx={{ width: "100%" }}>
+      <button type="button" onClick={handleClickAddView}>
+                    Add Users
+                </button>
+              
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <form onSubmit={handleSubmitSearch} noValidate>
-          <div>
-            <input
-              type="search"
-              placeholder="Search..."
-              onChange={handleChange}
-              value={searchInput}
-            />
-            <button type="submit">
-              {" "}
-              <FaSearch />
-            </button>
-          </div>
-        </form>
-
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          selectRow={selected}
+        />
+        
         <TableContainer>
+        
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
@@ -350,32 +277,32 @@ export default function List() {
               rowCount={rows.length}
             />
             <TableBody>
+              
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.userId);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
+                    
                     <TableRow
                       hover
+                      onClick={(event) => handleClick(event, row.userId)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={index}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
-                        <div className="form-check">
-                          <Checkbox
-                            color="primary"
-                            className="form-check-input"
-                            checked={isItemSelected}
-                            inputProps={{
-                              "aria-labelledby": labelId,
-                            }}
-                          />
-                        </div>
+                        <TableCell padding="checkbox">
+                        <Checkbox
+                          color="primary"
+                          checked={isItemSelected}
+                          inputProps={{
+                            "aria-labelledby": labelId,
+                          }}
+                        />
                       </TableCell>
                       <TableCell
                         component="th"
@@ -383,36 +310,11 @@ export default function List() {
                         scope="row"
                         padding="none"
                       >
-                        {row.userGroupName}
+                        {row.userName}
                       </TableCell>
-                      <TableCell align="right">{row.userGroupDesc}</TableCell>
-                      <TableCell align="right">{row.userGroupCode}</TableCell>
-                      {/* <TableCell align="right">{row.userFullName}</TableCell> */}
-                      <TableCell align="right">
-                        <Link
-                          to={{
-                            pathname: `/editusergroup/${row.userGroupName}`,
-
-                            data: row.groupname, // your data array of objects
-                          }}
-                        >
-                          <EditIcon />
-                        </Link>
-
-                        <Tooltip title="View Users">
-                          <IconButton>
-                            <Link
-                              to={{
-                                pathname: `/togroup/1`,
-
-                                data: row.groupname, // your data array of objects
-                              }}
-                            >
-                              <VisibilityIcon />
-                            </Link>
-                          </IconButton>
-                        </Tooltip>
-                      </TableCell>
+                      <TableCell align="right">{row.userFullName}</TableCell>
+                      <TableCell align="right">{row.userEmail}</TableCell>
+                    
                     </TableRow>
                   );
                 })}

@@ -221,7 +221,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Users List
+         User list
         </Typography>
       )}
 
