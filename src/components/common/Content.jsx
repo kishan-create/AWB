@@ -10,6 +10,8 @@ import ListGroups from '../../pages/usergroups/ListGroups';
 import EditUsergroup from '../../pages/usergroups/EditUsergroup';
 
 import UserRegistration from '../../pages/registration/UserRegistration';
+import Addagency from '../../pages/agency/Addagency';
+
 
 
 function Content() {
@@ -26,6 +28,7 @@ function Content() {
   <Route  path="/editusergroup/:id" exact={true} element={<EditUsergroup/>} />
 
   <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
+   <Route path="/addagency" exact={true} element={<Addagency/>}/>
   <Route />
  </Routes>
   )

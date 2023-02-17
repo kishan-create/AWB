@@ -2181,7 +2181,7 @@ textarea.form-control-lg {
   padding-left: 1.5em;
   margin-bottom: 0.125rem;
 }
-.form-check . {
+.form-check {
   float: left;
   margin-left: -1.5em;
 }
@@ -12016,3 +12016,37 @@ body {
 }
 
 /*# sourceMappingURL=portal.css.map */
+.page-grid-3 {
+  float: left;
+  width: 100%;
+  display: block;
+  margin-top: 0px;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px 20px;
+  grid-auto-rows: minmax(0px, auto);
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+.css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+  
+  margin-bottom: 20px;
+}
+.css-15wwp11-MuiTableHead-root {
+  display: table-header-group;
+  background-color: #f0f4f6;
+}
+.add-headd-sub1 {
+  font-size: 18px;
+  color: #2a4254; 
+}
+.add-headd-sub {
+  font-size: 18px;
+  color: #2a4254;
+  margin-bottom: 20px;
+}
+
+.p-15 {
+  padding: 15px;
+}
