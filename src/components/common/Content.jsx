@@ -8,8 +8,10 @@ import UserGroup from '../../pages/usergroups/usergroup';
 import ListGroups from '../../pages/usergroups/ListGroups';
 
 import EditUsergroup from '../../pages/usergroups/EditUsergroup';
+import EditAgent from '../../pages/agents/EditAgent'
 
 import UserRegistration from '../../pages/registration/UserRegistration';
+import Addagent from '../../pages/agents/Addagent';
 
 
 function Content() {
@@ -21,6 +23,11 @@ function Content() {
   <Route  path="/edituser/:id" exact={true} element={<EditUsers/>} /> 
   <Route  path="/usergroup" exact={true} element={<UserGroup/>} /> 
   <Route  path="/ListGroups" exact={true} element={<ListGroups/>} /> 
+  <Route  path="/EditAgent" exact={true} element={<EditAgent/>} /> 
+  
+  <Route  path="/Agents" exact={true} element={<Addagent/>} />
+
+  
 
 
   <Route  path="/editusergroup/:id" exact={true} element={<EditUsergroup/>} />
