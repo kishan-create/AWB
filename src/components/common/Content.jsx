@@ -11,8 +11,8 @@ import EditUsergroup from '../../pages/usergroups/EditUsergroup';
 
 import UserRegistration from '../../pages/registration/UserRegistration';
 import Addagency from '../../pages/agency/Addagency';
-
-
+import AgentDataTable from '../../pages/agency/AgentDataTable';
+import ListAgentsData from '../../pages/agency/ListAgentsData'
 
 function Content() {
   return (
@@ -28,7 +28,23 @@ function Content() {
   <Route  path="/editusergroup/:id" exact={true} element={<EditUsergroup/>} />
 
   <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
+
+
+
    <Route path="/addagency" exact={true} element={<Addagency/>}/>
+
+
+
+   <Route path="/ListAgentData" exact={true} element={<AgentDataTable />} />
+   <Route
+        path="/ListAgentheaddata/:id"
+        exact={true}
+        element={<ListAgentsData />}
+      />
+
+
+
+   
   <Route />
  </Routes>
   )
