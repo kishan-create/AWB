@@ -51,7 +51,7 @@ export default function Multiplefileupload(props)
     }, [selectedFiles]);
     
   
-   console.log(validFiles);
+  
   
     // fileDrop method that access all the files which are being dragged and sends to handleFiles method
     const fileDrop = (e) => {
