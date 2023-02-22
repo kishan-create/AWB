@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import PropTypes from "prop-types";
@@ -33,7 +33,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
 import Tabledata from "../../components/common/Tabledata";
-import AgentList from "./Agency";
+import Agency from "./Agency";
 import axios from "axios";
 const {
   descendingComparator,
@@ -42,7 +42,7 @@ const {
   EnhancedTableToolbar,
 } = Tabledata();
 
-const { rows, tableheader } = AgentList();
+const { rows, tableheader } = Agency();
 
 function EnhancedTableHead(props) {
   const {
@@ -102,6 +102,29 @@ export default function AgentDataTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+
+
+  useEffect(() => {
+    getAgencylists();
+    
+  }, []);
+
+
+  const getAgencylists = async () => {
+    
+    const response = await fetch(
+      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency"
+    );
+
+    console.log(response);
+    const data = await response.json();
+    setAgentrows(data);
+  
+  };
+
+
+ const [rows, setAgentrows] = useState( []);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";

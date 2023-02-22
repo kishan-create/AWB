@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import PropTypes from "prop-types";
@@ -44,11 +44,11 @@ const {
   
 } = Tabledata();
 
-const {rows,tableheader}=AgentsData();
+const {tableheader}=AgentsData();
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
-  const data =[props.selectedRow];
+  const { numSelected ,data} = props;
+//   const data =[props.selectedRow];
 
 
   return (
@@ -89,7 +89,8 @@ function EnhancedTableToolbar(props) {
             {/* <DeleteIcon onClick ={(e) => DeleteAgent(e,data)} /> */}
             <DeleteIcon  onClick={() =>
              {if (  window.confirm(  "Are you sure you wish to delete this item?" ) 
-            )DeleteAgent(data);}}  />
+            )DeleteAgent(data);}
+            }  />
           </IconButton>
         </Tooltip>
       ) : (
@@ -106,15 +107,16 @@ function EnhancedTableToolbar(props) {
 
 const DeleteAgent=async(e,data)=>
 {
-  e.preventDefault();
+    alert(data);
+//   e.preventDefault();
   const thisclickrow = e.currentTarget;
   thisclickrow.innerText = "Deleting";
-  const res = await axios.delete(`http://localhost:8000/api/agents/${data}`);
+  const res = await axios.delete(`http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents/${data}`);
 
 
   if (res.data.status == 200) {
     thisclickrow.closest("tr").remove();
-    alert("Branch Deleted successfully");
+    alert("Agent Deleted successfully");
   }
 
 }
@@ -183,6 +185,31 @@ export default function AgentTableList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  
+  
+  
+  useEffect(() => {
+    // console.log("test",rows);
+    getAgents();
+    
+  }, []);
+// console.log("test",rows);
+
+  const getAgents = async () => {
+   
+    const response = await fetch(
+      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer"
+    );
+
+    console.log(response);
+    const data = await response.json();
+    setAgentrows(data);
+  
+  };
+
+  const[rows,setAgentrows]=useState([]);  
+
+  
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -241,6 +268,11 @@ export default function AgentTableList(props) {
     props.method(false);
 
   }
+
+
+
+
+
 
   return (
 <>    

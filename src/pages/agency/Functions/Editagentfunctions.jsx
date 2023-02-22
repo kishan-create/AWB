@@ -15,13 +15,10 @@ const Editagentfunctions = () => {
     agencyFbin: "",
     agencyType: "",
 
-
-  
-
-
   });
   useEffect(() => {
     getagentsbyID(params.id);
+
   }, []);
   const handlePasswordChange = (evnt) => {
     setPasswordInput(evnt.target.value);
@@ -63,10 +60,11 @@ const Editagentfunctions = () => {
     setPasswordType("password");
   };
   const updateagents = async (e) => {
-    alert("test");
+    
     e.preventDefault();
     const res = await axios.put(
       "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/53",
+      
       values
     );
     console.log(res.data);
@@ -79,8 +77,7 @@ const Editagentfunctions = () => {
       });
     }
   };
-  return {
-    
+  return {    
     handlePasswordChange,
     passwordType,
     passwordInput,

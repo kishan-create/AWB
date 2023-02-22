@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import PropTypes from "prop-types";
@@ -42,8 +42,8 @@ const {
   
 } = Tabledata();
 
-const {rows,tableheader}=AgentsData();
-console.log(rows,tableheader);
+const {tableheader}=AgentsData();
+// console.log(rows,tableheader);
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
@@ -183,6 +183,27 @@ export default function AddAgentToAgency(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  useEffect(() => {
+    // console.log("test",rows);
+    getAgents();
+    
+  }, []);
+// console.log("test",rows);
+
+  const getAgents = async () => {
+   
+    const response = await fetch(
+      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer"
+    );
+
+    console.log(response);
+    const data = await response.json();
+    setAgentrows(data);
+  
+  };
+
+  const[rows,setAgentrows]=useState([]);  
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -283,8 +304,6 @@ export default function AddAgentToAgency(props) {
 
                   return (
 
-
-                    
                     <React.Fragment key={row.producerId}>
                       <TableRow
                          hover

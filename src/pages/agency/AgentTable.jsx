@@ -44,7 +44,48 @@ const {
 } = Tabledata();
 
 
-const {rows,tableheader}=Agency();
+const {tableheader}=Agency();
+// const tableheader = [
+//   { field: "agencyId", headerName: "Agent ID", width: 70 },
+
+//   { field: "agencyName", headerName: "Agency Name", width: 130 },
+
+//   { field: "agencyNpn", headerName: "Agency NPN", width: 130 },
+
+//   { field: "agencyFbin", headerName: "Agency Fbin", width: 130 },
+
+//   { field: "agencyType", headerName: "Agency Type", width: 130 },
+
+//   {
+//     field: "fullName",
+//     headerName: "",
+//     description: "This column has a value getter and is not sortable.",
+//     sortable: false,
+//     width: 160,
+//     valueGetter: (params) =>
+//       `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+//   },
+// ];
+
+// const rows = [
+//   { agencyId: 1, agencyName: 'Snow', agencyNpn: 'mail@Jon',agencyFbin:'9167939488', agencyType:1 },
+//   { agencyId: 2, agencyName: 'Lannister', agencyNpn: 'mail@Cersei',agencyFbin:'9167939488', agencyType:1 },
+//   { agencyId: 3, agencyName: 'Lannister', agencyNpn: 'mail@Jaime',agencyFbin:'9167939488', agencyType:1 },
+//   { agencyId: 4, agencyName: 'Stark', agencyNpn: 'mail@Arya',agencyFbin:'9167939488', agencyType:1 },
+//   { agencyId: 5, agencyName: 'Targaryen', agencyNpn: 'mail@Daenerys',agencyFbin:'9167939488', agencyType:1 },
+//   { agencyId: 6, agencyName: 'Melisandre', agencyNpn: null,agencyFbin:'9167939488', agencyType:1 },
+//   { agencyId: 7, agencyName: 'Clifford', agencyNpn: 'mail@Ferrara',agencyFbin:'9167939488', agencyType:1 },
+//   { agencyId: 8, agencyName: 'Frances', agencyNpn: 'mail@Rossini',agencyFbin:'9167939488', agencyType:1 },
+//   { agencyId: 9, agencyName: 'Roxie', agencyNpn: 'mail@Harvey',agencyFbin:'9167939488', agencyType:1 },
+// ];
+
+
+
+
+
+
+
+
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
@@ -182,7 +223,28 @@ export default function AgentTable(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
+
+
+
+  // useEffect(() => {
+  //   getAgencylists();
+    
+  // }, []);
+
+  const getAgencylists = async () => {
+    
+    const response = await fetch(
+      "https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group"
+    );
+
+    console.log(response);
+    const data = await response.json();
+    setAgentrows(data);
+  
+  };
+
+
 
   const fetchData = () => {
     fetch("http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency")
@@ -195,8 +257,11 @@ export default function AgentTable(props) {
   }
   
   useEffect(() => {
-    fetchData()
+    fetchData();
+    getAgencylists();
   }, [])
+  const [rows, setAgentrows] = useState([]);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -267,7 +332,7 @@ export default function AgentTable(props) {
  
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length } selectedRow={selected} />
+        <EnhancedTableToolbar numSelected={selected.length } selectedRow={selected}  />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -279,6 +344,8 @@ export default function AgentTable(props) {
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
+
+
              
 
               onChange={handleClick}
