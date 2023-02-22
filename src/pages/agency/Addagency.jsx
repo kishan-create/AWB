@@ -18,10 +18,11 @@ import Multiplefileupload from "../../components/common/Multiplefileupload";
 export default function Addagency() {
   const [adressData, setAddressData] = useState([]);
   const [fileData, setFileData] = useState([]);
+  const [listadd, SetListadd] = useState([]);
   const { handleChange, handleSubmit, values } = AgencyFunctions(
     Agency_Validation,
     adressData,
-    fileData
+    fileData,listadd
   );
   const getData = (data) => {
     //console.log(data);
@@ -37,7 +38,11 @@ export default function Addagency() {
   {
     setFileData(data);
   }
-  //console.log(fileData);
+  const getAddressDataLatest=(listaddress) =>
+  {
+    SetListadd(listaddress);
+  }
+
   return (
     <div>
       <AgencyHeader />
@@ -151,19 +156,19 @@ export default function Addagency() {
                                       }}
                                     >
                                       <TableCell component="th" scope="row">
-                                        {row.agent_Type}
+                                        {row.addrType}
                                       </TableCell>
                                       <TableCell align="right">
-                                        {row.agent_Adress}
+                                        {row.addrLine1}
                                       </TableCell>
                                       <TableCell align="right">
-                                        {row.agent_Address2}
+                                        {row.addrLine2}
                                       </TableCell>
                                       <TableCell align="right">
-                                        {row.country}
+                                        {row.countryId}
                                       </TableCell>
                                       <TableCell align="left">
-                                        {row.state}
+                                        {row.stateId}
                                       </TableCell>
                                       <TableCell align="left">
                                         {row.zip}
@@ -190,7 +195,7 @@ export default function Addagency() {
                         }
                       })()}
                       <div className="row gx-2 gy-2">
-                        <AddmultipleAdress addressData={getData} />
+                        <AddmultipleAdress addressData={getData}  latestAddress={getAddressDataLatest}/>
                       </div>
                       
                     </div>
