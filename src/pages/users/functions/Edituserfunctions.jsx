@@ -30,26 +30,26 @@ const Edituserfunctions = () => {
   };
   //Get user by ID
   const getUsersbyID = async (id) => {
-    console.log(id);
+   
 
     const response = await axios.get(
-      `https://4c05edda-18b5-41d1-8254-54799a0d6052.mock.pstmn.io/EditUser/${id}`
+      process.env.REACT_APP_API_ADMIN_URL + `/user/${id}`
     );
-    console.log(response)
+    
 
     if (response.status == 200) {
       SetValues({
-        userId: 1,
+        userId:response.data.userId,
         userName: response.data.userName,
         userEmail: response.data.userEmail,
         userFullName: response.data.userFullName,
         password: response.data.password,
+        userPhone:response.data.userPhone
       });
     }
   };
   // console.log(values);
- 
-console.log(values);
+
   const togglePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
@@ -60,7 +60,7 @@ console.log(values);
   const updateUsers = async (e) => {
     e.preventDefault();
     const res = await axios.put(
-      "https://4c05edda-18b5-41d1-8254-54799a0d6052.mock.pstmn.io",
+      process.env.REACT_APP_API_ADMIN_URL + `/user/${values.userId}`,
       values
     );
     if (res.data.status == 200) {
@@ -73,7 +73,6 @@ console.log(values);
     }
   };
   return {
-    
     handlePasswordChange,
     passwordType,
     passwordInput,

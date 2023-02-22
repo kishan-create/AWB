@@ -1,6 +1,6 @@
 import React,{useState,useEffect}  from 'react';
 
-const Userhooks = () => {
+const GroupUserFunction = (id) => {
   const [rows, setUserrows] = useState([]);
     const [passwordType, setPasswordType] = useState("password");
   const [passwordInput, setPasswordInput] = useState("shany");
@@ -9,7 +9,7 @@ const Userhooks = () => {
        }, []);
  const getUsers =async() =>
  {
-    const response = await fetch("http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/user");
+    const response = await fetch(`http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/groupmembers?groupid=${id}`);
     const data = await response.json();
     setUserrows(data);
     
@@ -29,4 +29,4 @@ const Userhooks = () => {
   
 return{rows,handlePasswordChange,passwordType,passwordInput,togglePassword}
 }
-export default Userhooks;
+export default GroupUserFunction;

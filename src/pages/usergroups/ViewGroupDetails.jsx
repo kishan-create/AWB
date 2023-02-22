@@ -29,15 +29,9 @@ import axios from "axios";
 import swal from "sweetalert";
 import Groupheader from "./includes/Groupheader";
 import Tabledata from "../../components/common/Tabledata";
-const {
-  descendingComparator,
-  getComparator,
-  stableSort,
- 
-  
-} = Tabledata();
-
-
+import GroupUserFunction from "./functions/GroupUserFunction";
+import {useParams} from 'react-router-dom';
+const { descendingComparator, getComparator, stableSort } = Tabledata();
 
 function EnhancedTableHead(props) {
   const {
@@ -51,26 +45,25 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
- 
+
   return (
     <TableHead>
-      
       <TableRow>
-      <TableCell padding="checkbox">
+        <TableCell padding="checkbox">
           <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
-              'aria-label': 'select all users',
+              "aria-label": "select all users",
             }}
           />
         </TableCell>
         <TableCell>User Name</TableCell>
         <TableCell>User FullName</TableCell>
         <TableCell>User Email</TableCell>
-        
+
         {/*  {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -167,16 +160,18 @@ EnhancedTableToolbar.propTypes = {
 
 const DeleteUsers = async (e, data) => {
   e.preventDefault();
-    const thisclickrow = e.currentTarget;
-    thisclickrow.innerText = "Deleting";
-    const res = await axios.delete(`http://localhost:8000/api/usergroupmembers/${data}`);
-    if (res.data.status == 200) {
-      thisclickrow.closest("tr").remove();
-      alert("Branch Deleted successfully");
-    }
-  
+  const thisclickrow = e.currentTarget;
+  thisclickrow.innerText = "Deleting";
+  const res = await axios.delete(
+    `http://localhost:8000/api/usergroupmembers/${data}`
+  );
+  if (res.data.status == 200) {
+    thisclickrow.closest("tr").remove();
+    alert("Branch Deleted successfully");
+  }
 };
 export default function ViewGroupDetails(props) {
+  const {id} = useParams();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -184,7 +179,7 @@ export default function ViewGroupDetails(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rowsCheck, SetRowsCheck] = React.useState([]);
-  const [active, setActive] = React.useState('First');
+  const [active, setActive] = React.useState("First");
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -203,7 +198,6 @@ export default function ViewGroupDetails(props) {
   };
 
   const handleClick = (event, name) => {
-    
     // alert("hii");
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -242,27 +236,25 @@ export default function ViewGroupDetails(props) {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  const { rows } = Userhooks();
+  const { rows } = GroupUserFunction(id);
 
-  const handleClickAddView=()=>{
+  const handleClickAddView = () => {
+    props.method(false);
+  };
 
-   props.method(false);
-  }
- 
   return (
     <Box sx={{ width: "100%" }}>
       <button type="button" onClick={handleClickAddView}>
-                    Add Users
-                </button>
-              
+        Add Users
+      </button>
+
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar
           numSelected={selected.length}
           selectRow={selected}
         />
-        
+
         <TableContainer>
-        
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
@@ -277,7 +269,6 @@ export default function ViewGroupDetails(props) {
               rowCount={rows.length}
             />
             <TableBody>
-              
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
@@ -285,7 +276,6 @@ export default function ViewGroupDetails(props) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    
                     <TableRow
                       hover
                       onClick={(event) => handleClick(event, row.userId)}
@@ -295,7 +285,7 @@ export default function ViewGroupDetails(props) {
                       key={index}
                       selected={isItemSelected}
                     >
-                        <TableCell padding="checkbox">
+                      <TableCell padding="checkbox">
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
@@ -314,7 +304,6 @@ export default function ViewGroupDetails(props) {
                       </TableCell>
                       <TableCell align="right">{row.userFullName}</TableCell>
                       <TableCell align="right">{row.userEmail}</TableCell>
-                    
                     </TableRow>
                   );
                 })}
