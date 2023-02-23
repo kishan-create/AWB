@@ -5,7 +5,6 @@ import axios from "axios";
 import swal from "sweetalert2"
 import logo from '../../images/awb_logo.svg'
 
-
 const Registration = (registeration_validation) => {
    const [values, SetValues] = useState({ 
     userName: "", 
@@ -14,11 +13,7 @@ const Registration = (registeration_validation) => {
     password: "", 
   userFullName: "", });
 
-
-
-
 const [errors, setErrors] = useState({});
-
 
 const [submitted, setSubmitted] = useState(false);
 
@@ -45,16 +40,11 @@ const handleSubmit = (e) =>
       console.log(values)
      };
 
-
-
      const onSubmitform = (e) => 
      {  
-       const response = axios.post(  "http://localhost:8000/api/add_registrationgroup",  values ); 
+       const response = axios.post(  "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/user",  values ); 
         response.then(function(res) {  if (res.data.status === 200)
            {  swal({  title: "Good job!",  text: "Usergroup Details added successfully",  icon: "success",  button: "ok", }); } }); };
-
-
-
 
 return{handleChange,values,handleSubmit,errors};
 

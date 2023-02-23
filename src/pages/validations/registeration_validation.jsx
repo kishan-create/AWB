@@ -28,8 +28,8 @@ const pwregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,25}$/;
 
             if (!values.userPhone.trim() ) 
             {  errors.userPhone = "User phone number required"; } 
-            else if(!numregex.test(values.number))
-           {  errors.number = "Use number only"; } 
+            else if(!numregex.test(values.userPhone))
+           {  errors.userPhone = "Use number only"; } 
 
 
 
