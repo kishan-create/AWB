@@ -261,7 +261,9 @@ const getGrouplists =async() =>
 {
 
 
-const response = await fetch("https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group");
+// const response = await fetch("https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group");
+const response = await fetch("http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup");
+
 const data = await response.json();
 setUserrows(data);
 
