@@ -241,7 +241,7 @@ useEffect(() => {
   getGrouplists();
  }, []);
  const handleChange = (e) => {
-   console.log("ji");
+  
   e.preventDefault();
   var lowerCase = e.target.value.toLowerCase();
   setSearchInput(lowerCase);
@@ -261,7 +261,6 @@ const getGrouplists =async() =>
 {
 
 
-// const response = await fetch("https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group");
 const response = await fetch("http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup");
 
 const data = await response.json();
@@ -409,11 +408,11 @@ setUserrows(data);
                       </TableCell>
                       <TableCell align="right">{row.userGroupDesc}</TableCell>
                       <TableCell align="right">{row.userGroupCode}</TableCell>
-                      {/* <TableCell align="right">{row.userFullName}</TableCell> */}
+                   
                       <TableCell align="right">
                       <Link
                           to={{
-                            pathname: `/editusergroup/${row.userGroupName}`,
+                            pathname: `/editusergroup/${row.userGroupId}`,
   
                             data: row.groupname, // your data array of objects
                           }}

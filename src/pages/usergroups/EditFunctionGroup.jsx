@@ -4,23 +4,19 @@ import axios from "axios";
 import swal from "sweetalert2";
 
 const Editgroupfunction = () =>{
+  const [values, SetValues] = useState({ 
+  userGroupName: "", 
+  userGroupDesc: "",
+  userGroupCode: "",  
+ });
     const params = useParams();
 
     const [submitted, setSubmitted] = useState(false);
 const [errors, setErrors] = useState({});
 const [rows, setUserrows] = useState([]);
 
-const [values, SetValues] = useState({ 
-  userGroupName: "", 
-  userGroupDesc: "",
-  userGroupCode: "",  
- });
 
-  
    const handleChange = (e) => { 
-    
-   
-  
      const { name, value } = e.target;
        SetValues({ 
         ...values,
@@ -34,7 +30,7 @@ const [values, SetValues] = useState({
     e.preventDefault(); 
  
     setSubmitted(true); 
-    console.log(values);
+    console.log("edit values",values);
  }
 
  useEffect(() => {
@@ -44,13 +40,11 @@ const [values, SetValues] = useState({
 
 const getGroupsbyID =async() =>
 {
-
-
-const response = await fetch(`https://2b83fe9b-7133-49e5-a9ad-e94194aa511b.mock.pstmn.io/usergroup`);
-// const data = await response.json();
-//setUserrows(data);
-// console.log(data)
-console.log(response)
+const response = await fetch(`https://2b83fe9b-7133-49e5-a9ad-e94194aa511b.mock.pstmn.io/usergrouphttp://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/2`);
+const data = await response.json();
+// setUserrows(data);
+// console.log("dT",data)
+console.log("response",response)
 
 if (response.status == 200) {
     SetValues({
@@ -64,9 +58,6 @@ if (response.status == 200) {
 
 
 }
-
-
-
 return{handleChange,values,handleEdit,rows};
 
 }
