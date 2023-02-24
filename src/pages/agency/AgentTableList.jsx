@@ -274,7 +274,7 @@ export default function AgentTableList(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   const handleClickViewPage=()=>{
-    props.method(false);
+    props.method(true);
 
   }
 
@@ -287,6 +287,12 @@ export default function AgentTableList(props) {
 <>    
 
     <>
+    <TextField
+        variant="outlined"
+        placeholder="search..."
+        type="search"
+        onInput={(e) => requestSearch(e.target.value)}
+      />
 
   <h1>Add Page</h1>
     <button onClick={handleClickViewPage}>add</button>
