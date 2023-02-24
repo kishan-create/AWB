@@ -184,11 +184,9 @@ export default function AddAgentToAgency(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   useEffect(() => {
-    // console.log("test",rows);
-    getAgents();
+        getAgents();
     
   }, []);
-// console.log("test",rows);
 
   const getAgents = async () => {
    

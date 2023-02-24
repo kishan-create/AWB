@@ -24,6 +24,7 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import TextField from "@mui/material/TextField";
 
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -184,15 +185,24 @@ export default function AgentTableList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  // const [rowss, setRows] = React.useState(rows);
   
-  
+
   
   useEffect(() => {
-    // console.log("test",rows);
+   
     getAgents();
     
   }, []);
-// console.log("test",rows);
+
+  const requestSearch = (searchedVal) => {
+    // const filteredRows = rows.filter((row) => {
+    //   return row.producerName.toLowerCase().includes(searchedVal.toLowerCase());
+    // });
+    // setRows(filteredRows);
+    console.log("searchedVal");
+  };
+
 
   const getAgents = async () => {
    

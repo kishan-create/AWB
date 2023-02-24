@@ -12,13 +12,9 @@ import add_circle from '../../images/add_circle.svg';
 
 
 export default function  ListAgentData() {
-   
-  
- 
+
   return (
 
-
-    
     <div>
     <div className="app-status justify-content-between align-items-center">
     <div className="container-fluid">
