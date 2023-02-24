@@ -1,6 +1,6 @@
 import React,{useState,useEffect}  from 'react';
 
-const GroupUserFunction = (id) => {
+const NongroupMembers = (groupID) => {
   const [rows, setUserrows] = useState([]);
     const [passwordType, setPasswordType] = useState("password");
   const [passwordInput, setPasswordInput] = useState("shany");
@@ -9,7 +9,7 @@ const GroupUserFunction = (id) => {
        }, []);
  const getUsers =async() =>
  {
-    const response = await fetch(`http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/groupmembers?groupid=${id}`);
+    const response = await fetch(`http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/nongroupmembers?groupid=${groupID}`);
     const data = await response.json();
     setUserrows(data);
     
@@ -29,4 +29,4 @@ const GroupUserFunction = (id) => {
   
 return{rows,handlePasswordChange,passwordType,passwordInput,togglePassword,getUsers}
 }
-export default GroupUserFunction;
+export default NongroupMembers;

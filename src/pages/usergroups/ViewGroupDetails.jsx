@@ -30,7 +30,7 @@ import swal from "sweetalert";
 import Groupheader from "./includes/Groupheader";
 import Tabledata from "../../components/common/Tabledata";
 import GroupUserFunction from "./functions/GroupUserFunction";
-import {useParams} from 'react-router-dom';
+import { useParams } from "react-router-dom";
 const { descendingComparator, getComparator, stableSort } = Tabledata();
 
 function EnhancedTableHead(props) {
@@ -100,9 +100,11 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  
+  let { numSelected } = props;
+  
   const data = [props.selectRow];
-
+  
   return (
     <Toolbar
       sx={{
@@ -138,9 +140,12 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Add To Group">
-          <IconButton>
-            <DeleteIcon onClick={(e) => DeleteUsers(e, data)} />
+        <Tooltip title=" Group">
+          <IconButton  onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) DeleteUsers(e, data, props.getGroupID,props.resetCheckbox) } }>
+        
+            <DeleteIcon
+              
+            />
           </IconButton>
         </Tooltip>
       ) : (
@@ -158,20 +163,33 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-const DeleteUsers = async (e, data) => {
+const DeleteUsers = async (e, data, groupID,reseMethod) => {
   e.preventDefault();
+let dataID=data[0];
+
   const thisclickrow = e.currentTarget;
-  thisclickrow.innerText = "Deleting";
-  const res = await axios.delete(
-    `http://localhost:8000/api/usergroupmembers/${data}`
-  );
-  if (res.data.status == 200) {
-    thisclickrow.closest("tr").remove();
-    alert("Branch Deleted successfully");
-  }
+  
+  const response = await axios.delete(
+    process.env.REACT_APP_API_ADMIN_URL + `/usergroup/${groupID}/groupmembers`,
+    { data:dataID }
+  ).then((response)=>{
+   // thisclickrow.closest("tr").remove();
+    if (response.status === 200) {
+      reseMethod();
+      swal({
+        title: "Good job!",
+        text: " Record deleted successfully",
+        icon: "success",
+        button: "ok",
+      });
+     
+    }
+  });
+
+ 
 };
 export default function ViewGroupDetails(props) {
-  const {id} = useParams();
+  const { id } = useParams();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -236,12 +254,17 @@ export default function ViewGroupDetails(props) {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  const { rows } = GroupUserFunction(id);
+  const { rows,getUsers } = GroupUserFunction(id);
 
   const handleClickAddView = () => {
     props.method(false);
   };
+  const resetCheckbox=()=>
+  {
+    setSelected([]);
+    getUsers();
 
+  } 
   return (
     <Box sx={{ width: "100%" }}>
       <button type="button" onClick={handleClickAddView}>
@@ -252,6 +275,8 @@ export default function ViewGroupDetails(props) {
         <EnhancedTableToolbar
           numSelected={selected.length}
           selectRow={selected}
+          getGroupID={id}
+          resetCheckbox={resetCheckbox}
         />
 
         <TableContainer>

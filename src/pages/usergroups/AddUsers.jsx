@@ -31,6 +31,7 @@ import Groupheader from "./includes/Groupheader";
 import Tabledata from "../../components/common/Tabledata";
 import TextField from "@mui/material/TextField";
 import {useParams} from 'react-router-dom';
+import NongroupMembers from "../users/functions/NongroupMembers";
 const {
   descendingComparator,
   getComparator,
@@ -148,8 +149,10 @@ function EnhancedTableToolbar(props) {
 
       {numSelected > 0 ? (
         <Tooltip title="Add To Group">
-           <IconButton>
-            <AddIcon onClick={(e) => UserTogroups(e, data,props.userid)} />
+           <IconButton   onClick={(e) => { if (window.confirm('Are you sure you wish to add this item?')) UserTogroups(e, data,props.userid,props.resetCheckbox) } } >
+         
+          
+            <AddIcon />
           </IconButton>
         </Tooltip>
       ) : (
@@ -167,32 +170,36 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-const UserTogroups = async (e, data,userid) => {
+const UserTogroups = async (e, data,userid,reseMethod) => {
   var Groupid = userid;
+  var gmembers=data[0]
   const userData = {
     Groupid: Groupid,
-    groupmembers: data,
+    groupmembers: data[0],
   };
   const response = axios.post(
-    process.env.REACT_APP_API_ADMIN_URL + "/usergroup",
-    userData,
+   `http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/${Groupid}/groupmembers`,
+    gmembers,
     
    
-  );
-  if (response.status == 200) {
-    swal({
-      title: "Good job!",
-      text: "User Added successfully",
-      icon: "success",
-      button: "ok",
-    });
-  }
+  ).then((response) => {
+    reseMethod();
+    if (response.status === 200) {
+      swal({
+        title: "Good job!",
+        text: "User Added successfully",
+        icon: "success",
+        button: "ok",
+      });
+    
+    }
+  });
 };
 
 export default function AddUsers(props) {
   const {id} = useParams();
  
-  const { rows } = Userhooks();
+  const { rows,getUsers } = NongroupMembers(id);
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -271,7 +278,12 @@ export default function AddUsers(props) {
 
    props.method(true);
   }
- 
+  const resetCheckbox=()=>
+  {
+    setSelected([]);
+    getUsers();
+
+  }
   return (
     <Box sx={{ width: "100%" }}>
         <TextField
@@ -288,6 +300,7 @@ export default function AddUsers(props) {
           numSelected={selected.length}
           selectRow={selected}
           userid={id}
+          resetCheckbox={resetCheckbox}
         />
         
         <TableContainer>

@@ -10,8 +10,9 @@ import ListGroups from '../../pages/usergroups/ListGroups';
 import EditUsergroup from '../../pages/usergroups/EditUsergroup';
 
 import UserRegistration from '../../pages/registration/UserRegistration';
-import ViewGroupDetails from '../../pages/usergroups/ViewGroupDetails';
+
 import AddUserstogroup from '../../pages/users/AddUserstogroup';
+import TestForm from '../../pages/users/TestForm';
 function Content() {
   return (
   <Routes>
@@ -27,6 +28,7 @@ function Content() {
 
   <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
   <Route path="/togroup/:id" exact={true} element={<AddUserstogroup/>}/>
+  <Route  path="/mform" exact={true} element={<TestForm/>} /> 
   <Route />
  </Routes>
   )
