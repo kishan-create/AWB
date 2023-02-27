@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
 
@@ -9,6 +9,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import http from "./http-common";
+import axios from "axios";
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -28,99 +30,113 @@ const customStyles = {
 };
 
 export default function AddmultipleAdress(props) {
-  const[name,SetName]=useState("shanu");
+  const [name, SetName] = useState("shanu");
   let subtitle;
   let count = 0;
   const [modalIsOpen, setIsOpen] = React.useState(false);
   // const [address1,setAddress1]=useState("");
   const [inputFields, setInputFields] = useState([
     {
-      agent_Type: "",
-      agent_Adress: "",
-      agent_Address2: "",
+      addrType: "",
+      addrLine1: "",
+      addrLine2: "",
 
-      country: "",
-      state: "",
+      countryId: "",
+      stateId: "",
+      countyId: "3",
       zip: "",
-      location: "",
     },
   ]);
 
-  const [inputFields2, setInputFields2] = useState({
-    agent_Type: "",
-    agent_Adress: "test",
-    agent_Address2: "",
-
-    country: "",
-    state: "",
-    zip: "",
-    location: "",
-  });
-  const [values, SetValues] = useState({
-    holiday_name: "",
-    project_name: "",
-    calander_type: "",
-    location_name: "",
-    holiday_name_drop: "",
-  });
-
   const [listaddress, SetlistAddress] = useState([]);
   const [btnCount, setbtnCount] = useState(0);
+  const [countryName, SetCountryName] = useState([]);
   function openModal() {
     setIsOpen(true);
   }
-
+  useEffect(() => {
+    getAllCountryName();
+    props.latestAddress(listaddress);
+  }, [listaddress]);
+  const getAllCountryName = async () => {
+    const response = http.get("/lookupdata/2").then((response) => {
+      if (response.status === 200) {
+        SetCountryName(response.data);
+      }
+    });
+  };
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
     //subtitle.style.color = "#f00";
   }
 
   function closeModal() {
+   
     setIsOpen(false);
   }
   const handleChangeDrop = (index, evnt) => {};
 
   const handleChange = (index, evnt) => {
+    if (evnt.target.name === "country" && evnt.target.value !== "") {
+      getStateValues(evnt.target.value);
+    }
     inputFields[index][evnt.target.name] = evnt.target.value;
-    //
   };
-
+  const getStateValues = async (id) => {};
   const addAddress = () => {
     {
       setbtnCount(btnCount + 1);
       let data = {
-        agent_Type: "",
-        agent_Adress: "",
-        agent_Address2: "",
+        addrType: "",
+        addrLine1: "",
+        addrLine2: "",
 
-        country: "",
-        state: "",
+        countryId: "",
+        stateId: "",
+        countyId: "3",
         zip: "",
-        location: "",
       };
       //  data[evnt.target.name] = evnt.target.value;
       setInputFields((prevState) => [...prevState, data]);
       SetlistAddress(inputFields);
+      submitEachAddress(inputFields[btnCount], btnCount);
       SetlistAddress({
-        agent_Type: "",
-        agent_Adress: "",
-        agent_Address2: "",
+        addrType: "",
+        addrLine1: "",
+        addrLine2: "",
 
-        country: "",
-        state: "",
+        countryId: "",
+        stateId: "",
+        countyId: "3",
         zip: "",
-        location: "",
       });
     }
     props.addressData(inputFields);
     closeModal();
   };
-// console.log(inputFields2);
+  const submitEachAddress = (inputs, btnCount) => {
+    const response = axios
+      .post("http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/addresses", inputs)
+      .then((response) => {
+       
+        if (response.status === 200) {
+          SetlistAddress([...listaddress,{
+            agyAddrTypeCode : response.data.addrType,
+            agencyId : "",
+            addressId:response.data.addrId
 
+          }])
+         
+        }
+       
+       
+      });
+  };
+ 
   return (
     <div>
-      <div className="col-12">
-        <button onClick={openModal} type="button" className="btn btn-link">
+      <div class="col-12">
+        <button onClick={openModal} type="button" class="btn btn-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -138,41 +154,36 @@ export default function AddmultipleAdress(props) {
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        ariaHideApp={false}
-
         style={customStyles}
         contentLabel="Example Modal"
       >
         <div>
-          
           <div>
-            <div className="row gx-2 gy-2">
-              <div className="col-12 mb-3"></div>
+            <div class="row gx-2 gy-2">
+              <div class="col-12 mb-3"></div>
             </div>
             <div className="row gx-2 gy-2">
               <div className="page-grid-3">
                 <div className="">
-                  <label htmlFor="Submission" className="form-label">
-                    Agency address Type <span className="red">*</span>
+                  <label htmlFor="Submission" class="form-label">
+                    Agency address Type <span class="red">*</span>
                   </label>
                   <select
-                    className="form-select mb-3"
-                    name="agent_Type"
+                    class="form-select mb-3"
+                    name="addrType"
                     onChange={(evnt) => handleChange(btnCount, evnt)}
                     defaultValue={inputFields.agent_Type}
                   >
-                    <option selected="" value="work address">
+                    <option selected="" value="1">
                       Work Address
                     </option>
-                    <option value="Billing address">Billing Address</option>
-                    <option value="permenent address">
-                      Permenent Address{" "}
-                    </option>
-                    <option value="shipping address">Shipping Address</option>
+                    <option value="2">Billing Address</option>
+                    <option value="3">Permenent Address </option>
+                    <option value="4">Shipping Address</option>
                   </select>
                 </div>
 
-                <div className="">
+                <div class="">
                   <label htmlFor="Submission" className="form-label">
                     {" "}
                     Address line 1<span className="red">*</span>
@@ -180,7 +191,7 @@ export default function AddmultipleAdress(props) {
                   <div className="input-group ">
                     <input
                       type="text"
-                      name="agent_Adress"
+                      name="addrLine1"
                       className="form-control"
                       placeholder="Enter Address line 1"
                       aria-label="Enter Insured Name"
@@ -198,7 +209,7 @@ export default function AddmultipleAdress(props) {
                   <div className="input-group ">
                     <input
                       type="text"
-                      name="agent_Address2"
+                      name="addrLine2"
                       className="form-control"
                       placeholder="Address line 2"
                       aria-label="Enter Insured Name"
@@ -208,40 +219,38 @@ export default function AddmultipleAdress(props) {
                     />
                   </div>
                 </div>
+
                 <div className="">
                   <label htmlFor="Submission" className="form-label">
                     Country <span className="red">*</span>
                   </label>
-                  <div className="input-group mb-3">
-                    <input
-                      type="text"
-                      name="country"
-                      className="form-control"
-                      placeholder="Country"
-                      aria-label="Date of Submission"
-                      aria-describedby="basic-addon1"
-                      onChange={(evnt) => handleChange(btnCount, evnt)}
-                      value={inputFields.country}
-                    />
-                  </div>
+                  <select
+                    class="form-control"
+                    name="countryId"
+                    onChange={(evnt) => handleChange(btnCount, evnt)}
+                    value={inputFields.countryId}
+                  >
+                    <option value="Select Country">Select</option>
+                    <option value="1">India</option>
+                    <option value="2">USA</option>
+                  </select>
                 </div>
                 <div className="">
                   <label htmlFor="Submission" className="form-label">
                     State <span className="red">*</span>
                   </label>
-                  <div className="input-group mb-3">
-                    <input
-                      type="text"
-                      name="state"
-                      className="form-control"
-                      placeholder="state"
-                      aria-label="Date of Submission"
-                      aria-describedby="basic-addon1"
-                      onChange={(evnt) => handleChange(btnCount, evnt)}
-                      value={inputFields.state}
-                    />
-                  </div>
+                  <select
+                    class="form-control"
+                    name="stateId"
+                    onChange={(evnt) => handleChange(btnCount, evnt)}
+                    value={inputFields.stateId}
+                  >
+                    <option value="Select State">Select</option>
+                    <option value="1">Kerala</option>
+                    <option value="2">TamilNadu</option>
+                  </select>
                 </div>
+
                 <div className="">
                   <label htmlFor="Submission" className="form-label">
                     Zip <span className="red">*</span>
@@ -266,8 +275,8 @@ export default function AddmultipleAdress(props) {
             <div className="row gx-2 gy-4"></div>
           </div>
 
-          <div className="col-12">
-            <button type="button" className="btn btn-link" onClick={addAddress}>
+          <div class="col-12">
+            <button type="button" class="btn btn-link" onClick={addAddress}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"

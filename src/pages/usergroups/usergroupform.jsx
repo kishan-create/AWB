@@ -41,7 +41,7 @@ const Usergroupform = (usergroup_validation) => {
     console.log(values)
 
     const response = axios.post(
-      "http://localhost:8000/api/add_usergroup",
+      "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup",
       values
     );
     response.then(function(res) {

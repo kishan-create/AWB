@@ -240,26 +240,10 @@ export default function List() {
 useEffect(() => {
   getGrouplists();
  }, []);
- const handleChange = (e) => {
-   console.log("ji");
-  e.preventDefault();
-  var lowerCase = e.target.value.toLowerCase();
-  setSearchInput(lowerCase);
-};
 
-
- 
-const handleSubmitSearch = async(e)  => {
-  console.log(searchInput)
-    e.preventDefault();
-    const response = await  axios.get(
-      `https://29eff349-9f6e-4979-a531-bed3ac4fb033.mock.pstmn.io/searchGroup?searchGroupquery=Team=${searchInput}`
-    );
-    }
 
 const getGrouplists =async() =>
 {
-
 
 const response = await fetch("https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group");
 const data = await response.json();
@@ -327,26 +311,6 @@ setUserrows(data);
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
       <form  onSubmit={handleSubmitSearch} noValidate >
-        <div>
-        <input
-               type="search"
-              placeholder="Search..."
-              onChange={handleChange}
-              value={searchInput} 
-              
-              
-            />
-            <button  type="submit">
-              {" "}
-              <FaSearch />
-
-              
-
-            </button>
-
-        </div>
-                
-
         </form>
      
         <EnhancedTableToolbar numSelected={selected.length} />

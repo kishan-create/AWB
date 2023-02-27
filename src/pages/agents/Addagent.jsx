@@ -16,13 +16,25 @@ import EditIcon from '@mui/icons-material/Edit';
 export default function Addagent() {
   const [seen,setSeen] = useState([]);
   const [adressData, setAddressData] = useState([]);
+  const[addressvalue, setAddressValue] = useState([]);
+  const [listadd, SetListadd] = useState([]);
 
 
-  const { handleChange, handleSubmit, values, errors, } = AgentFunctions(Agent_validation,seen,adressData);
+
+  const { handleChange, handleSubmit, values, errors, } = AgentFunctions(Agent_validation,seen,adressData,listadd);
 
   const getData = (data) => {
     setAddressData(data);
   };
+  const getValue = (value) =>{
+    setAddressValue(value);
+  }
+
+   const getAddressDataLatest=(listaddress) =>
+  {
+    SetListadd(listaddress);
+  }
+
   const RemoveAddress = (index) => {
     const rows = [...adressData];
     rows.splice(index, 1);
@@ -31,6 +43,9 @@ export default function Addagent() {
   const handleChangeFileUploads = (data) => {
        setSeen(data)
    };
+
+  // console.log(addressvalue);
+   
  
   return (
     <div>
@@ -150,19 +165,19 @@ export default function Addagent() {
                                     }}
                                   >
                                     <TableCell component="th" scope="row">
-                                      {row.agent_Type}
+                                      {row.addrType}
                                     </TableCell>
                                     <TableCell align="right">
-                                      {row.agent_Adress}
+                                      {row.addrLine1}
                                     </TableCell>
                                     <TableCell align="right">
-                                      {row.agent_Address2}
+                                      {row.addrLine2}
                                     </TableCell>
                                     <TableCell align="right">
-                                      {row.country}
+                                      {row.countryId}
                                     </TableCell>
                                     <TableCell align="left">
-                                      {row.state}
+                                      {row.stateId}
                                     </TableCell>
                                     <TableCell align="left">
                                       {row.zip}
@@ -183,7 +198,8 @@ export default function Addagent() {
                       }
                     })()}
                     <div className="row gx-2 gy-2">
-                      <AddmultipleAdress addressData={getData} />
+                    {/* <AddmultipleAdress addressData={getData} addressValue={getValue} /> */}
+                    <AddmultipleAdress addressData={getData}  latestAddress={getAddressDataLatest}/>
                     </div>
                     <div className="col-sm-4">
                       <Multiplefileupload handleChangeFileUploads={handleChangeFileUploads}/>

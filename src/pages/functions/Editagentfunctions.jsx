@@ -14,10 +14,10 @@ const [values, SetValues] = useState({
     producerName: "",
     producerEmail: "",
     producerPhone: "",
-    billingAddressId: "",
-    permanentAddressId: "",
-    shippingAddressId: "",
-    workAddressId: "",
+    // billingAddressId: "",
+    // permanentAddressId: "",
+    // shippingAddressId: "",
+    // workAddressId: "",
  });
 
    const handleChange = (e) => { 
@@ -39,22 +39,59 @@ const [values, SetValues] = useState({
    }, []);
 
 
-const getAgentsbyID =async() =>
-{
-const response = await fetch(`http://127.0.0.1:8082/submission-svc/producer`);
-const data = await response.json();
-setUserrows(data);
-if (response.status == 200) {
-    SetValues({
+
+
+
+// const getAgentsbyID =async() =>
+// {
+// const response = await fetch(`http://127.0.0.1:8082/submission-svc/producer`);
+// const data = await response.json();
+// setUserrows(data);
+// if (response.status == 200) {
+//     SetValues({
 
   
+//     });
+//   }
+// }
+
+const getAgentsbyID = async(id) =>{
+  const producerId = id;
+  const reponse = await axios.get(
+    `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer/1`
+  );
+  
+
+  if (reponse.status == 200) {
+    SetValues({
+      producerId: reponse.data.producerId,
+      producerName: reponse.data.producerName,
+      producerEmail: reponse.data.producerEmail,
+      producerPhone: reponse.data.producerPhone,
+     
     });
   }
+
+
 }
 
+const updateAgent = async (e) => {
+  e.preventDefault();
+  const res =  axios.put("http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer/4", values);
+  console.log(res)
+  if (res.status == 200) {
+    swal({
+      title: "Good job!",
+      text: "Job Updated successfully",
+      icon: "success",
+      button: "ok",
+    });
+  }
+};
 
 
-return{handleChange,values,handleEdit,rows};
+
+return{handleChange,values,handleEdit,rows,updateAgent};
 }
 
 export default Editagentfunctions;

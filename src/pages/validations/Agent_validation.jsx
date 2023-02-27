@@ -1,6 +1,6 @@
 export default function Agent_validation(values) {
 
-    var numregex = /^(?=.*[0-9]).{8,12}$/ ;
+    var numregex = /^(?=.*[0-9]).{1,12}$/ ;
     const PHONE_REGEX = 
                new RegExp(/"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"/gmi);
   

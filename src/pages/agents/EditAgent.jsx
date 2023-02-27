@@ -5,7 +5,7 @@ import Editagentfunctions from '../functions/Editagentfunctions'
 
 
 export default function EditAgent() {
-const {handleChange,values,handleEdit,rows}=Editagentfunctions();
+const {handleChange,values,handleEdit,rows,updateAgent}=Editagentfunctions();
 
 return (
     <div className="app-wrapper mt-4">
@@ -16,7 +16,7 @@ return (
                 <div className="app-card-body p-2 p-lg-4">
  
                 </div>
-                <form   onSubmit={handleEdit}>
+                <form   onSubmit={updateAgent}>
                 <div className="app-card-body p-2 p-lg-4">
                   <div className="row gx-2 gy-2">
                     <div className="col-12 mb-3">
@@ -29,7 +29,7 @@ return (
                       <label htmlFor="Submission" className="form-label">Agent Name <span className="red">*</span></label>
                       <div className="input-group mb-3">
 
-                            <input type="text" name="producerName"  onChange={handleChange}  value={rows.producerName} className="form-control" placeholder="Enter User Group Name" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
+                            <input type="text" name="producerName"  onChange={handleChange}  value={values.producerName} className="form-control" placeholder="Enter User Group Name" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
 
                       </div>
                     </div>
