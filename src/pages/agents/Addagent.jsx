@@ -118,7 +118,7 @@ export default function Addagent() {
                       </div>
                 </div>
                 </div>
-
+                agents
 </div>
 </div>
 </div>
@@ -133,7 +133,7 @@ export default function Addagent() {
               <form onSubmit={handleSubmit} noValidate>
                 <div className="inner">
                   <div className="app-card-body p-2 p-lg-4">
-                  <h4 className="add-headd-sub">Add Additional Insuerd</h4> 
+                  <h4 className="add-headd-sub">Add Additional Information</h4> 
                     {(() => {
                       if (adressData.length > 0) {
                         return (
@@ -200,7 +200,11 @@ export default function Addagent() {
                     <div className="row gx-2 gy-2">
                     {/* <AddmultipleAdress addressData={getData} addressValue={getValue} /> */}
                     <AddmultipleAdress addressData={getData}  latestAddress={getAddressDataLatest}/>
+                    
                     </div>
+
+                    <br/>
+                    <h6>Upload Documents</h6>
                     <div className="col-sm-4">
                       <Multiplefileupload handleChangeFileUploads={handleChangeFileUploads}/>
                     </div>

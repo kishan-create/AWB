@@ -63,10 +63,10 @@ const Edituserfunctions = () => {
       process.env.REACT_APP_API_ADMIN_URL + `/user/${values.userId}`,
       values
     );
-    if (res.data.status == 200) {
+    if (res.status == 200) {
       swal({
         title: "Good job!",
-        text: "Job Updated successfully",
+        text: "User Updated successfully",
         icon: "success",
         button: "ok",
       });

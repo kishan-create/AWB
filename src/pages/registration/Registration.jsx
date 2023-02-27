@@ -23,7 +23,7 @@ const [submitted, setSubmitted] = useState(false);
 
  const handleChange = (e) => { 
   
-console.log(values);
+
    const { name, value } = e.target;
      SetValues({ 
       ...values,
@@ -37,14 +37,21 @@ const handleSubmit = (e) =>
    e.preventDefault();
     const test = setErrors(registeration_validation(values)); 
     setSubmitted(true); 
-      console.log(values)
+      
      };
 
      const onSubmitform = (e) => 
      {  
        const response = axios.post(  "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/user",  values ); 
-        response.then(function(res) {  if (res.data.status === 200)
-           {  swal({  title: "Good job!",  text: "Usergroup Details added successfully",  icon: "success",  button: "ok", }); } }); };
+       if (response.status == 200) {
+        swal({
+          title: "Good job!",
+          text: "User Added successfully",
+          icon: "success",
+          button: "ok",
+        });
+      }
+     }
 
 return{handleChange,values,handleSubmit,errors};
 

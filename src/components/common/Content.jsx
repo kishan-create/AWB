@@ -25,14 +25,14 @@ function Content() {
   return (
 
   <Routes>
-  
-  <Route path="/" exact={true} element={<UserRegistration/>}/>
+   <Route path="/" exact={true} element={<Userslist/>}/>
+  <Route path="/registration" exact={true} element={<UserRegistration/>}/>
   <Route path="/login" exact={true} element={<Login/>}/>
   <Route path="/userlist" exact={true} element={<Userslist/>}/>
   <Route  path="/edituser/:id" exact={true} element={<EditUsers/>} /> 
   <Route  path="/usergroup" exact={true} element={<UserGroup/>} /> 
   <Route path="/EditAgent" exact={true} element={<EditAgent />} />
-  <Route path="/Agents" exact={true} element={<Addagent />} />
+  <Route path="/agents" exact={true} element={<Addagent />} />
   <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
   <Route path="/togroup/:id" exact={true} element={<AddUserstogroup/>}/>
   <Route path="/addagency" exact={true} element={<Addagency/>}/>

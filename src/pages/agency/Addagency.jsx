@@ -125,7 +125,7 @@ export default function Addagency() {
                 >
                   <div className="inner">
                     <div className="app-card-body p-2 p-lg-4">
-                      <h4 className="add-headd-sub">Add Additional Insuerd</h4>
+                      <h4 className="add-headd-sub">Add Additional Information</h4>
                       {(() => {
                         if (adressData.length > 0) {
                           return (

@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Content />
       {(() => {
-        if (location.pathname !== "/" && location.pathname !== "/login") {
+        if (location.pathname !== "/login") {
           return (
             <div>
               <Header />
