@@ -39,11 +39,13 @@ const AgentFunctions = (Agent_validation, seen, adressData,listadd) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmitform();
+    const test = setErrors(Agent_validation(values));
+    setIsSubmitting(true);
 
-    // const test = setErrors(Agent_validation(values));
-    // // const test2 = setErrors(Agent_validation(adressData));
-    // setIsSubmitting(true);
+
+    // onSubmitform();
+
+    // const test2 = setErrors(Agent_validation(adressData));
   };
 
 
@@ -74,7 +76,6 @@ const AgentFunctions = (Agent_validation, seen, adressData,listadd) => {
       }
     });;
 
-    console.log(returnValue);
    
   
   };
