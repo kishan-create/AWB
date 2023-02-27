@@ -34,6 +34,8 @@ import "./usergroup.scss";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function createData(groupname, groupdescription, userGroupCode, action) {
+
+
   return {
     groupname,
     groupdescription,
@@ -41,6 +43,7 @@ function createData(groupname, groupdescription, userGroupCode, action) {
     action,
   };
 }
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -57,6 +60,7 @@ function getComparator(order, orderBy) {
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
+
 
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
@@ -116,6 +120,7 @@ function EnhancedTableHead(props) {
    
     <TableHead>
       <TableRow>
+        
         <TableCell padding="checkbox">
           <div className="form-check">
             <Checkbox
@@ -200,7 +205,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Users List
+          Users Group List
         </Typography>
       )}
 
@@ -236,15 +241,23 @@ export default function List() {
   const [rows, setUserrows] = useState([]);
   const [searchInput, setSearchInput] = React.useState("");
 
-  useEffect(() => {
-    getGrouplists();
-  }, []);
-  const handleChange = (e) => {
-    console.log("ji");
-    e.preventDefault();
-    var lowerCase = e.target.value.toLowerCase();
-    setSearchInput(lowerCase);
-  };
+
+
+
+
+
+useEffect(() => {
+  getGrouplists();
+ }, []);
+ const handleChange = (e) => {
+  
+  e.preventDefault();
+  var lowerCase = e.target.value.toLowerCase();
+  setSearchInput(lowerCase);
+};
+
+
+ 
 
   const handleSubmitSearch = async (e) => {
     console.log(searchInput);
@@ -254,13 +267,22 @@ export default function List() {
     );
   };
 
-  const getGrouplists = async () => {
-    const response = await fetch(
-      "https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group"
-    );
-    const data = await response.json();
-    setUserrows(data);
-  };
+
+
+
+const getGrouplists =async() =>
+{
+
+
+const response = await fetch("http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup");
+
+const data = await response.json();
+setUserrows(data);
+
+
+
+}
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -270,19 +292,19 @@ export default function List() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.userGroupId);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, userGroupId) => {
+    const selectedIndex = selected.indexOf(userGroupId);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, userGroupId);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -310,7 +332,7 @@ export default function List() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (userGroupId) => selected.indexOf(userGroupId) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -325,15 +347,20 @@ export default function List() {
               type="search"
               placeholder="Search..."
               onChange={handleChange}
-              value={searchInput}
+              value={searchInput} 
+              
+              
             />
             <button type="submit">
               {" "}
               <FaSearch />
+
+              
+
             </button>
           </div>
         </form>
-
+     
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -353,17 +380,24 @@ export default function List() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.userGroupId);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
+                   
                     <TableRow
                       hover
+
+
+                      onClick={(event) => handleClick(event, row.userGroupId)}
+
                       role="checkbox"
+                    
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.userGroupId}
                       selected={isItemSelected}
+                      
                     >
                       <TableCell padding="checkbox">
                         <div className="form-check">
@@ -387,24 +421,24 @@ export default function List() {
                       </TableCell>
                       <TableCell align="right">{row.userGroupDesc}</TableCell>
                       <TableCell align="right">{row.userGroupCode}</TableCell>
-                      {/* <TableCell align="right">{row.userFullName}</TableCell> */}
+                   
                       <TableCell align="right">
                         <Link
                           to={{
-                            pathname: `/editusergroup/${row.userGroupName}`,
-
+                            pathname: `/editusergroup/${row.userGroupId}`,
+  
                             data: row.groupname, // your data array of objects
                           }}
                         >
                           <EditIcon />
                         </Link>
-
+                        
                         <Tooltip title="View Users">
                           <IconButton>
                             <Link
                               to={{
                                 pathname: `/togroup/1`,
-
+                    
                                 data: row.groupname, // your data array of objects
                               }}
                             >

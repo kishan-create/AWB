@@ -15,11 +15,11 @@ return (
                 <div className="app-card-body p-2 p-lg-4">
  
                 </div>
-                <form   onSubmit={handleEdit}>
+                <form  onSubmit={handleEdit} noValidate>
                 <div className="app-card-body p-2 p-lg-4">
                   <div className="row gx-2 gy-2">
                     <div className="col-12 mb-3">
-                      <h5>Edit Users</h5>
+                      <h5>Edit User Group</h5>
                     </div>
                   </div>
                   <div className="row gx-2 gy-2">
@@ -28,7 +28,7 @@ return (
                       <label htmlFor="Submission" className="form-label">User Group Name <span className="red">*</span></label>
                       <div className="input-group mb-3">
 
-                            <input type="text" name="userGroupName"  onChange={handleChange}  value={rows.userGroupName} className="form-control" placeholder="Enter User Group Name" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
+                            <input type="text" name="userGroupName"  onChange={handleChange}  value={values.userGroupName} className="form-control" placeholder="Enter User Group Name" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
 
                       </div>
                     </div>
@@ -45,7 +45,7 @@ return (
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label">User Group Code<span className="red">*</span></label>
                       <div className="input-group mb-3">
-                      <input type="text" name="userGroupCode" onChange={handleChange}  className="form-control" placeholder="Enter Group Code" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
+                      <input type="text" name="userGroupCode" onChange={handleChange} value={values.userGroupCode}  className="form-control" placeholder="Enter Group Code" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
                       </div>
                     </div>
                   </div>

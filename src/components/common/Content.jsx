@@ -11,8 +11,14 @@ import EditUsergroup from '../../pages/usergroups/EditUsergroup';
 
 import UserRegistration from '../../pages/registration/UserRegistration';
 
+
 import AddUserstogroup from '../../pages/users/AddUserstogroup';
-import TestForm from '../../pages/users/TestForm';
+
+
+import Addagency from '../../pages/agency/Addagency';
+import AgentDataTable from '../../pages/agency/AgentDataTable';
+import ListAgentsData from '../../pages/agency/ListAgentsData'
+
 function Content() {
   return (
   <Routes>
@@ -21,14 +27,31 @@ function Content() {
   <Route path="/userlist" exact={true} element={<Userslist/>}/>
   <Route  path="/edituser/:id" exact={true} element={<EditUsers/>} /> 
   <Route  path="/usergroup" exact={true} element={<UserGroup/>} /> 
-  <Route  path="/ListGroups" exact={true} element={<ListGroups/>} /> 
+  {/* <Route  path="/ListGroups" exact={true} element={<ListGroupss/>} />  */}
 
 
   <Route  path="/editusergroup/:id" exact={true} element={<EditUsergroup/>} />
 
   <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
+
   <Route path="/togroup/:id" exact={true} element={<AddUserstogroup/>}/>
-  <Route  path="/mform" exact={true} element={<TestForm/>} /> 
+
+
+
+
+
+   <Route path="/addagency" exact={true} element={<Addagency/>}/>
+
+
+
+   <Route path="/listagency" exact={true} element={<AgentDataTable />} />
+   <Route
+        path="/listagentheaddata/:id"
+        exact={true}
+        element={<ListAgentsData />}
+      />
+
+
   <Route />
  </Routes>
   )
