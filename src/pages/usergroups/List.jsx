@@ -437,7 +437,7 @@ setUserrows(data);
                           <IconButton>
                             <Link
                               to={{
-                                pathname: `/togroup/1`,
+                                pathname: `/togroup/${row.userGroupId}`,
                     
                                 data: row.groupname, // your data array of objects
                               }}

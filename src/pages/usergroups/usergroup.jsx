@@ -1,5 +1,5 @@
 import React from 'react'
-import usergroup_validation from  './usergroup_validation'
+import usergroup_validation from  '../validations/usergroup_validation'
 import Usergroupform from './usergroupform'
 import './usergroup.scss'
 

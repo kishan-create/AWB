@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
+import { faFileAlt, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DeleteIcon from '@mui/icons-material/Delete';
-import DownloadIcon from '@mui/icons-material/Download';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import swal from 'sweetalert';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -14,28 +16,15 @@ import Paper from '@mui/material/Paper';
 import axios from "axios";
 export default function Multiplefileupload(props)
 {
-   
+    
     const fileInputRef = useRef();
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [validFiles, setValidFiles] = useState([]);
     const [unsupportedFiles, setUnsupportedFiles] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
   
-   
-   
-   
-   /* const Data = () =>{
-      props.sendData(validFiles);
-  
-  
-    }*/
-  
-  
-    // useEffect Hook that removes stops duplicate files to be displayed
     useEffect(() => {
-     // console.log(selectedFiles);
-     //console.log(testData);
-   
+
       let filteredArr = selectedFiles.reduce((acc, current) => {
         const x = acc.find((item) => item.name === current.name);
         if (!x) {
@@ -45,28 +34,10 @@ export default function Multiplefileupload(props)
         }
       }, []);
       setValidFiles([...filteredArr]);
-     //sendFilesBack(selectedFiles);
-     //testData(selectedFiles);
      props.handleChangeFileUploads(selectedFiles);
     }, [selectedFiles]);
     
-  
-  
-  
-    // fileDrop method that access all the files which are being dragged and sends to handleFiles method
-    const fileDrop = (e) => {
-      preventDefault(e);
-      const files = e.dataTransfer.files;
-      if (files.length) {
-        handleFiles(files);
-      }
-    };
-  
-    // fileSelected method that sends the files to handleFiles
     const filesSelected = () => {
-     
-     
-      //props.fileData([...selectedFiles]);
       const files = fileInputRef.current.files;
       if (files.length) {
         let filteredArray = [];
@@ -85,15 +56,9 @@ export default function Multiplefileupload(props)
         handleFiles(filteredArray);
   
       }
-    //  console.log(selectedFiles);
-  
-      
       
     };
   
-    // handleFiles method that receives all the files being dragged
-    // validates if the files are of correct type
-    // sets the selectedFiles state if valid or sets errorMessage state variable
     const handleFiles = (files) => {
       for (let i = 0; i < files.length; i++) {
         if (validateFile(files[i])) {
@@ -105,12 +70,9 @@ export default function Multiplefileupload(props)
           setUnsupportedFiles((prevArray) => [...prevArray, files[i]]);
         }
       }
-      
-     
-      
+
     };
   
-    // method that holds the valid allowed file types and checks if each of the file is valid or not
     const validateFile = (file) => {
       const validTypes = [
         "image/jpeg",
@@ -132,11 +94,10 @@ export default function Multiplefileupload(props)
       const element = document.createElement("a");
       element.href = URL.createObjectURL(file);
       element.download = "Sample-" + Date.now() + ".pdf";
-      document.body.appendChild(element); // Required for this to work in FireFox
+      document.body.appendChild(element); 
       element.click();
   }
   
-    // method that receives the file name and handles the deletion of the file from all state variables.
     const removeFile = (name) => {
       const index = validFiles.findIndex((e) => e.name === name);
       const index2 = selectedFiles.findIndex((e) => e.name === name);
@@ -150,15 +111,7 @@ export default function Multiplefileupload(props)
         setUnsupportedFiles([...unsupportedFiles]);
       }
     };
-  
-    
-  
-   
-  
-    const preventDefault = (e) => {
-      e.preventDefault();
-    };
-  
+
     const deleteFile = () =>{
         swal({
             title: "Are you sure ??",
@@ -178,9 +131,6 @@ export default function Multiplefileupload(props)
         });
     }
   
-   
-  
-    // final HTML returned by the App component
     return (
       <div>
         <div className="content">
@@ -196,39 +146,11 @@ export default function Multiplefileupload(props)
                   className="file"
                   onChange={filesSelected}
                 />
-              
+               <label htmlFor="file">Select file</label>
   
                 </div>
               </div>
-              {/* <div className="file-display-container">
-                {validFiles.map((data, i) => (
-                  <div className="file-status-bar" key={i}>
-                    <div>
-                      <span
-                        className={`file-name ${
-                          data.invalid ? "file-error" : ""
-                        }`}
-                      >
-                        {data.name}
-                      </span>
-  
-                      {data.invalid && (
-                        <span className="file-error-message">
-                          ({errorMessage})
-                        </span>
-                      )}
-                    </div>
-                    <div
-                      className="file-remove"
-                      
-                      onClick={() => removeFile()}
-                    >
-                      <FontAwesomeIcon icon={faTrash}/>
-                      
-                    </div>
-                  </div>
-                ))}
-              </div> */}
+            
               {(() => {
                 if (validFiles.length>0){
                   return(
@@ -252,7 +174,7 @@ export default function Multiplefileupload(props)
                             </TableCell>
                             <TableCell align="right">
                             <div>   <a onClick={() => downloadTxtFile()}>
-                            <DownloadIcon/>
+                                        <FileDownloadIcon/>
                                         </a>
                                         {" "}
                                         <a onClick={(e) => deleteFile()}>
@@ -268,17 +190,11 @@ export default function Multiplefileupload(props)
                     </Table>
                   </TableContainer>
                   )
-  
                 }
-                
-  
               })()}
-  
-       
             </div>
           </>
         </div>
       </div>
     );
-    
 }   
