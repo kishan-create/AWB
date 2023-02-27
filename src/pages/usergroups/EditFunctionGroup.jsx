@@ -40,13 +40,12 @@ const [rows, setUserrows] = useState([]);
 
 const getGroupsbyID =async(id) =>
 {
-  // alert("test")
+
 // const response = await fetch(`https://2b83fe9b-7133-49e5-a9ad-e94194aa511b.mock.pstmn.io/usergrouphttp://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/2`);
 const response = await fetch(`http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/${id}`);
 
 const data = await response.json();
-// setUserrows(data);
-// console.log("dT",data)
+
 console.log("response",data)
 
 if (response.status == 200) {

@@ -43,27 +43,6 @@ const {
 } = Tabledata();
 
 const { tableheader } = Agency();
-// const tableheader = [
-//   { field: "agencyId", headerName: "Agent ID", width: 70 },
-
-//   { field: "agencyName", headerName: "Agency Name", width: 130 },
-
-//   { field: "agencyNpn", headerName: "Agency NPN", width: 130 },
-
-//   { field: "agencyFbin", headerName: "Agency Fbin", width: 130 },
-
-//   { field: "agencyType", headerName: "Agency Type", width: 130 },
-
-//   {
-//     field: "fullName",
-//     headerName: "",
-//     description: "This column has a value getter and is not sortable.",
-//     sortable: false,
-//     width: 160,
-//     valueGetter: (params) =>
-//       `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-//   },
-// ];
 
 
 
@@ -129,6 +108,7 @@ function EnhancedTableToolbar(props) {
 }
 
 const DeleteAgent = async (e, data) => {
+  
   e.preventDefault();
   const thisclickrow = e.currentTarget;
   thisclickrow.innerText = "Deleting";
@@ -197,38 +177,7 @@ export default function AgentTable(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [users, setUsers] = useState([]);
 
-  // useEffect(() => {
-  //   getAgencylists();
 
-  // }, []);
-
-  // const getAgencylists = async () => {
-  //   const response = await fetch(
-  //     "https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group"
-  //   );
-
-  //   console.log(response);
-  //   const data = await response.json();
-  //   setAgentrows(data);
-  // };
-
-  // const fetchData = () => {
-  //   fetch(
-  //     "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency"
-  //   )
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setUsers(data);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  //   // getAgencylists();
-  // }, []);
-  // const [rows, setAgentrows] = useState([]);
 
   const rows = [
     { agencyId: 1, agencyName: 'Snow', agencyNpn: 'mail@Jon',agencyFbin:'9167939488', agencyType:1 },

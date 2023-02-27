@@ -11,8 +11,8 @@ SetListPage(data);
   return(
     <div>
 
-{listpage === true ? (<AddAgentToAgency method={SetpageOption} />
-) : (< AgentTableList method={SetpageOption}/> )}
+{listpage === true ? (<AgentTableList method={SetpageOption} />
+) : (<  AddAgentToAgency method={SetpageOption}/> )}
 
   
 

@@ -35,6 +35,7 @@ import AgentsData from "./AgentsData";
 const { descendingComparator, getComparator, stableSort } = Tabledata();
 
 const { tableheader } = AgentsData();
+
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
   const data = [props.selectedRow];
@@ -207,8 +208,14 @@ export default function AddAgentToAgency(props) {
     // );
     // const data = await response.json();
     // setAgentrows(data);
-  
-
+    const response = await fetch(
+      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer"
+             
+      
+    );
+    const data = await response.json();
+    setAgentrows(data);
+    // console.log("agent",data);
   };
 
   console.log(rows);
@@ -268,15 +275,15 @@ export default function AddAgentToAgency(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   const handleClickViewPage = () => {
-    props.method(false);
+    props.method(true);
   };
 
   return (
     <>
       <>
-        <h1>List Page</h1>
+        <h1>Add Page</h1>
 
-        <button onClick={handleClickViewPage}>View</button>
+        <button onClick={handleClickViewPage}>List</button>
 
         <Box sx={{ width: "100%" }}>
           <Paper sx={{ width: "100%", mb: 2 }}>

@@ -30,7 +30,7 @@ import TextField from "@mui/material/TextField";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Tabledata from "../../components/common/Tabledata";
 
@@ -47,8 +47,8 @@ const {
 const {tableheader}=AgentsData();
 
 function EnhancedTableToolbar(props) {
-  const { numSelected ,data} = props;
-//   const data =[props.selectedRow];
+  const { numSelected ,para_id} = props;
+  // const data =[props.selectedRow];
 
 
   return (
@@ -90,7 +90,7 @@ function EnhancedTableToolbar(props) {
             <DeleteIcon  onClick={() =>
              {if (  window.confirm(  "Are you sure you wish to delete this item?" ) 
             )
-            DeleteAgent(data);}
+            DeleteAgent(para_id,props.selectedRow);}
             }  />
           </IconButton>
         </Tooltip>
@@ -106,17 +106,17 @@ function EnhancedTableToolbar(props) {
   
 }
 
-const DeleteAgent=async(e,data,id)=>
+const DeleteAgent=async(para_id,data)=>
 {
 
 
-  const thisclickrow = e.currentTarget;
-  thisclickrow.innerText = "Deleting";
-  const res = await axios.delete(`http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents/${id}`);
+  const res = await axios.delete
+  (`http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${para_id}/agents`,{data});
+  
 
 
   if (res.data.status == 200) {
-    thisclickrow.closest("tr").remove();
+
     alert("Agent Deleted successfully");
   }
 
@@ -179,6 +179,7 @@ EnhancedTableHead.propTypes = {
 
   
 export default function AgentTableList(props) {
+
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -186,13 +187,14 @@ export default function AgentTableList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  // const [rowss, setRowss] = React.useState(rows);
+  const params = useParams();
   
 
   
   useEffect(() => {
    
     getAgents();
+
     
   }, []);
 
@@ -209,12 +211,14 @@ export default function AgentTableList(props) {
    
     const response = await fetch(
       "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer"
+           
+      
     );
 
-    console.log(response);
+   
     const data = await response.json();
     setAgentrows(data);
-  
+    // console.log("agent",data);
   };
 
   const[rows,setAgentrows]=useState([]);  
@@ -275,7 +279,8 @@ export default function AgentTableList(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   const handleClickViewPage=()=>{
-    props.method(true);
+    props.method(false);
+    
 
   }
 
@@ -283,20 +288,15 @@ export default function AgentTableList(props) {
 <>    
 
     <>
-      {/* <TextField
-        variant="outlined"
-        placeholder="search..."
-        type="search"
-        onInput={(e) => requestSearch(e.target.value)}
-      /> */}
+ 
 
-  <h1>Add Page</h1>
-    <button onClick={handleClickViewPage}>add</button>
+  <h1>View Page</h1>
+    <button onClick={handleClickViewPage}>Add</button>
 
  
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length } selectedRow={selected} />
+        <EnhancedTableToolbar numSelected={selected.length } selectedRow={selected}  para_id={params.id} />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -308,6 +308,8 @@ export default function AgentTableList(props) {
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
+             
+
              
 
               onChange={handleClick}
