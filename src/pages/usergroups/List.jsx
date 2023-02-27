@@ -310,7 +310,7 @@ setUserrows(data);
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-      <form  onSubmit={handleSubmitSearch} noValidate >
+      <form   noValidate >
         </form>
      
         <EnhancedTableToolbar numSelected={selected.length} />
