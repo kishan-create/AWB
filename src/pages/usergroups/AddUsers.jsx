@@ -293,7 +293,7 @@ export default function AddUsers(props) {
         onInput={(e) => requestSearch(e.target.value)}
       />
     <button type="button" onClick={handleClickAddView}>
-        View Users
+        List Users
       </button>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar

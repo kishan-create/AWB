@@ -9,11 +9,11 @@ export const Sidebar = () => {
         <div className="sidepanel-inner d-flex flex-column">
           {" "}
           <Link
-            to="/login"
+            to="/addagency"
             id="sidepanel-close"
             className="sidepanel-close d-xl-none"
           >
-            Log in
+            Add Agency
           </Link>
           <div className="app-branding">
             <Link to="/login" id="sidepanel-close" className="app-logo">
@@ -31,7 +31,7 @@ export const Sidebar = () => {
             >
               <li className="nav-item">
                 {" "}
-                <Link to="/login" className="nav-link active">
+                <Link to="/addagency" className="nav-link active">
                   <span className="nav-icon">
                     {" "}
                     <svg
