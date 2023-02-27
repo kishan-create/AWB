@@ -102,6 +102,7 @@ export default function AgentDataTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setAgentrows] = useState( []);
 
 
 
@@ -117,14 +118,14 @@ export default function AgentDataTable() {
       "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency"
     );
 
-    console.log(response);
     const data = await response.json();
     setAgentrows(data);
+
   
   };
 
+  console.log("rows",rows);
 
- const [rows, setAgentrows] = useState( []);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -134,19 +135,19 @@ export default function AgentDataTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.agencyId);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, agencyId) => {
+    const selectedIndex = selected.indexOf(agencyId);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, agencyId);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -174,7 +175,7 @@ export default function AgentDataTable() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (agencyId) => selected.indexOf(agencyId) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -185,7 +186,7 @@ export default function AgentDataTable() {
     const thisclickrow = e.currentTarget;
     thisclickrow.innerText = "Deleting";
     const res = await axios.delete(
-      `https://4c05edda-18b5-41d1-8254-54799a0d6052.mock.pstmn.io/${id}`
+      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents/${id}`
     );
     if (res.data.status == 200) {
       thisclickrow.closest("tr").remove();
@@ -195,6 +196,7 @@ export default function AgentDataTable() {
 
   return (
     <div>
+      <h1>Agency List</h1>
       <div className="app-status justify-content-between align-items-center">
         <div className="container-fluid">
           <div className="row justify-content-between align-items-center">
@@ -332,6 +334,7 @@ export default function AgentDataTable() {
                 <div className="table-responsive">
                   <>
                     <>
+                    <h1>Agency </h1>
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
@@ -356,13 +359,39 @@ export default function AgentDataTable() {
                                     page * rowsPerPage + rowsPerPage
                                   )
                                   .map((row, index) => {
-                                    const isItemSelected = isSelected(row.name);
+                                    const isItemSelected = isSelected(row.agencyId);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
-                                      <React.Fragment key={row.id}>
+                                      <React.Fragment key={row.agencyId}>
                                         <TableRow>
-                                          <TableCell padding="checkbox">
+
+
+                                        <TableCell padding="checkbox">
+                       <div className='form-check'>
+                        <Checkbox
+                        
+                          color="primary"
+                          className='form-check-input'
+                          checked={isItemSelected}
+                          inputProps={{
+                            'aria-labelledby': labelId,
+                          }}
+                        />
+                        </div>
+                      </TableCell>
+                      
+
+
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
+                        {row.agencyId}
+                      </TableCell>
+                                          {/* <TableCell padding="checkbox">
                                             <div className="form-check">
                                               <Checkbox
                                                 color="primary"
@@ -373,9 +402,9 @@ export default function AgentDataTable() {
                                                 }}
                                               />
                                             </div>
-                                          </TableCell>
+                                          </TableCell> */}
 
-                                          <TableCell>{row.agencyId}</TableCell>
+                                          {/* <TableCell>{row.agencyId}</TableCell> */}
 
                                           <TableCell>
                                             {row.agencyName}

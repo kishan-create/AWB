@@ -35,16 +35,13 @@ function Content() {
 
 
 
-   <Route path="/listagent" exact={true} element={<AgentDataTable />} />
+   <Route path="/listagency" exact={true} element={<AgentDataTable />} />
    <Route
         path="/listagentheaddata/:id"
         exact={true}
         element={<ListAgentsData />}
       />
 
-
-
-   
   <Route />
  </Routes>
   )

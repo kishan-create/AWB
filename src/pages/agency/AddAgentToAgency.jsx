@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from "react";
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import "react-tabs/style/react-tabs.css";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -20,13 +20,11 @@ import Checkbox, { checkboxClasses } from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import AddIcon from "@mui/icons-material/Add";
-
+import { useParams } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import swal from "sweetalert";
 
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 
 import { Link } from "react-router-dom";
 
@@ -34,21 +32,12 @@ import Tabledata from "../../components/common/Tabledata";
 
 import axios from "axios";
 import AgentsData from "./AgentsData";
-const {
-  descendingComparator,
-  getComparator,
-  stableSort,
+const { descendingComparator, getComparator, stableSort } = Tabledata();
 
-  
-} = Tabledata();
-
-const {tableheader}=AgentsData();
-// console.log(rows,tableheader);
-
+const { tableheader } = AgentsData();
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
-  const data =[props.selectedRow];
-
+  const data = [props.selectedRow];
 
   return (
     <Toolbar
@@ -57,13 +46,16 @@ function EnhancedTableToolbar(props) {
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
         }),
       }}
     >
       {numSelected > 0 ? (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%" }}
           color="inherit"
           variant="subtitle1"
           component="div"
@@ -72,20 +64,30 @@ function EnhancedTableToolbar(props) {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%" }}
           variant="h6"
           id="tableTitle"
           component="div"
-        >
-        
-
-        </Typography>
+        ></Typography>
       )}
 
       {numSelected > 0 ? (
         <Tooltip title="Add">
           <IconButton>
-            <AddIcon onClick ={(e) => AddAgent(e,data)} />
+            {/* <link to ><AddIcon /></link>  */}
+            {/* <AddIcon onClick ={(e) => AddAgent(e,data)} /> */}
+            {/* <AddIcon onClick ={} /> */}
+
+            <Link
+              to={{
+                // pathname: `/AgentTabs/${row.agencyId}`,
+                pathname: `/addagency`,
+
+                // your data array of objects
+              }}
+            >
+              <AddIcon />
+            </Link>
           </IconButton>
         </Tooltip>
       ) : (
@@ -97,11 +99,10 @@ function EnhancedTableToolbar(props) {
       )}
     </Toolbar>
   );
-  
 }
 
-const AddAgent=async(e,data)=>
-{
+const AddAgent = async (e, data) => {
+  <Link to="/">here</Link>;
 
   //  const response = axios.post(
   //     "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/user",
@@ -118,9 +119,8 @@ const AddAgent=async(e,data)=>
   //     }
   //   });
 
-
   // http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents
-if (data.status == 200) {
+  if (data.status == 200) {
     swal({
       title: "Good job!",
       text: "User Added successfully",
@@ -128,9 +128,7 @@ if (data.status == 200) {
       button: "ok",
     });
   }
-
-}
-
+};
 
 function EnhancedTableHead(props) {
   const {
@@ -145,38 +143,31 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
+  return (
+    <>
+      <TableHead>
+        <TableRow>
+          <TableCell padding="checkbox">
+            <div className="form-check">
+              <Checkbox
+                color="primary"
+                className="form-check-input"
+                indeterminate={numSelected > 0 && numSelected < rowCount}
+                checked={rowCount > 0 && numSelected === rowCount}
+                onChange={onSelectAllClick}
+                inputProps={{
+                  "aria-label": "select all desserts",
+                }}
+              />
+            </div>
+          </TableCell>
 
-
-  return (<>
-    
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <div className="form-check">
-            <Checkbox
-              color="primary"
-              className="form-check-input"
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{
-                "aria-label": "select all desserts",
-              }}
-            />
-          </div>
-        </TableCell>
-
-        {tableheader.map((tablecelss) => (
-        <TableCell>{tablecelss.headerName}</TableCell>
-      
-        ))}
-     
-
-      </TableRow>
-    </TableHead>
-    <> 
-
-    </>
+          {tableheader.map((tablecelss) => (
+            <TableCell>{tablecelss.headerName}</TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+      <></>
     </>
   );
 }
@@ -190,36 +181,37 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-
-  
 export default function AddAgentToAgency(props) {
-  
+  const params = useParams();
+
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setAgentrows] = useState([]);
   useEffect(() => {
-        getAgents();
-    
+    getAgents(params.id);
   }, []);
 
   const getAgents = async (id) => {
-   
-    const response = await fetch(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer"
-      // "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/agents?  =2"
-    );
+//     const response = await fetch(
+// // `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${}`
+//       "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/agents?agencyid=102"
+//     );
 
-    console.log(response);
-    const data = await response.json();
-    setAgentrows(data);
+
+    // const response = await fetch(
+    //   `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`
+    // );
+    // const data = await response.json();
+    // setAgentrows(data);
   
+
   };
 
-  const[rows,setAgentrows]=useState([]);  
-
+  console.log(rows);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -275,124 +267,116 @@ export default function AddAgentToAgency(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const handleClickViewPage=()=>{
+  const handleClickViewPage = () => {
     props.method(false);
-
-  }
+  };
 
   return (
-<>    
-
     <>
-    <h1>List Page</h1>
+      <>
+        <h1>List Page</h1>
 
-  
-    <button onClick={handleClickViewPage}>View</button>
+        <button onClick={handleClickViewPage}>View</button>
 
- 
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length } selectedRow={selected} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
+        <Box sx={{ width: "100%" }}>
+          <Paper sx={{ width: "100%", mb: 2 }}>
+            <EnhancedTableToolbar
               numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-             
-
-              onChange={handleClick}
-                        onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              selectedRow={selected}
             />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  console.log(row);
-                  const isItemSelected = isSelected(row.producerId);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+            <TableContainer>
+              <Table
+                sx={{ minWidth: 750 }}
+                aria-labelledby="tableTitle"
+                size={dense ? "small" : "medium"}
+              >
+                <EnhancedTableHead
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onChange={handleClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={rows.length}
+                />
+                <TableBody>
+                  {stableSort(rows, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => {
+                      console.log(row);
+                      const isItemSelected = isSelected(row.producerId);
+                      const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
+                      return (
+                        <React.Fragment key={row.producerId}>
+                          <TableRow
+                            hover
+                            onClick={(event) =>
+                              handleClick(event, row.producerId)
+                            }
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            selected={isItemSelected}
+                          >
+                            <TableCell padding="checkbox">
+                              <div className="form-check">
+                                <Checkbox
+                                  color="primary"
+                                  className="form-check-input"
+                                  checked={isItemSelected}
+                                  inputProps={{
+                                    "aria-labelledby": labelId,
+                                  }}
+                                />
+                              </div>
+                            </TableCell>
 
-                    <React.Fragment key={row.producerId}>
-                      <TableRow
-                         hover
-                         onClick={(event) => handleClick(event, row.producerId)}
-                         role="checkbox"
-                         aria-checked={isItemSelected}
-                         tabIndex={-1}
-                         selected={isItemSelected}
-                       >
-                        <TableCell padding="checkbox">
-                          <div className="form-check">
-                            <Checkbox
-                              color="primary"
-                              className="form-check-input"
-                              checked={isItemSelected}
-                              inputProps={{
-                                "aria-labelledby": labelId,
-                              }}
-                            />
-                          </div>
- 
-                        </TableCell>
-                        
-                        <TableCell>{row.producerId}</TableCell>
-                        
-                        <TableCell>{row.producerName}</TableCell>
-                        
-                        <TableCell>{row.producerEmail}</TableCell>
+                            <TableCell>{row.producerId}</TableCell>
 
-                        <TableCell>{row.producerPhone}</TableCell>
+                            <TableCell>{row.producerName}</TableCell>
 
-                        <TableCell>{row.agencyId}</TableCell>
+                            <TableCell>{row.producerEmail}</TableCell>
 
-                        <TableCell>{row.billingAddressId}</TableCell>
+                            <TableCell>{row.producerPhone}</TableCell>
 
-                        <TableCell>{row.permanentAddressId}</TableCell>
+                            <TableCell>{row.agencyId}</TableCell>
 
-                        <TableCell>{row.shippingAddressId}</TableCell>
+                            <TableCell>{row.billingAddressId}</TableCell>
 
-                        <TableCell>{row.workAddressId}</TableCell>
+                            <TableCell>{row.permanentAddressId}</TableCell>
 
-                        
-                      </TableRow>
-                    </React.Fragment>
-                  );
+                            <TableCell>{row.shippingAddressId}</TableCell>
 
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                            <TableCell>{row.workAddressId}</TableCell>
+                          </TableRow>
+                        </React.Fragment>
+                      );
+                    })}
+                  {emptyRows > 0 && (
+                    <TableRow
+                      style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                      }}
+                    >
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </Box>
+      </>
     </>
-    </>
-
-
   );
 }

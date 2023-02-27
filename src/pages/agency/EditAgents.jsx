@@ -69,45 +69,7 @@ export default function Editagents() {
                     </div>
                   </div>
 
-                  {/* <div className="row gx-2 gy-2">
-                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">BillingAddress ID<span className="red">*</span></label>
-                      <div className="input-group mb-3">
-                        <input type="text" name="billingAddressId"  onChange={handleChange} value={values.billingAddressId} className="form-control" placeholder="Enter billingAddressId" aria-label="Enter billingAddressId" aria-describedby="basic-addon1" />
-                      </div>
-                    </div>
-                  </div> */}
-{/* 
-                       <div className="row gx-2 gy-2">
-                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">PermanentAddress ID<span className="red">*</span></label>
-                      <div className="input-group mb-3">
-                        <input type="text" name="permanentAddressId"  onChange={handleChange} value={values.permanentAddressId} className="form-control" placeholder="Enter permanentAddressId" aria-label="Enter permanentAddressId" aria-describedby="basic-addon1" />
-                      </div>
-                    </div>
-                  </div> */}
-
-                  {/* <div className="row gx-2 gy-2">
-                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">ShippingAddress ID<span className="red">*</span></label>
-                      <div className="input-group mb-3">
-                        <input type="text" name="shippingAddressId"  onChange={handleChange} value={values.shippingAddressId} className="form-control" placeholder="Enter shippingAddressId" aria-label="Enter shippingAddressId" aria-describedby="basic-addon1" />
-                      </div>
-                    </div>
-                  </div> */}
-
-{/*                   
-                  <div className="row gx-2 gy-2">
-                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">WorkAddress ID<span className="red">*</span></label>
-                      <div className="input-group mb-3">
-                        <input type="text" name="workAddressId"  onChange={handleChange} value={values.workAddressId} className="form-control" placeholder="Enter workAddressId" aria-label="Enter workAddressId" aria-describedby="basic-addon1" />
-                      </div>
-                    </div>
-                  </div> */}
-
-
-               
+                             
                   
                   
                   <div className="col-12 mt-4">

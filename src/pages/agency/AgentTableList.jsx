@@ -89,7 +89,8 @@ function EnhancedTableToolbar(props) {
             {/* <DeleteIcon onClick ={(e) => DeleteAgent(e,data)} /> */}
             <DeleteIcon  onClick={() =>
              {if (  window.confirm(  "Are you sure you wish to delete this item?" ) 
-            )DeleteAgent(data);}
+            )
+            DeleteAgent(data);}
             }  />
           </IconButton>
         </Tooltip>
@@ -105,13 +106,13 @@ function EnhancedTableToolbar(props) {
   
 }
 
-const DeleteAgent=async(e,data)=>
+const DeleteAgent=async(e,data,id)=>
 {
-    alert(data);
-//   e.preventDefault();
+
+
   const thisclickrow = e.currentTarget;
   thisclickrow.innerText = "Deleting";
-  const res = await axios.delete(`http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents/${data}`);
+  const res = await axios.delete(`http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents/${id}`);
 
 
   if (res.data.status == 200) {
@@ -185,7 +186,7 @@ export default function AgentTableList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  // const [rowss, setRows] = React.useState(rows);
+  // const [rowss, setRowss] = React.useState(rows);
   
 
   
@@ -195,13 +196,13 @@ export default function AgentTableList(props) {
     
   }, []);
 
-  const requestSearch = (searchedVal) => {
-    // const filteredRows = rows.filter((row) => {
-    //   return row.producerName.toLowerCase().includes(searchedVal.toLowerCase());
-    // });
-    // setRows(filteredRows);
-    console.log("searchedVal");
-  };
+  // const requestSearch = (searchedVal) => {
+  //   // const filteredRows = rows.filter((row) => {
+  //   //   return row.producerName.toLowerCase().includes(searchedVal.toLowerCase());
+  //   // });
+  //   // setRowss(filteredRows);
+  //   console.log("searchedVal",searchedVal);
+  // };
 
 
   const getAgents = async () => {
@@ -278,21 +279,16 @@ export default function AgentTableList(props) {
 
   }
 
-
-
-
-
-
   return (
 <>    
 
     <>
-    <TextField
+      {/* <TextField
         variant="outlined"
         placeholder="search..."
         type="search"
         onInput={(e) => requestSearch(e.target.value)}
-      />
+      /> */}
 
   <h1>Add Page</h1>
     <button onClick={handleClickViewPage}>add</button>

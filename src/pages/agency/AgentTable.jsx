@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from "react";
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import "react-tabs/style/react-tabs.css";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -23,6 +23,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { visuallyHidden } from "@mui/utils";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import EditIcon from "@mui/icons-material/Edit";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import Editagents from "./EditAgents";
@@ -37,11 +40,9 @@ const {
   getComparator,
   stableSort,
   // EnhancedTableToolbar,
-  
 } = Tabledata();
 
-
-const {tableheader}=Agency();
+const { tableheader } = Agency();
 // const tableheader = [
 //   { field: "agencyId", headerName: "Agent ID", width: 70 },
 
@@ -64,30 +65,11 @@ const {tableheader}=Agency();
 //   },
 // ];
 
-// const rows = [
-//   { agencyId: 1, agencyName: 'Snow', agencyNpn: 'mail@Jon',agencyFbin:'9167939488', agencyType:1 },
-//   { agencyId: 2, agencyName: 'Lannister', agencyNpn: 'mail@Cersei',agencyFbin:'9167939488', agencyType:1 },
-//   { agencyId: 3, agencyName: 'Lannister', agencyNpn: 'mail@Jaime',agencyFbin:'9167939488', agencyType:1 },
-//   { agencyId: 4, agencyName: 'Stark', agencyNpn: 'mail@Arya',agencyFbin:'9167939488', agencyType:1 },
-//   { agencyId: 5, agencyName: 'Targaryen', agencyNpn: 'mail@Daenerys',agencyFbin:'9167939488', agencyType:1 },
-//   { agencyId: 6, agencyName: 'Melisandre', agencyNpn: null,agencyFbin:'9167939488', agencyType:1 },
-//   { agencyId: 7, agencyName: 'Clifford', agencyNpn: 'mail@Ferrara',agencyFbin:'9167939488', agencyType:1 },
-//   { agencyId: 8, agencyName: 'Frances', agencyNpn: 'mail@Rossini',agencyFbin:'9167939488', agencyType:1 },
-//   { agencyId: 9, agencyName: 'Roxie', agencyNpn: 'mail@Harvey',agencyFbin:'9167939488', agencyType:1 },
-// ];
-
-
-
-
-
-
-
 
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
-  const data =[props.selectedRow];
-
+  const data = [props.selectedRow];
 
   return (
     <Toolbar
@@ -96,13 +78,16 @@ function EnhancedTableToolbar(props) {
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
         }),
       }}
     >
       {numSelected > 0 ? (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%" }}
           color="inherit"
           variant="subtitle1"
           component="div"
@@ -111,23 +96,25 @@ function EnhancedTableToolbar(props) {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%" }}
           variant="h6"
           id="tableTitle"
           component="div"
-        >
-        
-
-        </Typography>
+        ></Typography>
       )}
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton>
             {/* <DeleteIcon onClick ={(e) => DeleteAgent(e,data)} /> */}
-            <DeleteIcon  onClick={() =>
-             {if (  window.confirm(  "Are you sure you wish to delete this item?" ) 
-            )DeleteAgent(data);}}  />
+            <DeleteIcon
+              onClick={() => {
+                if (
+                  window.confirm("Are you sure you wish to delete this item?")
+                )
+                  DeleteAgent(data);
+              }}
+            />
           </IconButton>
         </Tooltip>
       ) : (
@@ -139,24 +126,19 @@ function EnhancedTableToolbar(props) {
       )}
     </Toolbar>
   );
-  
 }
 
-const DeleteAgent=async(e,data)=>
-{
+const DeleteAgent = async (e, data) => {
   e.preventDefault();
   const thisclickrow = e.currentTarget;
   thisclickrow.innerText = "Deleting";
   const res = await axios.delete(`http://localhost:8000/api/agents/${data}`);
 
-
   if (res.data.status == 200) {
     thisclickrow.closest("tr").remove();
     alert("Branch Deleted successfully");
   }
-
-}
-
+};
 
 function EnhancedTableHead(props) {
   const {
@@ -170,8 +152,6 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
-
 
   return (
     <TableHead>
@@ -192,11 +172,8 @@ function EnhancedTableHead(props) {
         </TableCell>
 
         {tableheader.map((tablecelss) => (
-        <TableCell>{tablecelss.headerName}</TableCell>
-      
+          <TableCell>{tablecelss.headerName}</TableCell>
         ))}
-     
-
       </TableRow>
     </TableHead>
   );
@@ -211,8 +188,6 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-
-  
 export default function AgentTable(props) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -222,42 +197,50 @@ export default function AgentTable(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [users, setUsers] = useState([]);
 
-
-
   // useEffect(() => {
   //   getAgencylists();
-    
+
   // }, []);
 
-  const getAgencylists = async () => {
-    
-    const response = await fetch(
-      "https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group"
-    );
+  // const getAgencylists = async () => {
+  //   const response = await fetch(
+  //     "https://81925945-eb66-4f84-899e-e40a7552d6c3.mock.pstmn.io/user-group"
+  //   );
 
-    console.log(response);
-    const data = await response.json();
-    setAgentrows(data);
-  
-  };
+  //   console.log(response);
+  //   const data = await response.json();
+  //   setAgentrows(data);
+  // };
 
+  // const fetchData = () => {
+  //   fetch(
+  //     "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency"
+  //   )
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setUsers(data);
+  //     });
+  // };
 
+  // useEffect(() => {
+  //   fetchData();
+  //   // getAgencylists();
+  // }, []);
+  // const [rows, setAgentrows] = useState([]);
 
-  const fetchData = () => {
-    fetch("http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency")
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        setUsers(data)
-      })
-  }
-  
-  useEffect(() => {
-    fetchData();
-    getAgencylists();
-  }, [])
-  const [rows, setAgentrows] = useState([]);
+  const rows = [
+    { agencyId: 1, agencyName: 'Snow', agencyNpn: 'mail@Jon',agencyFbin:'9167939488', agencyType:1 },
+    { agencyId: 2, agencyName: 'Lannister', agencyNpn: 'mail@Cersei',agencyFbin:'9167939488', agencyType:1 },
+    { agencyId: 3, agencyName: 'Lannister', agencyNpn: 'mail@Jaime',agencyFbin:'9167939488', agencyType:1 },
+    { agencyId: 4, agencyName: 'Stark', agencyNpn: 'mail@Arya',agencyFbin:'9167939488', agencyType:1 },
+    { agencyId: 5, agencyName: 'Targaryen', agencyNpn: 'mail@Daenerys',agencyFbin:'9167939488', agencyType:1 },
+    { agencyId: 6, agencyName: 'Melisandre', agencyNpn: null,agencyFbin:'9167939488', agencyType:1 },
+    { agencyId: 7, agencyName: 'Clifford', agencyNpn: 'mail@Ferrara',agencyFbin:'9167939488', agencyType:1 },
+    { agencyId: 8, agencyName: 'Frances', agencyNpn: 'mail@Rossini',agencyFbin:'9167939488', agencyType:1 },
+    { agencyId: 9, agencyName: 'Roxie', agencyNpn: 'mail@Harvey',agencyFbin:'9167939488', agencyType:1 },
+  ];
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -313,127 +296,115 @@ export default function AgentTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const handleClickViewPage=()=>{
+  const handleClickViewPage = () => {
     props.method(false);
-
-  }
+  };
 
   return (
-<>    
-
     <>
+      <>
+        <h1>Add Page</h1>
+        <button onClick={handleClickViewPage}>add</button>
 
-  <h1>Add Page</h1>
-    <button onClick={handleClickViewPage}>add</button>
-
- 
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length } selectedRow={selected}  />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
+        <Box sx={{ width: "100%" }}>
+          <Paper sx={{ width: "100%", mb: 2 }}>
+            <EnhancedTableToolbar
               numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-
-
-             
-
-              onChange={handleClick}
-                        onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              selectedRow={selected}
             />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  console.log(row);
-                  const isItemSelected = isSelected(row.producerId);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+            <TableContainer>
+              <Table
+                sx={{ minWidth: 750 }}
+                aria-labelledby="tableTitle"
+                size={dense ? "small" : "medium"}
+              >
+                <EnhancedTableHead
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onChange={handleClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={rows.length}
+                />
+                <TableBody>
+                  {stableSort(rows, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => {
+                      // console.log(row);
+                      const isItemSelected = isSelected(row.producerId);
+                      const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
+                      return (
+                        <React.Fragment key={row.producerId}>
+                          <TableRow
+                            hover
+                            onClick={(event) =>
+                              handleClick(event, row.producerId)
+                            }
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            selected={isItemSelected}
+                          >
+                            <TableCell padding="checkbox">
+                              <div className="form-check">
+                                <Checkbox
+                                  color="primary"
+                                  className="form-check-input"
+                                  checked={isItemSelected}
+                                  inputProps={{
+                                    "aria-labelledby": labelId,
+                                  }}
+                                />
+                              </div>
+                            </TableCell>
 
+                            <TableCell>{row.producerId}</TableCell>
 
-                    
-                    <React.Fragment key={row.producerId}>
-                      <TableRow
-                         hover
-                         onClick={(event) => handleClick(event, row.producerId)}
-                         role="checkbox"
-                         aria-checked={isItemSelected}
-                         tabIndex={-1}
-                         selected={isItemSelected}
-                       >
-                        <TableCell padding="checkbox">
-                          <div className="form-check">
-                            <Checkbox
-                              color="primary"
-                              className="form-check-input"
-                              checked={isItemSelected}
-                              inputProps={{
-                                "aria-labelledby": labelId,
-                              }}
-                            />
-                          </div>
- 
-                        </TableCell>
-                        
-                        <TableCell>{row.producerId}</TableCell>
-                        
-                        <TableCell>{row.producerName}</TableCell>
-                        
-                        <TableCell>{row.producerEmail}</TableCell>
+                            <TableCell>{row.producerName}</TableCell>
 
-                        <TableCell>{row.producerPhone}</TableCell>
+                            <TableCell>{row.producerEmail}</TableCell>
 
-                        <TableCell>{row.agencyId}</TableCell>
+                            <TableCell>{row.producerPhone}</TableCell>
 
-                        <TableCell>{row.billingAddressId}</TableCell>
+                            <TableCell>{row.agencyId}</TableCell>
 
-                        <TableCell>{row.permanentAddressId}</TableCell>
+                            <TableCell>{row.billingAddressId}</TableCell>
 
-                        <TableCell>{row.shippingAddressId}</TableCell>
+                            <TableCell>{row.permanentAddressId}</TableCell>
 
-                        <TableCell>{row.workAddressId}</TableCell>
+                            <TableCell>{row.shippingAddressId}</TableCell>
 
-                        
-                      </TableRow>
-                    </React.Fragment>
-                  );
-
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                            <TableCell>{row.workAddressId}</TableCell>
+                          </TableRow>
+                        </React.Fragment>
+                      );
+                    })}
+                  {emptyRows > 0 && (
+                    <TableRow
+                      style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                      }}
+                    >
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </Box>
+      </>
     </>
-    </>
-
-
   );
 }

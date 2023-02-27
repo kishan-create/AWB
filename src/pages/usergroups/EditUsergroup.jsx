@@ -15,7 +15,7 @@ return (
                 <div className="app-card-body p-2 p-lg-4">
  
                 </div>
-                <form   onSubmit={handleEdit}>
+                <form  onSubmit={handleEdit} noValidate>
                 <div className="app-card-body p-2 p-lg-4">
                   <div className="row gx-2 gy-2">
                     <div className="col-12 mb-3">
