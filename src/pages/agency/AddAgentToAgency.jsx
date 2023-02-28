@@ -281,9 +281,9 @@ export default function AddAgentToAgency(props) {
   return (
     <>
       <>
-        <h1>Add Page</h1>
+        
 
-        <button onClick={handleClickViewPage}>List</button>
+        <button class="btn app-btn-primary fl-right" onClick={handleClickViewPage}>List</button>
 
         <Box sx={{ width: "100%" }}>
           <Paper sx={{ width: "100%", mb: 2 }}>

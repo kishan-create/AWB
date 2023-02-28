@@ -284,8 +284,8 @@ export default function AgentTableList(props) {
     <>
  
 
-  <h1>View Page</h1>
-    <button onClick={handleClickViewPage}>Add</button>
+ 
+    <button  class="btn app-btn-primary fl-right" onClick={handleClickViewPage}>Add</button>
 
  
     <Box sx={{ width: "100%" }}>

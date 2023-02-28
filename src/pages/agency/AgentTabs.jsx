@@ -9,7 +9,7 @@ export default () => (
     </TabList>
 
     <TabPanel>
-      <h2>Edit Content</h2>
+
 
 <Editagents/>
 
