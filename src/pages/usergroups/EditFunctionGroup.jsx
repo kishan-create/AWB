@@ -30,7 +30,7 @@ const [rows, setUserrows] = useState([]);
     e.preventDefault(); 
  
     setSubmitted(true); 
-    console.log("edit values",values);
+   
  }
 
  useEffect(() => {
@@ -46,7 +46,7 @@ const response = await fetch(`http://dev-cok-alb-admin-01-301132241.us-east-1.el
 
 const data = await response.json();
 
-console.log("response",data)
+
 
 if (response.status == 200) {
     SetValues({

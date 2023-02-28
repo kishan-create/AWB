@@ -78,7 +78,7 @@ const getAgentsbyID = async(id) =>{
 const updateAgent = async (e) => {
   e.preventDefault();
   const res =  axios.put("http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer/4", values);
-  console.log(res)
+
   if (res.status == 200) {
     swal({
       title: "Good job!",

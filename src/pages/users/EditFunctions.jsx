@@ -12,11 +12,11 @@ const Edituserfunctions = () => {
        }, []);
  const getUsersbyID =async(id) =>
  {
-    console.log(id);
+   
 
     const response = await fetch("https://d058b22d-16bd-4340-a18b-713c19b3870b.mock.pstmn.io/EditUser?userId=1");
     const data = await response.json();
-    console.log(data);
+  
     
  }
   

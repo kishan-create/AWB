@@ -124,7 +124,7 @@ export default function AgentDataTable() {
   
   };
 
-  console.log("rows",rows);
+
 
 
   const handleRequestSort = (event, property) => {
@@ -398,20 +398,7 @@ export default function AgentDataTable() {
                       >
                         {row.agencyId}
                       </TableCell>
-                                          {/* <TableCell padding="checkbox">
-                                            <div className="form-check">
-                                              <Checkbox
-                                                color="primary"
-                                                className="form-check-input"
-                                                checked={isItemSelected}
-                                                inputProps={{
-                                                  "aria-labelledby": labelId,
-                                                }}
-                                              />
-                                            </div>
-                                          </TableCell> */}
-
-                                          {/* <TableCell>{row.agencyId}</TableCell> */}
+                                        
 
                                           <TableCell>
                                             {row.agencyName}
@@ -423,7 +410,6 @@ export default function AgentDataTable() {
                                             {row.agencyFbin}
                                           </TableCell>
 
-                                          {/* <TableCell>{row.agenyType}</TableCell> */}
                                           <TableCell>{row.agencyType}</TableCell>
 
 

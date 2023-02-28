@@ -33,12 +33,12 @@ const Editagentfunctions = () => {
 
 
   const getagentsbyID = async (id) => {
-    console.log(id);
+
 
     const response = await axios.get(
       `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`
     );
-    console.log(response)
+   
 
     if (response.status == 200) {
       SetValues({
@@ -67,7 +67,7 @@ const Editagentfunctions = () => {
       
       values
     );
-    console.log(res.data);
+ 
     if (res.data.status == 200) {
       swal({
         title: "Good job!",
