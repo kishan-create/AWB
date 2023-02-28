@@ -9,7 +9,7 @@ const Edituserfunctions = () => {
   const [passwordType, setPasswordType] = useState("password");
   const [passwordInput, setPasswordInput] = useState("");
   const [values, SetValues] = useState({
-    userId: "",
+    // userId: "",
     userName: "",
     userEmail: "",
     userPhone: "",
@@ -39,7 +39,7 @@ const Edituserfunctions = () => {
 
     if (response.status == 200) {
       SetValues({
-        userId:response.data.userId,
+        // userId:response.data.userId,
         userName: response.data.userName,
         userEmail: response.data.userEmail,
         userFullName: response.data.userFullName,
@@ -48,7 +48,7 @@ const Edituserfunctions = () => {
       });
     }
   };
-  // console.log(values);
+
 
   const togglePassword = () => {
     if (passwordType === "password") {

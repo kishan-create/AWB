@@ -390,14 +390,7 @@ export default function AgentDataTable() {
                       
 
 
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.agencyId}
-                      </TableCell>
+                    
                                         
 
                                           <TableCell>
@@ -406,11 +399,7 @@ export default function AgentDataTable() {
 
                                           <TableCell>{row.agencyNpn}</TableCell>
 
-                                          <TableCell>
-                                            {row.agencyFbin}
-                                          </TableCell>
-
-                                          <TableCell>{row.agencyType}</TableCell>
+                                       
 
 
                                           <TableCell>

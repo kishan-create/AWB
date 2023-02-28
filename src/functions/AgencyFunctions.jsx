@@ -8,7 +8,7 @@ const AgencyFunctions = (Agency_Validation, adressData,fileData,listadd) => {
     agencyName: "",
     agencyNpn: "",
     agencyFbin: "",
-    // address:"",
+    
   });
  const[returnValue,SetReturnValue]=useState({
   agencyId:"",
@@ -25,12 +25,13 @@ const AgencyFunctions = (Agency_Validation, adressData,fileData,listadd) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const submitForm = setErrors(Agency_Validation(values));
+    
+
     onSubmitform();
   };
 
   const onSubmitform = (e) => {
-    //console.log(values);
+    
    const response = axios.post(
    "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency",
       values
@@ -45,7 +46,7 @@ const AgencyFunctions = (Agency_Validation, adressData,fileData,listadd) => {
       }
     });;
 
-    console.log(returnValue);
+  
    
   
   };
@@ -54,11 +55,7 @@ const AgencyFunctions = (Agency_Validation, adressData,fileData,listadd) => {
     listadd.map((listaddress,key) => {
       listaddress.agencyId=agencyID
     });
-   // console.log(listadd);
-    /*const response = axios.post(
-      process.env.REACT_APP_API_URL + "/addresses",
-      adressData
-    );*/
+
     const response = axios.post(
       "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agencyaddr",
       listadd

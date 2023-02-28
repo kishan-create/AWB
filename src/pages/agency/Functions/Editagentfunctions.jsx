@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-const Editagentfunctions = () => {
-  const params = useParams();
+const Editagentfunctions = (id) => {
+  
 
   const [rows, setUserrows] = useState([]);
   const [passwordType, setPasswordType] = useState("password");
@@ -16,8 +15,9 @@ const Editagentfunctions = () => {
     agencyType: "",
 
   });
+
   useEffect(() => {
-    getagentsbyID(params.id);
+    getagentsbyID(id);
 
   }, []);
   const handlePasswordChange = (evnt) => {
@@ -32,7 +32,7 @@ const Editagentfunctions = () => {
   };
 
 
-  const getagentsbyID = async (id) => {
+  const getagentsbyID = async () => {
 
 
     const response = await axios.get(
@@ -63,20 +63,25 @@ const Editagentfunctions = () => {
     
     e.preventDefault();
     const res = await axios.put(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/53",
+      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`,
       
       values
-    );
- 
-    if (res.data.status == 200) {
-      swal({
-        title: "Good job!",
-        text: "Job Updated successfully",
-        icon: "success",
-        button: "ok",
-      });
-    }
-  };
+    )   
+    .then((responseuser) =>
+    {
+if (responseuser.status === 200)
+      {
+
+     swal({
+       title: "Good job!",
+       text: "User Group Updated successfully",
+       icon: "success",
+       button: "ok",
+     });
+   }
+ }
+ );
+}
   return {    
     handlePasswordChange,
     passwordType,

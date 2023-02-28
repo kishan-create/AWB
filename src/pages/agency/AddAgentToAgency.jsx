@@ -75,10 +75,7 @@ function EnhancedTableToolbar(props) {
       {numSelected > 0 ? (
         <Tooltip title="Add">
           <IconButton>
-            {/* <link to ><AddIcon /></link>  */}
-            {/* <AddIcon onClick ={(e) => AddAgent(e,data)} /> */}
-            {/* <AddIcon onClick ={} /> */}
-
+   
             <Link
               to={{
                 // pathname: `/AgentTabs/${row.agencyId}`,
@@ -105,23 +102,7 @@ function EnhancedTableToolbar(props) {
 const AddAgent = async (e, data) => {
   <Link to="/">here</Link>;
 
-  //  const response = axios.post(
-  //     "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/user",
-  //     values
-  //   );
-  //   response.then(function (res) {
-  //     if (res.data.status === 200) {
-  //       swal({
-  //         title: "Good job!",
-  //         text: "Usergroup Details added successfully",
-  //         icon: "success",
-  //         button: "ok",
-  //       });
-  //     }
-  //   });
-
-  // http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents
-  if (data.status == 200) {
+     if (data.status == 200) {
     swal({
       title: "Good job!",
       text: "User Added successfully",
@@ -197,17 +178,7 @@ export default function AddAgentToAgency(props) {
   }, []);
 
   const getAgents = async (id) => {
-//     const response = await fetch(
-// // `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${}`
-//       "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/agents?agencyid=102"
-//     );
 
-
-    // const response = await fetch(
-    //   `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`
-    // );
-    // const data = await response.json();
-    // setAgentrows(data);
     const response = await fetch(
       "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer"
              
