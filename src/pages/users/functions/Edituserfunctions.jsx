@@ -2,21 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-const Edituserfunctions = () => {
-  const params = useParams();
+const Edituserfunctions = (id) => {
+  
 
   const [rows, setUserrows] = useState([]);
   const [passwordType, setPasswordType] = useState("password");
   const [passwordInput, setPasswordInput] = useState("");
   const [values, SetValues] = useState({
-    userId: "",
+    // userId: "",
     userName: "",
     userEmail: "",
     userPhone: "",
     password: "",
   });
   useEffect(() => {
-    getUsersbyID(params.id);
+    getUsersbyID(id);
   }, []);
   const handlePasswordChange = (evnt) => {
     setPasswordInput(evnt.target.value);
@@ -28,8 +28,9 @@ const Edituserfunctions = () => {
       [name]: value,
     });
   };
+  
   //Get user by ID
-  const getUsersbyID = async (id) => {
+  const getUsersbyID = async () => {
    
 
     const response = await axios.get(
@@ -39,7 +40,7 @@ const Edituserfunctions = () => {
 
     if (response.status == 200) {
       SetValues({
-        userId:response.data.userId,
+        // userId:response.data.userId,
         userName: response.data.userName,
         userEmail: response.data.userEmail,
         userFullName: response.data.userFullName,
@@ -48,7 +49,7 @@ const Edituserfunctions = () => {
       });
     }
   };
-  // console.log(values);
+
 
   const togglePassword = () => {
     if (passwordType === "password") {
@@ -58,11 +59,14 @@ const Edituserfunctions = () => {
     setPasswordType("password");
   };
   const updateUsers = async (e) => {
+    
     e.preventDefault();
     const res = await axios.put(
-      process.env.REACT_APP_API_ADMIN_URL + `/user/${values.userId}`,
+      process.env.REACT_APP_API_ADMIN_URL + `/user/${id}`,
       values
     );
+
+
     if (res.status == 200) {
       swal({
         title: "Good job!",

@@ -9,7 +9,7 @@ const Userhooks = () => {
        }, []);
  const getUsers =async() =>
  {
-    const response = await fetch("http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/user");
+    const response = await fetch(process.env.REACT_APP_API_ADMIN_URL +"/user");
     const data = await response.json();
     setUserrows(data);
     

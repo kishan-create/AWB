@@ -7,7 +7,6 @@ const Usergroupform = (usergroup_validation) => {
     userGroupName: "",
     userGroupDesc: "",
     userGroupCode: "",
-    
   });
 
   const [errors, setErrors] = useState({});
@@ -18,27 +17,23 @@ const Usergroupform = (usergroup_validation) => {
     SetValues({
       ...values,
       [name]: value,
-      
     });
   };
 
- 
   useEffect(() => {
-   
     if (Object.keys(errors).length === 0 && isSubmitting) {
       onSubmitform();
     }
   }, [errors]);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const test = setErrors(usergroup_validation(values));
-      setIsSubmitting(true);
+    setIsSubmitting(true);
   };
 
-  const onSubmitform = (e) => { 
-    console.log(values)
+  const onSubmitform = (e) => {
+    console.log(values);
 
     const response = axios.post(
       // "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup",
@@ -46,7 +41,7 @@ const Usergroupform = (usergroup_validation) => {
       values
 
     );
-    response.then(function(res) {
+    response.then(function (res) {
       if (res.status === 200) {
         swal({
           title: "Good job!",
@@ -58,14 +53,11 @@ const Usergroupform = (usergroup_validation) => {
           userGroupName: "",
           userGroupDesc: "",
           userGroupCode: "",
-    
-
-
         });
       }
     });
   };
 
-  return { handleChange, values, handleSubmit, errors, };
+  return { handleChange, values, handleSubmit, errors };
 };
 export default Usergroupform;

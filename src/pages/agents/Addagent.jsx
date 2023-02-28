@@ -13,6 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from "react-router-dom";
 export default function Addagent() {
   const [seen,setSeen] = useState([]);
   const [adressData, setAddressData] = useState([]);
@@ -217,15 +218,11 @@ export default function Addagent() {
                         className="btn app-btn-primary"
                       />
 
-                      <button
-                        type="button"
-                        className="btn app-btn-secondary mx-3"
-                      >
-                        Put on Hold
-                      </button>
-                      <button type="button" className="btn btn-link">
+<Link to="/listagency">
+                      <button type="button" className="btn btn-link ">
                         Cancel
                       </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

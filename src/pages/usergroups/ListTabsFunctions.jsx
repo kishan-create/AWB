@@ -7,7 +7,7 @@ export default function ListTabsFunctions() {
   const SetpageOption = (data) => {
     SetListPage(data);
   };
-  //console.log(listpage);
+ 
   return (
     <div>
       {listpage === true ? (

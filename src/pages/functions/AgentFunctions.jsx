@@ -1,9 +1,9 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import swal from "sweetalert"
+import swal from "sweetalert";
 
-const AgentFunctions = (Agent_validation, seen, adressData,listadd) => {
+const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
   const [values, SetValues] = useState({
     producerName: "",
     producerEmail: "",
@@ -15,18 +15,15 @@ const AgentFunctions = (Agent_validation, seen, adressData,listadd) => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const[returnValue,SetReturnValue]=useState({
-    producerId:"",
-   })
+  const [returnValue, SetReturnValue] = useState({
+    producerId: "",
+  });
 
-
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
     SetValues({
       ...values,
       [name]: value,
-
     });
   };
 
@@ -36,100 +33,60 @@ const AgentFunctions = (Agent_validation, seen, adressData,listadd) => {
     }
   }, [errors]);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const test = setErrors(Agent_validation(values));
     setIsSubmitting(true);
-
-
-    // onSubmitform();
-
-    // const test2 = setErrors(Agent_validation(adressData));
   };
-
-
-  // const onSubmitAddress = (e) =>{
-  
-  //   // const response = axios.post(
-  //   //   // "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/addresses",
-  //   //   "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/addresses",
-  //   //   adressData
-
-  //   // );
-  // }
-
 
   const onSubmitform = (e) => {
     //console.log(values);
-   const response = axios.post(
-    "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer",
-      values
-    ).then((response) => {
-      if (response.status === 200) {
-     
-       SetReturnValue({
-        producerId: response.data.producerId,
-      })
-
-      submitAddress(response.data.producerId);
-      }
-    });;
-
-   
-  
-  };
-
-
-  const submitAddress =(producerID)=>
-  {
-    listadd.map((listaddress,key) => {
-      listaddress.producerId=producerID
-    });
-   // console.log(listadd);
-    /*const response = axios.post(
-      process.env.REACT_APP_API_URL + "/addresses",
-      adressData
-    );*/
-    const response = axios.post(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/produceraddr",
-      listadd
-       ).then((response) => {
+    const response = axios
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/producer", values)
+      .then((response) => {
         if (response.status === 200) {
-       
-          submitFiles(producerID)
+          SetReturnValue({
+            producerId: response.data.producerId,
+          });
+
+          submitAddress(response.data.producerId);
         }
       });
-    
-   // submitFiles(agencyID);
-  } 
+  };
 
-  const submitFiles =(producerID) =>
-  {
-    
-    let formData = new FormData();
-   
-    seen.map((file) => {
-    formData.append('documents', file);
-  });
-    formData.append("docOrginTypeId",producerID);
-    formData.append("docOrginType","AGENT");
-    formData.append("docCategoryId",7);
-    formData.append("docSubCategoryId", 9);
- 
+  const submitAddress = (producerID) => {
+    listadd.map((listaddress, key) => {
+      listaddress.producerId = producerID;
+    });
 
-    const response = axios.post(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/document",
-      formData
-       ).then((response) => {
+    const response = axios
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/produceraddr", listadd)
+      .then((response) => {
         if (response.status === 200) {
-       
-         
+          submitFiles(producerID);
         }
-      });;
-  }
+      });
+  };
 
+  const submitFiles = (producerID) => {
+    let formData = new FormData();
 
-  return { handleChange, values, handleSubmit, errors, adressData, };
+    seen.map((file) => {
+      formData.append("documents", file);
+    });
+    formData.append("docOrginTypeId", producerID);
+    formData.append("docOrginType", "AGENT");
+    formData.append("docCategoryId", 7);
+    formData.append("docSubCategoryId", 9);
+
+    const response = axios
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
+      .then((response) => {
+        if (response.status === 200) {
+        }
+      });
+  };
+
+  return { handleChange, values, handleSubmit, errors, adressData };
 };
 export default AgentFunctions;

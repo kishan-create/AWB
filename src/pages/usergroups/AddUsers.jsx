@@ -30,17 +30,9 @@ import swal from "sweetalert";
 import Groupheader from "./includes/Groupheader";
 import Tabledata from "../../components/common/Tabledata";
 import TextField from "@mui/material/TextField";
-import {useParams} from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import NongroupMembers from "../users/functions/NongroupMembers";
-const {
-  descendingComparator,
-  getComparator,
-  stableSort,
- 
-  
-} = Tabledata();
-
-
+const { descendingComparator, getComparator, stableSort } = Tabledata();
 
 function EnhancedTableHead(props) {
   const {
@@ -54,27 +46,24 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
- 
+
   return (
     <TableHead>
-      
       <TableRow>
-      <TableCell padding="checkbox">
+        <TableCell padding="checkbox">
           <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
-              'aria-label': 'select all users',
+              "aria-label": "select all users",
             }}
           />
         </TableCell>
         <TableCell>User Name</TableCell>
         <TableCell>User FullName</TableCell>
         <TableCell>User Email</TableCell>
-        
-      
       </TableRow>
     </TableHead>
   );
@@ -92,7 +81,7 @@ EnhancedTableHead.propTypes = {
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
   const data = [props.selectRow];
-  
+
   return (
     <Toolbar
       sx={{
@@ -129,9 +118,12 @@ function EnhancedTableToolbar(props) {
 
       {numSelected > 0 ? (
         <Tooltip title="Add To Group">
-           <IconButton   onClick={(e) => { if (window.confirm('Are you sure you wish to add this item?')) UserTogroups(e, data,props.userid,props.resetCheckbox) } } >
-         
-          
+          <IconButton
+            onClick={(e) => {
+              if (window.confirm("Are you sure you wish to add this item?"))
+                UserTogroups(e, data, props.userid, props.resetCheckbox);
+            }}
+          >
             <AddIcon />
           </IconButton>
         </Tooltip>
@@ -150,36 +142,37 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-const UserTogroups = async (e, data,userid,reseMethod) => {
+const UserTogroups = async (e, data, userid, reseMethod) => {
   var Groupid = userid;
-  var gmembers=data[0]
+  var gmembers = data[0];
   const userData = {
     Groupid: Groupid,
     groupmembers: data[0],
   };
-  const response = axios.post(
-   `http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/${Groupid}/groupmembers`,
-    gmembers,
-    
-   
-  ).then((response) => {
-    reseMethod();
-    if (response.status === 200) {
-      swal({
-        title: "Good job!",
-        text: "User Added successfully",
-        icon: "success",
-        button: "ok",
-      });
-    
-    }
-  });
+  const response = axios
+    .post(
+      process.env.REACT_APP_API_SERVICE_URL +
+        `/usergroup/${Groupid}/groupmembers`,
+
+      gmembers
+    )
+    .then((response) => {
+      reseMethod();
+      if (response.status === 200) {
+        swal({
+          title: "Good job!",
+          text: "User Added successfully",
+          icon: "success",
+          button: "ok",
+        });
+      }
+    });
 };
 
 export default function AddUsers(props) {
-  const {id} = useParams();
- 
-  const { rows,getUsers } = NongroupMembers(id);
+  const { id } = useParams();
+
+  const { rows, getUsers } = NongroupMembers(id);
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -187,7 +180,7 @@ export default function AddUsers(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rowsCheck, SetRowsCheck] = React.useState([]);
-  const [active, setActive] = React.useState('First');
+  const [active, setActive] = React.useState("First");
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -205,15 +198,13 @@ export default function AddUsers(props) {
     setSelected([]);
   };
   const requestSearch = (searchedVal) => {
-    
     const filteredRows = rows.filter((row) => {
       return row.userFullName.toLowerCase().includes(searchedVal.toLowerCase());
     });
-   // setRows(filteredRows);
-   rows=filteredRows;
+    // setRows(filteredRows);
+    rows = filteredRows;
   };
   const handleClick = (event, name) => {
-    
     // alert("hii");
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -253,21 +244,20 @@ export default function AddUsers(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-
-  const handleClickAddView=()=>{
-
-   props.method(true);
-  }
-  const resetCheckbox=()=>
-  {
+  const handleClickAddView = () => {
+    props.method(true);
+  };
+  const resetCheckbox = () => {
     setSelected([]);
     getUsers();
-
-  }
+  };
   return (
     <Box sx={{ width: "100%" }}>
-       
-    <button type="button" class="btn app-btn-primary fl-right" onClick={handleClickAddView}>
+      <button
+        type="button"
+        class="btn app-btn-primary fl-right"
+        onClick={handleClickAddView}
+      >
         List Users
       </button>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -277,9 +267,8 @@ export default function AddUsers(props) {
           userid={id}
           resetCheckbox={resetCheckbox}
         />
-        
+
         <TableContainer>
-        
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
@@ -294,7 +283,6 @@ export default function AddUsers(props) {
               rowCount={rows.length}
             />
             <TableBody>
-              
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
@@ -302,7 +290,6 @@ export default function AddUsers(props) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    
                     <TableRow
                       hover
                       onClick={(event) => handleClick(event, row.userId)}
@@ -312,7 +299,7 @@ export default function AddUsers(props) {
                       key={index}
                       selected={isItemSelected}
                     >
-                        <TableCell padding="checkbox">
+                      <TableCell padding="checkbox">
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
@@ -331,7 +318,6 @@ export default function AddUsers(props) {
                       </TableCell>
                       <TableCell align="right">{row.userFullName}</TableCell>
                       <TableCell align="right">{row.userEmail}</TableCell>
-                    
                     </TableRow>
                   );
                 })}

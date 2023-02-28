@@ -34,8 +34,6 @@ import "./usergroup.scss";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function createData(groupname, groupdescription, userGroupCode, action) {
-
-
   return {
     groupname,
     groupdescription,
@@ -43,7 +41,6 @@ function createData(groupname, groupdescription, userGroupCode, action) {
     action,
   };
 }
-
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -60,7 +57,6 @@ function getComparator(order, orderBy) {
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
 
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
@@ -116,11 +112,8 @@ function EnhancedTableHead(props) {
   };
 
   return (
-   
-   
     <TableHead>
       <TableRow>
-        
         <TableCell padding="checkbox">
           <div className="form-check">
             <Checkbox
@@ -159,7 +152,6 @@ function EnhancedTableHead(props) {
         ))}
       </TableRow>
     </TableHead>
-   
   );
 }
 
@@ -204,9 +196,7 @@ function EnhancedTableToolbar(props) {
           variant="h6"
           id="tableTitle"
           component="div"
-        >
-         
-        </Typography>
+        ></Typography>
       )}
 
       {numSelected > 0 ? (
@@ -255,22 +245,14 @@ useEffect(() => {
 
  
 
+  const getGrouplists = async () => {
+    const response = await fetch(
+      process.env.REACT_APP_API_ADMIN_URL + "/usergroup"
+    );
 
-
-
-const getGrouplists =async() =>
-{
-
-
-const response = await fetch("http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup");
-
-const data = await response.json();
-setUserrows(data);
-
-
-
-}
-
+    const data = await response.json();
+    setUserrows(data);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -333,8 +315,10 @@ setUserrows(data);
      
         <EnhancedTableToolbar numSelected={selected.length} />
         <h4 class="add-headd-sub1 fl-left">List Groups</h4>
-        <Link to="/usergroup" >
-        <button type="button" class="btn app-btn-primary fl-right">+ Add</button>
+        <Link to="/usergroup">
+          <button type="button" class="btn app-btn-primary fl-right">
+            + Add
+          </button>
         </Link>
         <TableContainer>
           <Table
@@ -358,20 +342,14 @@ setUserrows(data);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                   
                     <TableRow
                       hover
-
-
                       onClick={(event) => handleClick(event, row.userGroupId)}
-
                       role="checkbox"
-                    
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.userGroupId}
                       selected={isItemSelected}
-                      
                     >
                       <TableCell padding="checkbox">
                         <div className="form-check">
@@ -395,24 +373,24 @@ setUserrows(data);
                       </TableCell>
                       <TableCell align="right">{row.userGroupDesc}</TableCell>
                       <TableCell align="right">{row.userGroupCode}</TableCell>
-                   
+
                       <TableCell align="right">
                         <Link
                           to={{
                             pathname: `/editusergroup/${row.userGroupId}`,
-  
+
                             data: row.groupname, // your data array of objects
                           }}
                         >
                           <EditIcon />
                         </Link>
-                        
+
                         <Tooltip title="View Users">
                           <IconButton>
                             <Link
                               to={{
                                 pathname: `/togroup/${row.userGroupId}`,
-                    
+
                                 data: row.groupname, // your data array of objects
                               }}
                             >

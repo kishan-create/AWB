@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc",
+  baseURL:process.env.REACT_APP_API_SERVICE_URL,
   headers: {
     "Content-type": "application/json"
   }

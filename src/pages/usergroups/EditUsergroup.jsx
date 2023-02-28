@@ -1,10 +1,12 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react';
-
+import { useParams } from 'react-router-dom';
 import Editgroupfunction from './EditFunctionGroup';
-
+import { Link } from "react-router-dom";
 export default function EditUsersGroup() {
-const {handleChange,values,handleEdit,rows}=Editgroupfunction();
+  const params = useParams();
+
+const {handleChange,values,handleEdit,rows,updateusergroup}=Editgroupfunction(params.id);
 
 return (
     <div className="app-wrapper mt-4">
@@ -15,7 +17,7 @@ return (
                 <div className="app-card-body p-2 p-lg-4">
  
                 </div>
-                <form  onSubmit={handleEdit} noValidate>
+                <form  onSubmit={updateusergroup} noValidate>
                 <div className="app-card-body p-2 p-lg-4">
                   <div className="row gx-2 gy-2">
                     <div className="col-12 mb-3">
@@ -54,7 +56,8 @@ return (
                   <div className="col-12 mt-4">
                    
                 <input type="submit"  className="btn app-btn-primary"   value="Submit &amp; Continue" />
-                <button type="button" className="btn btn-link">Cancel</button>
+                <Link to="/grouplist">
+                <button type="button" className="btn btn-link">Cancel</button></Link>
 
 
 

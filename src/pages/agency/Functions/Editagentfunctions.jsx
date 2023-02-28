@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-const Editagentfunctions = () => {
-  const params = useParams();
+const Editagentfunctions = (id) => {
+  
 
   const [rows, setUserrows] = useState([]);
   const [passwordType, setPasswordType] = useState("password");
@@ -14,10 +13,10 @@ const Editagentfunctions = () => {
     agencyNpn: "",
     agencyFbin: "",
     agencyType: "",
-
   });
+
   useEffect(() => {
-    getagentsbyID(params.id);
+    getagentsbyID(id);
 
   }, []);
   const handlePasswordChange = (evnt) => {
@@ -32,13 +31,12 @@ const Editagentfunctions = () => {
   };
 
 
-  const getagentsbyID = async (id) => {
-
+  const getagentsbyID = async () => {
+    console.log(id);
 
     const response = await axios.get(
-      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`
+      process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`
     );
-   
 
     if (response.status == 200) {
       SetValues({
@@ -47,11 +45,10 @@ const Editagentfunctions = () => {
         agencyNpn: response.data.agencyNpn,
         agencyFbin: response.data.agencyFbin,
         agencyType: response.data.agencyType,
-   
       });
     }
   };
- 
+
   const togglePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
@@ -60,23 +57,27 @@ const Editagentfunctions = () => {
     setPasswordType("password");
   };
   const updateagents = async (e) => {
-    
     e.preventDefault();
     const res = await axios.put(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/53",
+      process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`,
       
       values
-    );
- 
-    if (res.data.status == 200) {
-      swal({
-        title: "Good job!",
-        text: "Job Updated successfully",
-        icon: "success",
-        button: "ok",
-      });
-    }
-  };
+    )   
+    .then((responseuser) =>
+    {
+if (responseuser.status === 200)
+      {
+
+     swal({
+       title: "Good job!",
+       text: "User Group Updated successfully",
+       icon: "success",
+       button: "ok",
+     });
+   }
+ }
+ );
+}
   return {    
     handlePasswordChange,
     passwordType,

@@ -1,11 +1,12 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react';
-
+import { useParams } from 'react-router-dom';
 import Editagentfunctions from '../functions/Editagentfunctions'
 
 
 export default function EditAgent() {
-const {handleChange,values,handleEdit,updateAgent}=Editagentfunctions();
+  const params = useParams();
+const {handleChange,values,handleEdit,updateAgent}=Editagentfunctions(params.id);
 
 return (
     <div className="app-wrapper mt-4">

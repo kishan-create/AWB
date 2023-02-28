@@ -15,6 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteConfirm from "../../components/common/DeleteConfirm";
 import Multiplefileupload from "../../components/common/Multiplefileupload";
+import { Link } from "react-router-dom";
 export default function Addagency() {
   const [adressData, setAddressData] = useState([]);
   const [fileData, setFileData] = useState([]);
@@ -22,7 +23,8 @@ export default function Addagency() {
   const { handleChange, handleSubmit, values } = AgencyFunctions(
     Agency_Validation,
     adressData,
-    fileData,listadd
+    fileData,
+    listadd
   );
   const getData = (data) => {
     //console.log(data);
@@ -33,15 +35,13 @@ export default function Addagency() {
     rows.splice(index, 1);
     setAddressData(rows);
   };
-  
-  const handleChangeFileUploads =(data)=>
-  {
+
+  const handleChangeFileUploads = (data) => {
     setFileData(data);
-  }
-  const getAddressDataLatest=(listaddress) =>
-  {
+  };
+  const getAddressDataLatest = (listaddress) => {
     SetListadd(listaddress);
-  }
+  };
 
   return (
     <div>
@@ -125,7 +125,9 @@ export default function Addagency() {
                 >
                   <div className="inner">
                     <div className="app-card-body p-2 p-lg-4">
-                      <h4 className="add-headd-sub">Add Additional Information</h4>
+                      <h4 className="add-headd-sub">
+                        Add Additional Information
+                      </h4>
                       {(() => {
                         if (adressData.length > 0) {
                           return (
@@ -195,17 +197,20 @@ export default function Addagency() {
                         }
                       })()}
                       <div className="row gx-2 gy-2">
-                        <AddmultipleAdress addressData={getData}  latestAddress={getAddressDataLatest}/>
+                        <AddmultipleAdress
+                          addressData={getData}
+                          latestAddress={getAddressDataLatest}
+                        />
                       </div>
-                      
                     </div>
                     <div className="app-card-body p-2 p-lg-4">
                       <h4 className="add-headd-sub">Upload Files</h4>
-                     
+
                       <div className="row gx-2 gy-2">
-                      <Multiplefileupload handleChangeFileUploads={handleChangeFileUploads}/>
+                        <Multiplefileupload
+                          handleChangeFileUploads={handleChangeFileUploads}
+                        />
                       </div>
-                      
                     </div>
                     <div className="app-card-body p-2 p-lg-4">
                       <div className="col-12 mt-4">
@@ -215,15 +220,11 @@ export default function Addagency() {
                           className="btn app-btn-primary"
                         />
 
-                        <button
-                          type="button"
-                          className="btn app-btn-secondary mx-3"
-                        >
-                          Put on Hold
-                        </button>
-                        <button type="button" className="btn btn-link">
-                          Cancel
-                        </button>
+                        <Link to="/listagency">
+                          <button type="button" className="btn btn-link">
+                            Cancel
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>

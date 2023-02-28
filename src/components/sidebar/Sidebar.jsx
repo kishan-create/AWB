@@ -32,9 +32,10 @@ export const Sidebar = () => {
               
               <li className="nav-item">
                 {" "}
-                <Link to="/" className="nav-link">
+                <Link to="/" className="nav-link" >
                   {" "}
-                  <span className="nav-icon">
+                      
+                  <span className="nav-icon"  title="List Users" >
                     {" "}
                     <svg
                       width="1em"
@@ -65,7 +66,7 @@ export const Sidebar = () => {
                 {" "}
                 <Link to="/grouplist" className="nav-link">
                   {" "}
-                  <span className="nav-icon">
+                  <span className="nav-icon"  title="List Group" >
                     {" "}
                     <svg
                       width="1em"
@@ -98,7 +99,7 @@ export const Sidebar = () => {
                 {" "}
                 <Link to="/listagency" className="nav-link">
                   {" "}
-                  <span className="nav-icon">
+                  <span className="nav-icon"  title="List Agency">
                     {" "}
                     <svg
                       width="1em"
@@ -128,7 +129,7 @@ export const Sidebar = () => {
                 {" "}
                 <Link to="/listagent" className="nav-link">
                   {" "}
-                  <span className="nav-icon">
+                  <span className="nav-icon"  title="List Agent">
                     {" "}
                     <svg
                       width="1em"

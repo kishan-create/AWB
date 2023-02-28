@@ -40,8 +40,7 @@ const Registration = (registeration_validation) => {
 
   const onSubmitform = (e) => {
     const response = axios
-      .post(
-        "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/user",
+      .post(process.env.REACT_APP_API_ADMIN_URL + "/user",
         values
       )
       .then((responseuser) => {

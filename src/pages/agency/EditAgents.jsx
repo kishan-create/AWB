@@ -1,16 +1,18 @@
 import React,{ useState } from 'react'
+import { Link } from "react-router-dom";
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import EditAgentfunctions from '../../pages/agency/Functions/Editagentfunctions'
+import { useParams } from 'react-router-dom';
 
 export default function Editagents() {
-  
+  const params=useParams();
 
   const {
     handlePasswordChange,passwordType,passwordInput,togglePassword,values,handleChange,updateagents
     
-  } = EditAgentfunctions();
+  } = EditAgentfunctions(params.id);
 
   
   return (
@@ -22,9 +24,6 @@ export default function Editagents() {
                 <div className="app-card-body p-2 p-lg-4">
 
 
-
-
-                  
                 </div>
                 <form onSubmit={updateagents} noValidate>
                 <div className="app-card-body p-2 p-lg-4">
@@ -75,7 +74,8 @@ export default function Editagents() {
                   <div className="col-12 mt-4">
                     <button type="submit" className="btn app-btn-primary">Submit &amp; Continue</button>
                    
-                    <button type="button" className="btn btn-link">Cancel</button>
+                    <Link to="/listagency"> <button type="button" className="btn btn-link">Cancel</button></Link>
+
                   </div>
                 </div>
                 </form>
