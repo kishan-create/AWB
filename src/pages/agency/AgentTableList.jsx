@@ -198,13 +198,7 @@ export default function AgentTableList(props) {
     
   }, []);
 
-  // const requestSearch = (searchedVal) => {
-  //   // const filteredRows = rows.filter((row) => {
-  //   //   return row.producerName.toLowerCase().includes(searchedVal.toLowerCase());
-  //   // });
-  //   // setRowss(filteredRows);
-  //   console.log("searchedVal",searchedVal);
-  // };
+
 
 
   const getAgents = async () => {
@@ -218,7 +212,7 @@ export default function AgentTableList(props) {
    
     const data = await response.json();
     setAgentrows(data);
-    // console.log("agent",data);
+   
   };
 
   const[rows,setAgentrows]=useState([]);  
@@ -320,7 +314,7 @@ export default function AgentTableList(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  console.log(row);
+               
                   const isItemSelected = isSelected(row.producerId);
                   const labelId = `enhanced-table-checkbox-${index}`;
 

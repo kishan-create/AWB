@@ -286,13 +286,8 @@ export default function AddUsers(props) {
   }
   return (
     <Box sx={{ width: "100%" }}>
-        <TextField
-        variant="outlined"
-        placeholder="search..."
-        type="search"
-        onInput={(e) => requestSearch(e.target.value)}
-      />
-    <button type="button" onClick={handleClickAddView}>
+       
+    <button type="button" class="btn app-btn-primary fl-right" onClick={handleClickAddView}>
         List Users
       </button>
       <Paper sx={{ width: "100%", mb: 2 }}>

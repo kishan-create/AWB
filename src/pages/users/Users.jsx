@@ -52,7 +52,10 @@ function EnhancedTableHead(props) {
   };
 
   return (
+  
+    
     <TableHead>
+         
       <TableRow>
         <TableCell padding="checkbox">
           <div className="form-check">
@@ -75,6 +78,7 @@ function EnhancedTableHead(props) {
         <TableCell>Action</TableCell>
       </TableRow>
     </TableHead>
+   
   );
 }
 
@@ -166,8 +170,13 @@ export default function Users() {
   const { rows } = Userhooks();
   return (
     <Box sx={{ width: "100%" }}>
+      
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
+        <h4 class="add-headd-sub1 fl-left">List Users</h4>
+        <Link to="/registration" >
+        <button type="button" class="btn app-btn-primary fl-right">+ Add Users</button>
+        </Link>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -182,6 +191,7 @@ export default function Users() {
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
+        
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

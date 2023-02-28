@@ -267,7 +267,7 @@ export default function ViewGroupDetails(props) {
   } 
   return (
     <Box sx={{ width: "100%" }}>
-      <button type="button" onClick={handleClickAddView}>
+      <button type="button" class="btn app-btn-primary fl-right" onClick={handleClickAddView}>
         Add Users
       </button>
 

@@ -334,10 +334,17 @@ export default function AgentDataTable() {
                 <div className="table-responsive">
                   <>
                     <>
-                    <h1>Agency </h1>
+                   
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
+                          <h4 class="add-headd-sub1 fl-left">List Agents</h4>
+                          <Link to="/addagency" >
+        <button type="button" class="btn app-btn-primary fl-right">+ Add Agency</button>
+        </Link>
+        <Link to="/agents" >
+        <button type="button" class="btn app-btn-primary fl-right">+ Add Agent</button>
+        </Link>
                           <TableContainer>
                             <Table
                               sx={{ minWidth: 750 }}

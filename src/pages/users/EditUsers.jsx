@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Edituserfunctions from './functions/Edituserfunctions';
+import { Link } from "react-router-dom";
 export default function EditUsers() {
  
   const {
@@ -75,8 +76,9 @@ export default function EditUsers() {
                   
                   <div className="col-12 mt-4">
                     <button type="submit" className="btn app-btn-primary">Submit &amp; Continue</button>
-                   
+                    <Link to="/" >
                     <button type="button" className="btn btn-link">Cancel</button>
+                    </Link>
                   </div>
                 </div>
                 </form>

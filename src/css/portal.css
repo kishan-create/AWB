@@ -12083,3 +12083,17 @@ input:focus + label {
   outline: -webkit-focus-ring-color auto 2px;
 }
 
+.fl-left {float: left;}
+
+
+.fl-right {
+  float: right;
+  margin-bottom: 10px;
+  margin-right: 16px;
+}
+.css-1mxz8qt-MuiPaper-root
+{
+  padding: 15px;
+}
+
+
