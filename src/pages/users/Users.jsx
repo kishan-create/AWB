@@ -102,7 +102,7 @@ export default function Users() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  const { rows } = Userhooks();
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -167,7 +167,7 @@ export default function Users() {
       alert("User Deleted successfully");
     }
   };
-  const { rows } = Userhooks();
+ 
   return (
     <Box sx={{ width: "100%" }}>
       

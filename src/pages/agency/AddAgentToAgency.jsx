@@ -215,10 +215,10 @@ export default function AddAgentToAgency(props) {
     );
     const data = await response.json();
     setAgentrows(data);
-    // console.log("agent",data);
+ 
   };
 
-  console.log(rows);
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -310,7 +310,7 @@ export default function AddAgentToAgency(props) {
                   {stableSort(rows, getComparator(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
-                      console.log(row);
+                   
                       const isItemSelected = isSelected(row.producerId);
                       const labelId = `enhanced-table-checkbox-${index}`;
 

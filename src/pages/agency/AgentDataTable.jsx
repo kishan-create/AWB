@@ -338,7 +338,7 @@ export default function AgentDataTable() {
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
-                          <h4 class="add-headd-sub1 fl-left">List Agents</h4>
+                          <h4 class="add-headd-sub1 fl-left">List Agency</h4>
                           <Link to="/addagency" >
         <button type="button" class="btn app-btn-primary fl-right">+ Add Agency</button>
         </Link>
