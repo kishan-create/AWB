@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from "react";
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import "react-tabs/style/react-tabs.css";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -26,9 +26,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import TextField from "@mui/material/TextField";
 
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 
 import { Link, useParams } from "react-router-dom";
 
@@ -41,15 +39,13 @@ const {
   getComparator,
   stableSort,
   // EnhancedTableToolbar,
-  
 } = Tabledata();
 
-const {tableheader}=AgentsData();
+const { tableheader } = AgentsData();
 
 function EnhancedTableToolbar(props) {
-  const { numSelected ,para_id} = props;
+  const { numSelected, para_id } = props;
   // const data =[props.selectedRow];
-
 
   return (
     <Toolbar
@@ -58,13 +54,16 @@ function EnhancedTableToolbar(props) {
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
         }),
       }}
     >
       {numSelected > 0 ? (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%" }}
           color="inherit"
           variant="subtitle1"
           component="div"
@@ -73,25 +72,25 @@ function EnhancedTableToolbar(props) {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%" }}
           variant="h6"
           id="tableTitle"
           component="div"
-        >
-        
-
-        </Typography>
+        ></Typography>
       )}
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton>
             {/* <DeleteIcon onClick ={(e) => DeleteAgent(e,data)} /> */}
-            <DeleteIcon  onClick={() =>
-             {if (  window.confirm(  "Are you sure you wish to delete this item?" ) 
-            )
-            DeleteAgent(para_id,props.selectedRow);}
-            }  />
+            <DeleteIcon
+              onClick={() => {
+                if (
+                  window.confirm("Are you sure you wish to delete this item?")
+                )
+                  DeleteAgent(para_id, props.selectedRow);
+              }}
+            />
           </IconButton>
         </Tooltip>
       ) : (
@@ -103,25 +102,18 @@ function EnhancedTableToolbar(props) {
       )}
     </Toolbar>
   );
-  
 }
 
-const DeleteAgent=async(para_id,data)=>
-{
-
-
-  const res = await axios.delete
-  (`http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${para_id}/agents`,{data});
-  
-
+const DeleteAgent = async (para_id, data) => {
+  const res = await axios.delete(
+    process.env.REACT_APP_API_SERVICE_URL + `/agency/${para_id}/agents`,
+    { data }
+  );
 
   if (res.data.status == 200) {
-
     alert("Agent Deleted successfully");
   }
-
-}
-
+};
 
 function EnhancedTableHead(props) {
   const {
@@ -135,8 +127,6 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
-
 
   return (
     <TableHead>
@@ -157,11 +147,8 @@ function EnhancedTableHead(props) {
         </TableCell>
 
         {tableheader.map((tablecelss) => (
-        <TableCell>{tablecelss.headerName}</TableCell>
-      
+          <TableCell>{tablecelss.headerName}</TableCell>
         ))}
-     
-
       </TableRow>
     </TableHead>
   );
@@ -176,10 +163,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-
-  
 export default function AgentTableList(props) {
-
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -188,36 +172,22 @@ export default function AgentTableList(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const params = useParams();
-  
 
-  
   useEffect(() => {
-   
     getAgents();
-
-    
   }, []);
 
-
-
-
   const getAgents = async () => {
-   
     const response = await fetch(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer"
-           
-      
+      process.env.REACT_APP_API_SERVICE_URL + "/producer"
     );
 
-   
     const data = await response.json();
     setAgentrows(data);
-   
   };
 
-  const[rows,setAgentrows]=useState([]);  
+  const [rows, setAgentrows] = useState([]);
 
-  
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -272,129 +242,119 @@ export default function AgentTableList(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const handleClickViewPage=()=>{
+  const handleClickViewPage = () => {
     props.method(false);
-    
-
-  }
+  };
 
   return (
-<>    
-
     <>
- 
+      <>
+        <button
+          class="btn app-btn-primary fl-right"
+          onClick={handleClickViewPage}
+        >
+          Add
+        </button>
 
- 
-    <button  class="btn app-btn-primary fl-right" onClick={handleClickViewPage}>Add</button>
-
- 
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length } selectedRow={selected}  para_id={params.id} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
+        <Box sx={{ width: "100%" }}>
+          <Paper sx={{ width: "100%", mb: 2 }}>
+            <EnhancedTableToolbar
               numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-             
-
-             
-
-              onChange={handleClick}
-                        onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              selectedRow={selected}
+              para_id={params.id}
             />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-               
-                  const isItemSelected = isSelected(row.producerId);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+            <TableContainer>
+              <Table
+                sx={{ minWidth: 750 }}
+                aria-labelledby="tableTitle"
+                size={dense ? "small" : "medium"}
+              >
+                <EnhancedTableHead
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onChange={handleClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={rows.length}
+                />
+                <TableBody>
+                  {stableSort(rows, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => {
+                      const isItemSelected = isSelected(row.producerId);
+                      const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
+                      return (
+                        <React.Fragment key={row.producerId}>
+                          <TableRow
+                            hover
+                            onClick={(event) =>
+                              handleClick(event, row.producerId)
+                            }
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            selected={isItemSelected}
+                          >
+                            <TableCell padding="checkbox">
+                              <div className="form-check">
+                                <Checkbox
+                                  color="primary"
+                                  className="form-check-input"
+                                  checked={isItemSelected}
+                                  inputProps={{
+                                    "aria-labelledby": labelId,
+                                  }}
+                                />
+                              </div>
+                            </TableCell>
 
+                            <TableCell>{row.producerId}</TableCell>
 
-                    
-                    <React.Fragment key={row.producerId}>
-                      <TableRow
-                         hover
-                         onClick={(event) => handleClick(event, row.producerId)}
-                         role="checkbox"
-                         aria-checked={isItemSelected}
-                         tabIndex={-1}
-                         selected={isItemSelected}
-                       >
-                        <TableCell padding="checkbox">
-                          <div className="form-check">
-                            <Checkbox
-                              color="primary"
-                              className="form-check-input"
-                              checked={isItemSelected}
-                              inputProps={{
-                                "aria-labelledby": labelId,
-                              }}
-                            />
-                          </div>
- 
-                        </TableCell>
-                        
-                        <TableCell>{row.producerId}</TableCell>
-                        
-                        <TableCell>{row.producerName}</TableCell>
-                        
-                        <TableCell>{row.producerEmail}</TableCell>
+                            <TableCell>{row.producerName}</TableCell>
 
-                        <TableCell>{row.producerPhone}</TableCell>
+                            <TableCell>{row.producerEmail}</TableCell>
 
-                        <TableCell>{row.agencyId}</TableCell>
+                            <TableCell>{row.producerPhone}</TableCell>
 
-                        <TableCell>{row.billingAddressId}</TableCell>
+                            <TableCell>{row.agencyId}</TableCell>
 
-                        <TableCell>{row.permanentAddressId}</TableCell>
+                            <TableCell>{row.billingAddressId}</TableCell>
 
-                        <TableCell>{row.shippingAddressId}</TableCell>
+                            <TableCell>{row.permanentAddressId}</TableCell>
 
-                        <TableCell>{row.workAddressId}</TableCell>
+                            <TableCell>{row.shippingAddressId}</TableCell>
 
-                        
-                      </TableRow>
-                    </React.Fragment>
-                  );
-
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                            <TableCell>{row.workAddressId}</TableCell>
+                          </TableRow>
+                        </React.Fragment>
+                      );
+                    })}
+                  {emptyRows > 0 && (
+                    <TableRow
+                      style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                      }}
+                    >
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </Box>
+      </>
     </>
-    </>
-
-
   );
 }

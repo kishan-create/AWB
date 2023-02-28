@@ -198,7 +198,7 @@ export default function AddUsers(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rows, setRows] = React.useState(originalRows);
   const [searched, setSearched] = React.useState("");
-  //const classes = useStyles();
+  
   const requestSearch = (searchedVal) => {
     const filteredRows = originalRows.filter((row) => {
       return row.userName.toLowerCase().includes(searchedVal.toLowerCase());

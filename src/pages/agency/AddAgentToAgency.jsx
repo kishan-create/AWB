@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 import "react-tabs/style/react-tabs.css";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
@@ -75,16 +75,9 @@ function EnhancedTableToolbar(props) {
       {numSelected > 0 ? (
         <Tooltip title="Add">
           <IconButton>
-            {/* <link to ><AddIcon /></link>  */}
-            {/* <AddIcon onClick ={(e) => AddAgent(e,data)} /> */}
-            {/* <AddIcon onClick ={} /> */}
-
             <Link
               to={{
-                // pathname: `/AgentTabs/${row.agencyId}`,
                 pathname: `/addagency`,
-
-                // your data array of objects
               }}
             >
               <AddIcon />
@@ -101,35 +94,6 @@ function EnhancedTableToolbar(props) {
     </Toolbar>
   );
 }
-
-const AddAgent = async (e, data) => {
-  <Link to="/">here</Link>;
-
-  //  const response = axios.post(
-  //     "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/user",
-  //     values
-  //   );
-  //   response.then(function (res) {
-  //     if (res.data.status === 200) {
-  //       swal({
-  //         title: "Good job!",
-  //         text: "Usergroup Details added successfully",
-  //         icon: "success",
-  //         button: "ok",
-  //       });
-  //     }
-  //   });
-
-  // http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents
-  if (data.status == 200) {
-    swal({
-      title: "Good job!",
-      text: "User Added successfully",
-      icon: "success",
-      button: "ok",
-    });
-  }
-};
 
 function EnhancedTableHead(props) {
   const {
@@ -197,28 +161,12 @@ export default function AddAgentToAgency(props) {
   }, []);
 
   const getAgents = async (id) => {
-//     const response = await fetch(
-// // `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${}`
-//       "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/agents?agencyid=102"
-//     );
-
-
-    // const response = await fetch(
-    //   `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`
-    // );
-    // const data = await response.json();
-    // setAgentrows(data);
     const response = await fetch(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/producer"
-             
-      
+      process.env.REACT_APP_API_SERVICE_URL + "/producer"
     );
     const data = await response.json();
     setAgentrows(data);
- 
   };
-
-
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -281,9 +229,12 @@ export default function AddAgentToAgency(props) {
   return (
     <>
       <>
-        
-
-        <button class="btn app-btn-primary fl-right" onClick={handleClickViewPage}>List</button>
+        <button
+          class="btn app-btn-primary fl-right"
+          onClick={handleClickViewPage}
+        >
+          List
+        </button>
 
         <Box sx={{ width: "100%" }}>
           <Paper sx={{ width: "100%", mb: 2 }}>
@@ -310,7 +261,6 @@ export default function AddAgentToAgency(props) {
                   {stableSort(rows, getComparator(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
-                   
                       const isItemSelected = isSelected(row.producerId);
                       const labelId = `enhanced-table-checkbox-${index}`;
 

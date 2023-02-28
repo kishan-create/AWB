@@ -14,11 +14,9 @@ const Editagentfunctions = () => {
     agencyNpn: "",
     agencyFbin: "",
     agencyType: "",
-
   });
   useEffect(() => {
     getagentsbyID(params.id);
-
   }, []);
   const handlePasswordChange = (evnt) => {
     setPasswordInput(evnt.target.value);
@@ -31,14 +29,10 @@ const Editagentfunctions = () => {
     });
   };
 
-
   const getagentsbyID = async (id) => {
-
-
     const response = await axios.get(
-      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`
+      process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`
     );
-   
 
     if (response.status == 200) {
       SetValues({
@@ -47,11 +41,10 @@ const Editagentfunctions = () => {
         agencyNpn: response.data.agencyNpn,
         agencyFbin: response.data.agencyFbin,
         agencyType: response.data.agencyType,
-   
       });
     }
   };
- 
+
   const togglePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
@@ -60,14 +53,13 @@ const Editagentfunctions = () => {
     setPasswordType("password");
   };
   const updateagents = async (e) => {
-    
     e.preventDefault();
     const res = await axios.put(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/53",
-      
+      process.env.REACT_APP_API_SERVICE_URL + `/agency/4`,
+
       values
     );
- 
+
     if (res.data.status == 200) {
       swal({
         title: "Good job!",
@@ -77,7 +69,7 @@ const Editagentfunctions = () => {
       });
     }
   };
-  return {    
+  return {
     handlePasswordChange,
     passwordType,
     passwordInput,
