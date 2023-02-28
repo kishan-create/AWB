@@ -41,8 +41,10 @@ const Usergroupform = (usergroup_validation) => {
     console.log(values)
 
     const response = axios.post(
-      "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup",
+      // "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup",
+      process.env.REACT_APP_API_ADMIN_URL+"/usergroup",
       values
+
     );
     response.then(function(res) {
       if (res.status === 200) {

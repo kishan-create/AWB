@@ -20,13 +20,13 @@ export default function AgentsData() {
   
         { field: 'agencyId', headerName: 'AgencyID', width: 130 },
         
-        { field: 'billingAddressId', headerName: 'BillingAddressID', width: 130 },
+        // { field: 'billingAddressId', headerName: 'BillingAddressID', width: 130 },
   
-        { field: 'permanentAddressId', headerName: 'PermanentAddressID', width: 130 },
+        // { field: 'permanentAddressId', headerName: 'PermanentAddressID', width: 130 },
   
-        { field: 'shippingAddressId', headerName: 'ShippingAddressI', width: 130 },
+        // { field: 'shippingAddressId', headerName: 'ShippingAddressI', width: 130 },
   
-        { field: 'workAddressId', headerName: 'workAddressId', width: 130 },
+        // { field: 'workAddressId', headerName: 'workAddressId', width: 130 },
   
        
    

@@ -5,7 +5,7 @@ import Editagentfunctions from '../functions/Editagentfunctions'
 
 
 export default function EditAgent() {
-const {handleChange,values,handleEdit,rows,updateAgent}=Editagentfunctions();
+const {handleChange,values,handleEdit,updateAgent}=Editagentfunctions();
 
 return (
     <div className="app-wrapper mt-4">
@@ -29,7 +29,7 @@ return (
                       <label htmlFor="Submission" className="form-label">Agent Name <span className="red">*</span></label>
                       <div className="input-group mb-3">
 
-                            <input type="text" name="producerName"  onChange={handleChange}  value={values.producerName} className="form-control" placeholder="Enter User Group Name" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
+                            <input type="text" name="producerName"  onChange={handleChange}  value={values.producerName} className="form-control" placeholder="Enter Agent Name" aria-label="Enter Agent Name" aria-describedby="basic-addon1" />
 
                       </div>
                     </div>
@@ -38,7 +38,7 @@ return (
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label"> Email <span className="red">*</span></label>
                       <div className="input-group mb-3">
-                     <input type="email" name="producerEmail" onChange={handleChange} value={values.producerEmail}  className="form-control" placeholder="Enter Group Description" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
+                     <input type="email" name="producerEmail" onChange={handleChange} value={values.producerEmail}  className="form-control" placeholder="Enter Agent Email" aria-label="Enter Agent Email" aria-describedby="basic-addon1" />
                       </div>
                     </div>
                   </div>
@@ -46,7 +46,7 @@ return (
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label">Phone Number<span className="red">*</span></label>
                       <div className="input-group mb-3">
-                      <input type="number" name="producerPhone" onChange={handleChange} value={values.producerPhone}   className="form-control" placeholder="Enter Group Code" aria-label="Enter Insured Name" aria-describedby="basic-addon1" />
+                      <input type="number" name="producerPhone" onChange={handleChange} value={values.producerPhone}   className="form-control" placeholder="Enter Agent Phone number" aria-label="Enter Enter Agent Phone number" aria-describedby="basic-addon1" />
                       </div>
                     </div>
                   </div>

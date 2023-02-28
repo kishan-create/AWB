@@ -239,7 +239,6 @@ export default function List() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [rows, setUserrows] = useState([]);
-  const [searchInput, setSearchInput] = React.useState("");
 
 
 
@@ -249,23 +248,12 @@ export default function List() {
 useEffect(() => {
   getGrouplists();
  }, []);
- const handleChange = (e) => {
-  
-  e.preventDefault();
-  var lowerCase = e.target.value.toLowerCase();
-  setSearchInput(lowerCase);
-};
+
 
 
  
 
-  const handleSubmitSearch = async (e) => {
-    console.log(searchInput);
-    e.preventDefault();
-    const response = await axios.get(
-      `https://29eff349-9f6e-4979-a531-bed3ac4fb033.mock.pstmn.io/searchGroup?searchGroupquery=Team=${searchInput}`
-    );
-  };
+ 
 
 
 
@@ -341,25 +329,7 @@ setUserrows(data);
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <form onSubmit={handleSubmitSearch} noValidate>
-          <div>
-            <input
-              type="search"
-              placeholder="Search..."
-              onChange={handleChange}
-              value={searchInput} 
-              
-              
-            />
-            <button type="submit">
-              {" "}
-              <FaSearch />
-
-              
-
-            </button>
-          </div>
-        </form>
+      
      
         <EnhancedTableToolbar numSelected={selected.length} />
         <h4 class="add-headd-sub1 fl-left">List Groups</h4>

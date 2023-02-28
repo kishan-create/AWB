@@ -33,9 +33,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
 import Tabledata from "../../components/common/Tabledata";
-import Agency from "./Agency";
 import axios from "axios";
-import UserHeader from './includes/AgencyHeader';
 const {
   descendingComparator,
   getComparator,
@@ -43,7 +41,6 @@ const {
   EnhancedTableToolbar,
 } = Tabledata();
 
-const { rows, tableheader } = Agency();
 
 function EnhancedTableHead(props) {
   const {
@@ -75,9 +72,10 @@ function EnhancedTableHead(props) {
             />
           </div>
         </TableCell>
-        {tableheader.map((tablecelss) => (
-          <TableCell>{tablecelss.headerName}</TableCell>
-        ))}
+         <TableCell>Agent Name</TableCell>
+         <TableCell>Agent Email</TableCell>
+         <TableCell>Agent Phone</TableCell>
+         <TableCell>Action</TableCell>
       </TableRow>
     </TableHead>
   );
@@ -96,7 +94,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function AgentDataTable() {
+export default function AgentTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -108,15 +106,16 @@ export default function AgentDataTable() {
 
 
   useEffect(() => {
-    getAgencylists();
+    getAgentlists();
     
   }, []);
 
 
-  const getAgencylists = async () => {
+  const getAgentlists = async () => {
     
     const response = await fetch(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency"
+    process.env.REACT_APP_API_SERVICE_URL+"/producer" 
+
     );
 
     const data = await response.json();
@@ -136,19 +135,19 @@ export default function AgentDataTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.agencyId);
+      const newSelected = rows.map((n) => n.producerId);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, agencyId) => {
-    const selectedIndex = selected.indexOf(agencyId);
+  const handleClick = (event, producerId) => {
+    const selectedIndex = selected.indexOf(producerId);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, agencyId);
+      newSelected = newSelected.concat(selected, producerId);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -176,30 +175,17 @@ export default function AgentDataTable() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (agencyId) => selected.indexOf(agencyId) !== -1;
+  const isSelected = (producerId) => selected.indexOf(producerId) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
   //Delete a user
-  const deleteAgent = async (e, id) => {
-    e.preventDefault();
-    const thisclickrow = e.currentTarget;
-    thisclickrow.innerText = "Deleting";
-    const res = await axios.delete(
-      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents/${id}`
-    );
-    if (res.data.status == 200) {
-      thisclickrow.closest("tr").remove();
-      alert("User Deleted successfully");
-    }
-  };
+
 
   return (
     <div>
-      <h1>Agency List</h1>
-     
-
+      
       <div className="app-wrapper mt-4">
         <div className="app-content pt-2 p-md-2">
           <div className="container-fluid">
@@ -215,10 +201,8 @@ export default function AgentDataTable() {
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
-                          <h4 class="add-headd-sub1 fl-left">List Agency</h4>
-                          <Link to="/addagency" >
-        <button type="button" class="btn app-btn-primary fl-right">+ Add Agency</button>
-        </Link>
+                          <h4 class="add-headd-sub1 fl-left">List Agent</h4>
+                         
         <Link to="/agents" >
         <button type="button" class="btn app-btn-primary fl-right">+ Add Agent</button>
         </Link>
@@ -243,11 +227,11 @@ export default function AgentDataTable() {
                                     page * rowsPerPage + rowsPerPage
                                   )
                                   .map((row, index) => {
-                                    const isItemSelected = isSelected(row.agencyId);
+                                    const isItemSelected = isSelected(row.producerId);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
-                                      <React.Fragment key={row.agencyId}>
+                                      <React.Fragment key={row.producerId}>
                                         <TableRow>
 
 
@@ -267,36 +251,27 @@ export default function AgentDataTable() {
                       
 
 
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.agencyId}
-                      </TableCell>
-                                        
+                          
 
                                           <TableCell>
-                                            {row.agencyName}
+                                            {row.producerName}
                                           </TableCell>
 
-                                          <TableCell>{row.agencyNpn}</TableCell>
+                                          <TableCell>{row.producerEmail}</TableCell>
 
                                           <TableCell>
-                                            {row.agencyFbin}
+                                            {row.producerPhone}
                                           </TableCell>
 
-                                          <TableCell>{row.agencyType}</TableCell>
 
 
                                           <TableCell>
                                             <Link
                                               to={{
                                                 // pathname: `/AgentTabs/${row.agencyId}`,
-                                                pathname: `/ListAgentheaddata/${row.agencyId}`,
+                                                pathname: `/editagent/${row.producerId}`,
 
-                                                data: row.agencyId, // your data array of objects
+                                                data: row.producerId, // your data array of objects
                                               }}
                                             >
                                               <PreviewIcon />

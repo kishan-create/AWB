@@ -20,6 +20,7 @@ import AddUserstogroup from '../../pages/users/AddUserstogroup';
 import Addagency from '../../pages/agency/Addagency';
 import AgentDataTable from '../../pages/agency/AgentDataTable';
 import ListAgentsData from '../../pages/agency/ListAgentsData'
+import AgentTable from '../../pages/agents/AgentTable'
 
 function Content() {
   return (
@@ -31,7 +32,7 @@ function Content() {
   <Route path="/userlist" exact={true} element={<Userslist/>}/>
   <Route  path="/edituser/:id" exact={true} element={<EditUsers/>} /> 
   <Route  path="/usergroup" exact={true} element={<UserGroup/>} /> 
-  <Route path="/EditAgent" exact={true} element={<EditAgent />} />
+  <Route path="/editagent/:id" exact={true} element={<EditAgent />} />
   <Route path="/agents" exact={true} element={<Addagent />} />
   <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
   <Route path="/togroup/:id" exact={true} element={<AddUserstogroup/>}/>
@@ -39,6 +40,9 @@ function Content() {
   <Route path="/listagency" exact={true} element={<AgentDataTable />} />
   <Route path="/listagentheaddata/:id" exact={true} element={<ListAgentsData />}/>
   <Route path="/editusergroup/:id" exact={true} element={<EditUsergroup />} />
+  <Route path="/listagent" exact={true} element={<AgentTable />} />
+
+
     
   </Routes>
 
