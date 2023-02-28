@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import PropTypes from "prop-types";
@@ -102,30 +102,19 @@ export default function AgentDataTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setAgentrows] = useState( []);
-
-
+  const [rows, setAgentrows] = useState([]);
 
   useEffect(() => {
     getAgencylists();
-    
   }, []);
 
-
   const getAgencylists = async () => {
-    
     const response = await fetch(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency"
+      process.env.REACT_APP_API_SERVICE_URL + "/agency"
     );
-
     const data = await response.json();
     setAgentrows(data);
-
-  
   };
-
-
-
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -186,7 +175,7 @@ export default function AgentDataTable() {
     const thisclickrow = e.currentTarget;
     thisclickrow.innerText = "Deleting";
     const res = await axios.delete(
-      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/102/agents/${id}`
+      process.env.REACT_APP_API_SERVICE_URL + `/agents/${id}`
     );
     if (res.data.status == 200) {
       thisclickrow.closest("tr").remove();
@@ -245,79 +234,16 @@ export default function AgentDataTable() {
                         {/* <i class="fas fa-search"></i> Font Awesome fontawesome.com */}
                       </button>{" "}
                     </form>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        State
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Status
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Quote ID
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Insured Name
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Coverage
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Program type
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Property
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Quote Assigned To
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Comments
-                      </span>
-                    </li>
-                    <li>
-                      <span className="dropdown-item">
-                        <input className="form-check-input" type="checkbox" />
-                        Submission Date &amp; Time
-                      </span>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Clear
-                      </a>
-                    </li>
+                    
+                  
+                   
+                  
+                   
+                    
                   </ul>
                 </div>
                 {/*//dropdown*/}
               </div>
-             
             </div>
           </div>
         </div>
@@ -334,17 +260,26 @@ export default function AgentDataTable() {
                 <div className="table-responsive">
                   <>
                     <>
-                   
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
                           <h4 class="add-headd-sub1 fl-left">List Agency</h4>
-                          <Link to="/addagency" >
-        <button type="button" class="btn app-btn-primary fl-right">+ Add Agency</button>
-        </Link>
-        <Link to="/agents" >
-        <button type="button" class="btn app-btn-primary fl-right">+ Add Agent</button>
-        </Link>
+                          <Link to="/addagency">
+                            <button
+                              type="button"
+                              class="btn app-btn-primary fl-right"
+                            >
+                              + Add Agency
+                            </button>
+                          </Link>
+                          <Link to="/agents">
+                            <button
+                              type="button"
+                              class="btn app-btn-primary fl-right"
+                            >
+                              + Add Agent
+                            </button>
+                          </Link>
                           <TableContainer>
                             <Table
                               sx={{ minWidth: 750 }}
@@ -366,12 +301,15 @@ export default function AgentDataTable() {
                                     page * rowsPerPage + rowsPerPage
                                   )
                                   .map((row, index) => {
-                                    const isItemSelected = isSelected(row.agencyId);
+                                    const isItemSelected = isSelected(
+                                      row.agencyId
+                                    );
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                       <React.Fragment key={row.agencyId}>
                                         <TableRow>
+                                         
 
 
                                         <TableCell padding="checkbox">

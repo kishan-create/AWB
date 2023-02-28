@@ -49,7 +49,7 @@ const [rows, setUserrows] = useState([]);
     e.preventDefault();
   
     const res = await axios.put(
-      `http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/${id}`,
+      process.env.REACT_APP_API_ADMIN_URL+`/usergroup/${id}`,
           values
     )
     .then((responseuser) =>
@@ -73,27 +73,22 @@ const [rows, setUserrows] = useState([]);
 const getGroupsbyID =async() =>
 {
   
-const response = await fetch(`http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup/${id}`);
+const response = await fetch(process.env.REACT_APP_API_ADMIN_URL+`/usergroup/${id}`);
 
 
 const data = await response.json();
+console.log(data);
 
 
-
-if (response.status == 200) {
+if (response.status === 200) {
     SetValues({
      
-      userGroupName: response.data.userGroupName,
-      userGroupDesc: response.data.userGroupDesc,
-      userGroupCode: response.data.userGroupCode,
+      userGroupName: data.userGroupName,
+      userGroupDesc: data.userGroupDesc,
+      userGroupCode: data.userGroupCode,
   
     });
-    swal({
-      title: "Good job!",
-      text: "Agency Added successfully",
-      icon: "success",
-      button: "ok",
-    });
+   
 
   }
 

@@ -56,7 +56,8 @@ return (
                   <div className="col-12 mt-4">
                    
                 <input type="submit"  className="btn app-btn-primary"   value="Submit &amp; Continue" />
-                <button type="button" className="btn btn-link">Cancel</button>
+                <link to="/grouplist">
+                <button type="button" className="btn btn-link">Cancel</button></link>
 
 
 

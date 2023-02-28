@@ -2,7 +2,7 @@ import React from 'react'
 import usergroup_validation from  '../validations/usergroup_validation'
 import Usergroupform from './usergroupform'
 import './usergroup.scss'
-
+import { Link } from "react-router-dom";
 
 
 export default function UserGroup() {
@@ -62,8 +62,9 @@ export default function UserGroup() {
                   
                   <div className="col-12 mt-4">
                     <button type="button" onClick={handleSubmit} className="btn app-btn-primary">Submit &amp; Continue</button>
-                   
+                    <Link to="/grouplist">
                     <button type="button" className="btn btn-link">Cancel</button>
+                    </Link>
                   </div>
                 </div>
               </div>

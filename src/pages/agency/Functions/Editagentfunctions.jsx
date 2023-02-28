@@ -13,7 +13,6 @@ const Editagentfunctions = (id) => {
     agencyNpn: "",
     agencyFbin: "",
     agencyType: "",
-
   });
 
   useEffect(() => {
@@ -36,9 +35,8 @@ const Editagentfunctions = (id) => {
 
 
     const response = await axios.get(
-      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`
+      process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`
     );
-   
 
     if (response.status == 200) {
       SetValues({
@@ -47,11 +45,10 @@ const Editagentfunctions = (id) => {
         agencyNpn: response.data.agencyNpn,
         agencyFbin: response.data.agencyFbin,
         agencyType: response.data.agencyType,
-   
       });
     }
   };
- 
+
   const togglePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
@@ -60,10 +57,9 @@ const Editagentfunctions = (id) => {
     setPasswordType("password");
   };
   const updateagents = async (e) => {
-    
     e.preventDefault();
     const res = await axios.put(
-      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/agency/${id}`,
+      process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`,
       
       values
     )   
