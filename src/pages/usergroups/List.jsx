@@ -94,7 +94,7 @@ const headCells = [
     id: "action",
     numeric: true,
     disablePadding: false,
-    label: "Action",
+    label: "",
   },
 ];
 
@@ -314,10 +314,10 @@ useEffect(() => {
       
      
         <EnhancedTableToolbar numSelected={selected.length} />
-        <h4 class="add-headd-sub1 fl-left">List Groups</h4>
+        <h4 class="add-headd-sub1 fl-left">Groups</h4>
         <Link to="/usergroup">
           <button type="button" class="btn app-btn-primary fl-right">
-            + Add
+            + Add Group
           </button>
         </Link>
         <TableContainer>

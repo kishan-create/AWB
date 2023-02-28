@@ -15,7 +15,7 @@ export default function Agency() {
    
     {
       field: "fullName",
-      headerName: "Actions",
+      headerName: "",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 160,

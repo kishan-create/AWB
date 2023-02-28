@@ -56,7 +56,7 @@ export default function Addagency() {
                   role="alert"
                 >
                   <div class="inner p-15">
-                    <h4 className="add-headd-sub1">Additional Information</h4>
+                    <h4 className="add-headd-sub1">Agency Information</h4>
                     <div className="page-grid-3">
                       <div className="">
                         <label htmlFor="Submission" className="form-label">

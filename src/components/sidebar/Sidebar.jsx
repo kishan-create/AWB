@@ -35,7 +35,7 @@ export const Sidebar = () => {
                 <Link to="/" className="nav-link" >
                   {" "}
                       
-                  <span className="nav-icon"  title="List Users" >
+                  <span className="nav-icon"  title="Users" >
                     {" "}
                     <svg
                       width="1em"
@@ -45,6 +45,7 @@ export const Sidebar = () => {
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
                     >
+                   
                       <path
                         fillRule="evenodd"
                         d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"
@@ -59,6 +60,7 @@ export const Sidebar = () => {
                     </svg>{" "}
                   </span>{" "}
                   {/*span class="nav-link-text">Orders</span*/}{" "}
+                  
                 </Link>
               </li>
              
@@ -66,7 +68,7 @@ export const Sidebar = () => {
                 {" "}
                 <Link to="/grouplist" className="nav-link">
                   {" "}
-                  <span className="nav-icon"  title="List Group" >
+                  <span className="nav-icon"  title="User Groups" >
                     {" "}
                     <svg
                       width="1em"
@@ -99,7 +101,7 @@ export const Sidebar = () => {
                 {" "}
                 <Link to="/listagency" className="nav-link">
                   {" "}
-                  <span className="nav-icon"  title="List Agency">
+                  <span className="nav-icon"  title="Agency">
                     {" "}
                     <svg
                       width="1em"
@@ -129,7 +131,7 @@ export const Sidebar = () => {
                 {" "}
                 <Link to="/listagent" className="nav-link">
                   {" "}
-                  <span className="nav-icon"  title="List Agent">
+                  <span className="nav-icon"  title="Agent">
                     {" "}
                     <svg
                       width="1em"

@@ -75,7 +75,7 @@ function EnhancedTableHead(props) {
          <TableCell>Agent Name</TableCell>
          <TableCell>Agent Email</TableCell>
          <TableCell>Agent Phone</TableCell>
-         <TableCell>Action</TableCell>
+         <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -201,7 +201,7 @@ export default function AgentTable() {
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
-                          <h4 class="add-headd-sub1 fl-left">List Agent</h4>
+                          <h4 class="add-headd-sub1 fl-left"> Agents</h4>
                          
         <Link to="/agents" >
         <button type="button" class="btn app-btn-primary fl-right">+ Add Agent</button>

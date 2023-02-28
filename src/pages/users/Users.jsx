@@ -75,7 +75,7 @@ function EnhancedTableHead(props) {
         <TableCell>Full Name</TableCell>
         <TableCell>Email</TableCell>
         <TableCell>Phone</TableCell>
-        <TableCell>Action</TableCell>
+        <TableCell></TableCell>
       </TableRow>
     </TableHead>
    
@@ -173,7 +173,7 @@ export default function Users() {
       
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <h4 class="add-headd-sub1 fl-left">List Users</h4>
+        <h4 class="add-headd-sub1 fl-left">Users</h4>
         <Link to="/registration" >
         <button type="button" class="btn app-btn-primary fl-right">+ Add Users</button>
         </Link>

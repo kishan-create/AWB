@@ -289,7 +289,7 @@ export default function AddAgentToAgency(props) {
                               </div>
                             </TableCell>
 
-                            <TableCell>{row.producerId}</TableCell>
+                     
 
                             <TableCell>{row.producerName}</TableCell>
 
@@ -297,15 +297,7 @@ export default function AddAgentToAgency(props) {
 
                             <TableCell>{row.producerPhone}</TableCell>
 
-                            <TableCell>{row.agencyId}</TableCell>
-
-                            <TableCell>{row.billingAddressId}</TableCell>
-
-                            <TableCell>{row.permanentAddressId}</TableCell>
-
-                            <TableCell>{row.shippingAddressId}</TableCell>
-
-                            <TableCell>{row.workAddressId}</TableCell>
+                          
                           </TableRow>
                         </React.Fragment>
                       );

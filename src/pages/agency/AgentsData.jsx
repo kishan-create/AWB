@@ -10,7 +10,7 @@ export default function AgentsData() {
   
   
       const tableheader = [
-        { field: 'producerId', headerName: 'Producer ID', width: 70  ,show: true},
+    
   
         { field: 'producerName', headerName: 'Producer Name', width: 130 },
        
@@ -18,15 +18,7 @@ export default function AgentsData() {
   
         { field: 'producerPhone', headerName: 'Producer Phone', width: 130 },
   
-        { field: 'agencyId', headerName: 'AgencyID', width: 130 },
-        
-        // { field: 'billingAddressId', headerName: 'BillingAddressID', width: 130 },
-  
-        // { field: 'permanentAddressId', headerName: 'PermanentAddressID', width: 130 },
-  
-        // { field: 'shippingAddressId', headerName: 'ShippingAddressI', width: 130 },
-  
-        // { field: 'workAddressId', headerName: 'workAddressId', width: 130 },
+      
   
        
    
@@ -41,17 +33,7 @@ export default function AgentsData() {
       },
     ];
     
-    // const rows = [
-    //   { producerId: 1, producerName: 'Snow', producerEmail: 'mail@Jon',producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    //   { producerId: 2, producerName: 'Lannister', producerEmail: 'mail@Cersei',producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    //   { producerId: 3, producerName: 'Lannister', producerEmail: 'mail@Jaime',producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    //   { producerId: 4, producerName: 'Stark', producerEmail: 'mail@Arya',producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    //   { producerId: 5, producerName: 'Targaryen', producerEmail: 'mail@Daenerys',producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    //   { producerId: 6, producerName: 'Melisandre', producerEmail: null,producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    //   { producerId: 7, producerName: 'Clifford', producerEmail: 'mail@Ferrara',producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    //   { producerId: 8, producerName: 'Frances', producerEmail: 'mail@Rossini',producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    //   { producerId: 9, producerName: 'Roxie', producerEmail: 'mail@Harvey',producerPhone:'9167939488',agencyId:2, billingAddressId:1,permanentAddressId: 1,shippingAddressId:2,workAddressId:3, },
-    // ];
+  
   
 
     return {
