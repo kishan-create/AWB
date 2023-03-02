@@ -18,13 +18,13 @@ export default function Userslist() {
               <a className="nav-link active" aria-current="page" href="">My Submissions (50)</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="">All Referrals (20)</a>
+              <a className="nav-link" href="">All Referrals (30)</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="">Assigned you (0)</a>
+              <a className="nav-link" href="">Assigned you (10)</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="">Archived (2)</a>
+              <a className="nav-link" href="">Archived (0)</a>
             </li>
           </ul>
         </div>
