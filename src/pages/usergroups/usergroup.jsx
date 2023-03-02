@@ -63,9 +63,9 @@ export default function UserGroup() {
                  
                   
                   <div className="col-12 mt-4">
-                    <button type="button" onClick={handleSubmit} className="btn app-btn-primary">Submit &amp; Continue</button>
+                    <button type="button" onClick={handleSubmit} className="next-pre-btn mrg-r-3">Save</button>
                    <Link to ="/grouplist">
-                   <button type="button" className="btn btn-link">Cancel</button>
+                   <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button>
 
 
                    </Link>

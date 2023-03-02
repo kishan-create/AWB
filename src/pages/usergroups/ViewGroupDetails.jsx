@@ -177,7 +177,7 @@ let dataID=data[0];
     if (response.status === 200) {
       reseMethod();
       swal({
-        title: "Good job!",
+        title: "",
         text: " Record deleted successfully",
         icon: "success",
         button: "ok",
@@ -267,7 +267,7 @@ export default function ViewGroupDetails(props) {
   } 
   return (
     <Box sx={{ width: "100%" }}>
-      <button type="button" class="btn app-btn-primary fl-right" onClick={handleClickAddView}>
+      <button type="button" class="next-pre-btn mrg-r-3 fl-right" onClick={handleClickAddView}>
         Add Users
       </button>
 
@@ -354,10 +354,7 @@ export default function ViewGroupDetails(props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+     
     </Box>
   );
 }

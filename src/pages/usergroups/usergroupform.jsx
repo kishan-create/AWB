@@ -44,7 +44,7 @@ const Usergroupform = (usergroup_validation) => {
     response.then(function (res) {
       if (res.status === 200) {
         swal({
-          title: "Good job!",
+          title: "",
           text: "Usergroup Details added successfully",
           icon: "success",
           button: "ok",

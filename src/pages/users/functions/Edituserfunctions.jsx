@@ -69,7 +69,7 @@ const Edituserfunctions = (id) => {
 
     if (res.status == 200) {
       swal({
-        title: "Good job!",
+        title: "",
         text: "User Edited successfully",
         icon: "success",
         button: "ok",

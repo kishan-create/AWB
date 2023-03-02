@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import PropTypes from "prop-types";
@@ -41,7 +41,6 @@ const {
   EnhancedTableToolbar,
 } = Tabledata();
 
-
 function EnhancedTableHead(props) {
   const {
     onSelectAllClick,
@@ -59,23 +58,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <div className="form-check">
-            <Checkbox
-              color="primary"
-              className="form-check-input"
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{
-                "aria-label": "select all desserts",
-              }}
-            />
-          </div>
+          <div className="form-check"></div>
         </TableCell>
-         <TableCell>Agent Name</TableCell>
-         <TableCell>Agent Email</TableCell>
-         <TableCell>Agent Phone</TableCell>
-         <TableCell></TableCell>
+        <TableCell>Agent Name</TableCell>
+        <TableCell>Agent Email</TableCell>
+        <TableCell>Agent Phone</TableCell>
+        <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -101,31 +89,20 @@ export default function AgentTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setAgentrows] = useState( []);
-
-
+  const [rows, setAgentrows] = useState([]);
 
   useEffect(() => {
     getAgentlists();
-    
   }, []);
 
-
   const getAgentlists = async () => {
-    
     const response = await fetch(
-    process.env.REACT_APP_API_SERVICE_URL+"/producer" 
-
+      process.env.REACT_APP_API_SERVICE_URL + "/producer"
     );
 
     const data = await response.json();
     setAgentrows(data);
-
-  
   };
-
-
-
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -182,10 +159,8 @@ export default function AgentTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
   //Delete a user
 
-
   return (
     <div>
-      
       <div className="app-wrapper mt-4">
         <div className="app-content pt-2 p-md-2">
           <div className="container-fluid">
@@ -197,15 +172,19 @@ export default function AgentTable() {
                 <div className="table-responsive">
                   <>
                     <>
-                   
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
                           <h4 class="add-headd-sub1 fl-left"> Agents</h4>
-                         
-        <Link to="/agents" >
-        <button type="button" class="btn app-btn-primary fl-right">+ Add Agent</button>
-        </Link>
+
+                          <Link to="/agents">
+                            <button
+                              type="button"
+                              class="next-pre-btn mrg-r-3 fl-right"
+                            >
+                              + Add Agent
+                            </button>
+                          </Link>
                           <TableContainer>
                             <Table
                               sx={{ minWidth: 750 }}
@@ -227,43 +206,27 @@ export default function AgentTable() {
                                     page * rowsPerPage + rowsPerPage
                                   )
                                   .map((row, index) => {
-                                    const isItemSelected = isSelected(row.producerId);
+                                    const isItemSelected = isSelected(
+                                      row.producerId
+                                    );
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                       <React.Fragment key={row.producerId}>
                                         <TableRow>
-
-
-                                        <TableCell padding="checkbox">
-                       <div className='form-check'>
-                        <Checkbox
-                        
-                          color="primary"
-                          className='form-check-input'
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
-                        </div>
-                      </TableCell>
-                      
-
-
-                          
+                                          <TableCell padding="checkbox"></TableCell>
 
                                           <TableCell>
                                             {row.producerName}
                                           </TableCell>
 
-                                          <TableCell>{row.producerEmail}</TableCell>
+                                          <TableCell>
+                                            {row.producerEmail}
+                                          </TableCell>
 
                                           <TableCell>
                                             {row.producerPhone}
                                           </TableCell>
-
-
 
                                           <TableCell>
                                             <Link

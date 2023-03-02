@@ -20,7 +20,7 @@ export default function Addagency() {
   const [adressData, setAddressData] = useState([]);
   const [fileData, setFileData] = useState([]);
   const [listadd, SetListadd] = useState([]);
-  const { handleChange, handleSubmit, values } = AgencyFunctions(
+  const { handleChange, handleSubmit, values,errors } = AgencyFunctions(
     Agency_Validation,
     adressData,
     fileData,
@@ -68,12 +68,16 @@ export default function Addagency() {
                             className="form-control"
                             placeholder="Agency Name"
                             name="agencyName"
+                            required
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
                             value={values.agencyName}
                           />
                         </div>
+                        {errors.agencyName && (
+                        <p className="message">{errors.agencyName}</p>
+                      )}
                       </div>
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
@@ -85,12 +89,16 @@ export default function Addagency() {
                             className="form-control"
                             placeholder="Agency Npn"
                             name="agencyNpn"
+                            required
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
                             value={values.agencyNpn}
                           />
                         </div>
+                        {errors.agencyNpn && (
+                        <p className="message">{errors.agencyNpn}</p>
+                      )}
                       </div>
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
@@ -102,16 +110,21 @@ export default function Addagency() {
                             className="form-control"
                             placeholder="Agency Fbin"
                             name="agencyFbin"
+                            required
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
                             value={values.agencyFbin}
                           />
+                          
                         </div>
+                        {errors.agencyFbin && (
+                        <p className="message">{errors.agencyFbin}</p>
+                      )}
                       </div>
                     </div>
                   </div>
-                  Table
+                  
                 </div>
               </div>
             </div>
@@ -138,7 +151,7 @@ export default function Addagency() {
                               >
                                 <TableHead>
                                   <TableRow>
-                                    <TableCell>Type</TableCell>
+                                 
                                     <TableCell>Address line 1</TableCell>
                                     <TableCell>Address line 2</TableCell>
                                     <TableCell>Country</TableCell>
@@ -157,9 +170,7 @@ export default function Addagency() {
                                         },
                                       }}
                                     >
-                                      <TableCell component="th" scope="row">
-                                        {row.addrType}
-                                      </TableCell>
+                                      
                                       <TableCell align="right">
                                         {row.addrLine1}
                                       </TableCell>
@@ -217,11 +228,11 @@ export default function Addagency() {
                         <input
                           type="submit"
                           value="Submit"
-                          className="btn app-btn-primary"
+                          className="next-pre-btn mrg-r-3"
                         />
 
                         <Link to="/listagency">
-                          <button type="button" className="btn btn-link">
+                          <button type="button" className="next-pre-btn-secondary mrg-r-3">
                             Cancel
                           </button>
                         </Link>

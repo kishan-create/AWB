@@ -68,7 +68,7 @@ const updateAgent = async (e) => {
     if (responseuser.status === 200) {
    
       swal({
-        title: "Good job!",
+        title: "",
         text: "Agent Updated successfully",
         icon: "success",
         button: "ok",

@@ -119,7 +119,7 @@ export default function Addagent() {
                       </div>
                 </div>
                 </div>
-                agents
+                
 </div>
 </div>
 </div>
@@ -215,11 +215,11 @@ export default function Addagent() {
                       <input
                         type="submit"
                         value="Submit"
-                        className="btn app-btn-primary"
+                        className="next-pre-btn mrg-r-3"
                       />
 
 <Link to="/listagency">
-                      <button type="button" className="btn btn-link ">
+                      <button type="button" className="next-pre-btn-secondary mrg-r-3 ">
                         Cancel
                       </button>
                       </Link>

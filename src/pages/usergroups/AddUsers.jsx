@@ -112,7 +112,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          List Users
+          Users
         </Typography>
       )}
 
@@ -151,7 +151,7 @@ const UserTogroups = async (e, data, userid, reseMethod) => {
   };
   const response = axios
     .post(
-      process.env.REACT_APP_API_SERVICE_URL +
+      process.env.REACT_APP_API_ADMIN_URL +
         `/usergroup/${Groupid}/groupmembers`,
 
       gmembers
@@ -160,7 +160,7 @@ const UserTogroups = async (e, data, userid, reseMethod) => {
       reseMethod();
       if (response.status === 200) {
         swal({
-          title: "Good job!",
+          title: "",
           text: "User Added successfully",
           icon: "success",
           button: "ok",
@@ -255,7 +255,7 @@ export default function AddUsers(props) {
     <Box sx={{ width: "100%" }}>
       <button
         type="button"
-        class="btn app-btn-primary fl-right"
+        class="next-pre-btn mrg-r-3 fl-right"
         onClick={handleClickAddView}
       >
         List Users
@@ -343,10 +343,7 @@ export default function AddUsers(props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+     
     </Box>
   );
 }

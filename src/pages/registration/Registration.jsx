@@ -53,7 +53,7 @@ const Registration = (registeration_validation) => {
             userFullName: "",
           });
           swal({
-            title: "Good job!",
+            title: "",
             text: "User Added successfully",
             icon: "success",
             button: "ok",

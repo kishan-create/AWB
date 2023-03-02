@@ -30,6 +30,7 @@ import { Link } from "react-router-dom";
 import Userhooks from "./functions/Userhooks";
 import Tabledata from "../../components/common/Tabledata";
 import axios from "axios";
+import swal from "sweetalert";
 const {
   descendingComparator,
   getComparator,
@@ -57,20 +58,7 @@ function EnhancedTableHead(props) {
     <TableHead>
          
       <TableRow>
-        <TableCell padding="checkbox">
-          <div className="form-check">
-            <Checkbox
-              color="primary"
-              className="form-check-input"
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{
-                "aria-label": "select all desserts",
-              }}
-            />
-          </div>
-        </TableCell>
+       
         <TableCell>User Name</TableCell>
         <TableCell>Full Name</TableCell>
         <TableCell>Email</TableCell>
@@ -102,7 +90,7 @@ export default function Users() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { rows } = Userhooks();
+  const { rows,getUsers } = Userhooks();
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -160,12 +148,20 @@ export default function Users() {
   const deleteUser = async (e, id) => {
     e.preventDefault();
     const thisclickrow = e.currentTarget;
-    thisclickrow.innerText = "Deleting";
-    const res = await axios.delete(`https://4c05edda-18b5-41d1-8254-54799a0d6052.mock.pstmn.io/${id}`);
-    if (res.data.status == 200) {
-      thisclickrow.closest("tr").remove();
-      alert("User Deleted successfully");
-    }
+   
+    const response = await axios.delete(process.env.REACT_APP_API_ADMIN_URL +`/user/${id}`)
+    .then((response)=>{
+      // thisclickrow.closest("tr").remove();
+       if (response.status === 200) {
+        getUsers();
+         swal({
+           title: "",
+           text: " Record deleted successfully",
+           icon: "success",
+           button: "ok",
+         });;
+        }
+      });
   };
  
   return (
@@ -175,7 +171,7 @@ export default function Users() {
         <EnhancedTableToolbar numSelected={selected.length} />
         <h4 class="add-headd-sub1 fl-left">Users</h4>
         <Link to="/registration" >
-        <button type="button" class="btn app-btn-primary fl-right">+ Add Users</button>
+        <button type="button" class="next-pre-btn mrg-r-3 fl-right">+ Add Users</button>
         </Link>
         <TableContainer>
           <Table
@@ -202,18 +198,7 @@ export default function Users() {
                   return (
                     <React.Fragment key={row.userId}>
                       <TableRow>
-                        <TableCell padding="checkbox">
-                          <div className="form-check">
-                            <Checkbox
-                              color="primary"
-                              className="form-check-input"
-                              checked={isItemSelected}
-                              inputProps={{
-                                "aria-labelledby": labelId,
-                              }}
-                            />
-                          </div>
-                        </TableCell>
+                        
                         <TableCell>{row.userName}</TableCell>
                         <TableCell>{row.userFullName}</TableCell>
                         <TableCell>{row.userEmail}</TableCell>
@@ -229,7 +214,11 @@ export default function Users() {
                             <EditIcon />
                           </Link>
                           <DeleteIcon
-                            onClick={(e) => deleteUser(e, row.userId)}
+                           onClick={(e) => {
+                            if (window.confirm("Are you sure you wish to delete this item?"))
+                            deleteUser(e, row.userId)
+                          }}
+                          
                           />
                         </TableCell>
                       </TableRow>

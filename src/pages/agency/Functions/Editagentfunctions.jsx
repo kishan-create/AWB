@@ -69,7 +69,7 @@ if (responseuser.status === 200)
       {
 
      swal({
-       title: "Good job!",
+       title: "",
        text: "User Group Updated successfully",
        icon: "success",
        button: "ok",

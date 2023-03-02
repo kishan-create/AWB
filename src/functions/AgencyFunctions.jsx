@@ -15,6 +15,13 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  useEffect(() => {
+   
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      onSubmitform();
+    }
+  }, [errors]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     SetValues({
@@ -25,9 +32,10 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    const test = setErrors(Agency_Validation(values));
+    setIsSubmitting(true);
 
-    onSubmitform();
+   // onSubmitform();
   };
 
   const onSubmitform = (e) => {
@@ -82,6 +90,6 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
       });
   };
 
-  return { handleChange, handleSubmit, values };
+  return { handleChange, handleSubmit, values,errors };
 };
 export default AgencyFunctions;

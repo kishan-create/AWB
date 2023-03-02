@@ -63,16 +63,7 @@ function EnhancedTableHead(props) {
       <TableRow>
         <TableCell padding="checkbox">
           <div className="form-check">
-            <Checkbox
-              color="primary"
-              className="form-check-input"
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{
-                "aria-label": "select all desserts",
-              }}
-            />
+           
           </div>
         </TableCell>
         {tableheader.map((tablecelss) => (
@@ -207,7 +198,7 @@ export default function AgentDataTable() {
                           <Link to="/addagency">
                             <button
                               type="button"
-                              class="btn app-btn-primary fl-right"
+                              class="next-pre-btn mrg-r-3 fl-right"
                             >
                               + Add Agency
                             </button>
@@ -247,15 +238,7 @@ export default function AgentDataTable() {
 
                                         <TableCell padding="checkbox">
                        <div className='form-check'>
-                        <Checkbox
                         
-                          color="primary"
-                          className='form-check-input'
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
                         </div>
                       </TableCell>
                       
