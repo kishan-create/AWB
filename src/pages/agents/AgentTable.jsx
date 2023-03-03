@@ -237,7 +237,7 @@ export default function AgentTable() {
                                                 data: row.producerId, // your data array of objects
                                               }}
                                             >
-                                              <PreviewIcon />
+                                           <EditIcon />
                                             </Link>
                                           </TableCell>
                                         </TableRow>

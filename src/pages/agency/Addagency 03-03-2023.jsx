@@ -42,37 +42,6 @@ export default function Addagency() {
   const getAddressDataLatest = (listaddress) => {
     SetListadd(listaddress);
   };
-  const country = [
-    {
-      name: "India",
-    },
-    {
-      name: "Us",
-    },
-  ];
-
-  const state = [
-    {
-      name: "Kerala",
-    },
-    {
-      name: "Tamilnadu",
-    },
-  ];
-  const addressType = [
-    {
-      name: "Work Address",
-    },
-    {
-      name: "Billing Address",
-    },
-    {
-      name: "Permenent Address",
-    },
-    {
-      name: "Shipping Address",
-    },
-  ];
 
   return (
     <div>
@@ -86,8 +55,8 @@ export default function Addagency() {
                   className="app-card alert alert-dismissible shadow-sm mb-4"
                   role="alert"
                 >
-                  <div className="inner p-15">
-                    <h4 className="add-headd-sub1">Agency Information</h4>
+                  <div class="inner p-15">
+                    <h4 className="add-headd-sub1">Agency Details</h4>
                     <div className="page-grid-3">
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
@@ -99,16 +68,16 @@ export default function Addagency() {
                             className="form-control"
                             placeholder="Agency Name"
                             name="agencyName"
+                            required
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
                             value={values.agencyName}
                           />
-                         
                         </div>
                         {errors.agencyName && (
-                            <p className="message">{errors.agencyName}</p>
-                          )}
+                        <p className="message">{errors.agencyName}</p>
+                      )}
                       </div>
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
@@ -120,6 +89,7 @@ export default function Addagency() {
                             className="form-control"
                             placeholder="Agency Npn"
                             name="agencyNpn"
+                            required
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
@@ -127,8 +97,8 @@ export default function Addagency() {
                           />
                         </div>
                         {errors.agencyNpn && (
-                          <p className="message">{errors.agencyNpn}</p>
-                        )}
+                        <p className="message">{errors.agencyNpn}</p>
+                      )}
                       </div>
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
@@ -140,18 +110,21 @@ export default function Addagency() {
                             className="form-control"
                             placeholder="Agency Fbin"
                             name="agencyFbin"
+                            required
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
                             value={values.agencyFbin}
                           />
+                          
                         </div>
                         {errors.agencyFbin && (
-                          <p className="message">{errors.agencyFbin}</p>
-                        )}
+                        <p className="message">{errors.agencyFbin}</p>
+                      )}
                       </div>
                     </div>
                   </div>
+                  
                 </div>
               </div>
             </div>
@@ -178,7 +151,7 @@ export default function Addagency() {
                               >
                                 <TableHead>
                                   <TableRow>
-                                    <TableCell>Type</TableCell>
+                                 
                                     <TableCell>Address line 1</TableCell>
                                     <TableCell>Address line 2</TableCell>
                                     <TableCell>Country</TableCell>
@@ -190,16 +163,14 @@ export default function Addagency() {
                                 <TableBody>
                                   {adressData.map((row, index) => (
                                     <TableRow
-                                      key={index}
+                                      key={row.agent_Type}
                                       sx={{
                                         "&:last-child td, &:last-child th": {
                                           border: 0,
                                         },
                                       }}
                                     >
-                                      <TableCell component="th" scope="row">
-                                        {addressType[row.addrType - 1].name}
-                                      </TableCell>
+                                      
                                       <TableCell align="right">
                                         {row.addrLine1}
                                       </TableCell>
@@ -207,10 +178,10 @@ export default function Addagency() {
                                         {row.addrLine2}
                                       </TableCell>
                                       <TableCell align="right">
-                                        {country[row.countryId - 1].name}
+                                        {row.countryId}
                                       </TableCell>
                                       <TableCell align="left">
-                                        {state[row.stateId - 1].name}
+                                        {row.stateId}
                                       </TableCell>
                                       <TableCell align="left">
                                         {row.zip}
@@ -256,15 +227,12 @@ export default function Addagency() {
                       <div className="col-12 mt-4">
                         <input
                           type="submit"
-                          value="Save"
+                          value="Submit"
                           className="next-pre-btn mrg-r-3"
                         />
 
                         <Link to="/listagency">
-                          <button
-                            type="button"
-                            className="next-pre-btn-secondary mrg-r-3"
-                          >
+                          <button type="button" className="next-pre-btn-secondary mrg-r-3">
                             Cancel
                           </button>
                         </Link>

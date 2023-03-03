@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import http from "../components/common/http-common";
+import {useNavigate} from 'react-router-dom';
 
 const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
   const [values, SetValues] = useState({
@@ -21,7 +22,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
       onSubmitform();
     }
   }, [errors]);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     SetValues({
@@ -86,6 +87,13 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
       .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
       .then((response) => {
         if (response.status === 200) {
+          swal({
+            title: "",
+            text: "Agency Added successfully",
+            icon: "success",
+            button: "ok",
+          });
+          navigate('/listagency', {replace: true});
         }
       });
   };

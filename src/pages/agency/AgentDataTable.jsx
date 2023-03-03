@@ -265,7 +265,7 @@ export default function AgentDataTable() {
                                                 data: row.agencyId, // your data array of objects
                                               }}
                                             >
-                                              <PreviewIcon />
+                                             <EditIcon />
                                             </Link>
                                           </TableCell>
                                         </TableRow>
