@@ -294,20 +294,9 @@ export default function AddmultipleAdress(props) {
           </div>
 
           <div class="col-12">
-            <button type="button" class="btn btn-link" onClick={addAddress}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="24"
-                fill="none"
-                viewBox="0 0 25 24"
-              >
-                <path
-                  fill="#158AF5"
-                  d="M11.594 19v-6h-6v-2h6V5h2v6h6v2h-6v6h-2Z"
-                />
-              </svg>
-              Add
+            <button type="button" class="next-pre-btn mrg-r-3" onClick={addAddress}>
+            
+              Save
             </button>
           </div>
         </div>

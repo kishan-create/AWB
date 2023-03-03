@@ -1,6 +1,8 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 import Editagentfunctions from '../functions/Editagentfunctions'
 
 
@@ -56,7 +58,7 @@ return (
                   <div className="col-12 mt-4">
                    
                 <input type="submit"  className="next-pre-btn mrg-r-3"   value="Update" />
-                <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button>
+                <Link to="/listagent"> <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link>
 
 
 

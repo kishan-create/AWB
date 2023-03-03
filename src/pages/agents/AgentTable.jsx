@@ -27,6 +27,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
+import AgencyHeader from "./../agency/includes/AgencyHeader"
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -161,6 +162,7 @@ export default function AgentTable() {
 
   return (
     <div>
+      <AgencyHeader/>
       <div className="app-wrapper mt-4">
         <div className="app-content pt-2 p-md-2">
           <div className="container-fluid">

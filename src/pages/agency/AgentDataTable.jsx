@@ -36,6 +36,8 @@ import Tabledata from "../../components/common/Tabledata";
 import Agency from "./Agency";
 import axios from "axios";
 import UserHeader from './includes/AgencyHeader';
+import AgencyHeader from '../agency/includes/AgencyHeader';
+
 const {
   descendingComparator,
   getComparator,
@@ -177,7 +179,8 @@ export default function AgentDataTable() {
 
   return (
     <div>
-      <h1>Agency List</h1>
+      <AgencyHeader/>
+     
      
 
       <div className="app-wrapper mt-4">

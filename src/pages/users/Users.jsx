@@ -169,7 +169,7 @@ export default function Users() {
         <h4 class="add-headd-sub1 fl-left">Users</h4>
         <Link to="/registration">
           <button type="button" class="next-pre-btn mrg-r-3 fl-right">
-            + Add Users
+            + Add User
           </button>
         </Link>
         <TableContainer>

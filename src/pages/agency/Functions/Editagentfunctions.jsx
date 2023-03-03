@@ -32,7 +32,6 @@ const Editagentfunctions = (id) => {
 
 
   const getagentsbyID = async () => {
-    console.log(id);
 
     const response = await axios.get(
       process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`
