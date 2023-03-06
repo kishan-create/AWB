@@ -32,9 +32,7 @@ export default function UserHeader() {
           </div>
         </div>*/ }
         </div>
-        <div className="col-auto">
-          <button type="button" className="btn app-btn-primary">Upload Documents</button>
-        </div>
+       
       </div>
     </div>
   </div>
