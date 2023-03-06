@@ -4,6 +4,8 @@ import "./registration.scss";
 import axios from "axios";
 import swal from "sweetalert";
 import logo from "../../images/awb_logo.svg";
+import {useNavigate} from 'react-router-dom';
+
 
 const Registration = (registeration_validation) => {
   const [values, SetValues] = useState({
@@ -31,6 +33,7 @@ const Registration = (registeration_validation) => {
       [name]: value,
     });
   };
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,12 +56,15 @@ const Registration = (registeration_validation) => {
             userFullName: "",
           });
           swal({
-           
+            title: "",
             text: "User Added successfully",
             icon: "success",
             button: "ok",
           });
+          navigate('/userlist', {replace: true});
         }
+        
+
       });
   };
 

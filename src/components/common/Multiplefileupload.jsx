@@ -146,7 +146,7 @@ export default function Multiplefileupload(props)
                   className="file"
                   onChange={filesSelected}
                 />
-               <label htmlFor="file">Select file</label>
+               <label htmlFor="file"></label>
   
                 </div>
               </div>

@@ -10657,7 +10657,17 @@ hr {
 .popover {
   border-color: #dee1fc;
 }
+.fl-left {float: left;}
 
+.message {
+  color: #ff0000; /* red */
+}
+
+.fl-right {
+  float: right;
+  margin-bottom: 10px;
+  margin-right: 16px;
+}
 .bs-popover-left > .arrow::before, .bs-popover-auto[x-placement^=left] > .arrow::before {
   border-left-color: #dee1fc;
 }
@@ -12068,6 +12078,7 @@ body {
 
 .p-15 {
   padding: 15px;
+   min-height: 200px;
 }
 
 

@@ -32,7 +32,6 @@ const Editagentfunctions = (id) => {
 
 
   const getagentsbyID = async () => {
-    console.log(id);
 
     const response = await axios.get(
       process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`
@@ -69,7 +68,7 @@ if (responseuser.status === 200)
       {
 
      swal({
-       title: "Good job!",
+       title: "",
        text: "User Group Updated successfully",
        icon: "success",
        button: "ok",

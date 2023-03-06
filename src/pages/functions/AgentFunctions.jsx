@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-
+import {useNavigate} from 'react-router-dom';
 const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
   const [values, SetValues] = useState({
     producerName: "",
@@ -32,7 +32,7 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
       onSubmitform();
     }
   }, [errors]);
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const test = setErrors(Agent_validation(values));
@@ -83,7 +83,14 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
       .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
       .then((response) => {
         if (response.status === 200) {
+          swal({
+            title: "",
+            text: "Agent Added successfully",
+            icon: "success",
+            button: "ok",
+          });
         }
+        navigate('/listagent', {replace: true});
       });
   };
 
