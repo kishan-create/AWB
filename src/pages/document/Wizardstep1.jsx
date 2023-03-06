@@ -57,26 +57,25 @@ export default function Wizardstep1() {
                         </div>
                         <div className="add-headd-wizard"> Upload Document
                         <div class="bottom-arrow-1"><CircleIcon /></div></div>
-                        {/* <div className="add-headd-wizard"> Upload Files 
-                        <div class="bottom-arrow-1"><CircleIcon /></div></div> */}
+            
                     </div>
                     <div className="page-grid-2">
                       <div className="">
- <div>
-      <label htmlFor="options">TEMP-CODE :</label>
-      <select id="options" value={selectedOption} onChange={handleSelect}>
+ <div  className="p-b-15">
+      <label htmlFor="options">Templorary-Code :</label>
+      <select id="options"   className="form-control" value={selectedOption} onChange={handleSelect}>
         <option value="">-- Please select --</option>
         <option value="Motor Vehicle insurance offer you">Vehicle insurance</option>
         <option value="Land insurance offer you">Property insurance</option>
         <option value="Health insurance oofer you">Health INsurance</option>
       </select>
-      <p>You selected type: {selectedOption}</p>
+
     </div>
 
                         
                       <div className="p-b-15">
                         <label htmlFor="Submission" className="form-label">
-                        TEMP-CODE <span className="red">*</span>
+                        Tag 1<span className="red">*</span>
                         </label>
                         <div className="input-group mb-3">
                           <input
@@ -87,13 +86,34 @@ export default function Wizardstep1() {
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
-                           value={"TEMP-CODE"}
+                           value={"Tag 1"}
                           />
                         </div>
                       </div>
+
+
                       <div className="p-b-15">
                         <label htmlFor="Submission" className="form-label">
-                        TEMP DESC <span className="red">*</span>
+                        Tag 2<span className="red">*</span>
+                        </label>
+                        <div className="input-group mb-3">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Agency Name"
+                            name="agencyName"
+                            onChange={handleChange}
+                            aria-label="Date of Submission"
+                            aria-describedby="basic-addon1"
+                           value={"Tag 2"}
+                          />
+                        </div>
+                      </div>
+
+
+                      <div className="p-b-15">
+                        <label htmlFor="Submission" className="form-label">
+                        Temporary Description <span className="red">*</span>
                         </label>
                         <div className="input-group mb-3">
                           <input
@@ -104,13 +124,13 @@ export default function Wizardstep1() {
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
-                            value={"TEM DESC"}
+                            value={"Temporary Description"}
                           />
                         </div>
                       </div>
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
-                        TEMP-NAME<span className="red">*</span>
+                        Temporary Name<span className="red">*</span>
                         </label>
                         <div className="input-group mb-3">
                           <input
@@ -121,7 +141,7 @@ export default function Wizardstep1() {
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
-                            value={" TEMP-NAME"}
+                            value={" Temporary Name"}
                           />
                         </div>
                       </div>

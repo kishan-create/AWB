@@ -2,40 +2,14 @@ import React, { useState } from "react";
 import AddmultipleAdress from "../../components/common/AddmultipleAdress";
 
 
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteConfirm from "../../components/common/DeleteConfirm";
-import Multiplefileupload from "../../components/common/Multiplefileupload"; 
+
 import DocumentHeader from "../../pages/document/Includes/DocumentHeader"
 
 import DocumentMultiStepForm from "./DocumentMultiStepForm";
 export default function AddDocumentWizard() {
   
 
-  // const { handleChange, handleSubmit, values } = AgencyFunctions(
-  //   Agency_Validation,
-  //   adressData,
-  //   fileData
-  // );
-  // const getData = (data) => {
-  //   //console.log(data);
-  //   setAddressData(data);
-  // };
-  // const RemoveAddress = (index) => {
-  //   const rows = [...adressData];
-  //   rows.splice(index, 1);
-  //   setAddressData(rows);
-  // };
   
-  // const handleChangeFileUploads =(data)=>
-  // {
-  //   setFileData(data);
-  // }
   
   const handleSubmit =()=>
   {
