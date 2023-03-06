@@ -20,8 +20,9 @@ import AddUserstogroup from '../../pages/users/AddUserstogroup';
 import Addagency from '../../pages/agency/Addagency';
 import AgentDataTable from '../../pages/agency/AgentDataTable';
 import ListAgentsData from '../../pages/agency/ListAgentsData'
-import AgentTable from '../../pages/agents/AgentTable'
+import AgentTable from '../../pages/agents/AgentTable';
 
+import AddDocumentWizard from '../../pages/document/AddDocumentWizard'
 function Content() {
   return (
 
@@ -41,6 +42,10 @@ function Content() {
   <Route path="/listagentheaddata/:id" exact={true} element={<ListAgentsData />}/>
   <Route path="/editusergroup/:id" exact={true} element={<EditUsergroup />} />
   <Route path="/listagent" exact={true} element={<AgentTable />} />
+  <Route path="/addDocument-wizard" exact={true} element={<AddDocumentWizard/>}/>
+
+  
+  
 
 
     

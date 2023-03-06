@@ -33,7 +33,7 @@ const Usergroupform = (usergroup_validation) => {
   };
 
   const onSubmitform = (e) => {
-    console.log(values);
+   
 
     const response = axios.post(
       // "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup",

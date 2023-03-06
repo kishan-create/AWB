@@ -29,60 +29,52 @@ export default function UserRegistration() {
               <form className="auth-form auth-signup-form"  onSubmit={handleSubmit}> 
 
               <div className="email mb-3">
-                  <label className="sr-only" htmlFor="signup-email"> Name</label>
-                  <input onChange={handleChange}  value={values.userName} id="signup-name" name="userName" type="text" className="form-control signup-name" placeholder=" name" required/>
+                  <label className="sr-only" htmlFor="signup-email"> Name <span className="red"> *</span></label>
+                  <input onChange={handleChange}  value={values.userName} id="signup-name" name="userName" type="text" className="form-control signup-name" placeholder=" name" />
                   
-                    {errors.userName && (<p className="message">{errors.userName}</p>)}
+                    {errors.userName && (<p className="message "  style={{ color: 'red'}}>{errors.userName}</p>)}
                 </div>
+
 
              
                   <div className="email mb-3">
-                    <label className="sr-only" htmlFor="signup-email"> Email</label>
-                    <input onChange={handleChange} value={values.userEmail} id="userEmail" name="userEmail" type="email" className="form-control signup-email" placeholder="Email" required  />
-                    {errors.userEmail && (<p className="message">{errors.userEmail}</p>)}
+                    <label className="sr-only" htmlFor="signup-email"> Email <span className="red">*</span></label>
+                    <input onChange={handleChange} value={values.userEmail} id="userEmail" name="userEmail" type="email" className="form-control signup-email" placeholder="Email"   />
+                    {errors.userEmail && (<p className="message" style={{ color: 'red'}}>{errors.userEmail}</p>)}
                  
                   </div>
 
                   <div className="email mb-3">
-                  <label className="sr-only" htmlFor="signup-email">Full Name</label>
-                  <input onChange={handleChange}  value={values.userFullName} id="userFullName" name="userFullName" type="text" className="form-control signup-name" placeholder="Full name" required />
-                  {errors.userFullName && (<p className="message">{errors.userFullName}</p>)}
+                  <label className="sr-only" htmlFor="signup-email">Full Name <span className="red">*</span></label>
+                  <input onChange={handleChange}  value={values.userFullName} id="userFullName" name="userFullName" type="text" className="form-control signup-name" placeholder="Full name"  />
+                  {errors.userFullName && (<p className="message" style={{ color: 'red'}}>{errors.userFullName}</p>)}
                
                 </div>
 
                 <div className="phone mb-3">
-                  <label className="sr-only" htmlFor="signup-phone">Phone </label>
-                  <input onChange={handleChange} value={values.userPhone} id="userPhone" name="userPhone" type="number" className="form-control signup-phone" placeholder="Phone"  required/>
-                  {errors.userPhone && (<p className="message">{errors.userPhone}</p>)}
+                  <label className="sr-only" htmlFor="signup-phone">Phone <span className="red">*</span> </label>
+                  <input onChange={handleChange} value={values.userPhone} id="userPhone" name="userPhone" type="text" className="form-control signup-phone" placeholder="Phone"  />
+                  {errors.userPhone && (<p className="message" style={{ color: 'red'}}>{errors.userPhone}</p>)}
              
                 </div>
 
                 <div className="password mb-3">
-                  <label className="sr-only" htmlFor="signup-password">Password</label>
-                  <input  id="signup-password" 	onChange={handleChange}  value={values.password}  name="password" type="password" className="form-control signup-password" placeholder="Create a password"  required />
-                  {errors.password && (<p className="message">{errors.password}</p>)}
+                  <label className="sr-only" htmlFor="signup-password">Password <span className="red">*</span></label>
+                  <input  id="signup-password" 	onChange={handleChange}  value={values.password}  name="password" type="password" className="form-control signup-password" placeholder="Create a password"   />
+                  {errors.password && (<p className="message" style={{ color: 'red'}}>{errors.password}</p>)}
               
              
       </div>
 
                 
-                <div className="extra mb-3">
-                  <div className="form-check">
-                    <input className="form-check-input" type="checkbox" defaultValue id="RememberPassword" />
-                    <label className="form-check-label" htmlFor="RememberPassword">
-                      I agree to Portal's <a href="#" className="app-link">Terms of Service</a> and <a href="#" className="app-link">Privacy Policy</a>.
-                    </label>
-                  </div>
-                </div>{/*//extra*/}
+               
                 <div className="text-center">
                  
-                  {/* <input type="submit" value="Submit" className="btn app-btn-primary"/> */}
+               
                   <input type="submit" value="Submit" className="btn app-btn-primary"/>
                 </div>
               </form>{/*//auth-form*/}
-              <div className="auth-option text-center pt-5">Already have an account?
-              <Link to="/login">Log in</Link>
-               </div>
+            
             </div>{/*//auth-form-container*/}	
           </div>{/*//auth-body*/}
           
