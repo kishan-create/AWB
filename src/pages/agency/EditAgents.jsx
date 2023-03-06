@@ -17,11 +17,11 @@ export default function Editagents() {
   
   return (
     <div className="app-wrapper mt-4">
-        <div className="app-content pt-2 p-md-2">
-          <div className="container-fluid">
-            <div className="app-card alert alert-dismissible shadow-sm mb-4" role="alert">
-              <div className="inner">
-                <div className="app-card-body p-2 p-lg-4">
+        <div >
+          <div >
+            <div className="" role="alert">
+              <div >
+                <div >
 
 
                 </div>
@@ -72,7 +72,7 @@ export default function Editagents() {
                   
                   
                   <div className="col-12 mt-4">
-                    <button type="submit" className="next-pre-btn mrg-r-3">Submit &amp; Continue</button>
+                  <input type="submit"  className="next-pre-btn mrg-r-3"   value="Update" />
                    
                     <Link to="/listagency"> <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link>
 

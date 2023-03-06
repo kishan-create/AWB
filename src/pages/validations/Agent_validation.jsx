@@ -12,11 +12,19 @@ export default function Agent_validation(values) {
     }
     
   
-    if (!values.producerPhone.trim() ) {
-        errors.producerPhone = "User phone number required";
-       }  else if(!numregex.test(values.producerPhone)) {
-           errors.producerPhone = "Invalid phone number. Please try again"; 
-          } 
+    // if (!values.producerPhone.trim() ) {
+    //     errors.producerPhone = "User phone number required";
+    //    }  else if(!numregex.test(values.producerPhone)) {
+    //        errors.producerPhone = "Invalid phone number. Please try again"; 
+    //       } 
+
+
+
+          if (!values.producerPhone.trim() ) 
+          {  errors.producerPhone = "User phone number required"; } 
+          else if(!numregex.test(values.producerPhone))
+         {  errors.producerPhone = "Use number only"; } 
+
 
 
 

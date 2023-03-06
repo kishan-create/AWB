@@ -9,7 +9,7 @@ export default function Agency_Validation(values) {
     errors.agencyNpn = "Agency Npn Required";
   }
   if (!values.agencyFbin.trim()) {
-    errors.agencyFbin = "Agency agencyFbin   Required";
+    errors.agencyFbin = "Agency Fbin   Required";
   }
 
   return errors;

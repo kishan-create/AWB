@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { faFileAlt, faDownload, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DeleteIcon from '@mui/icons-material/Delete';
+import DownloadIcon from '@mui/icons-material/Download';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import swal from 'sweetalert';
 import Box from '@mui/material/Box';
@@ -137,23 +138,17 @@ export default function Multiplefileupload(props)
           <>
             <div className="container">
               <div>
-                  <div className="file-input">
-                
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  id="file"
-                  className="file"
-                  onChange={filesSelected}
-                />
-               <label htmlFor="file"></label>
-  
+              <div className="file-input"> 
+                  <label for="file" class="btn choosefile-attach-txt">
+                  <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <g> <path fill="none" d="M0 0h24v24H0z"/> <path d="M14.828 7.757l-5.656 5.657a1 1 0 1 0 1.414 1.414l5.657-5.656A3 3 0 1 0 12 4.929l-5.657 5.657a5 5 0 1 0 7.071 7.07L19.071 12l1.414 1.414-5.657 5.657a7 7 0 1 1-9.9-9.9l5.658-5.656a5 5 0 0 1 7.07 7.07L12 16.244A3 3 0 1 1 7.757 12l5.657-5.657 1.414 1.414z"/> </g> </svg>  
+
+                    Add Documents</label>
+                <input ref={fileInputRef} type="file"  id="file"  className="file opacity-0"  onChange={filesSelected}></input>
+         
                 </div>
               </div>
-            
-              {(() => {
-                if (validFiles.length>0){
-                  return(
+              <div className="uplaod-table-box">
+              
                     <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 350 }} aria-label="simple table">
                       <TableHead>
@@ -172,9 +167,9 @@ export default function Multiplefileupload(props)
                             <TableCell component="th" scope="row">
                               {row.name}
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="right" className="p-l-1" >
                             <div>   <a onClick={() => downloadTxtFile()}>
-                                        <FileDownloadIcon/>
+                            <DownloadIcon/>
                                         </a>
                                         {" "}
                                         <a onClick={(e) => deleteFile()}>
@@ -186,12 +181,47 @@ export default function Multiplefileupload(props)
                   
                           </TableRow>
                         ))}
+                         <TableRow >
+                            <TableCell component="th" scope="row">
+                            <div className="td-sample-txt1">.</div>
+                            </TableCell>
+                            <TableCell align="right"  className="p-l-1"> 
+                                <DownloadIcon/> 
+                                <DeleteIcon/> 
+                            </TableCell> 
+                          </TableRow>
+                          <TableRow >
+                            <TableCell component="th" scope="row">
+                            <div className="td-sample-txt1">.</div>
+                            </TableCell>
+                            <TableCell align="right"  className="p-l-1"> 
+                                <DownloadIcon/> 
+                                <DeleteIcon/> 
+                            </TableCell> 
+                          </TableRow>
+                          <TableRow >
+                            <TableCell component="th" scope="row">
+                            <div className="td-sample-txt1">.</div>
+                            </TableCell>
+                            <TableCell align="right"  className="p-l-1"> 
+                                <DownloadIcon/> 
+                                <DeleteIcon/> 
+                            </TableCell> 
+                          </TableRow>
+                          <TableRow >
+                            <TableCell component="th" scope="row">
+                            <div className="td-sample-txt1">.</div>
+                            </TableCell>
+                            <TableCell align="right"  className="p-l-1"> 
+                                <DownloadIcon/> 
+                                <DeleteIcon/> 
+                            </TableCell> 
+                          </TableRow>
                       </TableBody>
                     </Table>
                   </TableContainer>
-                  )
-                }
-              })()}
+                  
+  </div>
             </div>
           </>
         </div>

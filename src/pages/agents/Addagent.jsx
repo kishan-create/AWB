@@ -15,6 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from "react-router-dom";
 
+
 export default function Addagent() {
   const [seen,setSeen] = useState([]);
   const [adressData, setAddressData] = useState([]);
@@ -349,14 +350,14 @@ export default function Addagent() {
                         <h4 className="add-headd-sub">Upload Files</h4>
 
                         <div className="page-grid-2 p-tb-50">
-                          <div className="choose-file-sty">
-                            <Multiplefileupload handleChangeFileUploads={handleChangeFileUploads} />
-                          </div>
-                          <div>
-                            <div className="upload-righ-icon"> </div>
-
-                          </div>
-                        </div>
+                            <div className="choose-file-sty">
+                            <Multiplefileupload handleChangeFileUploads={handleChangeFileUploads}/>
+                            </div> 
+                            <div>
+                              <div className="upload-righ-icon"></div>
+                              
+                            </div>
+                      </div>
                       </div>
 
                     </div>
