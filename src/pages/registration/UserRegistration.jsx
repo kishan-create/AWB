@@ -40,7 +40,7 @@ export default function UserRegistration() {
                       type="text"
                       className="form-control signup-name"
                       placeholder=" name"
-                      required
+                      
                     />
 
                     {errors.userName && (
@@ -61,7 +61,7 @@ export default function UserRegistration() {
                       type="email"
                       className="form-control signup-email"
                       placeholder="Email"
-                      required
+                      
                     />
                     {errors.userEmail && (
                       <p className="message">{errors.userEmail}</p>
@@ -80,7 +80,7 @@ export default function UserRegistration() {
                       type="text"
                       className="form-control signup-name"
                       placeholder="Full name"
-                      required
+                      
                     />
                     {errors.userFullName && (
                       <p className="message">{errors.userFullName}</p>
@@ -96,10 +96,10 @@ export default function UserRegistration() {
                       value={values.userPhone}
                       id="userPhone"
                       name="userPhone"
-                      type="number"
+                      type="text"
                       className="form-control signup-phone"
                       placeholder="Phone"
-                      required
+                      
                     />
                     {errors.userPhone && (
                       <p className="message">{errors.userPhone}</p>
@@ -118,7 +118,7 @@ export default function UserRegistration() {
                       type="password"
                       className="form-control signup-password"
                       placeholder="Create a password"
-                      required
+                      
                     />
                     {errors.password && (
                       <p className="message">{errors.password}</p>
@@ -126,28 +126,7 @@ export default function UserRegistration() {
                   </div>
 
                   <div className="extra mb-3">
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        defaultValue
-                        id="RememberPassword"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="RememberPassword"
-                      >
-                        I agree to Portal's{" "}
-                        <a href="#" className="app-link">
-                          Terms of Service
-                        </a>{" "}
-                        and{" "}
-                        <a href="#" className="app-link">
-                          Privacy Policy
-                        </a>
-                        .
-                      </label>
-                    </div>
+                   
                   </div>
                   {/*//extra*/}
                   <div className="text-center">
@@ -165,18 +144,18 @@ export default function UserRegistration() {
                       </button>{" "}
                       </Link>
                     </div>
-                    {/* <input type="submit" value="Submit" className="btn app-btn-primary"/> */}
+                  
                   </div>
                 </form>
-                {/*//auth-form*/}
+              
               </div>
-              {/*//auth-form-container*/}
+      
             </div>
-            {/*//auth-body*/}
+         
           </div>
-          {/*//flex-column*/}
+  
         </div>
-        {/*//auth-main-col*/}
+  
         <div className="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
           <div className="auth-background-holder"></div>
           <div className="auth-background-mask" />
