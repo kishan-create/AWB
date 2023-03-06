@@ -125,7 +125,7 @@ export default function Addagent() {
                       </label>
                       <div className="input-group mb-3">
                       <input
-                            type="number"
+                            type="text"
                             className="form-control"
                             placeholder="Phone"
                             name="producerPhone"

@@ -17,8 +17,9 @@ export default function UserRegistration() {
           <div className="d-flex flex-column align-content-end">
             <div className="app-auth-body mx-auto">
               <div className="app-auth-branding mb-4">
+              
+                <br></br>
                 <a className="app-logo" href="index.html">
-                  <img className="logo-icon me-2" src={logo} alt="logo" />
                 </a>
               </div>
               <h2 className="auth-heading text-center mb-4">Add User</h2>
@@ -40,7 +41,7 @@ export default function UserRegistration() {
                       type="text"
                       className="form-control signup-name"
                       placeholder=" name"
-                      required
+                      
                     />
 
                     {errors.userName && (
@@ -61,7 +62,7 @@ export default function UserRegistration() {
                       type="email"
                       className="form-control signup-email"
                       placeholder="Email"
-                      required
+                      
                     />
                     {errors.userEmail && (
                       <p className="message">{errors.userEmail}</p>
@@ -80,7 +81,7 @@ export default function UserRegistration() {
                       type="text"
                       className="form-control signup-name"
                       placeholder="Full name"
-                      required
+                      
                     />
                     {errors.userFullName && (
                       <p className="message">{errors.userFullName}</p>
@@ -96,10 +97,10 @@ export default function UserRegistration() {
                       value={values.userPhone}
                       id="userPhone"
                       name="userPhone"
-                      type="number"
+                      type="text"
                       className="form-control signup-phone"
                       placeholder="Phone"
-                      required
+                      
                     />
                     {errors.userPhone && (
                       <p className="message">{errors.userPhone}</p>
@@ -118,7 +119,7 @@ export default function UserRegistration() {
                       type="password"
                       className="form-control signup-password"
                       placeholder="Create a password"
-                      required
+                      
                     />
                     {errors.password && (
                       <p className="message">{errors.password}</p>
@@ -137,7 +138,7 @@ export default function UserRegistration() {
                         className="form-check-label"
                         htmlFor="RememberPassword"
                       >
-                        I agree to Portal's{" "}
+                        I agree to AWB{" "}
                         <a href="#" className="app-link">
                           Terms of Service
                         </a>{" "}
