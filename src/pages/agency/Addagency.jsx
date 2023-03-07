@@ -42,6 +42,40 @@ export default function Addagency() {
   const getAddressDataLatest = (listaddress) => {
     SetListadd(listaddress);
   };
+const country=
+[
+  {
+    "name": "India"
+  },
+  {
+    "name": "Us"
+  }
+]
+
+const state=
+[
+  {
+    "name": "Tamilnadu"
+  },
+  {
+    "name": "Kerala"
+  }
+]
+const addressType=
+[
+  {
+    "name": "Work Address"
+  },
+  {
+    "name": "Billing Address"
+  },
+  {
+    "name": "Permenent Address"
+  },
+  {
+    "name": "Shipping Address"
+  },
+]
 
   return (
     <div>
@@ -55,7 +89,7 @@ export default function Addagency() {
                   className="app-card alert alert-dismissible shadow-sm mb-4"
                   role="alert"
                 >
-                  <div class="inner p-15">
+                  <div className="inner p-15">
                     <h4 className="add-headd-sub1">Agency Information</h4>
                     <div className="page-grid-3">
                       <div className="">
@@ -149,8 +183,9 @@ export default function Addagency() {
                                 </TableHead>
                                 <TableBody>
                                   {adressData.map((row, index) => (
+                                    
                                     <TableRow
-                                      key={row.agent_Type}
+                                      key={index}
                                       sx={{
                                         "&:last-child td, &:last-child th": {
                                           border: 0,
@@ -158,7 +193,7 @@ export default function Addagency() {
                                       }}
                                     >
                                       <TableCell component="th" scope="row">
-                                        {row.addrType}
+                                      {addressType[row.addrType-1].name}
                                       </TableCell>
                                       <TableCell align="right">
                                         {row.addrLine1}
@@ -167,10 +202,10 @@ export default function Addagency() {
                                         {row.addrLine2}
                                       </TableCell>
                                       <TableCell align="right">
-                                        {row.countryId}
+                                      {country[row.countryId-1].name}
                                       </TableCell>
                                       <TableCell align="left">
-                                        {row.stateId}
+                                      {state[row.stateId-1].name}
                                       </TableCell>
                                       <TableCell align="left">
                                         {row.zip}

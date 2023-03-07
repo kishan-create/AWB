@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import http from "./http-common";
 import axios from "axios";
+import MultipleAddressValidation from "../../pages/validations/MultipleAddressValidation";
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -31,6 +32,7 @@ const customStyles = {
 
 export default function AddmultipleAdress(props) {
   const [name, SetName] = useState("shanu");
+  const [errors, setErrors] = useState({});
   let subtitle;
   let count = 0;
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -47,17 +49,28 @@ export default function AddmultipleAdress(props) {
       zip: "",
     },
   ]);
-
+  const countries = [
+    {value: "0", text: "Select"}, 
+    {value: "1", text: "USA"}, 
+    {value: "2", text: "Canada"}, 
+    {value: "3", text: "Japan"}, 
+    {value: "4", text: "Mexico"}
+  ]
   const [listaddress, SetlistAddress] = useState([]);
   const [btnCount, setbtnCount] = useState(0);
   const [countryName, SetCountryName] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   function openModal() {
     setIsOpen(true);
   }
   useEffect(() => {
-    getAllCountryName();
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+     
+      onSubmitform(inputFields[btnCount], btnCount);
+    }
+  //  getAllCountryName();
     props.latestAddress(listaddress);
-  }, [listaddress]);
+  }, [listaddress, errors]);
   const getAllCountryName = async () => {
     const response = http.get("/lookupdata/2").then((response) => {
       if (response.status === 200) {
@@ -71,68 +84,60 @@ export default function AddmultipleAdress(props) {
   }
 
   function closeModal() {
-   
     setIsOpen(false);
   }
   const handleChangeDrop = (index, evnt) => {};
 
   const handleChange = (index, evnt) => {
-    if (evnt.target.name === "country" && evnt.target.value !== "") {
-      getStateValues(evnt.target.value);
-    }
+   
     inputFields[index][evnt.target.name] = evnt.target.value;
   };
   const getStateValues = async (id) => {};
   const addAddress = () => {
-    {
-      setbtnCount(btnCount + 1);
-      let data = {
-        addrType: "",
-        addrLine1: "",
-        addrLine2: "",
-
-        countryId: "",
-        stateId: "",
-        countyId: "3",
-        zip: "",
-      };
-      //  data[evnt.target.name] = evnt.target.value;
-      setInputFields((prevState) => [...prevState, data]);
-      SetlistAddress(inputFields);
-      submitEachAddress(inputFields[btnCount], btnCount);
-      SetlistAddress({
-        addrType: "",
-        addrLine1: "",
-        addrLine2: "",
-
-        countryId: "",
-        stateId: "",
-        countyId: "3",
-        zip: "",
-      });
-    }
-    props.addressData(inputFields);
-    closeModal();
+   
+    submitEachAddress(inputFields[btnCount], btnCount);
   };
   const submitEachAddress = (inputs, btnCount) => {
+    let error = MultipleAddressValidation(inputs);
+    setErrors(error);
+    setIsSubmitting(true);
+  };
+  const onSubmitform = (inputs,btncount) => {
     const response = axios
       .post(process.env.REACT_APP_API_SERVICE_URL + "/addresses", inputs)
       .then((response) => {
        
         if (response.status === 200) {
+          let data = {
+            addrType: "",
+            addrLine1: "",
+            addrLine2: "",
+      
+            countryId: "",
+            stateId: "",
+            countyId: "3",
+            zip: "",
+          };
+          setInputFields((prevState) => [...prevState, data]);
+          setbtnCount(btnCount + 1);
+          props.addressData(inputFields);
           SetlistAddress([...listaddress,{
             agyAddrTypeCode : response.data.addrType,
             agencyId : "",
             addressId:response.data.addrId
 
           }])
+          setIsSubmitting(false);
+          closeModal();
          
         }
        
        
       });
-  };
- 
+
+  }
+
+  
   return (
     <div>
       <div class="col-12">
@@ -172,15 +177,17 @@ export default function AddmultipleAdress(props) {
                     class="form-select mb-3"
                     name="addrType"
                     onChange={(evnt) => handleChange(btnCount, evnt)}
-                    defaultValue={inputFields.agent_Type}
+                    defaultValue={inputFields.addrType}
                   >
-                    <option selected="" value="1">
-                      Work Address
-                    </option>
+                    <option value="">Select your Address</option>
+                    <option value="1">Work Address</option>
                     <option value="2">Billing Address</option>
                     <option value="3">Permenent Address </option>
                     <option value="4">Shipping Address</option>
                   </select>
+                  {errors.addrType && (
+                    <p className="message">{errors.addrType}</p>
+                  )}
                 </div>
 
                 <div class="">
@@ -197,9 +204,12 @@ export default function AddmultipleAdress(props) {
                       aria-label="Enter Insured Name"
                       aria-describedby="basic-addon1"
                       onChange={(evnt) => handleChange(btnCount, evnt)}
-                      value={listaddress.agent_Address}
+                      value={inputFields.addrLine1}
                     />
                   </div>
+                  {errors.addrLine1 && (
+                    <p className="message">{errors.addrLine1}</p>
+                  )}
                 </div>
                 <div className="">
                   <label htmlFor="Submission" className="form-label">
@@ -215,7 +225,7 @@ export default function AddmultipleAdress(props) {
                       aria-label="Enter Insured Name"
                       aria-describedby="basic-addon1"
                       onChange={(evnt) => handleChange(btnCount, evnt)}
-                      value={inputFields.agent_Address2}
+                      value={inputFields.addrLine2}
                     />
                   </div>
                 </div>
@@ -224,6 +234,7 @@ export default function AddmultipleAdress(props) {
                   <label htmlFor="Submission" className="form-label">
                     Country <span className="red">*</span>
                   </label>
+                  
                   <select
                     class="form-control"
                     name="countryId"
@@ -234,6 +245,9 @@ export default function AddmultipleAdress(props) {
                     <option value="1">India</option>
                     <option value="2">USA</option>
                   </select>
+                  {errors.countryId && (
+                    <p className="message">{errors.countryId}</p>
+                  )}
                 </div>
                 <div className="">
                   <label htmlFor="Submission" className="form-label">
@@ -249,6 +263,9 @@ export default function AddmultipleAdress(props) {
                     <option value="1">Kerala</option>
                     <option value="2">TamilNadu</option>
                   </select>
+                  {errors.stateId && (
+                    <p className="message">{errors.stateId}</p>
+                  )}
                 </div>
 
                 <div className="">
@@ -267,6 +284,7 @@ export default function AddmultipleAdress(props) {
                       value={inputFields.zip}
                     />
                   </div>
+                  {errors.zip && <p className="message">{errors.zip}</p>}
                 </div>
                 <div className=""></div>
               </div>

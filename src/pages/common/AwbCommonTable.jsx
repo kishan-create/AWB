@@ -1,7 +1,7 @@
 import React from 'react'
 import AwbTable from '../../components/common/AwbTable'
 import AgencyHeader from '../agency/includes/AgencyHeader'
-export default function ListGroups() {
+export default function AwbCommonTable() {
   return (
     <div>
            <AgencyHeader/>
@@ -12,7 +12,7 @@ export default function ListGroups() {
           <div className="inner">
             <div className="table-responsive">
          
-            <AwbTable tableHeader="USERGROUP" tableRow="usergroup" id="userGroupId" baseURL={process.env.REACT_APP_API_ADMIN_URL}/>
+<AwbTable tableHeader="USER" tableRow="user"/>
             </div>
           </div>
         </div>

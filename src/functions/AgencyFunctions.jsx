@@ -8,7 +8,6 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
     agencyName: "",
     agencyNpn: "",
     agencyFbin: "",
-    
   });
   const [returnValue, SetReturnValue] = useState({
     agencyId: "",
@@ -25,7 +24,6 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
 
     onSubmitform();
   };
@@ -43,14 +41,12 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
           submitAddress(response.data.agencyId);
         }
       });
-
-  
   };
   const submitAddress = (agencyID) => {
     listadd.map((listaddress, key) => {
       listaddress.agencyId = agencyID;
     });
- 
+
     const response = axios
 
       .post(process.env.REACT_APP_API_SERVICE_URL + "/agencyaddr", listadd)
@@ -59,7 +55,6 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
           submitFiles(agencyID);
         }
       });
-
   };
   const submitFiles = (agencyID) => {
     let formData = new FormData();
@@ -71,7 +66,6 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
     formData.append("docOrginType", "AGENCY");
     formData.append("docCategoryId", 7);
     formData.append("docSubCategoryId", 9);
-   
 
     const response = axios
 
