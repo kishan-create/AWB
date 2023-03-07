@@ -12,7 +12,7 @@ export default function ListGroups() {
           <div className="inner">
             <div className="table-responsive">
          
-            <AwbTable tableHeader="USERGROUP" tableRow="usergroup" id="userGroupId" baseURL={process.env.REACT_APP_API_ADMIN_URL}/>
+            <AwbTable tableHeader="USERGROUP" tableRow="usergroup" id="userGroupId" baseURL={process.env.REACT_APP_API_ADMIN_URL} displayName="User Group"/>
             </div>
           </div>
         </div>

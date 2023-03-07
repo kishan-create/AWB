@@ -12,7 +12,7 @@ export default function ListAgency() {
           <div className="inner">
             <div className="table-responsive">
          
-            <AwbTable tableHeader="AGENCY" tableRow="agency" id="agencyId" baseURL={process.env.REACT_APP_API_SERVICE_URL}/>
+            <AwbTable tableHeader="AGENCY" tableRow="agency" id="agencyId" baseURL={process.env.REACT_APP_API_SERVICE_URL} displayName="Agency"/>
             </div>
           </div>
         </div>

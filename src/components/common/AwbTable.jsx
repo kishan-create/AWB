@@ -79,14 +79,13 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function Users(props) {
-  
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { rows, columns,getRows } = AwbTableFunctions(props);
+  const { rows, columns, getRows } = AwbTableFunctions(props);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -143,29 +142,42 @@ export default function Users(props) {
   //Delete a user
   const Rowdelete = async (e, id) => {
     e.preventDefault();
-    const thisclickrow = e.currentTarget;
-
-    const response = await axios
-      .delete(process.env.REACT_APP_API_ADMIN_URL + `/${props.tableRow}/${id}`)
-      .then((response) => {
-        // thisclickrow.closest("tr").remove();
-        if (response.status === 200) {
-          getRows();
-          swal({
-            title: "",
-            text: " Record deleted successfully",
-            icon: "success",
-            button: "ok",
+    swal({
+      title: "Are you sure?",
+      text: "You want to delete this Entry?",
+      type: "warning",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2e4153",
+      confirmButtonText: "Yes",
+      closeOnConfirm: false,
+      buttons: true,
+      buttons: ["No", "Yes"],
+    
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(
+            process.env.REACT_APP_API_ADMIN_URL + `/${props.tableRow}/${id}`
+          )
+          .then((res) => {
+            swal({
+              title: "Done!",
+              text: "user is deleted",
+              icon: "success",
+              timer: 2000,
+              button: false,
+            });
           });
-        }
-      });
+      }
+    });
   };
 
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <h4 class="add-headd-sub1 fl-left">{props.tableHeader}</h4>
+        <h4 class="add-headd-sub1 fl-left">{props.displayName}</h4>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -191,21 +203,21 @@ export default function Users(props) {
                   return (
                     <React.Fragment key={row.userId}>
                       <TableRow>
-                        {columns.map((column, ckey) => (
-                       
-                           column.isFieldDisplay == "N" ? (
+                        {columns.map((column, ckey) =>
+                          column.isFieldDisplay == "N" ? (
                             <TableCell></TableCell>
                           ) : (
                             <TableCell key={ckey}>
-                            {row[column.fieldName]}
-                          </TableCell>
+                              {row[column.fieldName]}
+                            </TableCell>
                           )
-                          
-                        ))}
+                        )}
                         <TableCell>
                           <Link
                             to={{
-                              pathname: `/edit${props.tableRow}/${row[props.id]}`,
+                              pathname: `/edit${props.tableRow}/${
+                                row[props.id]
+                              }`,
 
                               data: row[props.id], // your data array of objects
                             }}
@@ -214,17 +226,11 @@ export default function Users(props) {
                           </Link>
                           <Link
                             onClick={(e) => {
-                              if (
-                                window.confirm(
-                                  "Are you sure you wish to delete this item?"
-                                )
-                              )
                               Rowdelete(e, row[props.id]);
                             }}
                           >
                             <DeleteIcon />
                           </Link>
-                          
                         </TableCell>
                       </TableRow>
                     </React.Fragment>
