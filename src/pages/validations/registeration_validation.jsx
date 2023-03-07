@@ -26,7 +26,7 @@ const pwregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,25}$/;
         if (!values.userEmail.trim() )
         {  errors.userEmail = "User email required"; }
        
-        else if (!values.userEmail.trim() )
+        else if (!values.userEmail )
         {  errors.userEmail = " User Email already added"; }
 
         if (!values.password.trim() )

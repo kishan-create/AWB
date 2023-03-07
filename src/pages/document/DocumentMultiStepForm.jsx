@@ -20,33 +20,26 @@ export default function DocumentMultiStepForm() {
 
   return (
     
-    <form onSubmit={handleSubmit}>
+    <>
                     
       {step === 1 && (
         <div  id="section-1">
               
-               <Wizardstep1 />
-               <div className='p-l-15'> 
-                  <button className='next-pre-btn  mrg-r-3' type="button" onClick={nextStep}>Next</button>
-                  <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel </button>
-              </div>
+               <Wizardstep1 next={nextStep} previous={prevStep}/>
+              
         </div>
       )}
 
       {step === 2 && (
         <div>
         
-         <Wizardstep2  id="section-2"/>
-         <div className='p-l-15 m-b-50 '>
-              <button className='next-pre-btn  mrg-r-3' type="button" onClick={prevStep}>Back</button>
-              <button className='next-pre-btn  mrg-r-3' type="button" onClick={nextStep}>Next</button>
-              <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel </button>
-         </div>
+         <Wizardstep2  id="section-2" next={nextStep} previous={prevStep} />
+        
           
         </div>
       )}
      
-    </form>
+    </>
   );
 }
 
