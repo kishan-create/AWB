@@ -158,18 +158,20 @@ export default function Users(props) {
       if (willDelete) {
         axios
           .delete(
-            process.env.REACT_APP_API_ADMIN_URL + `/${props.tableRow}/${id}`
+            props.baseURL + `/${props.tableRow}/${id}`
           )
           .then((res) => {
             swal({
               title: "Done!",
-              text: "user is deleted",
+              text: `${props.displayName} is deleted successfully`,
               icon: "success",
               timer: 2000,
               button: false,
             });
           });
+          getRows();
       }
+    
     });
   };
 
@@ -178,6 +180,11 @@ export default function Users(props) {
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <h4 class="add-headd-sub1 fl-left">{props.displayName}</h4>
+        <Link to={`/${props.tableRow}`}>
+          <button type="button" class="next-pre-btn mrg-r-3 fl-right">
+            + Add {props.displayName}
+          </button>
+        </Link>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

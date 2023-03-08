@@ -10756,6 +10756,14 @@ button.close:focus {
 .swal-icon:first-child {
   margin-top: 20px;
 }
+.next-pre-btn {
+  background: #2e4153;
+  color: #fff;
+  border-color: #2e4153;
+  padding: 0.5rem 1.8rem;
+  border-radius: 5px;
+  
+}
 .swal-title {
   color: rgba(0,0,0,.65);
   font-weight: 600;

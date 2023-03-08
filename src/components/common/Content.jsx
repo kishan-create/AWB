@@ -27,16 +27,16 @@ function Content() {
   return (
     <Routes>
       <Route path="/" exact={true} element={<Users />} />
-      <Route path="/registration" exact={true} element={<UserRegistration />} />
+      <Route path="/user" exact={true} element={<UserRegistration />} />
       <Route path="/login" exact={true} element={<Login />} />
       <Route path="/userlist" exact={true} element={<Users />} />
       <Route path="/edituser/:id" exact={true} element={<EditUsers />} />
       <Route path="/usergroup" exact={true} element={<UserGroup />} />
       <Route path="/editproducer/:id" exact={true} element={<EditAgent />} />
-      <Route path="/agents" exact={true} element={<Addagent />} />
+      <Route path="/producer" exact={true} element={<Addagent />} />
       <Route path="/grouplist" exact={true} element={<ListGroups />} />
       <Route path="/togroup/:id" exact={true} element={<AddUserstogroup />} />
-      <Route path="/addagency" exact={true} element={<Addagency />} />
+      <Route path="/agency" exact={true} element={<Addagency />} />
       <Route path="/listagency" exact={true} element={<ListAgency />} />
       <Route
         path="/editagency/:id"
