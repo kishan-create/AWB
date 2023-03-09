@@ -9,7 +9,7 @@ const NongroupMembers = (groupID) => {
        }, []);
  const getUsers =async() =>
  {
-    const response = await fetch(process.env.REACT_APP_API_ADMIN_URL+`/usergroup/nongroupmembers?groupid=${groupID}`);
+    const response = await fetch(process.env.REACT_APP_API_ADMIN_URL+`/usergroup/nongroupmembers/group/${groupID}/user`);
     const data = await response.json();
     setUserrows(data);
     

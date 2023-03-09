@@ -35,7 +35,7 @@ function Content() {
       <Route path="/editproducer/:id" exact={true} element={<EditAgent />} />
       <Route path="/producer" exact={true} element={<Addagent />} />
       <Route path="/grouplist" exact={true} element={<ListGroups />} />
-      <Route path="/togroup/:id" exact={true} element={<AddUserstogroup />} />
+      <Route path="/editusergroup/:id" exact={true} element={<AddUserstogroup />} />
       <Route path="/agency" exact={true} element={<Addagency />} />
       <Route path="/listagency" exact={true} element={<ListAgency />} />
       <Route
@@ -44,7 +44,7 @@ function Content() {
         element={<ListAgentsData />}
       />
       <Route
-        path="/editusergroup/:id"
+        path="/editusergroupbyid/:id"
         exact={true}
         element={<EditUsergroup />}
       />

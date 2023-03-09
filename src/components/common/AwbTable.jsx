@@ -161,6 +161,7 @@ export default function Users(props) {
             props.baseURL + `/${props.tableRow}/${id}`
           )
           .then((res) => {
+            getRows();
             swal({
               title: "Done!",
               text: `${props.displayName} is deleted successfully`,
@@ -169,7 +170,7 @@ export default function Users(props) {
               button: false,
             });
           });
-          getRows();
+          
       }
     
     });
