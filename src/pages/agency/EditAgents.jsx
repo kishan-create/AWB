@@ -72,9 +72,9 @@ export default function Editagents() {
                   
                   
                   <div className="col-12 mt-4">
-                    <button type="submit" className="btn app-btn-primary">Submit &amp; Continue</button>
+                    <button type="submit" className="next-pre-btn mrg-r-3">Submit &amp; Continue</button>
                    
-                    <Link to="/listagency"> <button type="button" className="btn btn-link">Cancel</button></Link>
+                    <Link to="/listagency"> <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link>
 
                   </div>
                 </div>

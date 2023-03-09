@@ -33,7 +33,7 @@ export default function AgencyHeader() {
         </div>*/ }
         </div>
         <div className="col-auto">
-          <button type="button" className="btn app-btn-primary">Upload Documents</button>
+        
         </div>
       </div>
     </div>

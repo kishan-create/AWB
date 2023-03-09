@@ -13,12 +13,19 @@ const pwregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,25}$/;
      let errors = {};
        if (!values.userName.trim() )
         {  errors.userName = "User group name required"; }
+        else if (!values.userName.trim())
+        {  errors.userName = " User name already added"; }
+
+
 
         if (!values.userFullName.trim() )
         {  errors.userFullName = "Full  name required"; }
 
         if (!values.userEmail.trim() )
         {  errors.userEmail = "User email required"; }
+       
+        else if (!values.userEmail.trim() )
+        {  errors.userEmail = " User Email already added"; }
 
         if (!values.password.trim() )
           {  errors.password = "password required"; }
@@ -29,18 +36,12 @@ const pwregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,25}$/;
             if (!values.userPhone.trim() ) 
             {  errors.userPhone = "User phone number required"; } 
             else if(!numregex.test(values.userPhone))
-           {  errors.userPhone = "Use number only"; } 
+           {  errors.userPhone = "Use number 10 digit only"; } 
 
 
 
 
         
-        // if (!values.userGroupDesc.trim() )
-        //   {  errors.userGroupDesc = "Description required"; }
-        //    else if(!regex.test(values.userGroupDesc))
-        //    {  errors.userGroupDesc = "Special characters are not allowed"; } 
 
-        //     if (!values.userGroupCode.trim() ) 
-        //     {  errors.userGroupCode = "User group code required"; } 
              return errors;
             }

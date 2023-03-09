@@ -27,6 +27,6 @@ const Userhooks = () => {
     setPasswordType("password")
   }
   
-return{rows,handlePasswordChange,passwordType,passwordInput,togglePassword}
+return{rows,handlePasswordChange,passwordType,passwordInput,togglePassword,getUsers}
 }
 export default Userhooks;

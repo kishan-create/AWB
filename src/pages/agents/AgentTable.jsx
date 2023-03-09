@@ -27,25 +27,20 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
+import AgencyHeader from "./../agency/includes/AgencyHeader"
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { Link } from "react-router-dom";
 
 import Tabledata from "../../components/common/Tabledata";
-import Agency from "./Agency";
 import axios from "axios";
-import UserHeader from './includes/AgencyHeader';
-import AgencyHeader from '../agency/includes/AgencyHeader';
-
 const {
   descendingComparator,
   getComparator,
   stableSort,
   EnhancedTableToolbar,
 } = Tabledata();
-
-const { rows, tableheader } = Agency();
 
 function EnhancedTableHead(props) {
   const {
@@ -64,13 +59,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <div className="form-check">
-           
-          </div>
+          <div className="form-check"></div>
         </TableCell>
-        {tableheader.map((tablecelss) => (
-          <TableCell>{tablecelss.headerName}</TableCell>
-        ))}
+        <TableCell>Agent Name</TableCell>
+        <TableCell>Agent Email</TableCell>
+        <TableCell>Agent Phone</TableCell>
+        <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -89,7 +83,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function AgentDataTable() {
+export default function AgentTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -99,13 +93,14 @@ export default function AgentDataTable() {
   const [rows, setAgentrows] = useState([]);
 
   useEffect(() => {
-    getAgencylists();
+    getAgentlists();
   }, []);
 
-  const getAgencylists = async () => {
+  const getAgentlists = async () => {
     const response = await fetch(
-      process.env.REACT_APP_API_SERVICE_URL + "/agency"
+      process.env.REACT_APP_API_SERVICE_URL + "/producer"
     );
+
     const data = await response.json();
     setAgentrows(data);
   };
@@ -118,19 +113,19 @@ export default function AgentDataTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.agencyId);
+      const newSelected = rows.map((n) => n.producerId);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, agencyId) => {
-    const selectedIndex = selected.indexOf(agencyId);
+  const handleClick = (event, producerId) => {
+    const selectedIndex = selected.indexOf(producerId);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, agencyId);
+      newSelected = newSelected.concat(selected, producerId);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -158,31 +153,16 @@ export default function AgentDataTable() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (agencyId) => selected.indexOf(agencyId) !== -1;
+  const isSelected = (producerId) => selected.indexOf(producerId) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
   //Delete a user
-  const deleteAgent = async (e, id) => {
-    e.preventDefault();
-    const thisclickrow = e.currentTarget;
-    thisclickrow.innerText = "Deleting";
-    const res = await axios.delete(
-      process.env.REACT_APP_API_SERVICE_URL + `/agents/${id}`
-    );
-    if (res.data.status == 200) {
-      thisclickrow.closest("tr").remove();
-      alert("User Deleted successfully");
-    }
-  };
 
   return (
     <div>
       <AgencyHeader/>
-     
-     
-
       <div className="app-wrapper mt-4">
         <div className="app-content pt-2 p-md-2">
           <div className="container-fluid">
@@ -197,16 +177,16 @@ export default function AgentDataTable() {
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
-                          <h4 class="add-headd-sub1 fl-left">Agency</h4>
-                          <Link to="/addagency">
+                          <h4 class="add-headd-sub1 fl-left"> Agents</h4>
+
+                          <Link to="/agents">
                             <button
                               type="button"
                               class="next-pre-btn mrg-r-3 fl-right"
                             >
-                              + Add Agency
+                              + Add Agent
                             </button>
                           </Link>
-                     
                           <TableContainer>
                             <Table
                               sx={{ minWidth: 750 }}
@@ -229,46 +209,37 @@ export default function AgentDataTable() {
                                   )
                                   .map((row, index) => {
                                     const isItemSelected = isSelected(
-                                      row.agencyId
+                                      row.producerId
                                     );
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
-                                      <React.Fragment key={row.agencyId}>
+                                      <React.Fragment key={row.producerId}>
                                         <TableRow>
-                                         
-
-
-                                        <TableCell padding="checkbox">
-                       <div className='form-check'>
-                        
-                        </div>
-                      </TableCell>
-                      
-
-
-                    
-                                        
+                                          <TableCell padding="checkbox"></TableCell>
 
                                           <TableCell>
-                                            {row.agencyName}
+                                            {row.producerName}
                                           </TableCell>
 
-                                          <TableCell>{row.agencyNpn}</TableCell>
+                                          <TableCell>
+                                            {row.producerEmail}
+                                          </TableCell>
 
-                                       
-
+                                          <TableCell>
+                                            {row.producerPhone}
+                                          </TableCell>
 
                                           <TableCell>
                                             <Link
                                               to={{
                                                 // pathname: `/AgentTabs/${row.agencyId}`,
-                                                pathname: `/ListAgentheaddata/${row.agencyId}`,
+                                                pathname: `/editagent/${row.producerId}`,
 
-                                                data: row.agencyId, // your data array of objects
+                                                data: row.producerId, // your data array of objects
                                               }}
                                             >
-                                             <EditIcon />
+                                           <EditIcon />
                                             </Link>
                                           </TableCell>
                                         </TableRow>

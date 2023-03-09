@@ -250,7 +250,7 @@ export default function AgentTableList(props) {
     <>
       <>
         <button
-          class="btn app-btn-primary fl-right"
+          class="next-pre-btn mrg-r-3 fl-right"
           onClick={handleClickViewPage}
         >
           Add

@@ -60,26 +60,27 @@ export default function EditUsers() {
                       </div>
                     </div>
                   </div>
-                  <div className="row gx-2 gy-2">
+                 {/* <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" n className="form-label">Password <span className="red">*</span></label>
                       <div className="input-group mb-3">
                         <input type={passwordType}  onChange={handlePasswordChange} name="password" value={values.password} className="form-control" placeholder="Enter User phone" aria-label="Enter user Phone" aria-describedby="basic-addon1" />
-                        <button className="btn btn-outline-primary" onClick={togglePassword}>
+                        <button type="button" className="btn btn-outline-primary" onClick={togglePassword}>
                      { passwordType==="password"? <VisibilityOffIcon/> :<RemoveRedEyeIcon/> }
                      </button>
                       </div>
                     </div>
                     <div className="input-group-btn">
-                    <input type="hidden" name="id" value={values.userId} />
+                   
                     </div>
                   </div>
+  */}
                   
-                  
+                  <input type="hidden" name="id" value={values.userId} />
                   <div className="col-12 mt-4">
-                    <button type="submit" className="btn app-btn-primary">Submit &amp; Continue</button>
+                    <button type="submit" className="next-pre-btn mrg-r-3">Update</button>
                     <Link to="/" >
-                    <button type="button" className="btn btn-link">Cancel</button>
+                    <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button>
                     </Link>
                   </div>
                 </div>

@@ -116,17 +116,7 @@ function EnhancedTableHead(props) {
       <TableRow>
         <TableCell padding="checkbox">
           <div className="form-check">
-            <Checkbox
-              color="primary"
-              size="extrasmall"
-              className="form-check-input"
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{
-                "aria-label": "select all desserts",
-              }}
-            />
+            
           </div>
         </TableCell>
         {headCells.map((headCell) => (
@@ -316,7 +306,7 @@ useEffect(() => {
         <EnhancedTableToolbar numSelected={selected.length} />
         <h4 class="add-headd-sub1 fl-left">Groups</h4>
         <Link to="/usergroup">
-          <button type="button" class="btn app-btn-primary fl-right">
+          <button type="button" class="next-pre-btn mrg-r-3 fl-right">
             + Add Group
           </button>
         </Link>
@@ -344,7 +334,7 @@ useEffect(() => {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.userGroupId)}
+                      
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -353,14 +343,7 @@ useEffect(() => {
                     >
                       <TableCell padding="checkbox">
                         <div className="form-check">
-                          <Checkbox
-                            color="primary"
-                            className="form-check-input"
-                            checked={isItemSelected}
-                            inputProps={{
-                              "aria-labelledby": labelId,
-                            }}
-                          />
+                          
                         </div>
                       </TableCell>
                       <TableCell
@@ -375,28 +358,22 @@ useEffect(() => {
                       <TableCell align="right">{row.userGroupCode}</TableCell>
 
                       <TableCell align="right">
-                        <Link
-                          to={{
-                            pathname: `/editusergroup/${row.userGroupId}`,
-
-                            data: row.groupname, // your data array of objects
-                          }}
-                        >
-                          <EditIcon />
-                        </Link>
+                        
 
                         <Tooltip title="View Users">
-                          <IconButton>
-                            <Link
+                        <Link
                               to={{
                                 pathname: `/togroup/${row.userGroupId}`,
 
                                 data: row.groupname, // your data array of objects
                               }}
                             >
-                              <VisibilityIcon />
-                            </Link>
-                          </IconButton>
+                         
+                            
+                              
+                            
+                          <EditIcon/>
+                          </Link>
                         </Tooltip>
                       </TableCell>
                     </TableRow>
@@ -424,10 +401,7 @@ useEffect(() => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+    
     </Box>
   );
 }

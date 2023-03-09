@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import {useNavigate} from 'react-router-dom';
+
 
 const Usergroupform = (usergroup_validation) => {
   const [values, SetValues] = useState({
@@ -25,6 +27,8 @@ const Usergroupform = (usergroup_validation) => {
       onSubmitform();
     }
   }, [errors]);
+  const navigate = useNavigate();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,10 +37,8 @@ const Usergroupform = (usergroup_validation) => {
   };
 
   const onSubmitform = (e) => {
-    console.log(values);
 
     const response = axios.post(
-      // "http://dev-cok-alb-admin-01-301132241.us-east-1.elb.amazonaws.com/admin-svc/usergroup",
       process.env.REACT_APP_API_ADMIN_URL+"/usergroup",
       values
 
@@ -44,7 +46,7 @@ const Usergroupform = (usergroup_validation) => {
     response.then(function (res) {
       if (res.status === 200) {
         swal({
-          title: "Good job!",
+          title: "",
           text: "Usergroup Details added successfully",
           icon: "success",
           button: "ok",
@@ -55,6 +57,8 @@ const Usergroupform = (usergroup_validation) => {
           userGroupCode: "",
         });
       }
+      navigate('/grouplist', {replace: true});
+
     });
   };
 

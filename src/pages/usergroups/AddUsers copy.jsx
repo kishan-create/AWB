@@ -180,7 +180,7 @@ const UserTogroups = async (e, data) => {
   );
   if (response.data.status == 200) {
     swal({
-      title: "Good job!",
+      title: "",
       text: "User Added successfully",
       icon: "success",
       button: "ok",

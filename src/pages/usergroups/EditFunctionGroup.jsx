@@ -58,7 +58,7 @@ const [rows, setUserrows] = useState([]);
        {
 
       swal({
-        title: "Good job!",
+        title: "",
         text: "User Group Updated successfully",
         icon: "success",
         button: "ok",
