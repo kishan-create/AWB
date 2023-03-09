@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+
 import AddmultipleAdress from "../../components/common/AddmultipleAdress";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -6,9 +8,15 @@ import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useEffect } from "react";
+import axios from "axios";
+import swal from "sweetalert2";
+import Addwizard from "./functions/Addwizard";
 
 export default function Wizardstep1({ next, previous }) {
+
+const {handleSubmitFile,fileData}=Addwizard()
+
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
   const [content, setContent] = useState("");
@@ -16,6 +24,8 @@ export default function Wizardstep1({ next, previous }) {
   const [selectedOption, setSelectedOption] = useState("");
   const [showtext, setShowText] = useState(true);
   const [showfile, setShowFile] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
   useEffect(() => {
     HideShowDivs(selectedOption);
   }, [selectedOption]);
@@ -24,7 +34,7 @@ export default function Wizardstep1({ next, previous }) {
     HideShowDivs(selectedOption);
   };
   const HideShowDivs = async (seloptions) => {
-    if (seloptions == "0" || seloptions == "2") {
+    if (seloptions == "SMS" || seloptions == "EMAIL") {
       setShowText(true);
       setShowFile(false);
     } else {
@@ -36,29 +46,22 @@ export default function Wizardstep1({ next, previous }) {
     setSelectedFile(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("handleSubmit");
 
-    console.log("test");
-    // TODO: Handle the file upload here
-    console.log(selectedFile);
-    console.log(selectedOption);
-  };
 
+ 
   const toggleVisibility = (e) => {
     e.preventDefault();
     setIsVisible(!isVisible);
   };
 
-  const handleChange = (value) => {
+  const handleChange = (  value) => {
     setContent(value);
   };
 
   return (
     <div>
       <div>
-        <form noValidate encType="multipart/form-data" onSubmit={handleSubmit}>
+        <form noValidate encType="multipart/form-data" onSubmit={handleSubmitFile}>
           <div className=" ">
             <div className=" " role="alert">
               <div class="inner p-15">
@@ -79,34 +82,44 @@ export default function Wizardstep1({ next, previous }) {
                   </div>
                 </div>
 
-                <div  className="p-b-15" >
-                 <div className=" col-12 col-sm-6 col-md-4 col-lg-6">
-                  <label htmlFor="options"  className="form-label" >
-                    Select Type of Document :<span className="red"> *</span>
-                  </label>
-                  <div className="input-group mb-3">
-                  <select
-                    id="options"
-                    className="form-control"
-                    value={selectedOption}
-                    onChange={handleSelect}
-                  >
-                    <option value="">Select Upload File Type</option>
-
-                    <option value="0">SMS</option>
-                    <option value="1">DOCX</option>
-                    <option value="2"> EMAIL </option>
-                  </select>
-                  </div>
-                </div>
-                </div>
-
                 <div className="page-grid-2">
                   <div className="">
                     <div>
+                      <label htmlFor="options" className="form-label">
+                        Select Type of Document :<span className="red"> *</span>
+                      </label>
+                      <div className="input-group mb-3">
+                        <select
+                          id="options"
+                          className="form-control"
+                          value={selectedOption}
+                          onChange={handleSelect}
+                        >
+                          
+                          <option value="DOCX">DOCX</option>
+
+                          <option value="SMS">SMS</option>
+                          <option value="EMAIL"> EMAIL </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
                       {showfile && (
-                        <div>
-                          <label>
+                        <div className="file-input">
+                          <label for="file" class="btn choosefile-attach-txt">
+                            <svg
+                              width="20"
+                              height="20"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              {" "}
+                              <g>
+                                {" "}
+                                <path fill="none" d="M0 0h24v24H0z" />{" "}
+                                <path d="M14.828 7.757l-5.656 5.657a1 1 0 1 0 1.414 1.414l5.657-5.656A3 3 0 1 0 12 4.929l-5.657 5.657a5 5 0 1 0 7.071 7.07L19.071 12l1.414 1.414-5.657 5.657a7 7 0 1 1-9.9-9.9l5.658-5.656a5 5 0 0 1 7.07 7.07L12 16.244A3 3 0 1 1 7.757 12l5.657-5.657 1.414 1.414z" />{" "}
+                              </g>{" "}
+                            </svg>
                             Select Document file:
                             <input
                               type="file"
@@ -142,7 +155,7 @@ export default function Wizardstep1({ next, previous }) {
             >
               Back
             </button>
-            <button className="next-pre-btn  mrg-r-3" type="button">
+            <button className="next-pre-btn  mrg-r-3"  type="submit">
               Save
             </button>
             <button type="button" className="next-pre-btn-secondary mrg-r-3">
