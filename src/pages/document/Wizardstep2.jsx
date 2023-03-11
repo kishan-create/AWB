@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-import AddmultipleAdress from "../../components/common/AddmultipleAdress";
+
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
@@ -10,21 +10,19 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import swal from "sweetalert2";
-import Addwizard from "./functions/Addwizard";
+import TemplateAddwizard from "./functions/Addwizard";
 
-export default function Wizardstep1({ next, previous }) {
-
-const {handleSubmitFile,fileData}=Addwizard()
-
+export default function Wizardstep1({ previousID, previous }) {
+  const [selectedOption, setSelectedOption] = useState("");
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
   const [content, setContent] = useState("");
 
-  const [selectedOption, setSelectedOption] = useState("");
   const [showtext, setShowText] = useState(true);
   const [showfile, setShowFile] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { handleSubmitFile, fileData } = TemplateAddwizard(selectedOption, previousID,content,selectedFile);
 
   useEffect(() => {
     HideShowDivs(selectedOption);
@@ -46,22 +44,23 @@ const {handleSubmitFile,fileData}=Addwizard()
     setSelectedFile(e.target.files[0]);
   };
 
-
-
- 
   const toggleVisibility = (e) => {
     e.preventDefault();
     setIsVisible(!isVisible);
   };
 
-  const handleChange = (  value) => {
+  const handleChange = (value) => {
     setContent(value);
   };
 
   return (
     <div>
       <div>
-        <form noValidate encType="multipart/form-data" onSubmit={handleSubmitFile}>
+        <form
+          noValidate
+          encType="multipart/form-data"
+          onSubmit={handleSubmitFile}
+        >
           <div className=" ">
             <div className=" " role="alert">
               <div class="inner p-15">
@@ -95,7 +94,6 @@ const {handleSubmitFile,fileData}=Addwizard()
                           value={selectedOption}
                           onChange={handleSelect}
                         >
-                          
                           <option value="DOCX">DOCX</option>
 
                           <option value="SMS">SMS</option>
@@ -155,7 +153,7 @@ const {handleSubmitFile,fileData}=Addwizard()
             >
               Back
             </button>
-            <button className="next-pre-btn  mrg-r-3"  type="submit">
+            <button className="next-pre-btn  mrg-r-3" type="submit">
               Save
             </button>
             <button type="button" className="next-pre-btn-secondary mrg-r-3">

@@ -1,5 +1,9 @@
 
 
+import React, { useState } from "react";
+import { useRef, useEffect } from "react";
+import axios from "axios";
+import swal from "sweetalert2";
 import AddmultipleAdress from "../../components/common/AddmultipleAdress";
 
 
@@ -9,11 +13,30 @@ import insurnnew from "../../images/insurancenew.svg";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-import Addwizard from "./functions/Addwizard";
+import TemplateAddwizard from "./functions/Addwizard";
 
 export default function Wizardstep1({ next, previous }) {
-   const { handleSubmit,handleChange,values} =Addwizard(next)
+  //  const { } =Addwizard(tempid)
+  const [tempid, setTempid] = useState(1);
+  const [submitted, setSubmitted] = useState(false);
 
+
+   const [values, SetValues] = useState({
+
+    templateName:"", 
+  templateDec: "",
+  templateCode: "",
+  filter1: "",
+  filter2: "",
+  // templateId:"",
+ 
+});
+
+// useEffect(() => {
+//   console.log("insode useEffect");
+//       HideShowDivs(selectedOption);
+     
+//     }, [selectedOption,tempid]);
 
   // const [selectedOption, setSelectedOption] = useState("");
 
@@ -29,10 +52,48 @@ export default function Wizardstep1({ next, previous }) {
   //   setSelectedOption(e.target.value);
   // };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    SetValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+
+    // const test = setErrors(registeration_validation(values));
+    setSubmitted(true);
+    onSubmitform();
+  };
+  const onSubmitform = (e) => {
+      
+    const response = axios.post(
+      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/docgeneration",
+      values
+    ).then((response) => {
+      if (response.status === 200) {
+                 let templateID= response.data.templateId;
+                 setTempid(templateID);
+           
   
+      
+  next(templateID);
+
+      }
+    });;
+
+
+
+    
+  };
+
 
  
-
   return (
     <div>
       <div>
@@ -158,11 +219,13 @@ export default function Wizardstep1({ next, previous }) {
             </div>
           </div>
 
+
+
           <div className="p-l-15">
             <button
               className="next-pre-btn  mrg-r-3"
               type="submit"
-              
+              // onClick={next}
             >
               Next
             </button>
