@@ -35,32 +35,50 @@ const Usergroupform = (usergroup_validation) => {
     const test = setErrors(usergroup_validation(values));
     setIsSubmitting(true);
   };
-
+ 
   const onSubmitform = (e) => {
 
     const response = axios.post(
       process.env.REACT_APP_API_ADMIN_URL+"/usergroup",
       values
 
-    );
-    response.then(function (res) {
-      if (res.status === 200) {
+    )
+    .then((responseuser) => {
+      if (responseuser.status === 208) {
+        setErrors({ ...errors, userGroupName: "Group name already exist" });
+
+      }
+ 
+      else if (responseuser.status === 200) {
+        SetValues({
+          userGroupName: "",
+          userGroupDesc: "",
+          userGroupCode: "",
+        });
         swal({
           title: "",
           text: "Usergroup Details added successfully",
           icon: "success",
           button: "ok",
         });
-        SetValues({
-          userGroupName: "",
-          userGroupDesc: "",
-          userGroupCode: "",
-        });
-      }
-      navigate('/grouplist', {replace: true});
+        navigate('/grouplist', {replace: true});
 
-    });
-  };
+      }
+    
+    })
+ 
+    // .catch(function (error) {
+    //   let dupmsg = error.response.data.apierror.message;
+
+    //   if (
+    //     error.response.data.apierror.message ===
+    //     "Duplicate entry found with same user group name or user group code"
+    //   ) {
+    //     setErrors({ ...errors, userGroupName: "Group name already exist" });
+      
+    //   }
+    // });
+};
 
   return { handleChange, values, handleSubmit, errors };
 };

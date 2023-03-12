@@ -55,6 +55,11 @@ export default function Addagent() {
     { name: "Kerala" },
   { name: "Tamilnadu" },
 ];
+
+const county = [
+  { name: "Ernamkulam" },
+{ name: "Trissur" },
+];
   const addressType = [
     { name: "Work Address" },
   { name: "Billing Address"},
@@ -181,6 +186,8 @@ export default function Addagent() {
                             <TableCell>Address line 2</TableCell>
                             <TableCell>Country</TableCell>
                             <TableCell>State</TableCell>
+                            <TableCell>County</TableCell>
+
                             <TableCell>Zip</TableCell>
                             <TableCell></TableCell>
                           </TableRow>
@@ -210,6 +217,9 @@ export default function Addagent() {
                               </TableCell>
                               <TableCell align="left">
                               {state[row.stateId - 1].name}
+                              </TableCell>
+                              <TableCell align="left">
+                              {county[row.countyId - 1].name}
                               </TableCell>
                               <TableCell align="left">
                                 {row.zip}
@@ -248,26 +258,6 @@ export default function Addagent() {
                             <TableCell align="left">
                               <div className="td-sample-txt">.</div>
                             </TableCell>
-                            <TableCell>
-                              <DeleteIcon />
-                            </TableCell>
-                          </TableRow>
-                          <TableRow >
-                            <TableCell component="th" scope="row">
-                              <div className="td-sample-txt">.</div>
-                            </TableCell>
-                            <TableCell align="right">
-                              <div className="td-sample-txt1">.</div>
-                            </TableCell>
-                            <TableCell align="right">
-                              <div className="td-sample-txt1">.</div>
-                            </TableCell>
-                            <TableCell align="right">
-                              <div className="td-sample-txt1">.</div>
-                            </TableCell>
-                            <TableCell align="left">
-                              <div className="td-sample-txt">.</div>
-                            </TableCell>
                             <TableCell align="left">
                               <div className="td-sample-txt">.</div>
                             </TableCell>
@@ -294,6 +284,9 @@ export default function Addagent() {
                             <TableCell align="left">
                               <div className="td-sample-txt">.</div>
                             </TableCell>
+                            <TableCell align="left">
+                              <div className="td-sample-txt">.</div>
+                            </TableCell>
                             <TableCell>
                               <DeleteIcon />
                             </TableCell>
@@ -310,6 +303,35 @@ export default function Addagent() {
                             </TableCell>
                             <TableCell align="right">
                               <div className="td-sample-txt1">.</div>
+                            </TableCell>
+                            <TableCell align="left">
+                              <div className="td-sample-txt">.</div>
+                            </TableCell>
+                            <TableCell align="left">
+                              <div className="td-sample-txt">.</div>
+                            </TableCell>
+                            <TableCell align="left">
+                              <div className="td-sample-txt">.</div>
+                            </TableCell>
+                            <TableCell>
+                              <DeleteIcon />
+                            </TableCell>
+                          </TableRow>
+                          <TableRow >
+                            <TableCell component="th" scope="row">
+                              <div className="td-sample-txt">.</div>
+                            </TableCell>
+                            <TableCell align="right">
+                              <div className="td-sample-txt1">.</div>
+                            </TableCell>
+                            <TableCell align="right">
+                              <div className="td-sample-txt1">.</div>
+                            </TableCell>
+                            <TableCell align="right">
+                              <div className="td-sample-txt1">.</div>
+                            </TableCell>
+                            <TableCell align="left">
+                              <div className="td-sample-txt">.</div>
                             </TableCell>
                             <TableCell align="left">
                               <div className="td-sample-txt">.</div>

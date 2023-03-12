@@ -280,7 +280,6 @@ export default function AgentTable(props) {
                   {stableSort(rows, getComparator(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
-                      // console.log(row);
                       const isItemSelected = isSelected(row.producerId);
                       const labelId = `enhanced-table-checkbox-${index}`;
 

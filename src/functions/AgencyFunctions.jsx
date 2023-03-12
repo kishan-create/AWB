@@ -44,7 +44,11 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
     const response = axios
       .post(process.env.REACT_APP_API_SERVICE_URL + "/agency", values)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 208) {
+          setErrors({ ...errors, agencyName: "Agency Name already exist" });
+  
+        }
+        else if (response.status === 200) {
           SetReturnValue({
             agencyId: response.data.agencyId,
           });
@@ -86,7 +90,8 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
 
       .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
       .then((response) => {
-        if (response.status === 200) {
+       
+         if (response.status === 200) {
           swal({
             title: "",
             text: "Agency Added successfully",

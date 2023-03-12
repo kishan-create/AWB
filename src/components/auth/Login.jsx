@@ -77,12 +77,9 @@ export const Login = () => {
                   </div>
                   {/*//form-group*/}
                   <div className="text-center">
-                    <button
-                      type="submit"
-                      className="btn app-btn-primary w-100 theme-btn mx-auto"
-                    >
-                      Log In
-                    </button>
+                  <button className="next-pre-btn mrg-r-3" type="save">
+                        Log In
+                      </button>{" "}
                   </div>
                 </form>
                 <div className="auth-option text-center pt-5">

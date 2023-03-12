@@ -1,6 +1,8 @@
 export default function registeration_validation(values)
  { 
     var numregex = /^(?=.*[0-9]).{10}$/ ;
+    var emailregex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 
      
 
@@ -20,7 +22,10 @@ const pwregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,25}$/;
 
         if (!values.userEmail.trim() )
         {  errors.userEmail = "User email required"; }
-        if (!values.userEmail.trim() )
+        else if (!emailregex.test(values.userEmail)){
+          errors.userEmail = "Invalid email address"
+        }
+        else if (!values.userEmail.trim() )
         {  errors.userEmail = " email  already existing"; }
 
         if (!values.password.trim() )

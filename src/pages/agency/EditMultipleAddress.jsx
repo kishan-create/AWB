@@ -9,12 +9,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import http from "./http-common";
+import http from "./../../components/common/http-common"
 import axios from "axios";
+import { useParams } from 'react-router-dom';
+
 import MultipleAddressValidation from "../../pages/validations/MultipleAddressValidation";
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
+
+
 
 const rows = [createData("Frozen yoghurt", 159, 6.0, 24, 4.0)];
 const customStyles = {
@@ -30,7 +34,7 @@ const customStyles = {
   },
 };
 
-export default function AddmultipleAdress(props) {
+export default function EditMultipleAddress(props) {
   const [name, SetName] = useState("shanu");
   const [errors, setErrors] = useState({});
   let subtitle;
@@ -63,6 +67,9 @@ export default function AddmultipleAdress(props) {
   function openModal() {
     setIsOpen(true);
   }
+const params=useParams();
+const agencyID = params.id 
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
      
@@ -84,6 +91,8 @@ export default function AddmultipleAdress(props) {
   }
 
   function closeModal() {
+    props.method(agencyID);
+
     setIsOpen(false);
   }
   const handleChangeDrop = (index, evnt) => {};
@@ -103,11 +112,15 @@ export default function AddmultipleAdress(props) {
     setIsSubmitting(true);
   };
   const onSubmitform = (inputs,btncount) => {
+      
     const response = axios
       .post(process.env.REACT_APP_API_SERVICE_URL + "/addresses", inputs)
       .then((response) => {
+
+        if ( response.status === 200) {
+         
        
-        if (response.status === 200) {
+        // else if (response.status === 200) {
           let data = {
             addrType: "",
             addrLine1: "",
@@ -127,8 +140,12 @@ export default function AddmultipleAdress(props) {
             addressId:response.data.addrId
 
           }])
-          setIsSubmitting(false);
-          closeModal();
+
+      submitAddress( listaddress, agencyID);
+      
+
+
+          
          
         }
        
@@ -136,13 +153,30 @@ export default function AddmultipleAdress(props) {
       });
 
   }
+
+
+  const submitAddress = () => {
+   
+    listaddress.map((listaddkey, key) => {
+      listaddkey.agencyId = agencyID;
+    });
+    const response = axios
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/agencyaddr", listaddress)
+      .then((response) => {
+        if (response.status === 200) {
+            setIsSubmitting(false);
+          closeModal();
+        }
+
+    })
+  };
   
 
   
   return (
     <div>
       <div class="col-12">
-        <button onClick={openModal} type="button" class="btn btn-link">
+        {/* <button  type="button" class="btn btn-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -153,7 +187,13 @@ export default function AddmultipleAdress(props) {
             <path fill="#158AF5" d="M11.594 19v-6h-6v-2h6V5h2v6h6v2h-6v6h-2Z" />
           </svg>
           Add Address
-        </button>
+        </button> */}
+        <button onClick={openModal}
+                              type="button"
+                              class="next-pre-btn mrg-r-3 fl-right"
+                            >
+                              + Add Address
+                            </button>
       </div>
       <div></div>
       <Modal
@@ -180,7 +220,7 @@ export default function AddmultipleAdress(props) {
                     onChange={(evnt) => handleChange(btnCount, evnt)}
                     defaultValue={inputFields.addrType}
                   >
-                    <option value="">Select your Address</option>
+                    <option value="Select Address">Select your Address</option>
                     <option value="1">Work Address</option>
                     <option value="2">Billing Address</option>
                     <option value="3">Permenent Address </option>

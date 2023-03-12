@@ -40,11 +40,14 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
   };
 
   const onSubmitform = (e) => {
-    //console.log(values);
     const response = axios
       .post(process.env.REACT_APP_API_SERVICE_URL + "/producer", values)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 208) {
+          setErrors({ ...errors, producerEmail: "Email Address already exist" });
+  
+        }
+        else if (response.status === 200) {
           SetReturnValue({
             producerId: response.data.producerId,
           });
@@ -53,7 +56,7 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
         }
       });
   };
-
+  
   const submitAddress = (producerID) => {
     listadd.map((listaddress, key) => {
       listaddress.producerId = producerID;
@@ -81,17 +84,30 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
 
     const response = axios
       .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
-      .then((response) => {
-        if (response.status === 200) {
+      .then((responseuser) => {
+       
+        if (responseuser.status === 200) {
           swal({
             title: "",
             text: "Agent Added successfully",
             icon: "success",
             button: "ok",
           });
-        }
         navigate('/listagent', {replace: true});
-      });
+
+        }
+      })
+      // .catch(function (error) {
+      //   let dupmsg = error.response.data.apierror.message;
+
+      //   if (
+      //     error.response.data.apierror.message ===
+      //     "Duplicate entry found with same agent email"
+      //   ) {
+      //     setErrors({ ...errors, producerEmail: "Duplicate entry found with same agent email" });
+        
+      //   }
+      // });
   };
 
   return { handleChange, values, handleSubmit, errors, adressData };
