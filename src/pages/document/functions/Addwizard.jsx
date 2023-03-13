@@ -13,13 +13,17 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
   const handleSubmitFile = (e) => {
     e.preventDefault();
 
-    console.log("content", content);
+
 
     setSubmitted(true);
     onSubmitfileform();
   };
-  const onSubmitfileform = (e,previousID) => {
-console.log(previousID);
+
+console.log("previous",previousID);
+
+  
+  const onSubmitfileform = (e) => {
+
    let formData = new FormData();
    let contentfile=selectedOption+"."+selectedOption
    
@@ -41,17 +45,18 @@ console.log(previousID);
     const response = axios.post(
       process.env.REACT_APP_API_SERVICE_URL + "/document",
       formData
-    );
-    response.then(function (res) {
-      if (res.data.status === 200) {
-        swal({
-          title: "Good job!",
-          text: "Usergroup Details added successfully",
-          icon: "success",
-          button: "ok",
-        });
-      }
-    });
+    )
+       .then((response) => {
+        if (response.status === 200) {
+          swal({
+            title: "",
+            text: "Document Added successfully",
+            icon: "success",
+            button: "ok",
+          });
+        }
+      
+      });
   };
 
   const HideShowDivs = async (seloptions) => {

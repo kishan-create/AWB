@@ -10,7 +10,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import swal from "sweetalert2";
-import TemplateAddwizard from "./functions/Addwizard";
+import Addwizard from "./functions/Addwizard";
 
 export default function Wizardstep1({ previousID, previous }) {
   const [selectedOption, setSelectedOption] = useState("");
@@ -22,7 +22,7 @@ export default function Wizardstep1({ previousID, previous }) {
   const [showtext, setShowText] = useState(true);
   const [showfile, setShowFile] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const { handleSubmitFile, fileData } = TemplateAddwizard(selectedOption, previousID,content,selectedFile);
+  const { handleSubmitFile, fileData } = Addwizard(selectedOption, previousID,content,selectedFile);
 
   useEffect(() => {
     HideShowDivs(selectedOption);
@@ -43,7 +43,7 @@ export default function Wizardstep1({ previousID, previous }) {
   const handleFileInputChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-
+console.log("template id in ",previousID);
   const toggleVisibility = (e) => {
     e.preventDefault();
     setIsVisible(!isVisible);

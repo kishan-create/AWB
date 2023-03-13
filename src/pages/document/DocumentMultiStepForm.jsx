@@ -27,11 +27,11 @@ export default function DocumentMultiStepForm() {
 
       {step === 2 && (
         <div>
-          <Wizardstep2 id="section-2"  previousID={preID} previous={prevStep} />
-          <TemplateFullTable id="section-2"  previousID={preID}  />
+          <Wizardstep2 id="section-2"  previousID  ={preID} previous={prevStep} />
 
         </div>
       )}
+    
     </>
   );
 }

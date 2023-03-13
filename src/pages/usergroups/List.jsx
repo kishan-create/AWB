@@ -115,9 +115,7 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <div className="form-check">
-            
-          </div>
+          <div className="form-check"></div>
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -220,20 +218,9 @@ export default function List() {
 
   const [rows, setUserrows] = useState([]);
 
-
-
-
-
-
-useEffect(() => {
-  getGrouplists();
- }, []);
-
-
-
- 
-
- 
+  useEffect(() => {
+    getGrouplists();
+  }, []);
 
   const getGrouplists = async () => {
     const response = await fetch(
@@ -301,8 +288,6 @@ useEffect(() => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-      
-     
         <EnhancedTableToolbar numSelected={selected.length} />
         <h4 class="add-headd-sub1 fl-left">Groups</h4>
         <Link to="/usergroup">
@@ -334,7 +319,6 @@ useEffect(() => {
                   return (
                     <TableRow
                       hover
-                      
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -342,9 +326,7 @@ useEffect(() => {
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                        <div className="form-check">
-                          
-                        </div>
+                        <div className="form-check"></div>
                       </TableCell>
                       <TableCell
                         component="th"
@@ -358,21 +340,15 @@ useEffect(() => {
                       <TableCell align="right">{row.userGroupCode}</TableCell>
 
                       <TableCell align="right">
-                        
-
                         <Tooltip title="View Users">
-                        <Link
-                              to={{
-                                pathname: `/togroup/${row.userGroupId}`,
+                          <Link
+                            to={{
+                              pathname: `/togroup/${row.userGroupId}`,
 
-                                data: row.groupname, // your data array of objects
-                              }}
-                            >
-                         
-                            
-                              
-                            
-                          <EditIcon/>
+                              data: row.groupname, // your data array of objects
+                            }}
+                          >
+                            <EditIcon />
                           </Link>
                         </Tooltip>
                       </TableCell>
@@ -401,7 +377,6 @@ useEffect(() => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-    
     </Box>
   );
 }
