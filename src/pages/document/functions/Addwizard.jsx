@@ -2,6 +2,7 @@ import  { useState } from "react";
 
 import axios from "axios";
 import swal from "sweetalert2";
+import Document_Validation from "../../validations/Document_Validation";
 
 function Addwizard(selectedOption, previousID, content, selectedFile) {
 
@@ -9,17 +10,22 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
 
   const [showfile, setShowFile] = useState(false);
   const [showtext, setShowText] = useState(true);
+  // const [errors, setErrors] = useState({});
+
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
-
+    // const test = setErrors(Document_Validation(values));
 
 
     setSubmitted(true);
+    
     onSubmitfileform();
+
+
+
   };
 
-console.log("previous",previousID);
 
   
   const onSubmitfileform = (e) => {

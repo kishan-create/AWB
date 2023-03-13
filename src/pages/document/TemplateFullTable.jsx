@@ -521,12 +521,14 @@ export default function TemplateFullTable() {
                     <button className="next-pre-btn  mrg-r-3" type="submit">
                       Save
                     </button>
+                    <Link to="/listdocument">
                     <button
                       type="button"
                       className="next-pre-btn-secondary mrg-r-3"
                     >
                       Cancel{" "}
                     </button>
+                    </Link>
                   </div>
                 </form>
               </div>

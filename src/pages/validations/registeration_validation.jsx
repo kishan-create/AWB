@@ -7,7 +7,7 @@ export default function registeration_validation(values) {
   let errors = {};
 
   if (!values.userName.trim()) {
-    errors.userName = " User name already added";
+    errors.userName = " User name  added";
   }
 
   if (!values.userFullName.trim()) {

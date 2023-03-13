@@ -8,6 +8,8 @@ import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
 import swal from "sweetalert2";
 import Addwizard from "./functions/Addwizard";
@@ -43,7 +45,7 @@ export default function Wizardstep1({ previousID, previous }) {
   const handleFileInputChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-console.log("template id in ",previousID);
+
   const toggleVisibility = (e) => {
     e.preventDefault();
     setIsVisible(!isVisible);
@@ -94,11 +96,13 @@ console.log("template id in ",previousID);
                           value={selectedOption}
                           onChange={handleSelect}
                         >
+
                           <option value="DOCX">DOCX</option>
 
                           <option value="SMS">SMS</option>
                           <option value="EMAIL"> EMAIL </option>
                         </select>
+                        
                       </div>
                     </div>
                     <div>
@@ -156,9 +160,13 @@ console.log("template id in ",previousID);
             <button className="next-pre-btn  mrg-r-3" type="submit">
               Save
             </button>
+            <Link to="/listdocument">
             <button type="button" className="next-pre-btn-secondary mrg-r-3">
               Cancel{" "}
+             
             </button>
+            </Link>
+
           </div>
         </form>
       </div>

@@ -3,22 +3,20 @@
 import React, { useState } from "react";
 import { useRef, useEffect } from "react";
 import axios from "axios";
-import swal from "sweetalert2";
-import AddmultipleAdress from "../../components/common/AddmultipleAdress";
+import { Link } from "react-router-dom";
 
 
+import Document_Validation from "../validations/Document_Validation";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-import TemplateAddwizard from "./functions/Addwizard";
 
 export default function Wizardstep1({ next, previous }) {
   //  const { } =Addwizard(tempid)
   const [tempid, setTempid] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
 
 
    const [values, SetValues] = useState({
@@ -28,29 +26,10 @@ export default function Wizardstep1({ next, previous }) {
   templateCode: "",
   filter1: "",
   filter2: "",
-  // templateId:"",
+ 
  
 });
 
-// useEffect(() => {
-//   console.log("insode useEffect");
-//       HideShowDivs(selectedOption);
-     
-//     }, [selectedOption,tempid]);
-
-  // const [selectedOption, setSelectedOption] = useState("");
-
-
-
-  // // useEffect(() => {
-  // //   // if (Object.keys(errors).length === 0 && submitted) {
-  // //   // onSubmitform();
-  // //   // }
-  // // }, []);
-  // const handleSelect = (e) => {
-   
-  //   setSelectedOption(e.target.value);
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,7 +45,7 @@ export default function Wizardstep1({ next, previous }) {
     e.preventDefault();
     
 
-    // const test = setErrors(registeration_validation(values));
+    const test = setErrors(Document_Validation(values));
     setSubmitted(true);
     onSubmitform();
   };
@@ -129,13 +108,15 @@ export default function Wizardstep1({ next, previous }) {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Agency Fbin"
+                            placeholder="Template Name"
                             name="templateName"
                             onChange={handleChange}
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
                             value={values.templateName}
                           />
+                    {errors.templateName && (<p className="message">{errors.templateName}</p>)}
+
                         </div>
                       </div>
 
@@ -153,6 +134,8 @@ export default function Wizardstep1({ next, previous }) {
                           aria-describedby="basic-addon1"
                           value={values.templateCode}
                         />
+                    {errors.templateCode && (<p className="message">{errors.templateCode}</p>)}
+
                       </div>
                     </div>
 
@@ -171,6 +154,8 @@ export default function Wizardstep1({ next, previous }) {
                           aria-describedby="basic-addon1"
                           value={values.templateDec}
                         />
+                    {errors.templateDec && (<p className="message">{errors.templateDec}</p>)}
+
                       </div>
                     </div>
 
@@ -189,6 +174,9 @@ export default function Wizardstep1({ next, previous }) {
                           aria-describedby="basic-addon1"
                           value={values.filter1}
                         />
+                                                {errors.filter1 && (<p className="message">{errors.filter1}</p>)}
+
+          
                       </div>
                     </div>
 
@@ -207,6 +195,8 @@ export default function Wizardstep1({ next, previous }) {
                           aria-describedby="basic-addon1"
                           value={values.filter2}
                         />
+                         {errors.filter2 && (<p className="message">{errors.filter2}</p>)}
+
                       </div>
                     </div>
                   </div>
@@ -229,12 +219,14 @@ export default function Wizardstep1({ next, previous }) {
             >
               Next
             </button>
+            <Link to="/listdocument">
             <button
               type="button"
               className="next-pre-btn-secondary mrg-r-3"
             >
               Cancel{" "}
             </button>
+            </Link>
           </div>
         </form>
       </div>
