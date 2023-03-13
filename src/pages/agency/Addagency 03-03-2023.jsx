@@ -27,7 +27,6 @@ export default function Addagency() {
     listadd
   );
   const getData = (data) => {
-    //console.log(data);
     setAddressData(data);
   };
   const RemoveAddress = (index) => {

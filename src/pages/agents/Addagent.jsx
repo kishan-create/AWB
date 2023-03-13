@@ -67,7 +67,6 @@ const county = [
     { name: "Shipping Address", },
   ];
 
-  // console.log(addressvalue);
    
  
   return (<div>

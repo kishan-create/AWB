@@ -22,11 +22,11 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -231,10 +231,8 @@ const params=useParams();
 
   const isSelected = (addrId) => selected.indexOf(addrId) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  //Delete a user
   const deleteAgent = async (e, id) => {
     e.preventDefault();
     const thisclickrow = e.currentTarget;
@@ -271,7 +269,44 @@ const params=useParams();
   ];
 
   
+  // const deleteAddress = async ( agencyID,id) => {
+  //   e.preventDefault();
+  //   const thisclickrow = e.currentTarget;
+  //   swal({
+  //     title: "Are you sure ??",
+  //     icon: "warning",
+  //     buttons: true,
+  //     dangerMode: true,
+  //   })
+  //     .then((willDelete) => {
+  //       if (willDelete) {
+  //         const response = axios
+  //           .delete(process.env.REACT_APP_API_SERVICE_URL + `/document/${id}`)
+  //           .then((response) => {
+  //             // thisclickrow.closest("tr").remove();
+  //             if (response.status === 200) {
+  //               getAgencyAddress(agencyID);
+  //               swal({
+  //                 title: "",
+  //                 text: " Address deleted successfully",
+  //                 icon: "success",
+  //                 button: "ok",
+  //               });
+  //             }
+  //           });
 
+  //       }
+  //       else {
+  //         swal("Your Address is safe!");
+  //       }
+
+
+
+  //     });
+
+
+
+  // };
 
 
   return (
@@ -375,6 +410,14 @@ const params=useParams();
 
 
                                           <TableCell>
+                                          {/* <Link
+                                              onClick={(e) => {
+
+                                                deleteAddress(row.addrId);
+                                              }}
+                                            >
+                                              <DeleteIcon />
+                                            </Link> */}
                                             <Link
                                               to={{
                                                 pathname: `/editaddress/${row.addrId}`,

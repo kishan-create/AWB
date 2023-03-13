@@ -72,6 +72,8 @@ function EnhancedTableHead(props) {
       <TableCell>Address Line2</TableCell>
       <TableCell>Country</TableCell>
       <TableCell>State</TableCell>
+      <TableCell>County</TableCell>
+
       <TableCell>Zipcode</TableCell>
 
 
@@ -123,16 +125,12 @@ const params=useParams();
     
     getAgencyFullAddress(data);
   
-    //setAgentrows(data);
   };
 
   const agencyID = params.id
 
   const getAgencyFullAddress = async (ID) =>{
-    console.log(ID);
-    // await axios.get(process.env.REACT_APP_API_SERVICE_URL + `/addresses/details`,
-    //     { data:ID }
-    // )
+    
     fetch(process.env.REACT_APP_API_SERVICE_URL + `/addresses/details`, { method: 'POST',
      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(ID) 
@@ -205,10 +203,8 @@ const params=useParams();
 
   const isSelected = (addrId) => selected.indexOf(addrId) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  //Delete a user
   const deleteAgent = async (e, id) => {
     e.preventDefault();
     const thisclickrow = e.currentTarget;
@@ -243,6 +239,12 @@ const params=useParams();
   { name: "Billing Address"},
    { name: "Permenent Addrzess" },
     { name: "Shipping Address", },
+  ];
+
+  const county =[
+    {name: "Ernamkulam"},
+    {name:"Trissur"},
+
   ];
   return (
     
@@ -331,6 +333,8 @@ const params=useParams();
                                           <TableCell>{row.addrLine2}</TableCell>
                                           <TableCell>{country[row.countryId - 1].name}</TableCell>
                                           <TableCell>{state[row.stateId - 1].name}</TableCell>
+                                          <TableCell>{county[row.countyId - 1].name}</TableCell>
+
                                           <TableCell>{row.zip}</TableCell>
 
 
@@ -344,7 +348,7 @@ const params=useParams();
                                             <Link
                                               to={{
                                                 // pathname: `/AgentTabs/${row.agencyId}`,
-                                                pathname: `/editaddress/${row.addrId}`,
+                                                pathname: `/editagentaddress/${row.addrId}`,
 
                                                 data: row.addrId, // your data array of objects
                                               }}

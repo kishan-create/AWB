@@ -23,6 +23,7 @@ import ListAgentsData from '../../pages/agency/ListAgentsData'
 import AgentTable from '../../pages/agents/AgentTable'
 import EditAddress from '../../pages/agency/EditAddress'
 import ListAgentData from '../../pages/agents/ListAgentData'
+import EditAgentAddress from '../../pages/agents/EditAgentAddress'
 
 function Content() {
   return (
@@ -45,6 +46,8 @@ function Content() {
   <Route path="/listagent" exact={true} element={<AgentTable />} />
   <Route path="/editaddress/:id" exact={true} element={<EditAddress />} />
   <Route path="/listdata/:id" exact={true} element={<ListAgentData />} />
+  <Route path="/editagentaddress/:id" exact={true} element={<EditAgentAddress />} />
+
 
 
 

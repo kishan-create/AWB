@@ -40,7 +40,6 @@ export default function EditMultipleAddress(props) {
   let subtitle;
   let count = 0;
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  // const [address1,setAddress1]=useState("");
   const [inputFields, setInputFields] = useState([
     {
       addrType: "",
@@ -86,8 +85,6 @@ const agencyID = params.id
     });
   };
   function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    //subtitle.style.color = "#f00";
   }
 
   function closeModal() {
@@ -176,18 +173,7 @@ const agencyID = params.id
   return (
     <div>
       <div class="col-12">
-        {/* <button  type="button" class="btn btn-link">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="24"
-            fill="none"
-            viewBox="0 0 25 24"
-          >
-            <path fill="#158AF5" d="M11.594 19v-6h-6v-2h6V5h2v6h6v2h-6v6h-2Z" />
-          </svg>
-          Add Address
-        </button> */}
+      
         <button onClick={openModal}
                               type="button"
                               class="next-pre-btn mrg-r-3 fl-right"

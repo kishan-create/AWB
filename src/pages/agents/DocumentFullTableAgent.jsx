@@ -169,21 +169,6 @@ const handleButtonClick = () => {
 
 
   
-  const validateFile = (file) => {
-    const validTypes = [
-      "image/jpeg",
-      "image/jpg",
-      "image/png",
-      "image/gif",
-      "image/x-icon",
-      "application/pdf",
-    ];
-    if (validTypes.indexOf(file.type) === -1) {
-      return false;
-    }
-
-    return true;
-  };
 
 
 
@@ -202,10 +187,8 @@ const handleButtonClick = () => {
 
   const isSelected = (docId) => selected.indexOf(docId) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  //Delete a user
   const deletedocument = async (e, id, test) => {
     e.preventDefault();
     const thisclickrow = e.currentTarget;
@@ -258,7 +241,6 @@ saveAs(blob, filename);
 
 
 
-// FileSaver.saveAs(blob, "hello world.txt");
    
   };
 
