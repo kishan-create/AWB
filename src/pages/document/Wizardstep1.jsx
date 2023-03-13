@@ -115,7 +115,7 @@ export default function Wizardstep1({ next, previous }) {
                             aria-describedby="basic-addon1"
                             value={values.templateName}
                           />
-                    {errors.templateName && (<p className="message">{errors.templateName}</p>)}
+                    {errors.templateName && (<p className="message validation-sty" >{errors.templateName}</p>)}
 
                         </div>
                       </div>
@@ -134,7 +134,7 @@ export default function Wizardstep1({ next, previous }) {
                           aria-describedby="basic-addon1"
                           value={values.templateCode}
                         />
-                    {errors.templateCode && (<p className="message">{errors.templateCode}</p>)}
+                    {errors.templateCode && (<p className="message validation-sty">{errors.templateCode}</p>)}
 
                       </div>
                     </div>
@@ -154,7 +154,7 @@ export default function Wizardstep1({ next, previous }) {
                           aria-describedby="basic-addon1"
                           value={values.templateDec}
                         />
-                    {errors.templateDec && (<p className="message">{errors.templateDec}</p>)}
+                    {errors.templateDec && (<p className="message validation-sty">{errors.templateDec}</p>)}
 
                       </div>
                     </div>
@@ -174,7 +174,7 @@ export default function Wizardstep1({ next, previous }) {
                           aria-describedby="basic-addon1"
                           value={values.filter1}
                         />
-                                                {errors.filter1 && (<p className="message">{errors.filter1}</p>)}
+                                                {errors.filter1 && (<p className="message validation-sty">{errors.filter1}</p>)}
 
           
                       </div>
@@ -195,7 +195,7 @@ export default function Wizardstep1({ next, previous }) {
                           aria-describedby="basic-addon1"
                           value={values.filter2}
                         />
-                         {errors.filter2 && (<p className="message">{errors.filter2}</p>)}
+                         {errors.filter2 && (<p className="message validation-sty">{errors.filter2}</p>)}
 
                       </div>
                     </div>
