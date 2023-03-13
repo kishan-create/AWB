@@ -1,20 +1,21 @@
-import React from 'react'
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Login } from '../auth/Login';
-import Userslist from '../../pages/users/Userslist';
-import EditUsers from '../../pages/users/EditUsers';
-import UserGroup from '../../pages/usergroups/usergroup';
-import ListGroups from '../../pages/usergroups/ListGroups';
+import { Login } from "../auth/Login";
+import Userslist from "../../pages/users/Userslist";
+import EditUsers from "../../pages/users/EditUsers";
+import UserGroup from "../../pages/usergroups/usergroup";
+import ListGroups from "../../pages/usergroups/ListGroups";
 
-import EditUsergroup from '../../pages/usergroups/EditUsergroup';
-import EditAgent from '../../pages/agents/EditAgent'
+import EditUsergroup from "../../pages/usergroups/EditUsergroup";
+import EditAgent from "../../pages/agents/EditAgent";
 
-import UserRegistration from '../../pages/registration/UserRegistration';
-import Addagent from '../../pages/agents/Addagent';
+import UserRegistration from "../../pages/registration/UserRegistration";
+import Addagent from "../../pages/agents/Addagent";
+
+import AddUserstogroup from "../../pages/users/AddUserstogroup";
 
 
-import AddUserstogroup from '../../pages/users/AddUserstogroup';
 
 
 import Addagency from '../../pages/agency/Addagency';
@@ -25,8 +26,12 @@ import EditAddress from '../../pages/agency/EditAddress'
 import ListAgentData from '../../pages/agents/ListAgentData'
 import EditAgentAddress from '../../pages/agents/EditAgentAddress'
 
+import AddDocumentWizard from "../../pages/document/AddDocumentWizard";
+import ListDocument from "../../pages/document/ListDocument";
+import ListDocumentData from "../../pages/document/Includes/ListDocumentData";
 function Content() {
   return (
+    
 
   <Routes>
    <Route path="/" exact={true} element={<Userslist/>}/>
@@ -47,15 +52,22 @@ function Content() {
   <Route path="/editaddress/:id" exact={true} element={<EditAddress />} />
   <Route path="/listdata/:id" exact={true} element={<ListAgentData />} />
   <Route path="/editagentaddress/:id" exact={true} element={<EditAgentAddress />} />
+  <Route path="/listdocument" exact={true} element={<ListDocument />} />
 
 
+      <Route
+        path="/listdocument/:id"
+        exact={true}
+        element={<ListDocumentData />}
+      />
 
-
-
-    
-  </Routes>
-
-  )
+      <Route
+        path="/addDocument-wizard"
+        exact={true}
+        element={<AddDocumentWizard />}
+      />
+    </Routes>
+  );
 }
 
-export default Content
+export default Content;

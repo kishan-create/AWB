@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import Registration from "./Registration";
 import registeration_validation from "../validations/registeration_validation";
-// import registeration_validation from '../validations/'
+
 
 export default function UserRegistration() {
   const { handleChange, values, handleSubmit, errors } = Registration(
@@ -18,9 +18,6 @@ export default function UserRegistration() {
             <div className="app-auth-body mx-auto">
               <div className="app-auth-branding mb-4">
               
-                <br></br>
-                <a className="app-logo" href="index.html">
-                </a>
               </div>
               <h2 className="auth-heading text-center mb-4">Add User</h2>
               <div className="auth-form-container text-start mx-auto">
@@ -127,28 +124,7 @@ export default function UserRegistration() {
                   </div>
 
                   <div className="extra mb-3">
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        defaultValue
-                        id="RememberPassword"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="RememberPassword"
-                      >
-                        I agree to AWB{" "}
-                        <a href="#" className="app-link">
-                          Terms of Service
-                        </a>{" "}
-                        and{" "}
-                        <a href="#" className="app-link">
-                          Privacy Policy
-                        </a>
-                        .
-                      </label>
-                    </div>
+                   
                   </div>
                   {/*//extra*/}
                   <div className="text-center">
@@ -166,18 +142,18 @@ export default function UserRegistration() {
                       </button>{" "}
                       </Link>
                     </div>
-                    {/* <input type="submit" value="Submit" className="btn app-btn-primary"/> */}
+                  
                   </div>
                 </form>
-                {/*//auth-form*/}
+              
               </div>
-              {/*//auth-form-container*/}
+      
             </div>
-            {/*//auth-body*/}
+         
           </div>
-          {/*//flex-column*/}
+  
         </div>
-        {/*//auth-main-col*/}
+  
         <div className="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
           <div className="auth-background-holder"></div>
           <div className="auth-background-mask" />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function AgencyHeader() {
+export default function DocumentHeader() {
    
   return (
     <div className="app-status">
@@ -10,7 +10,7 @@ export default function AgencyHeader() {
        
         </div>
         <div className="col-auto">
-        
+          <button type="button" className="btn app-btn-primary">Upload Documents</button>
         </div>
       </div>
     </div>

@@ -4,8 +4,7 @@ import "./registration.scss";
 import axios from "axios";
 import swal from "sweetalert";
 import logo from "../../images/awb_logo.svg";
-import {useNavigate} from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 const Registration = (registeration_validation) => {
   const [values, SetValues] = useState({
@@ -14,6 +13,7 @@ const Registration = (registeration_validation) => {
     userPhone: "",
     password: "",
     userFullName: "",
+    // dup:"test"
   });
 
   const [errors, setErrors] = useState({});
@@ -25,7 +25,7 @@ const Registration = (registeration_validation) => {
       onSubmitform();
     }
   }, [errors]);
-
+  console.log(errors);
   const handleChange = (e) => {
     const { name, value } = e.target;
     SetValues({
@@ -43,10 +43,9 @@ const Registration = (registeration_validation) => {
 
   const onSubmitform = (e) => {
     const response = axios
-      .post(process.env.REACT_APP_API_ADMIN_URL + "/user",
-        values
-      )
+      .post(process.env.REACT_APP_API_ADMIN_URL + "/user", values)
       .then((responseuser) => {
+ 
         if (responseuser.status === 200) {
           SetValues({
             userName: "",
@@ -61,10 +60,19 @@ const Registration = (registeration_validation) => {
             icon: "success",
             button: "ok",
           });
-          navigate('/userlist', {replace: true});
+          navigate("/userlist", { replace: true });
         }
-        
+      })
+      .catch(function (error) {
+        let dupmsg = error.response.data.apierror.message;
 
+        if (
+          error.response.data.apierror.message ===
+          "Duplicate entry found with same user email id."
+        ) {
+          setErrors({ ...errors, userEmail: "Email already exist" });
+        
+        }
       });
   };
 
