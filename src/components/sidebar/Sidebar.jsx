@@ -160,7 +160,7 @@ export const Sidebar = () => {
 
               <li className="nav-item">
                 {" "}
-                <Link to="/listdocument" className="nav-link">
+                <Link to="/document" className="nav-link">
                   {" "}
                   <span className="nav-icon"  title="Document Generation">
                     {" "}

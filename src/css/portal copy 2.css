@@ -10610,7 +10610,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 a {
-  color: #2e4153;
+  color: #02B875;
   text-decoration: none;
 }
 a:hover {
@@ -11274,7 +11274,7 @@ button.close:focus {
   padding-top: 1rem;
   padding-left: 1rem;
   margin-bottom: 1rem;
-  background-color: #d0e1eb;
+  background-color: #02B875;
 }
 .app-branding a {
   display: block;
@@ -12063,14 +12063,14 @@ body {
 
 
 .css-1mxz8qt-MuiPaper-root {
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.87);
-  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  border-radius: 4px;
-  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-  width: 100%;
-  margin-bottom: 2px !important;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.87);
+    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 4px;
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    width: 100%;
+    margin-bottom: 2px !important;
 }
 .page-grid-3 {
   float: left;
@@ -12143,38 +12143,6 @@ body {
   margin-top: 100px;
   margin-left: 120px;
 }
-.react-tabs__tab-list {
-  border-bottom: 0px solid #aaa;
-  margin: 0 0 0px;
-  padding: 0;
-  background-color: #6f7d8c;
-}
-.react-tabs__tab--selected {
-  background: #34658f !important;
-  border-color: #34658f !important;
-  color: black;
-  border-radius: 0px 0px 0 0 !important;
-  color: #fff !important;
-  padding: 14px 30px !important;
-}
-.react-tabs__tab {
-  display: inline-block;
-  border: 1px solid transparent;
-  border-bottom: none;
-  bottom: -1px;
-  position: relative;
-  list-style: none;
-  padding: 14px 30px !important;
-  cursor: pointer;
-  color: #fff;
-}
-.css-1whpjm6-MuiToolbar-root {
-  padding-left: 16px;
-  padding-right: 8px;
-  width: 30%;
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
 .next-pre-btn {
   background: #2e4153;
   color: #fff;
@@ -12245,19 +12213,6 @@ body {
   margin-left: -16px;
   border-radius: 5px;
 }
-.choose-file-sty .file-input {
-  
-  margin-left: -16px;
-  border-radius: 5px;
-}
-.choosefile-attach-txt {
-  text-align: center;
-  width: 100%;
-  /* padding-top: 30px; */
-  background-color: #d0e1eb;
-  padding: 30px;
-  border: dotted 2px #818181;
-}
 .m-b-30 {
   margin-bottom: 30px;
 }
@@ -12270,17 +12225,10 @@ body {
 .p-t-15{
   padding-top: 15px;
 }
-.css-1pty0ct {
-  padding-left: 15px!important;
-}
 .bottom-arrow {
   text-align: center;
   color: #02B875;
   padding: 7px; 
-}
-.css-1wbz3t9
-{
-  background-color: #f0f4f6;
 }
 .bottom-arrow .css-i4bv87-MuiSvgIcon-root {
   -webkit-user-select: none;
@@ -12343,10 +12291,6 @@ body {
   text-align: center;
   color: #b5b5b5;
   padding: 7px;
-}
-.css-1wbz3t9
-{
-  background-color: #f0f4f6;
 }
 .bottom-arrow-1 .css-i4bv87-MuiSvgIcon-root {
   -webkit-user-select: none;
@@ -12419,7 +12363,6 @@ body {
   width: 80%;
   float: right;
 }
-
 .main-hrd-agncy {
   font-size: 22px;
   padding-left: 12px;
@@ -12520,13 +12463,4 @@ body {
   margin-bottom: -20px;
 }
 
-
-
-}
-
-
-.validation-sty{
-  font-size: 10px;
-  width: 100%;
-  padding-top: 5px;
 }
