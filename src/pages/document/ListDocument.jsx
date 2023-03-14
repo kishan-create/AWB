@@ -240,11 +240,13 @@ export default function ListDocument() {
                                             {row.templateName}
                                           </TableCell>
 
-                                          <TableCell>
-                                            {row.templateDec}
-                                          </TableCell>
+                                      
                                           <TableCell>
                                             {row.templateCode}
+                                          </TableCell>
+
+                                          <TableCell>
+                                            {row.templateDec}
                                           </TableCell>
 
                                           <TableCell>
@@ -258,7 +260,7 @@ export default function ListDocument() {
                                           <TableCell>
                                             <Link
                                               to={{
-                                                // pathname: `/AgentTabs/${row.templateId}`,
+                                               
                                                 pathname: `/listdocument/${row.templateId}`,
 
                                                 data: row.templateId, // your data array of objects

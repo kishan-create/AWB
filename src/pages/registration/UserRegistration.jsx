@@ -37,7 +37,7 @@ export default function UserRegistration() {
                       name="userName"
                       type="text"
                       className="form-control signup-name"
-                      placeholder=" name"
+                      placeholder=" Name"
                       
                     />
 

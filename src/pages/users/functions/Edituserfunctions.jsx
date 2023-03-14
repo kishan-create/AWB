@@ -14,6 +14,7 @@ const Edituserfunctions = (id) => {
     userEmail: "",
     userPhone: "",
     password: "",
+    userFullName:"",
   });
   useEffect(() => {
     getUsersbyID(id);

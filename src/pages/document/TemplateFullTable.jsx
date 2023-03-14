@@ -50,7 +50,7 @@ import { saveAs } from "file-saver";
 import TemplateAddwizard from "../document/functions/Addwizard";
 
 const {
-  descendingComparator,
+ 
   getComparator,
   stableSort,
   EnhancedTableToolbar,
@@ -58,11 +58,7 @@ const {
 
 function EnhancedTableHead(props) {
   const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
+
     onRequestSort,
   } = props;
   const createSortHandler = (property) => (event) => {
@@ -134,8 +130,6 @@ export default function TemplateFullTable() {
     HideShowDivs(selectedOption);
   }, [selectedOption]);
 
-
-
   const getDocumentAddress = async (id) => {
     const response = await fetch(
       process.env.REACT_APP_API_SERVICE_URL +
@@ -156,7 +150,6 @@ export default function TemplateFullTable() {
   };
   const handleChangeFileUploads = (data) => {
     setSeen(data);
- 
   };
   const handleButtonClick = () => {
     setIsHalfShown(!isHalfShown);
@@ -227,23 +220,32 @@ export default function TemplateFullTable() {
   const deletedocument = async (e, id, test) => {
     e.preventDefault();
     const thisclickrow = e.currentTarget;
-
-    const response = await axios
-      .delete(process.env.REACT_APP_API_SERVICE_URL + `/document/${id}`)
-      .then((response) => {
-        // thisclickrow.closest("tr").remove();
-        if (response.status === 200) {
-          getDocumentAddress(test);
-          swal({
-            title: "",
-            text: " Record deleted successfully",
-            icon: "success",
-            button: "ok",
+    swal({
+      title: "Are you sure ??",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        const response = axios
+          .delete(process.env.REACT_APP_API_SERVICE_URL + `/document/${id}`)
+          .then((response) => {
+          
+            if (response.status === 200) {
+              getDocumentAddress(test);
+              swal({
+                title: "",
+                text: " Record deleted successfully",
+                icon: "success",
+                button: "ok",
+              });
+            }
           });
-        }
-      });
+      } else {
+        swal("Your file is safe!");
+      }
+    });
   };
-
   const uploaddocument = async (id, filename) => {
     const response = await axios
       .get(process.env.REACT_APP_API_SERVICE_URL + `/document/download/${id}`)
@@ -258,12 +260,10 @@ export default function TemplateFullTable() {
   const handleSubmitFile = (e) => {
     e.preventDefault();
 
-    
     setSubmitted(true);
     onSubmitfileform();
   };
   const onSubmitfileform = () => {
-    
     let formData = new FormData();
     let contentfile = selectedOption + "." + selectedOption;
 
@@ -366,16 +366,11 @@ export default function TemplateFullTable() {
                                           <TableCell>
                                             <Link
                                               onClick={(e) => {
-                                                if (
-                                                  window.confirm(
-                                                    "Are you sure you wish to delete this item?"
-                                                  )
-                                                )
-                                                  deletedocument(
-                                                    e,
-                                                    row.docId,
-                                                    test
-                                                  );
+                                                deletedocument(
+                                                  e,
+                                                  row.docId,
+                                                  test
+                                                );
                                               }}
                                             >
                                               <DeleteIcon />
@@ -521,12 +516,12 @@ export default function TemplateFullTable() {
                       Save
                     </button>
                     <Link to="/listdocument">
-                    <button
-                      type="button"
-                      className="next-pre-btn-secondary mrg-r-3"
-                    >
-                      Cancel{" "}
-                    </button>
+                      <button
+                        type="button"
+                        className="next-pre-btn-secondary mrg-r-3"
+                      >
+                        Cancel{" "}
+                      </button>
                     </Link>
                   </div>
                 </form>

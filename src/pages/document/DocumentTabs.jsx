@@ -7,8 +7,7 @@ export default  () => (
     <TabList>
       <Tab> Edit Details</Tab>
       <Tab>Attched Document</Tab>
-      {/* <Tab>Documents</Tab>
-      <Tab>Add Agent</Tab> */}
+     
 
     </TabList>
 
@@ -22,10 +21,7 @@ export default  () => (
       <TemplateFullTable/>
     </TabPanel>
 
-    {/* <TabPanel>
-    <AddView/>
-    
-    </TabPanel> */}
+
 
 
   </Tabs>

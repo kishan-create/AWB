@@ -10,9 +10,11 @@ export default function TemplateCol() {
 
     { field: "templateName", headerName: "Template Name", width: 130 },
 
+    { field: "templateCode", headerName: "Template Code", width: 130 },
+
     { field: "templateDec", headerName: "Template Description", width: 130 },
     
-    { field: "templateCode", headerName: "Template Code", width: 130 },
+    
 
     { field: "filter1", headerName: "Filter 1", width: 130 },
     

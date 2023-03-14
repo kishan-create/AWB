@@ -74,7 +74,7 @@ const agencyID = params.id
      
       onSubmitform(inputFields[btnCount], btnCount);
     }
-  //  getAllCountryName();
+ 
     props.latestAddress(listaddress);
   }, [listaddress, errors]);
   const getAllCountryName = async () => {
@@ -116,8 +116,7 @@ const agencyID = params.id
 
         if ( response.status === 200) {
          
-       
-        // else if (response.status === 200) {
+      
           let data = {
             addrType: "",
             addrLine1: "",
