@@ -24,6 +24,7 @@ import Tabledata from "../../components/common/Tabledata";
 import axios from "axios";
 import swal from "sweetalert";
 import EditMultipleAddress from "../../pages/agents/EditMultipleAddressAgent";
+
 const {
   descendingComparator,
   getComparator,
@@ -79,15 +80,16 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function AwbTable(props) {
+export default function AwbTableChild(props) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { rows, columns, getRows } = AwbTableFunctions(props);
+  const { rows, columns, getRows,getAgencyAddress } = AwbTableFunctions(props);
   const [adressData, setAddressData] = React.useState([]);
+  const [listadd, SetListadd] = React.useState([]);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -138,6 +140,12 @@ export default function AwbTable(props) {
   const getData = (data) => {
     setAddressData(data);
   };
+  const getAddressDataLatest=(listaddress) =>
+  {
+    SetListadd(listaddress);
+  }
+ 
+ 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -182,11 +190,12 @@ export default function AwbTable(props) {
         {(() => {
           if (props.displayName === "Address") {
             return (
-              <Link to='/agency'>
-              <button type="button" class="next-pre-btn mrg-r-3 fl-right">
-                + Add {props.displayName}
-              </button>
-            </Link>
+                <EditMultipleAddress
+                agencyID = {props.paramid}
+                  addressData={getData}
+                  latestAddress={getAddressDataLatest}
+                  method={getRows}
+                />
             );
           } else {
             return (

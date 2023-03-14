@@ -12,7 +12,7 @@ export default function Users() {
           <div className="inner">
             <div className="table-responsive">
          
-            <AwbTable tableHeader="USER" tableRow="user" id="userId" baseURL={process.env.REACT_APP_API_ADMIN_URL} displayName="Users"/>
+            <AwbTable tableHeader="USER"  tableRow="user"  id="userId" baseURL={process.env.REACT_APP_API_ADMIN_URL} displayName="Users"/>
             </div>
           </div>
         </div>

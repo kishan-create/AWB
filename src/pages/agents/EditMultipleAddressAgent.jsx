@@ -35,7 +35,7 @@ const customStyles = {
 };
 
 export default function EditMultipleAddress(props) {
-  const [name, SetName] = useState("shanu");
+  const [name, SetName] = useState("");
   const [errors, setErrors] = useState({});
   let subtitle;
   let count = 0;
@@ -68,6 +68,7 @@ export default function EditMultipleAddress(props) {
   }
 const params=useParams();
 const agencyID = params.id 
+//console.log(agencyID);
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
@@ -108,6 +109,7 @@ const agencyID = params.id
     setErrors(error);
     setIsSubmitting(true);
   };
+  
   const onSubmitform = (inputs,btncount) => {
       
     const response = axios
@@ -133,7 +135,7 @@ const agencyID = params.id
           props.addressData(inputFields);
           SetlistAddress([...listaddress,{
             agyAddrTypeCode : response.data.addrType,
-            agencyId : "",
+            agencyId : agencyID,
             addressId:response.data.addrId
 
           }])
@@ -153,12 +155,10 @@ const agencyID = params.id
 
 
   const submitAddress = () => {
-   
-    listaddress.map((listaddkey, key) => {
-      listaddkey.producerId = agencyID;
-    });
+  // console.log(listaddress);
+    
     const response = axios
-      .post(process.env.REACT_APP_API_SERVICE_URL + "/produceraddr", listaddress)
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/agencyaddr", listaddress)
       .then((response) => {
         if (response.status === 200) {
             setIsSubmitting(false);
