@@ -32,7 +32,7 @@ export default function EditUsers() {
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label">User Name <span className="red">*</span></label>
                       <div className="input-group mb-3">
-                        <input type="text" name="userName" value={values.userName} onChange={handleChange} className="form-control" placeholder="Enter User Name" aria-label="Enter User Name" aria-describedby="basic-addon1" />
+                        <input type="text" readOnly name="userName" value={values.userName} onChange={handleChange} className="form-control" placeholder="Enter User Name" aria-label="Enter User Name" aria-describedby="basic-addon1" />
                       </div>
                     </div>
                   </div>
@@ -48,7 +48,7 @@ export default function EditUsers() {
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label">User Email<span className="red">*</span></label>
                       <div className="input-group mb-3">
-                        <input type="text" name="userEmail" onChange={handleChange} value={values.userEmail} className="form-control" placeholder="Enter User Email" aria-label="Enter User Email" aria-describedby="basic-addon1" />
+                        <input type="text" readOnly name="userEmail" onChange={handleChange} value={values.userEmail} className="form-control" placeholder="Enter User Email" aria-label="Enter User Email" aria-describedby="basic-addon1" />
                       </div>
                     </div>
                   </div>
