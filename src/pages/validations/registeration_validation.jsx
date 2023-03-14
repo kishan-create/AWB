@@ -19,9 +19,6 @@ export default function registeration_validation(values) {
   }
 
   if (!values.password.trim()) {
-    errors.password = "password required";
-  }
-  {
     errors.password =
       "Use 8 or more characters with a mix of letters, numbers & symbols,capital letter";
   }
