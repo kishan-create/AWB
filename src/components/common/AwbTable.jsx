@@ -180,7 +180,7 @@ export default function AwbTable(props) {
 
         <h4 class="add-headd-sub1 fl-left">{props.displayName}</h4>
         {(() => {
-          if (props.displayName === "Address") {
+          if (props.displayName === "Documents") {
             return (
               <Link to='/agency'>
               <button type="button" class="next-pre-btn mrg-r-3 fl-right">

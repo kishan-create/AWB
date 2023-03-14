@@ -199,7 +199,7 @@ export default function AwbTableChild(props) {
             );
           } else {
             return (
-              <Link to={`/${props.tableRow}`}>
+              <Link to="">
                 <button type="button" class="next-pre-btn mrg-r-3 fl-right">
                   + Add {props.displayName}
                 </button>
