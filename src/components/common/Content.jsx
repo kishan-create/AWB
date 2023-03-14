@@ -60,13 +60,13 @@ function Content() {
 
 
       <Route
-        path="/listdocument/:id"
+        path="/editdocgeneration/:id"
         exact={true}
         element={<ListDocumentData />}
       />
 
       <Route
-        path="/addDocument-wizard"
+        path="/docgeneration"
         exact={true}
         element={<AddDocumentWizard />}
       />
