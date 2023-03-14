@@ -60,24 +60,17 @@ const Usergroupform = (usergroup_validation) => {
           text: "Usergroup Details added successfully",
           icon: "success",
           button: "ok",
-        });
-        navigate('/grouplist', {replace: true});
+        }).then(() => {
+         
+          navigate('/grouplist', {replace: true});
+        });;
+       // 
 
       }
     
     })
  
-    // .catch(function (error) {
-    //   let dupmsg = error.response.data.apierror.message;
-
-    //   if (
-    //     error.response.data.apierror.message ===
-    //     "Duplicate entry found with same user group name or user group code"
-    //   ) {
-    //     setErrors({ ...errors, userGroupName: "Group name already exist" });
-      
-    //   }
-    // });
+   
 };
 
   return { handleChange, values, handleSubmit, errors };

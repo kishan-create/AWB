@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 const Edituserfunctions = (id) => {
   
 
@@ -16,6 +17,7 @@ const Edituserfunctions = (id) => {
     password: "",
     userFullName:"",
   });
+  const navigate = useNavigate();
   useEffect(() => {
     getUsersbyID(id);
   }, []);
@@ -74,7 +76,10 @@ const Edituserfunctions = (id) => {
         text: "User Edited successfully",
         icon: "success",
         button: "ok",
-      });
+      }).then(() => {
+        // Redirect to another page using history.push
+        navigate("/userlist", { replace: true });
+      });;
     }
   };
   return {

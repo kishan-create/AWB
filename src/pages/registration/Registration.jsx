@@ -59,8 +59,11 @@ const Registration = (registeration_validation) => {
             text: "User Added successfully",
             icon: "success",
             button: "ok",
-          });
-          navigate("/userlist", { replace: true });
+          }).then(() => {
+            // Redirect to another page using history.push
+            navigate("/userlist", { replace: true });
+          });;;
+         
         }
       })
       .catch(function (error) {
