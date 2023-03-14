@@ -80,7 +80,7 @@ export default function EditDocument() {
                   
                   
                   <div className="col-12 mt-4">
-                    <button type="submit" className="btn app-btn-primary">Submit &amp; Continue</button>
+                    <button type="submit" className="next-pre-btn mrg-r-3">Update</button>
                    
                     <button type="button" className="btn btn-link">Cancel</button>
                   </div>

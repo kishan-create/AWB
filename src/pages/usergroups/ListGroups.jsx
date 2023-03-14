@@ -1,17 +1,7 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-
-import filter_list from '../../images/filter_list.svg';
-import exportsvg from '../../images/export.svg';
-import add_circle from '../../images/add_circle.svg';
-import List from "./List";
-import axios from "axios";
-import { FaSearch } from 'react-icons/fa';
-
-
-
+import React from 'react'
+import AwbTable from '../../components/common/AwbTable'
+import AgencyHeader from '../agency/includes/AgencyHeader'
 export default function ListGroups() {
- 
   return (
     <div>
     <div className="app-status justify-content-between align-items-center">
@@ -29,7 +19,8 @@ export default function ListGroups() {
         <div className="app-card alert alert-dismissible p-0 shadow-sm mb-4" role="alert">
           <div className="inner">
             <div className="table-responsive">
-            <List/>
+         
+            <AwbTable tableHeader="USERGROUP" tableRow="usergroup" id="userGroupId" baseURL={process.env.REACT_APP_API_ADMIN_URL} displayName="User Group"/>
             </div>
           </div>
         </div>
@@ -37,6 +28,7 @@ export default function ListGroups() {
       </div>
     </div>
   </div>
-  </div>
+       
+    </div>
   )
 }

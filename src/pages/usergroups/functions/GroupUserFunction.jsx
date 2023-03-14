@@ -10,7 +10,7 @@ const GroupUserFunction = (id) => {
   const getUsers = async () => {
     const response = await fetch(
       process.env.REACT_APP_API_ADMIN_URL +
-        `/usergroup/groupmembers?groupid=${id}`
+        `/usergroup/groupmembers/group/${id}/users`
     );
     const data = await response.json();
     setUserrows(data);

@@ -19,7 +19,7 @@ export default function FormNew() {
               
               
               <div className="col-12 mt-4">
-                <button type="button" className="btn app-btn-primary">Submit &amp; Continue</button>
+                <button type="button" className="btn app-btn-primary">Update</button>
                 <button type="button" className="btn app-btn-secondary mx-3">Put on Hold</button>
                 <button type="button" className="btn btn-link">Cancel</button>
               </div>

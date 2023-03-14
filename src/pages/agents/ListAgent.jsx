@@ -1,7 +1,7 @@
 import React from 'react'
 import AwbTable from '../../components/common/AwbTable'
 import AgencyHeader from '../agency/includes/AgencyHeader'
-export default function Users() {
+export default function ListAgent() {
   return (
     <div>
            <AgencyHeader/>
@@ -12,7 +12,7 @@ export default function Users() {
           <div className="inner">
             <div className="table-responsive">
          
-            <AwbTable tableHeader="USER"  tableRow="user"  id="userId" baseURL={process.env.REACT_APP_API_ADMIN_URL} displayName="Users"/>
+            <AwbTable tableHeader="AGENT" tableRow="producer" id="producerId" baseURL={process.env.REACT_APP_API_SERVICE_URL} displayName="Agent"/>
             </div>
           </div>
         </div>
