@@ -35,8 +35,8 @@ const [rows, setUserrows] = useState([]);
  }
 
  useEffect(() => {
-    getGroupsbyID(id);
-    updateusergroup(id);
+  getGroupsbyID();
+    
 
    }, []);
 
