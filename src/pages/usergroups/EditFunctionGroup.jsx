@@ -42,13 +42,9 @@ const [rows, setUserrows] = useState([]);
 
 
 
-
-
-
-   const updateusergroup = async (e) => {
-    e.preventDefault();
-  
-    const res = await axios.put(
+   const updateusergroup = async () => {
+   
+  const res = await axios.put(
       process.env.REACT_APP_API_ADMIN_URL+`/usergroup/${id}`,
           values
     )

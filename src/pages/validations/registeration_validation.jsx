@@ -7,7 +7,7 @@ export default function registeration_validation(values) {
   let errors = {};
 
   if (!values.userName.trim()) {
-    errors.userName = " User name  added";
+    errors.userName = " User name  required";
   }
 
   if (!values.userFullName.trim()) {
@@ -23,7 +23,7 @@ export default function registeration_validation(values) {
   }
   {
     errors.password =
-      "Use 8 or more characters with a mix of letters, numbers & symbols,Capital Letter";
+      "Use 8 or more characters with a mix of letters, numbers & symbols,capital letter";
   }
 
   if (!values.userPhone.trim()) {

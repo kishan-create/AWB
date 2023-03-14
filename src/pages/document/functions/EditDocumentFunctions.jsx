@@ -20,6 +20,7 @@ const EditDocumentfunctions = () => {
   });
   useEffect(() => {
     getDocumentbyID(params.id);
+    updateagents(params.id);
     
   }, []);
   const handlePasswordChange = (evnt) => {
@@ -32,9 +33,9 @@ const EditDocumentfunctions = () => {
       [name]: value,
     });
   };
+const id=params.id
 
-
-  const getDocumentbyID = async (id) => {
+  const getDocumentbyID = async () => {
    
     const response = await axios.get(
       `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/docgeneration/${id}`
@@ -43,7 +44,7 @@ const EditDocumentfunctions = () => {
 
     if (response.status == 200) {
       SetValues({
-        templateId: 1,
+        // templateId: id,
         templateName: response.data.templateName,
         templateDec: response.data.templateDec,
         templateCode: response.data.templateCode,
@@ -64,17 +65,17 @@ const EditDocumentfunctions = () => {
   };
   const updateagents = async (e) => {
     
-    e.preventDefault();
+   
     const res = await axios.put(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/docgeneration/1",
+      `http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/docgeneration/${id}`,
       
       values
     );
     
     if (res.data.status == 200) {
       swal({
-        title: "Good job!",
-        text: "Job Updated successfully",
+        title: "",
+        text: "Document Updated successfully",
         icon: "success",
         button: "ok",
       });
