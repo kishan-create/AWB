@@ -12,6 +12,7 @@ import Paper from "@mui/material/Paper";
 import http from "./http-common";
 import axios from "axios";
 import MultipleAddressValidation from "../../pages/validations/MultipleAddressValidation";
+import CountryStateCountyDropdown from "../../pages/common/CountryStateCountyDropdown";
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -31,6 +32,15 @@ const customStyles = {
 };
 
 export default function AddmultipleAdress(props) {
+  const {
+    countries,
+    selectedCountry,
+    handleCountryChange,
+    states,
+    selectedState,
+    handleStateChange,
+    counties,
+  } = CountryStateCountyDropdown();
   const [name, SetName] = useState("shanu");
   const [errors, setErrors] = useState({});
   let subtitle;
@@ -43,19 +53,13 @@ export default function AddmultipleAdress(props) {
       addrLine1: "",
       addrLine2: "",
 
-      countryId: "",
-      stateId: "",
+      countryId: selectedCountry,
+      stateId: selectedState,
       countyId: "",
       zip: "",
     },
   ]);
-  const countries = [
-    {value: "0", text: "Select"}, 
-    {value: "1", text: "USA"}, 
-    {value: "2", text: "Canada"}, 
-    {value: "3", text: "Japan"}, 
-    {value: "4", text: "Mexico"}
-  ]
+
   const [listaddress, SetlistAddress] = useState([]);
   const [btnCount, setbtnCount] = useState(0);
   const [countryName, SetCountryName] = useState([]);
@@ -65,10 +69,9 @@ export default function AddmultipleAdress(props) {
   }
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-     
       onSubmitform(inputFields[btnCount], btnCount);
     }
-  //  getAllCountryName();
+    //  getAllCountryName();
     props.latestAddress(listaddress);
   }, [listaddress, errors]);
   const getAllCountryName = async () => {
@@ -89,56 +92,56 @@ export default function AddmultipleAdress(props) {
   const handleChangeDrop = (index, evnt) => {};
 
   const handleChange = (index, evnt) => {
-   
     inputFields[index][evnt.target.name] = evnt.target.value;
   };
   const getStateValues = async (id) => {};
   const addAddress = () => {
-   
     submitEachAddress(inputFields[btnCount], btnCount);
   };
   const submitEachAddress = (inputs, btnCount) => {
-    let error = MultipleAddressValidation(inputs);
+    let error = MultipleAddressValidation(
+      inputs,
+      selectedCountry,
+      selectedState
+    );
     setErrors(error);
     setIsSubmitting(true);
   };
-  const onSubmitform = (inputs,btncount) => {
+  const onSubmitform = (inputs, btncount) => {
+    inputs.stateId = selectedState;
+    inputs.countryId = selectedCountry;
+
     const response = axios
       .post(process.env.REACT_APP_API_SERVICE_URL + "/addresses", inputs)
       .then((response) => {
-       
         if (response.status === 200) {
           let data = {
             addrType: "",
             addrLine1: "",
             addrLine2: "",
-      
-            countryId: "",
-            stateId: "",
+
+            countryId: response.data.countryId,
+            stateId: response.data.stateId,
             countyId: "",
             zip: "",
           };
           setInputFields((prevState) => [...prevState, data]);
           setbtnCount(btnCount + 1);
           props.addressData(inputFields);
-          SetlistAddress([...listaddress,{
-            agyAddrTypeCode : response.data.addrType,
-            agencyId : "",
-            addressId:response.data.addrId
-
-          }])
+          SetlistAddress([
+            ...listaddress,
+            {
+              agyAddrTypeCode: response.data.addrType,
+              agencyId: "",
+              addressId: response.data.addrId,
+            },
+          ]);
           setIsSubmitting(false);
           closeModal();
-         
         }
-       
-       
       });
+  };
 
-  }
-  
-
-  
   return (
     <div>
       <div class="col-12">
@@ -174,8 +177,9 @@ export default function AddmultipleAdress(props) {
                   <label htmlFor="Submission" class="form-label">
                     Agency address Type <span class="red">*</span>
                   </label>
+
                   <select
-                    class="form-select mb-3"
+                    class="form-control"
                     name="addrType"
                     onChange={(evnt) => handleChange(btnCount, evnt)}
                     defaultValue={inputFields.addrType}
@@ -235,16 +239,19 @@ export default function AddmultipleAdress(props) {
                   <label htmlFor="Submission" className="form-label">
                     Country <span className="red">*</span>
                   </label>
-                  
+
                   <select
                     class="form-control"
                     name="countryId"
-                    onChange={(evnt) => handleChange(btnCount, evnt)}
-                    value={inputFields.countryId}
+                    onChange={handleCountryChange}
+                    value={selectedCountry}
                   >
-                    <option value="Select Country">Select</option>
-                    <option value="1">India</option>
-                    <option value="2">USA</option>
+                    <option value="">Select a country</option>
+                    {countries.map((country) => (
+                      <option key={country.dataCode} value={country.dataId}>
+                        {country.dataName}
+                      </option>
+                    ))}
                   </select>
                   {errors.countryId && (
                     <p className="message">{errors.countryId}</p>
@@ -257,12 +264,16 @@ export default function AddmultipleAdress(props) {
                   <select
                     class="form-control"
                     name="stateId"
-                    onChange={(evnt) => handleChange(btnCount, evnt)}
-                    value={inputFields.stateId}
+                    value={selectedState}
+                    onChange={handleStateChange}
+                    disabled={!selectedCountry}
                   >
-                    <option value="Select State">Select</option>
-                    <option value="1">Kerala</option>
-                    <option value="2">TamilNadu</option>
+                    <option value="">Select a state</option>
+                    {states.map((state) => (
+                      <option key={state.dataCode} value={state.dataId}>
+                        {state.dataName}
+                      </option>
+                    ))}
                   </select>
                   {errors.stateId && (
                     <p className="message">{errors.stateId}</p>
@@ -275,12 +286,16 @@ export default function AddmultipleAdress(props) {
                   <select
                     class="form-control"
                     name="countyId"
-                    onChange={(evnt) => handleChange(btnCount, evnt)}
+                    disabled={!selectedState}
                     value={inputFields.countyId}
+                    onChange={(evnt) => handleChange(btnCount, evnt)}
                   >
-                    <option value="Select State">Select</option>
-                    <option value="1">Ernamkulam</option>
-                    <option value="2">Trissur</option>
+                    <option value="">Select a County</option>
+                    {counties.map((county) => (
+                      <option key={county.dataCode} value={county.dataId}>
+                        {county.dataName}
+                      </option>
+                    ))}
                   </select>
                   {errors.countyId && (
                     <p className="message">{errors.countyId}</p>
@@ -313,8 +328,11 @@ export default function AddmultipleAdress(props) {
           </div>
 
           <div class="col-12">
-            <button type="button" class="next-pre-btn mrg-r-3" onClick={addAddress}>
-            
+            <button
+              type="button"
+              class="next-pre-btn mrg-r-3"
+              onClick={addAddress}
+            >
               Save
             </button>
           </div>

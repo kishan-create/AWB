@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-const Edituserfunctions = (id) => {
+const Edituserfunctions = (id,registeration_validation) => {
   
 
   const [rows, setUserrows] = useState([]);
   const [passwordType, setPasswordType] = useState("password");
   const [passwordInput, setPasswordInput] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
   const [values, SetValues] = useState({
     // userId: "",
     userName: "",
@@ -19,6 +21,9 @@ const Edituserfunctions = (id) => {
   });
   const navigate = useNavigate();
   useEffect(() => {
+    if (Object.keys(errors).length === 0 && submitted) {
+      onSubmitform();
+    }
     getUsersbyID(id);
   }, []);
   const handlePasswordChange = (evnt) => {
@@ -47,7 +52,7 @@ const Edituserfunctions = (id) => {
         userName: response.data.userName,
         userEmail: response.data.userEmail,
         userFullName: response.data.userFullName,
-        password: response.data.password,
+       // password: response.data.password,
         userPhone:response.data.userPhone
       });
     }
@@ -62,26 +67,49 @@ const Edituserfunctions = (id) => {
     setPasswordType("password");
   };
   const updateUsers = async (e) => {
-    
     e.preventDefault();
-    const res = await axios.put(
-      process.env.REACT_APP_API_ADMIN_URL + `/user/${id}`,
-      values
-    );
-
-
-    if (res.status == 200) {
-      swal({
-        title: "",
-        text: "User Edited successfully",
-        icon: "success",
-        button: "ok",
-      }).then(() => {
-        // Redirect to another page using history.push
-        navigate("/userlist", { replace: true });
-      });;
-    }
+    const test = setErrors(registeration_validation(values));
+    setSubmitted(true);
+  
   };
+  const onSubmitform = (e) => {
+    const response = axios
+      .post(process.env.REACT_APP_API_ADMIN_URL + "/user", values)
+      .then((responseuser) => {
+ 
+        if (responseuser.status === 200) {
+          SetValues({
+            userName: "",
+            userEmail: "",
+            userPhone: "",
+            password: "",
+            userFullName: "",
+          });
+          swal({
+            title: "",
+            text: "User Added successfully",
+            icon: "success",
+            button: "ok",
+          }).then(() => {
+            // Redirect to another page using history.push
+            navigate("/userlist", { replace: true });
+          });;;
+         
+        }
+      })
+      .catch(function (error) {
+        let dupmsg = error.response.data.apierror.message;
+
+        if (
+          error.response.data.apierror.message ===
+          "Duplicate entry found with same user email id."
+        ) {
+          setErrors({ ...errors, userEmail: "Email already exist" });
+        
+        }
+      });
+  };
+
   return {
     handlePasswordChange,
     passwordType,

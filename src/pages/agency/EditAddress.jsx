@@ -5,13 +5,23 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import EditAgentfunctions from '../../pages/agency/Functions/Editagentfunctions'
 import EditAddressFunctions from './EditAddressFunctions'
+import CountryStateCountyDropdown from '../common/CountryStateCountyDropdown';
 import { useParams } from 'react-router-dom';
 
 export default function EditAddress() {
   const params=useParams();
 
   const {
-    handleChange,values,handleEdit,updateAddress
+    handleChange,values,handleEdit,updateAddress, countries,
+    states,
+    counties,
+    handleCountryChange,
+    handleStateChange,
+    selectedCountry,
+    handleCountryEditChange,
+    selectedState,
+    handlestateEditChange
+
     
   } = EditAddressFunctions(params.id);
 
@@ -109,17 +119,21 @@ const county = [
                     Country <span className="red">*</span>
                   </label>
                   
+                 
                   <select
-                  defaultValue={values.countryId}
-
                     class="form-control"
                     name="countryId"
-                    onChange={handleChange} 
+                    onChange={handleCountryEditChange}
                     value={values.countryId}
+                   
+                   
                   >
-                    <option value="Select Country">Select</option>
-                    <option value="1">India</option>
-                    <option value="2">USA</option>
+                    <option value="">Select a country</option>
+                    {countries.map((country) => (
+                      <option key={country.dataId} value={country.dataId}>
+                        {country.dataName}
+                      </option>
+                    ))}
                   </select>
                   
                   </div>
@@ -133,23 +147,26 @@ const county = [
                     State <span className="red">*</span>
                   </label>
                   
-                  <select 
-                  defaultValue={values.stateId}
-
+                  <select
                     class="form-control"
                     name="stateId"
-                    onChange={handleChange} 
+                   
+                    onChange={handlestateEditChange}
+                  
                     value={values.stateId}
+                 
                   >
-                    <option value="Select State">Select</option>
-                    <option value="1">Kerala</option>
-                    <option value="2">TamilNadu</option>
+                    <option value="">Select a state</option>
+                    {states.map((state) => (
+                      <option key={state.dataCode} value={state.dataId}>
+                        {state.dataName}
+                      </option>
+                    ))}
                   </select>
                   
                   </div>
                 
                 </div>
-
                 <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
 
@@ -157,22 +174,26 @@ const county = [
                     County <span className="red">*</span>
                   </label>
                   
-                  <select 
-                  defaultValue={values.countyId}
-
+                  <select
                     class="form-control"
                     name="countyId"
-                    onChange={handleChange} 
+                  
                     value={values.countyId}
+                    onChange={handleChange}
                   >
-                    <option value="Select Country">Select</option>
-                    <option value="1">Ernamkulam</option>
-                    <option value="2">Trissur</option>
+                    <option value="">Select a County</option>
+                    {counties.map((county) => (
+                      <option key={county.dataCode} value={county.dataId}>
+                        {county.dataName}
+                      </option>
+                    ))}
                   </select>
                   
                   </div>
                 
                 </div>
+
+             
 
                   <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">

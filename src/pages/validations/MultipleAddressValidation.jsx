@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 
-var zipregex = /^[0-9.-]*$/;
-
-export default function MultipleAddressValidation(values) {
+export default function MultipleAddressValidation(values,contry,state) {
+  
   let errors = {};
 
   if (!values.addrType.trim()) {
@@ -11,19 +10,18 @@ export default function MultipleAddressValidation(values) {
   if (!values.addrLine1.trim()) {
     errors.addrLine1 = "Address  Required";
   }
-  if (!values.countryId.trim()) {
+  if (!contry.trim()) {
     errors.countryId = "Country  Required";
   }
-  if (!values.stateId.trim()) {
+  if (!state.trim()) {
     errors.stateId = "State  Required";
   }
   if (!values.countyId.trim()) {
     errors.countyId = "County  Required";
   }
   if (!values.zip.trim()) {
-    errors.zip = "Zipcode Required";
+    errors.zip = "Address  Required";
   }
-  
 
   
   return errors;

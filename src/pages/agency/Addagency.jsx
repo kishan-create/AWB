@@ -196,10 +196,10 @@ export default function Addagency() {
                                   {row.addrLine2}
                                 </TableCell>
                                 <TableCell align="right">
-                                {country[row.countryId - 1].name}
+                                 {row.countryId}
                                 </TableCell>
                                 <TableCell align="left">
-                                {state[row.stateId - 1].name}
+                                   { row.stateId}
                                 </TableCell>
                                 <TableCell align="left">
                                   {row.zip}

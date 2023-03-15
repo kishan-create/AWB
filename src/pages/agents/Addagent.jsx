@@ -215,10 +215,10 @@ const county = [
                               {country[row.countryId - 1].name}
                               </TableCell>
                               <TableCell align="left">
-                              {state[row.stateId - 1].name}
+                               {row.countryId}
                               </TableCell>
                               <TableCell align="left">
-                              {county[row.countyId - 1].name}
+                                 { row.stateId}
                               </TableCell>
                               <TableCell align="left">
                                 {row.zip}

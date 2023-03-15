@@ -4,13 +4,14 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Edituserfunctions from './functions/Edituserfunctions';
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import registeration_validation from '../validations/registeration_validation';
 export default function EditUsers() {
   const params = useParams();
 
   const {
     handlePasswordChange,passwordType,passwordInput,togglePassword,values,handleChange,updateUsers
     
-  } = Edituserfunctions(params.id);
+  } = Edituserfunctions(params.id,registeration_validation);
   return (
     <div className="app-wrapper mt-4">
         <div className="app-content pt-2 p-md-2">
