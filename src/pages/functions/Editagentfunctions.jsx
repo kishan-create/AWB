@@ -3,14 +3,25 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-const Editagentfunctions = (id) =>{
+const Editagentfunctions = (id, Agent_validation) =>{
     
 
 const [submitted, setSubmitted] = useState(false);
-const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 useEffect(() => {
+
+
+  if (Object.keys(errors).length === 0 && submitted) {
+    onSubmitform();
+  }
+
+}, [errors]);
+
+useEffect(() =>{
   getAgentsbyID();
-}, []);
+
+},[])
+
 const [values, SetValues] = useState({ 
   // producerId: "",
     producerName: "",
@@ -27,10 +38,10 @@ const [values, SetValues] = useState({
    
    };
    
- const handleEdit =(e) =>{
-    e.preventDefault(); 
-    setSubmitted(true); 
- }
+//  const handleEdit =(e) =>{
+//     e.preventDefault(); 
+//     setSubmitted(true); 
+//  }
 
 
 
@@ -53,34 +64,64 @@ const getAgentsbyID = async() =>{
    
   };
 }
- 
-
- 
 
 const updateAgent = async (e) => {
-
   e.preventDefault();
+  const test = setErrors(Agent_validation(values));
+  setSubmitted(true);
 
+};
+ 
+
+ 
+
+// const updateAgent = async (e) => {
+
+//   e.preventDefault();
+//     const res =  axios.put(
+//       process.env.REACT_APP_API_SERVICE_URL+`/producer/${id}`,
+//       values)
+//       .then((responseuser) => {
+//         if (responseuser.status === 200) {
+       
+//           swal({
+//             title: "",
+//             text: "Agent Updated successfully",
+//             icon: "success",
+//             button: "ok",
+//           });
+//         }
+//       });
+
+  
+
+ 
+// };
+const onSubmitform = (e) => {
   const res =  axios.put(
-  process.env.REACT_APP_API_SERVICE_URL+`/producer/${id}`,
-  values)
-  .then((responseuser) => {
-    if (responseuser.status === 200) {
+    process.env.REACT_APP_API_SERVICE_URL+`/producer/${id}`,
+    values)
+    .then((responseuser) => {
+
+      if (responseuser.status === 200) {
+
+       
+        swal({
+          title: "",
+          text: "Agent Updated successfully",
+          icon: "success",
+          button: "ok",
+        });
+       
+      }
+    })
    
-      swal({
-        title: "",
-        text: "Agent Updated successfully",
-        icon: "success",
-        button: "ok",
-      });
-    }
-  });
 };
 
 
 
 
 
-return{handleChange,values,handleEdit,updateAgent};
+return{handleChange,values,updateAgent,errors};
 }
 export default Editagentfunctions;

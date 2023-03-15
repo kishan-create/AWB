@@ -134,7 +134,7 @@ const agencyID = params.id
           props.addressData(inputFields);
           SetlistAddress([...listaddress,{
             agyAddrTypeCode : response.data.addrType,
-            agencyId : agencyID,
+            agencyId : "",
             addressId:response.data.addrId
 
           }])
@@ -155,9 +155,11 @@ const agencyID = params.id
 
   const submitAddress = () => {
   // console.log(listaddress);
-    
+  listaddress.map((listaddkey, key) => {
+    listaddkey.producerId = agencyID;
+  });
     const response = axios
-      .post(process.env.REACT_APP_API_SERVICE_URL + "/agencyaddr", listaddress)
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/produceraddr", listaddress)
       .then((response) => {
         if (response.status === 200) {
             setIsSubmitting(false);

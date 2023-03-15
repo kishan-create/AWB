@@ -4,13 +4,14 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Edituserfunctions from './functions/Edituserfunctions';
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import edit_user_validation from "./../validations/edit_user_validation"
 export default function EditUsers() {
   const params = useParams();
 
   const {
-    handlePasswordChange,passwordType,passwordInput,togglePassword,values,handleChange,updateUsers
+    handlePasswordChange,passwordType,passwordInput,togglePassword,values,handleChange,updateUsers, errors
     
-  } = Edituserfunctions(params.id);
+  } = Edituserfunctions(params.id, edit_user_validation);
   return (
     <div className="app-wrapper mt-4">
         <div className="app-content pt-2 p-md-2">
@@ -34,6 +35,9 @@ export default function EditUsers() {
                       <div className="input-group mb-3">
                         <input type="text" name="userName" value={values.userName} onChange={handleChange} className="form-control" placeholder="Enter User Name" aria-label="Enter User Name" aria-describedby="basic-addon1" />
                       </div>
+                      {errors.userName && (
+                      <p className="message">{errors.userName}</p>
+                    )}
                     </div>
                   </div>
                   <div className="row gx-2 gy-2">
@@ -42,6 +46,9 @@ export default function EditUsers() {
                       <div className="input-group mb-3">
                         <input type="text" name="userFullName" onChange={handleChange}  value={values.userFullName}  className="form-control" placeholder="Enter User full Name" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
                       </div>
+                      {errors.userFullName && (
+                      <p className="message">{errors.userFullName}</p>
+                    )}
                     </div>
                   </div>
                   <div className="row gx-2 gy-2">
@@ -50,6 +57,9 @@ export default function EditUsers() {
                       <div className="input-group mb-3">
                         <input type="text" name="userEmail" onChange={handleChange} value={values.userEmail} className="form-control" placeholder="Enter User Email" aria-label="Enter User Email" aria-describedby="basic-addon1" />
                       </div>
+                      {errors.userEmail && (
+                      <p className="message">{errors.userEmail}</p>
+                    )}
                     </div>
                   </div>
                   <div className="row gx-2 gy-2">
@@ -58,6 +68,9 @@ export default function EditUsers() {
                       <div className="input-group mb-3">
                         <input type="text" name="userPhone"  onChange={handleChange} value={values.userPhone} className="form-control" placeholder="Enter User phone" aria-label="Enter user Phone" aria-describedby="basic-addon1" />
                       </div>
+                      {errors.userPhone && (
+                      <p className="message">{errors.userPhone}</p>
+                    )}
                     </div>
                   </div>
                  {/* <div className="row gx-2 gy-2">

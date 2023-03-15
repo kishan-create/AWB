@@ -23,7 +23,7 @@ import AwbTableFunctions from "../../functions/AwbTableFunctions";
 import Tabledata from "../../components/common/Tabledata";
 import axios from "axios";
 import swal from "sweetalert";
-import EditMultipleAddress from "../../pages/agents/EditMultipleAddressAgent";
+import EditMultipleAddress from "../../pages/agency/EditMultipleAddress";
 
 const {
   descendingComparator,

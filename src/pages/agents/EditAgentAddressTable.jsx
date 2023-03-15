@@ -38,6 +38,8 @@ import UserHeader from './includes/AgencyHeader';
 import AgencyHeader from './includes/AgencyHeader';
 import { useParams } from 'react-router-dom';
 import EditMultipleAddress from './EditMultipleAddressAgent'
+import swal from "sweetalert";
+
 
 
 const {
@@ -111,6 +113,8 @@ export default function EditAddressTable(id) {
   const [listadd, SetListadd] = useState([]);
 
 const params=useParams();
+const agencyID = params.id
+
 
 
   useEffect(() => {
@@ -127,7 +131,6 @@ const params=useParams();
   
   };
 
-  const agencyID = params.id
 
   const getAgencyFullAddress = async (ID) =>{
     
@@ -246,6 +249,40 @@ const params=useParams();
     {name:"Trissur"},
 
   ];
+
+  const deleteAddress = async ( e,agencyID,id) => {
+    
+  
+    e.preventDefault();
+    const thisclickrow = e.currentTarget;
+    swal({
+      title: "Are you sure ??",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          const response = axios
+            .delete(process.env.REACT_APP_API_SERVICE_URL + `/produceraddr/producer/${id}/address/${agencyID}`)
+            
+            .then((response) => {
+              if (response.status === 200) {
+                getAgencyAddress(id);
+                swal({
+                  title: "",
+                  text: " Address deleted successfully",
+                  icon: "success",
+                  button: "ok",
+                });
+              }
+            });
+        }
+        else {
+          swal("Your Address is safe!");
+        }
+      });
+  };
   return (
     
     <div>
@@ -345,10 +382,18 @@ const params=useParams();
 
 
                                           <TableCell>
+                                          <Link
+                                              onClick={(e) => {
+
+                                                deleteAddress(e, row.addrId, agencyID);
+                                              }}
+                                            >
+                                              <DeleteIcon />
+                                            </Link>
                                             <Link
                                               to={{
                                                 // pathname: `/AgentTabs/${row.agencyId}`,
-                                                pathname: `/editagentaddress/${row.addrId}`,
+                                                pathname: `/editagentaddress/${row.addrId+"_"+agencyID}`,
 
                                                 data: row.addrId, // your data array of objects
                                               }}

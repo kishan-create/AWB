@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-const EditAddressFunctions = (id) => {
+const EditAddressFunctions = (id, MultipleAddressValidation) => {
   
 
   const [rows, setUserrows] = useState([]);
@@ -18,6 +18,17 @@ const EditAddressFunctions = (id) => {
 
 
   });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+ useEffect(() => {
+ 
+ 
+  if (Object.keys(errors).length === 0 && submitted) {
+    onSubmitform();
+  }
+ 
+ }, [errors]);
 
  
   const [countryname, setCountryName] = useState([]);
@@ -72,9 +83,14 @@ const EditAddressFunctions = (id) => {
     }
   };
 
-
   const updateAddress = async (e) => {
     e.preventDefault();
+    const test = setErrors(MultipleAddressValidation(values));
+    setSubmitted(true);
+  
+  };
+
+  const onSubmitform = async () => {
     const res = await axios.put(
       process.env.REACT_APP_API_SERVICE_URL + `/addresses/${id}`,
       
@@ -96,7 +112,7 @@ if (responseuser.status === 200)
  );
 }
   return {    
-    handleChange,values,updateAddress
+    handleChange,values,updateAddress, errors
   };
 };
 export default EditAddressFunctions;

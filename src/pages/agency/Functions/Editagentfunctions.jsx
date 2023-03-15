@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-const Editagentfunctions = (id) => {
+const Editagentfunctions = (id, Agency_Validation) => {
   
 
   const [rows, setUserrows] = useState([]);
@@ -12,8 +12,19 @@ const Editagentfunctions = (id) => {
     agencyName: "",
     agencyNpn: "",
     agencyFbin: "",
-    agencyType: "",
+    // agencyType: "",
   });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+useEffect(() => {
+
+
+  if (Object.keys(errors).length === 0 && submitted) {
+    onSubmitform();
+  }
+
+}, [errors]);
 
   useEffect(() => {
     getagentsbyID(id);
@@ -43,7 +54,7 @@ const Editagentfunctions = (id) => {
         agencyName: response.data.agencyName,
         agencyNpn: response.data.agencyNpn,
         agencyFbin: response.data.agencyFbin,
-        agencyType: response.data.agencyType,
+        // agencyType: response.data.agencyType,
       });
     }
   };
@@ -55,28 +66,36 @@ const Editagentfunctions = (id) => {
     }
     setPasswordType("password");
   };
+
   const updateagents = async (e) => {
     e.preventDefault();
-    const res = await axios.put(
-      process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`,
-      
-      values
-    )   
-    .then((responseuser) =>
-    {
-if (responseuser.status === 200)
-      {
+    const test = setErrors(Agency_Validation(values));
+    setSubmitted(true);
+  
+  };
+ 
 
-     swal({
-       title: "",
-       text: "User Group Updated successfully",
-       icon: "success",
-       button: "ok",
-     });
-   }
- }
- );
-}
+const onSubmitform = (e) => {
+  const res =  axios.put(
+      process.env.REACT_APP_API_SERVICE_URL + `/agency/${id}`,
+    values)
+    .then((responseuser) => {
+
+      if (responseuser.status === 200) {
+
+       
+        swal({
+          title: "",
+          text: "Agency Updated successfully",
+          icon: "success",
+          button: "ok",
+        });
+       
+      }
+    })
+   
+};
+
   return {    
     handlePasswordChange,
     passwordType,
@@ -85,6 +104,7 @@ if (responseuser.status === 200)
     values,
     handleChange,
     updateagents,
+    errors,
   };
 };
 export default Editagentfunctions;

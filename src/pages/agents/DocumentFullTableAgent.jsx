@@ -203,8 +203,10 @@ const handleButtonClick = () => {
       const response =  axios
       .delete(process.env.REACT_APP_API_SERVICE_URL + `/document/${id}`)
       .then((response) => {
+
         // thisclickrow.closest("tr").remove();
         if (response.status === 200) {
+
           getAgencyAddress(test);
           swal({
             title: "",
@@ -212,8 +214,13 @@ const handleButtonClick = () => {
             icon: "success",
             button: "ok",
           });
+
         }
+        setIsHalfShown(false);
+
+
       });
+
 
     }
     else {

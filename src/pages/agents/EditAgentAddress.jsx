@@ -6,16 +6,19 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import EditAgentfunctions from '../../pages/agency/Functions/Editagentfunctions'
 import EditAddressFunctions from '../agency/EditAddressFunctions'
 import { useParams } from 'react-router-dom';
+import MultipleAddressValidation from '../validations/Edit_Address_validation'
 
 export default function EditAgentAddress() {
   const params=useParams();
+  const id =params.id;
+const addID = id.split('_');
 
   const {
-    handleChange,values,handleEdit,updateAddress
+    handleChange,values,handleEdit,updateAddress, errors
     
-  } = EditAddressFunctions(params.id);
+  } = EditAddressFunctions(addID[0], MultipleAddressValidation)
 
-const id =params.id;
+
 
   const state = [
     { name: "Kerala" },
@@ -78,6 +81,9 @@ const county = [
 
 
                   </select>
+                  {errors.addrType && (
+                    <p className="message">{errors.addrType}</p>
+                  )}
                   
                   </div>
 
@@ -91,12 +97,15 @@ const county = [
                       <div className="input-group mb-3">
                         <input type="text" name="addrLine1" onChange={handleChange}  value={values.addrLine1}  className="form-control" placeholder="Enter Producer Email" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
                       </div>
+                      {errors.addrLine1 && (
+                    <p className="message">{errors.addrLine1}</p>
+                  )}
                     </div>
                   </div>
   
                   <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">Address Line 2<span className="red">*</span></label>
+                      <label htmlFor="Submission" n className="form-label">Address Line 2<span className="red"></span></label>
                       <div className="input-group mb-3">
                         <input type="text" name="addrLine2"  onChange={handleChange} value={values.addrLine2} className="form-control" placeholder="Enter producer phone" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
@@ -121,7 +130,9 @@ const county = [
                     <option value="1">India</option>
                     <option value="2">USA</option>
                   </select>
-                  
+                  {errors.countryId && (
+                    <p className="message">{errors.countryId}</p>
+                  )}
                   </div>
                 
                 </div>
@@ -145,7 +156,9 @@ const county = [
                     <option value="1">Kerala</option>
                     <option value="2">TamilNadu</option>
                   </select>
-                  
+                  {errors.stateId && (
+                    <p className="message">{errors.stateId}</p>
+                  )}
                   </div>
                 
                 </div>
@@ -169,6 +182,9 @@ const county = [
                     <option value="1">Ernamkulam</option>
                     <option value="2">Trissur</option>
                   </select>
+                  {errors.countyId && (
+                    <p className="message">{errors.countyId}</p>
+                  )}
                   
                   </div>
                 
@@ -180,6 +196,8 @@ const county = [
                       <div className="input-group mb-3">
                         <input type="text" name="zip"  onChange={handleChange} value={values.zip} className="form-control" placeholder="Enter agencyId" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
+                  {errors.zip && <p className="message">{errors.zip}</p>}
+
                     </div>
                   </div>
 
@@ -188,8 +206,12 @@ const county = [
                   
                   <div className="col-12 mt-4">
                   <input type="submit"  className="next-pre-btn mrg-r-3"   value="Update" />
-                   
-                    <Link to="/listagent"> <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link>
+
+ 
+                                               <Link    to={{
+                                                pathname:`/editproducer/${addID[1]}`,
+
+                                              }}><button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link> 
 
                   </div>
                 </div>

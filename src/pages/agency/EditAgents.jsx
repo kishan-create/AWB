@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import EditAgentfunctions from '../../pages/agency/Functions/Editagentfunctions'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
+import Agency_Validation from '../validations/Agency_Validation'
 
 export default function Editagents() {
   const params=useParams();
 
   const {
-    handlePasswordChange,passwordType,passwordInput,togglePassword,values,handleChange,updateagents
+    handlePasswordChange,passwordType,passwordInput,togglePassword,values,handleChange,updateagents, errors
     
-  } = EditAgentfunctions(params.id);
+  } = EditAgentfunctions(params.id, Agency_Validation);
 
   
   return (
@@ -39,6 +40,8 @@ export default function Editagents() {
                       <div className="input-group mb-3">
                         <input type="text" name="agencyName" value={values.agencyName} onChange={handleChange} className="form-control" placeholder="Enter Agency Name" aria-label="Enter Producer Name" aria-describedby="basic-addon1" />
                       </div>
+                       {errors.agencyName && (<p className="message">{errors.agencyName}</p>)}
+
                     </div>
                   </div>
                   <div className="row gx-2 gy-2">
@@ -47,6 +50,8 @@ export default function Editagents() {
                       <div className="input-group mb-3">
                         <input type="text" name="agencyNpn" onChange={handleChange}  value={values.agencyNpn}  className="form-control" placeholder="Enter Producer Email" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
                       </div>
+                       {errors.agencyNpn && (<p className="message">{errors.agencyNpn}</p>)}
+
                     </div>
                   </div>
   
@@ -56,6 +61,8 @@ export default function Editagents() {
                       <div className="input-group mb-3">
                         <input type="text" name="agencyFbin"  onChange={handleChange} value={values.agencyFbin} className="form-control" placeholder="Enter producer phone" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
+                       {errors.agencyFbin && (<p className="message">{errors.agencyFbin}</p>)}
+
                     </div>
                   </div>
 {/* 

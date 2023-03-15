@@ -4,15 +4,23 @@ import axios from "axios";
 import swal from "sweetalert";
 import { ContentCopy } from '@mui/icons-material';
 
-const Editgroupfunction = (id) =>{
+const Editgroupfunction = (id, usergroup_validation) =>{
   const [values, SetValues] = useState({ 
   userGroupName: "", 
   userGroupDesc: "",
   userGroupCode: "",  
  });
    
-    const [submitted, setSubmitted] = useState(false);
-const [errors, setErrors] = useState({});
+ const [submitted, setSubmitted] = useState(false);
+ const [errors, setErrors] = useState({});
+useEffect(() => {
+
+
+ if (Object.keys(errors).length === 0 && submitted) {
+   onSubmitform();
+ }
+
+}, [errors]);
 const [rows, setUserrows] = useState([]);
 
 
@@ -26,13 +34,13 @@ const [rows, setUserrows] = useState([]);
    };
    
    
- const handleEdit =(e) =>{
+//  const handleEdit =(e) =>{
   
-    e.preventDefault(); 
+//     e.preventDefault(); 
  
-    setSubmitted(true); 
+//     setSubmitted(true); 
    
- }
+//  }
 
  useEffect(() => {
   getGroupsbyID();
@@ -40,30 +48,59 @@ const [rows, setUserrows] = useState([]);
 
    }, []);
 
-
-
-   const updateusergroup = async () => {
    
-  const res = await axios.put(
-      process.env.REACT_APP_API_ADMIN_URL+`/usergroup/${id}`,
-          values
-    )
-    .then((responseuser) =>
-     {
- if (responseuser.status === 200)
-       {
+const updateusergroup = async (e) => {
+  e.preventDefault();
+  const test = setErrors(usergroup_validation(values));
+  setSubmitted(true);
 
-      swal({
-        title: "",
-        text: "User Group Updated successfully",
-        icon: "success",
-        button: "ok",
-      });
-    }
-  }
-  );
 };
+
+
+
+//    const updateusergroup = async () => {
+   
+//   const res = await axios.put(
+//       process.env.REACT_APP_API_ADMIN_URL+`/usergroup/${id}`,
+//           values
+//     )
+//     .then((responseuser) =>
+//      {
+//  if (responseuser.status === 200)
+//        {
+
+//       swal({
+//         title: "",
+//         text: "User Group Updated successfully",
+//         icon: "success",
+//         button: "ok",
+//       });
+//     }
+//   }
+//   );
+// };
     
+
+const onSubmitform = (e) => {
+  const res =  axios.put(
+      process.env.REACT_APP_API_ADMIN_URL+`/usergroup/${id}`,
+    values)
+    .then((responseuser) => {
+
+      if (responseuser.status === 200) {
+
+       
+        swal({
+          title: "",
+          text: "User Group Updated successfully",
+          icon: "success",
+          button: "ok",
+        });
+       
+      }
+    })
+   
+};
 
 
 const getGroupsbyID =async() =>
@@ -97,7 +134,7 @@ if (response.status === 200) {
 
 
 
-return{handleChange,values,handleEdit,rows,updateusergroup};
+return{handleChange,values,rows,updateusergroup, errors};
 
 }
 
