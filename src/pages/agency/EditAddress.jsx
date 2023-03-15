@@ -5,15 +5,17 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import EditAgentfunctions from '../../pages/agency/Functions/Editagentfunctions'
 import EditAddressFunctions from './EditAddressFunctions'
+import MultipleAddressValidation from '../validations/Edit_Address_validation'
+
 import { useParams } from 'react-router-dom';
 
 export default function EditAddress() {
   const params=useParams();
 
   const {
-    handleChange,values,handleEdit,updateAddress
+    handleChange,values,handleEdit,updateAddress, errors
     
-  } = EditAddressFunctions(params.id);
+  } = EditAddressFunctions(params.id,MultipleAddressValidation);
 
 const id =params.id;
 
@@ -91,6 +93,9 @@ const county = [
                       <div className="input-group mb-3">
                         <input type="text" name="addrLine1" onChange={handleChange}  value={values.addrLine1}  className="form-control" placeholder="Enter Producer Email" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
                       </div>
+                      {errors.addrLine1 && (
+                    <p className="message">{errors.addrLine1}</p>
+                  )}
                     </div>
                   </div>
   
@@ -180,6 +185,8 @@ const county = [
                       <div className="input-group mb-3">
                         <input type="text" name="zip"  onChange={handleChange} value={values.zip} className="form-control" placeholder="Enter agencyId" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
+                  {errors.zip && <p className="message">{errors.zip}</p>}
+
                     </div>
                   </div>
 

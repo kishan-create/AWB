@@ -20,6 +20,7 @@ const Edituserfunctions = (id, edit_user_validation) => {
     // password: "",
     userFullName: "",
   });
+  const navigate = useNavigate();
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitted) {
       onSubmitform();
@@ -31,7 +32,6 @@ const Edituserfunctions = (id, edit_user_validation) => {
     getUsersbyID(id);
 
   }, [])
-  const navigate = useNavigate();
 
   const handlePasswordChange = (evnt) => {
     setPasswordInput(evnt.target.value);

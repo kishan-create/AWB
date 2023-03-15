@@ -48,7 +48,7 @@ export default function Editagents() {
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label">Agency Npn <span className="red">*</span></label>
                       <div className="input-group mb-3">
-                        <input type="text" name="agencyNpn" onChange={handleChange}  value={values.agencyNpn}  className="form-control" placeholder="Enter Producer Email" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
+                        <input type="text" name="agencyNpn" onChange={handleChange}  value={values.agencyNpn}  className="form-control" placeholder="Enter Agency Npn" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
                       </div>
                        {errors.agencyNpn && (<p className="message">{errors.agencyNpn}</p>)}
 
@@ -59,7 +59,7 @@ export default function Editagents() {
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" n className="form-label">Agency Fbin<span className="red">*</span></label>
                       <div className="input-group mb-3">
-                        <input type="text" name="agencyFbin"  onChange={handleChange} value={values.agencyFbin} className="form-control" placeholder="Enter producer phone" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
+                        <input type="text" name="agencyFbin"  onChange={handleChange} value={values.agencyFbin} className="form-control" placeholder="Enter Agency Fbin" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
                        {errors.agencyFbin && (<p className="message">{errors.agencyFbin}</p>)}
 

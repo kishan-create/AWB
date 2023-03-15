@@ -82,7 +82,7 @@ export default function Addagency() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Agency Name"
+                            placeholder="Enter Agency Name"
                             name="agencyName"
                             onChange={handleChange}
                             aria-label="Date of Submission"
@@ -100,7 +100,7 @@ export default function Addagency() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Agency Npn"
+                            placeholder="Enter Agency Npn"
                             name="agencyNpn"
                             onChange={handleChange}
                             aria-label="Date of Submission"
@@ -118,7 +118,7 @@ export default function Addagency() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Agency Fbin"
+                            placeholder="Enter Agency Fbin"
                             name="agencyFbin"
                             onChange={handleChange}
                             aria-label="Date of Submission"

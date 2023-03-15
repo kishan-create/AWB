@@ -43,7 +43,7 @@ return (
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label"> Email <span className="red">*</span></label>
                       <div className="input-group mb-3">
-                     <input type="email" name="producerEmail" onChange={handleChange} value={values.producerEmail}  className="form-control" placeholder="Enter Agent Email" aria-label="Enter Agent Email" aria-describedby="basic-addon1" />
+                     <input type="text" name="producerEmail" onChange={handleChange} value={values.producerEmail}  className="form-control" placeholder="Enter Agent Email" aria-label="Enter Agent Email" aria-describedby="basic-addon1" />
                       </div>
                        {errors.producerEmail && (<p className="message">{errors.producerEmail}</p>)}
 

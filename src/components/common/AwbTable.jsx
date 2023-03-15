@@ -234,7 +234,7 @@ export default function AwbTable(props) {
                           )
                         )}
                         <TableCell>
-                          <Link
+                          <Link 
                             to={{
                               pathname: `/edit${props.tableRow}/${
                                 row[props.id]
@@ -242,6 +242,7 @@ export default function AwbTable(props) {
 
                               data: row[props.id], // your data array of objects
                             }}
+                            title="Edit"
                           >
                             <EditIcon />
                           </Link>
@@ -249,6 +250,7 @@ export default function AwbTable(props) {
                             onClick={(e) => {
                               Rowdelete(e, row[props.id]);
                             }}
+                            title="Delete"
                           >
                             <DeleteIcon />
                           </Link>

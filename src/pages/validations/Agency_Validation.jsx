@@ -1,4 +1,6 @@
 import React from "react";
+var fbinregex = /^[0-9.-]*$/;
+
 
 export default function Agency_Validation(values) {
   let errors = {};
@@ -11,6 +13,9 @@ export default function Agency_Validation(values) {
   if (!values.agencyFbin.trim()) {
     errors.agencyFbin = "Agency Fbin   Required";
   }
+  else if (!fbinregex.test(values.agencyFbin)) { 
+    errors.agencyFbin = "Invalid Agency Fbin ";
+   }
 
   return errors;
 }

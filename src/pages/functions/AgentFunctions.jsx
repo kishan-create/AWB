@@ -35,7 +35,7 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    const test = setErrors(+(values));
+    const test = setErrors(Agent_validation(values));
     setIsSubmitting(true);
   };
 

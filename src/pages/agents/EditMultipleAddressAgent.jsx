@@ -242,14 +242,14 @@ const agencyID = params.id
                 <div className="">
                   <label htmlFor="Submission" className="form-label">
                     {" "}
-                    Address line 2<span className="red">*</span>
+                    Address line 2<span className="red"></span>
                   </label>
                   <div className="input-group ">
                     <input
                       type="text"
                       name="addrLine2"
                       className="form-control"
-                      placeholder="Address line 2"
+                      placeholder="Enter Address line 2"
                       aria-label="Enter Insured Name"
                       aria-describedby="basic-addon1"
                       onChange={(evnt) => handleChange(btnCount, evnt)}
@@ -316,14 +316,14 @@ const agencyID = params.id
 
                 <div className="">
                   <label htmlFor="Submission" className="form-label">
-                    Zip <span className="red">*</span>
+                    ZIP Code <span className="red">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       name="zip"
                       className="form-control"
-                      placeholder="zip"
+                      placeholder="Enter ZIP Code"
                       aria-label="Date of Submission"
                       aria-describedby="basic-addon1"
                       onChange={(evnt) => handleChange(btnCount, evnt)}

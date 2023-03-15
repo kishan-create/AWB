@@ -13,7 +13,7 @@ export default function Agent_validation(values) {
 
 
 
-  if (!values.producerPhone.trim()) { errors.producerPhone = "User phone number required"; }
+  if (!values.producerPhone.trim()) { errors.producerPhone = "Agent phone number required"; }
   else if (!numregex.test(values.producerPhone)) { errors.producerPhone = "Invalid Phone Number"; }
 
 
@@ -22,7 +22,7 @@ export default function Agent_validation(values) {
 
 
   if (!values.producerEmail.trim()) {
-    errors.producerEmail = "Email required";
+    errors.producerEmail = "Agent Email required";
   }
   else if (!emailregex.test(values.producerEmail)) {
     errors.producerEmail = "Invalid Email Address"

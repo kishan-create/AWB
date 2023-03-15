@@ -25,6 +25,9 @@ import axios from "axios";
 import swal from "sweetalert";
 import EditMultipleAddress from "../../pages/agency/EditMultipleAddress";
 
+// import EditMultipleAddress from "../../pages/agents/EditMultipleAddressAgent";
+import Multiplefileupload from "./../../components/common/Multiplefileupload";
+import { useParams } from 'react-router-dom';
 const {
   descendingComparator,
   getComparator,
@@ -87,15 +90,18 @@ export default function AwbTableChild(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { rows, columns, getRows,getAgencyAddress } = AwbTableFunctions(props);
+  const { rows, columns, getRows, getAgencyAddress } = AwbTableFunctions(props);
   const [adressData, setAddressData] = React.useState([]);
   const [listadd, SetListadd] = React.useState([]);
+  const [isHalfShown, setIsHalfShown] = React.useState(false);
+  const [seen, setSeen] = React.useState([]);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
+  const params = useParams();
+  const test = params.id
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelected = rows.map((n) => n.name);
@@ -140,12 +146,42 @@ export default function AwbTableChild(props) {
   const getData = (data) => {
     setAddressData(data);
   };
-  const getAddressDataLatest=(listaddress) =>
-  {
+  const getAddressDataLatest = (listaddress) => {
     SetListadd(listaddress);
-  }
- 
- 
+  };
+  const handleChangeFileUploads = (data) => {
+    setSeen(data);
+  };
+  const submitFiles = (test) => {
+    let formData = new FormData();
+
+    seen.map((file) => {
+      formData.append("documents", file);
+    });
+    formData.append("docOrginTypeId", test);
+    formData.append("docOrginType", "AGENCY");
+    formData.append("docCategoryId", 7);
+    formData.append("docSubCategoryId", 9);
+
+    const response = axios
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
+      .then((response) => {
+        if (response.status === 200) {
+          swal({
+            title: "",
+            text: "Document Added successfully",
+            icon: "success",
+            button: "ok",
+          });
+        }
+        getRows();
+       // getAgencyAddress(test);
+      });
+  };
+
+  const handleButtonClick = () => {
+    setIsHalfShown(!isHalfShown);
+  };
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -182,113 +218,191 @@ export default function AwbTableChild(props) {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+    <div>
+      <Box sx={{ width: "100%" }}>
+        <Paper sx={{ width: "100%", mb: 2 }}>
+          <EnhancedTableToolbar numSelected={selected.length} />
 
-        <h4 class="add-headd-sub1 fl-left">{props.displayName}</h4>
-        {(() => {
-          if (props.displayName === "Address") {
-            return (
+          <h4 class="add-headd-sub1 fl-left">{props.displayName}</h4>
+          {(() => {
+            if (props.displayName === "Address") {
+              return (
                 <EditMultipleAddress
-                agencyID = {props.paramid}
+                  agencyID={props.paramid}
                   addressData={getData}
                   latestAddress={getAddressDataLatest}
                   method={getRows}
                 />
-            );
-          } else {
-            return (
-              <Link to="">
-                <button type="button" class="next-pre-btn mrg-r-3 fl-right">
-                  + Add {props.displayName}
-                </button>
-              </Link>
-            );
-          }
-        })()}
+              );
+            } else if (props.displayName === "Documents") {
+              return (
+                <Link to="">
+                  <button
+                    type="button"
+                    to="upfile"
+                    onClick={handleButtonClick}
+                    class="next-pre-btn mrg-r-3 fl-right"
+                  >
+                    + Add {props.displayName}
+                  </button>
+                </Link>
+              );
+            } else {
+              return (
+                <Link to="">
+                  <button type="button" class="next-pre-btn mrg-r-3 fl-right">
+                    + Add {props.displayName}
+                  </button>
+                </Link>
+              );
+            }
+          })()}
 
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-              headercells={columns}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? "small" : "medium"}
+            >
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+                headercells={columns}
+              />
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row.name);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <React.Fragment key={index}>
-                      <TableRow>
-                        {columns.map((column, ckey) =>
-                          column.isFieldDisplay == "N" ? (
-                            <TableCell></TableCell>
-                          ) : (
-                            <TableCell key={ckey}>
-                              {row[column.fieldName]}
-                            </TableCell>
-                          )
-                        )}
-                        <TableCell>
-                          <Link
-                            to={{
-                              pathname: `/edit${props.tableRow}/${
-                                row[props.id]
-                              }`,
+                    return (
+                      <React.Fragment key={index}>
+                        <TableRow>
+                          {columns.map((column, ckey) =>
+                            column.isFieldDisplay == "N" ? (
+                              <TableCell></TableCell>
+                            ) : (
+                              <TableCell key={ckey}>
+                                {row[column.fieldName]}
+                              </TableCell>
+                            )
+                          )}
+                          <TableCell>
+                            {(() => {
+                              if (props.displayName === "Address") {
+                                return (
+                                  <Link
+                                    to={{
+                                      pathname: `/editaddress/${row[props.id]}`,
 
-                              data: row[props.id], // your data array of objects
-                            }}
-                          >
-                            <EditIcon />
-                          </Link>
-                          <Link
-                            onClick={(e) => {
-                              Rowdelete(e, row[props.id]);
-                            }}
-                          >
-                            <DeleteIcon />
-                          </Link>
-                        </TableCell>
-                      </TableRow>
-                    </React.Fragment>
-                  );
-                })}
+                                      data: row[props.id], // your data array of objects
+                                    }}
+                                  >
+                                    <EditIcon />
+                                  </Link>
+                                );
+                              }
+                            })()}
+                            <Link
+                              onClick={(e) => {
+                                Rowdelete(e, row[props.id]);
+                              }}
+                            >
+                              <DeleteIcon />
+                            </Link>
+                          </TableCell>
+                        </TableRow>
+                      </React.Fragment>
+                    );
+                  })}
 
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Box>
+      {isHalfShown ? (
+        <div id="upfile" className="app-card-body p-2 p-lg-4">
+          <div className="app-wrapper ">
+            <div className="app-content pt-2 p-md-2">
+              <div className="container-fluid">
+                <div
+                  className="app-card alert alert-dismissible shadow-sm mb-4"
+                  role="alert"
                 >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                  <div className="inner">
+                    <div className="app-card-body p-2 p-lg-4">
+                      <div className="row gx-2 gy-2 btn-link-brd add-btn-mob">
+                        <div className="app-card-body p-2 p-lg-4">
+                          <h4 className="add-headd-sub">Upload Files</h4>
+
+                          <div className="page-grid-2 p-tb-50">
+                            <div className="choose-file-sty">
+                              <Multiplefileupload
+                                handleChangeFileUploads={
+                                  handleChangeFileUploads
+                                }
+                              />
+                            </div>
+                            <div>
+                              <div className="upload-righ-icon"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="app-card-body p-2 p-lg-4">
+              <div className="col-12 mt-4">
+                <button
+                  onClick={() => {
+                    submitFiles(test);
+                  }}
+                  type="button"
+                  className="next-pre-btn mrg-r-3"
+                >
+                  Save
+                </button>
+
+                <Link to="/listagency">
+                  <button
+                    type="button"
+                    className="next-pre-btn-secondary mrg-r-3"
+                  >
+                    Cancel
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </div>
   );
 }

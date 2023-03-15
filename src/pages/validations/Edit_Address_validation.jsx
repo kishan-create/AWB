@@ -13,10 +13,10 @@ export default function MultipleAddressValidation(values) {
 
  
   if (!values.zip.trim()) {
-    errors.zip = "Zipcode Required";
+    errors.zip = "ZIP Code Required";
   }
   else if (!zipregex.test(values.zip)) { 
-    errors.zip = "Invalid Zip code";
+    errors.zip = "Invalid ZIP Code";
    }
 
 

@@ -94,7 +94,7 @@ const onSubmitform = (e) => {
           title: "",
           text: "User Group Updated successfully",
           icon: "success",
-          button: "ok",
+          button: "OK",
         });
        
       }
