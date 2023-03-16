@@ -294,11 +294,12 @@ export default function AwbTableChild(props) {
                           )}
                           <TableCell>
                             {(() => {
-                              if (props.displayName === "Address") {
+                              if (props.displayName === "Agent Address") {
                                 return (
+                                  
                                   <Link
                                     to={{
-                                      pathname: `/editaddress/${row[props.id]}`,
+                                          pathname: `/editaddress/${row[props.id]}/${params.id}/agent`,
 
                                       data: row[props.id], // your data array of objects
                                     }}
@@ -307,6 +308,22 @@ export default function AwbTableChild(props) {
                                   </Link>
                                 );
                               }
+
+                              else   {
+                                return (
+                                  
+                                  <Link
+                                    to={{
+                                          pathname: `/editaddress/${row[props.id]}/${params.id}/agency`,
+
+                                      data: row[props.id], // your data array of objects
+                                    }}
+                                  >
+                                    <EditIcon />
+                                  </Link>
+                                );
+                              }
+
                             })()}
                             <Link
                               onClick={(e) => {

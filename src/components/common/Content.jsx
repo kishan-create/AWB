@@ -48,13 +48,14 @@ function Content() {
   <Route path="/editproducer/:id" exact={true} element={<ListAgentData />} />
   <Route path="/producer" exact={true} element={<Addagent />} />
   <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
-  <Route path="/togroup/:id" exact={true} element={<AddUserstogroup/>}/>
+ 
   <Route path="/agency" exact={true} element={<Addagency/>}/>
   <Route path="/listagency" exact={true} element={<ListAgency />} />
   <Route path="/listagentheaddata/:id" exact={true} element={<ListAgentsData />}/>
   <Route path="/editusergroup/:id" exact={true} element={<AddUserstogroup />} />
   <Route path="/listagent" exact={true} element={<ListAgent />} />
-  <Route path="/editaddress/:id" exact={true} element={<EditAddress />} />
+  {/* <Route path="/editaddress/:id" exact={true} element={<EditAddress />} /> */}
+  <Route path="/editaddress/:id/:type/:url" exact={true} element={<EditAddress />} />
   {/* <Route path="/listdata/:id" exact={true} element={<ListAgentData />} /> */}
   <Route path="/editagentaddress/:id" exact={true} element={<EditAgentAddress />} />
   <Route path="/document" exact={true} element={<ListDocument />} />

@@ -254,14 +254,15 @@ const county = [
                               <TableCell align="right">
                                 {row.addrLine2}
                               </TableCell>
+                            
+                              <TableCell align="left">
+                               {row.countryId}
+                              </TableCell>
+                              <TableCell align="left">
+                                 { row.stateId}
+                              </TableCell>
                               <TableCell align="right">
-                              {country[row.countryId - 1].name}
-                              </TableCell>
-                              <TableCell align="left">
-                              {state[row.stateId - 1].name}
-                              </TableCell>
-                              <TableCell align="left">
-                              {county[row.countyId - 1].name}
+                              {row.countyId}
                               </TableCell>
                               <TableCell align="left">
                                 {row.zip}

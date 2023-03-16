@@ -4,6 +4,7 @@ var zipregex = /^[0-9.-]*$/;
 
 export default function MultipleAddressValidation(values) {
   let errors = {};
+  console.log(values);
 
   
   if (!values.addrLine1.trim()) {
@@ -18,6 +19,17 @@ export default function MultipleAddressValidation(values) {
   else if (!zipregex.test(values.zip)) { 
     errors.zip = "Invalid ZIP Code";
    }
+
+   if (values.countryId === "") {
+    errors.countryId = "Country Required";
+  }
+
+   if (values.stateId === "") {
+    errors.stateId = "State  Required";
+  }
+  if (values.countyId ==="") {
+    errors.countyId = "County  Required";
+  }
 
 
   
