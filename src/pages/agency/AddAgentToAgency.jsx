@@ -175,7 +175,7 @@ const AgentToagency = async (e, data, AgentId, reseMethod) => {
       if (response.status === 200) {
         swal({
           title: "",
-          text: "User Added successfully",
+          text: "Agent Added successfully",
           icon: "success",
           button: "ok",
         });
@@ -194,9 +194,6 @@ export default function AddAgentToAgency(props) {
   const [rowsCheck, SetRowsCheck] = React.useState([]);
 
   const [rows, setAgentrows] = useState([]);
-  // useEffect(() => {
-  //   getAgents(id.id);
-  // }, []);
 
 
   useEffect(() => {
