@@ -96,7 +96,7 @@ const county = [
                   title: "",
                   text: " Record deleted successfully",
                   icon: "success",
-                  button: "ok",
+                  button: "OK",
                 });
               }
               RemoveAddress(index);

@@ -237,7 +237,7 @@ export default function TemplateFullTable() {
                 title: "",
                 text: " Record deleted successfully",
                 icon: "success",
-                button: "ok",
+                button: "OK",
               });
             }
           });
@@ -290,7 +290,7 @@ export default function TemplateFullTable() {
             title: "",
             text: "Document Added successfully",
             icon: "success",
-            button: "ok",
+            button: "OK",
           });
         }
         getDocumentAddress(test);

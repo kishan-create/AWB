@@ -81,42 +81,22 @@ const Edituserfunctions = (id,registeration_validation) => {
     setSubmitted(true);
   
   };
-  const onSubmitform = (e) => {
-    const response = axios
-      .post(process.env.REACT_APP_API_ADMIN_URL + "/user", values)
-      .then((responseuser) => {
- 
-        if (responseuser.status === 200) {
-          SetValues({
-            userName: "",
-            userEmail: "",
-            userPhone: "",
-            password: "",
-            userFullName: "",
-          });
-          swal({
-            title: "",
-            text: "User Added successfully",
-            icon: "success",
-            button: "ok",
-          }).then(() => {
-            // Redirect to another page using history.push
-            navigate("/userlist", { replace: true });
-          });;;
-         
-        }
-      })
-      .catch(function (error) {
-        let dupmsg = error.response.data.apierror.message;
-
-        if (
-          error.response.data.apierror.message ===
-          "Duplicate entry found with same user email id."
-        ) {
-          setErrors({ ...errors, userEmail: "Email already exist" });
-        
-        }
+  const onSubmitform = async () => {
+    const res = await axios.put(
+      process.env.REACT_APP_API_ADMIN_URL + `/user/${id}`,
+      values);
+    if (res.status == 200) {
+      swal({
+        title: "",
+        text: "User Edited successfully",
+        icon: "success",
+        button: "ok",
+      }).then(() => {
+        navigate("/userlist", { replace: true });
       });
+
+
+    }
   };
 
   return {

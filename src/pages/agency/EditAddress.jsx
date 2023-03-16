@@ -214,7 +214,7 @@ const county = [
 
                   <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">Zipcode<span className="red">*</span></label>
+                      <label htmlFor="Submission" n className="form-label">ZIP Code<span className="red">*</span></label>
                       <div className="input-group mb-3">
                         <input type="text" name="zip"  onChange={handleChange} value={values.zip} className="form-control" placeholder="Enter ZIP Code" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>

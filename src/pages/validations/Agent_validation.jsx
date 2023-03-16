@@ -13,8 +13,11 @@ export default function Agent_validation(values) {
 
 
 
-  if (!values.producerPhone.trim()) { errors.producerPhone = "Agent phone number required"; }
-  else if (!numregex.test(values.producerPhone)) { errors.producerPhone = "Invalid Phone Number"; }
+  if (!values.producerPhone.trim()) 
+  { errors.producerPhone = "Agent phone number required"; }
+
+  else if (!numregex.test(values.producerPhone))
+   { errors.producerPhone = "Invalid Phone Number"; }
 
 
 

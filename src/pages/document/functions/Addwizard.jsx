@@ -58,7 +58,7 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
             title: "",
             text: "Document Added successfully",
             icon: "success",
-            button: "ok",
+            button: "OK",
           });
         }
       

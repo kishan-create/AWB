@@ -26,6 +26,9 @@ export default function registeration_validation(values) {
   if (!values.userPhone.trim()) {
     errors.userPhone = "User phone number required";
   }
+  else if (!numregex.test(values.userPhone))
+   { errors.userPhone = "Invalid Phone Number"; }
+  
 
   return errors;
 }

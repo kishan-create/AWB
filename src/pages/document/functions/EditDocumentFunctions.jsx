@@ -98,7 +98,7 @@ const id=params.id
         title: "",
         text: "Document Updated successfully",
         icon: "success",
-        button: "ok",
+        button: "OK",
       });
     }
   };
