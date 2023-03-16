@@ -117,10 +117,9 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title=" Group">
+        <Tooltip title=" Remove User from User group">
           <IconButton
             onClick={(e) => {
-              if (window.confirm("Are you sure you wish to delete this item?"))
                 DeleteUsers(e, data, props.getGroupID, props.resetCheckbox);
             }}
           >
@@ -142,13 +141,52 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
+// const DeleteUsers = async (e, data, groupID, reseMethod) => {
+//   e.preventDefault();
+//   let dataID = data[0];
+
+//   const thisclickrow = e.currentTarget;
+
+//   const response = await axios
+//     .delete(
+//       process.env.REACT_APP_API_ADMIN_URL +
+//         `/usergroup/${groupID}/groupmembers`,
+//       { data: dataID }
+//     )
+//     .then((response) => {
+//       // thisclickrow.closest("tr").remove();
+//       if (response.status === 200) {
+//         reseMethod();
+//         swal({
+//           title: "",
+//           text: " Record deleted successfully",
+//           icon: "success",
+//           button: "ok",
+//         });
+//       }
+//     });
+// };
+
 const DeleteUsers = async (e, data, groupID, reseMethod) => {
   e.preventDefault();
   let dataID = data[0];
-
   const thisclickrow = e.currentTarget;
 
-  const response = await axios
+
+  swal({
+    title: "Are you sure",
+    text: "You want to delete this Entry?",
+    type: "warning",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#2e4153",
+    confirmButtonText: "Yes",
+    closeOnConfirm: false,
+    buttons: true,
+    buttons: ["No", "Yes"],
+  }).then((willDelete) => {
+    if (willDelete) {
+      const response =  axios
     .delete(
       process.env.REACT_APP_API_ADMIN_URL +
         `/usergroup/${groupID}/groupmembers`,
@@ -166,6 +204,8 @@ const DeleteUsers = async (e, data, groupID, reseMethod) => {
         });
       }
     });
+    }
+  });
 };
 export default function ViewGroupDetails(props) {
   const { id } = useParams();

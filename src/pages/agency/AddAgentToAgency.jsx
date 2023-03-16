@@ -75,11 +75,10 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Add">
+        <Tooltip title="Add Agents to Agency">
           <IconButton
           
           onClick={(e) => {
-            if (window.confirm("Are you sure you wish to add this item?"))
               AgentToagency(e, data, props.AgentId, props.resetCheckbox);
           }}>
           
@@ -149,8 +148,43 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const AgentToagency = async (e, data, AgentId, reseMethod) => {
+// const AgentToagency = async (e, data, AgentId, reseMethod) => {
 
+  
+//   var Groupid = AgentId;
+  
+//   var gmembers = data[0];
+  
+
+//   const userData = {
+//     Groupid: Groupid,
+//     groupmembers: data[0],
+//   };
+
+
+//   const response = axios
+//     .put(
+//       process.env.REACT_APP_API_SERVICE_URL +
+//         `/agency/${Groupid}/agents`,gmembers
+
+
+//     )
+//     .then((response) => {
+//       reseMethod();
+//       if (response.status === 200) {
+//         swal({
+//           title: "",
+//           text: "Agent Added successfully",
+//           icon: "success",
+//           button: "ok",
+//         });
+//       }
+//     });
+// };
+
+
+
+const AgentToagency = async (e, data, AgentId, reseMethod) => {
   
   var Groupid = AgentId;
   
@@ -163,24 +197,38 @@ const AgentToagency = async (e, data, AgentId, reseMethod) => {
   };
 
 
-  const response = axios
-    .put(
-      process.env.REACT_APP_API_SERVICE_URL +
-        `/agency/${Groupid}/agents`,gmembers
-
-
-    )
-    .then((response) => {
-      reseMethod();
-      if (response.status === 200) {
-        swal({
-          title: "",
-          text: "Agent Added successfully",
-          icon: "success",
-          button: "ok",
-        });
-      }
-    });
+  swal({
+    title: "Are you sure ",
+    text: "you wish to add this item?",
+   
+    showCancelButton: true,
+    confirmButtonColor: "#2e4153",
+    confirmButtonText: "Yes",
+    closeOnConfirm: false,
+    buttons: true,
+    buttons: ["No", "Yes"],
+  }).then((willDelete) => {
+    if (willDelete) {
+      const response = axios
+      .put(
+        process.env.REACT_APP_API_SERVICE_URL +
+          `/agency/${Groupid}/agents`,gmembers
+  
+  
+      )
+      .then((response) => {
+        reseMethod();
+        if (response.status === 200) {
+          swal({
+            title: "",
+            text: "Agent Added successfully",
+            icon: "success",
+            button: "ok",
+          });
+        }
+      });
+    }
+  });
 };
 export default function AddAgentToAgency(props) {
   const id = useParams();
