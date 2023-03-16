@@ -20,18 +20,20 @@ export default function Addagency() {
   const [adressData, setAddressData] = useState([]);
   const [fileData, setFileData] = useState([]);
   const [listadd, SetListadd] = useState([]);
-  const { handleChange, handleSubmit, values,errors } = AgencyFunctions(
+  const { handleChange, handleSubmit, values,errors,DeleteAddress } = AgencyFunctions(
     Agency_Validation,
     adressData,
     fileData,
     listadd
   );
   const getData = (data) => {
+    console.log(data);
     setAddressData(data);
   };
-  const RemoveAddress = (index) => {
+  const RemoveAddress = (index,addrid) => {
     const rows = [...adressData];
     rows.splice(index, 1);
+    DeleteAddress(addrid);
     setAddressData(rows);
   };
 
@@ -212,7 +214,7 @@ export default function Addagency() {
                                           "Are you sure you wish to delete this item?"
                                         )
                                       )
-                                        RemoveAddress(index);
+                                        RemoveAddress(index,row.addressId);
                                     }}
                                   />
                                 </TableCell>

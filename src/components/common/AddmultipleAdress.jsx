@@ -57,8 +57,7 @@ export default function AddmultipleAdress(props) {
       stateId: selectedState,
       countyId: "",
       zip: "",
-      addrId:"",
-      
+      addressId:""
     },
   ]);
 
@@ -75,9 +74,8 @@ export default function AddmultipleAdress(props) {
     }
     //  getAllCountryName();
     props.latestAddress(listaddress);
-  }, [listaddress, errors, inputFields]);
-
-  
+    
+  }, [listaddress, errors]);
   const getAllCountryName = async () => {
     const response = http.get("/lookupdata/2").then((response) => {
       if (response.status === 200) {
@@ -128,10 +126,11 @@ export default function AddmultipleAdress(props) {
             stateId: response.data.stateId,
             countyId: "",
             zip: "",
-            addrId:response.data.addrId,
-
+            addressId:response.data.addrId
           };
+          inputs.addressId=response.data.addrId;
           setInputFields((prevState) => [...prevState, data]);
+        
           setbtnCount(btnCount + 1);
           props.addressData(inputFields);
           SetlistAddress([
