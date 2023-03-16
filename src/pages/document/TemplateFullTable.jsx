@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useRef, useState, useEffect } from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
 import "react-tabs/style/react-tabs.css";
 import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,26 +12,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+
 import Paper from "@mui/material/Paper";
-import Checkbox, { checkboxClasses } from "@mui/material/Checkbox";
-import PreviewIcon from "@mui/icons-material/Preview";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import EditIcon from "@mui/icons-material/Edit";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CircleIcon from "@mui/icons-material/Circle";
+
 import insurnnew from "../../images/insurancenew.svg";
 import ReactQuill from "react-quill";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+
 
 import { Link } from "react-router-dom";
 
@@ -39,7 +27,7 @@ import Tabledata from "../../components/common/Tabledata";
 import axios from "axios";
 
 import { useParams } from "react-router-dom";
-import { LoyaltyRounded } from "@mui/icons-material";
+
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -72,7 +60,7 @@ function EnhancedTableHead(props) {
           <div className="form-check"></div>
         </TableCell>
         <TableCell>Template Name</TableCell>
-        <TableCell>Template Descrioption</TableCell>
+        <TableCell>cription</TableCell>
 
         <TableCell></TableCell>
       </TableRow>
@@ -515,7 +503,8 @@ export default function TemplateFullTable() {
                     <button className="next-pre-btn  mrg-r-3" type="submit">
                       Save
                     </button>
-                    <Link to="/listdocument">
+                    <Link to="/document">
+
                       <button
                         type="button"
                         className="next-pre-btn-secondary mrg-r-3"
@@ -529,19 +518,7 @@ export default function TemplateFullTable() {
             </div>
             <div className="app-card-body p-2 p-lg-4">
               <div className="col-12 mt-4">
-                {/* <button  onClick={() => {
-                     
-                    //  submitFiles( test);
-
-                 }} type="button" className="next-pre-btn-secondary mrg-r-3">
-        Save
-      </button> */}
-
-                {/* <Link to="/listdocument">
-        <button type="button" className="next-pre-btn-secondary mrg-r-3">
-          Cancel
-                </button>
-      </Link> */}
+             
               </div>
             </div>
           </div>

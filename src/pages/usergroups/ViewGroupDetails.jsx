@@ -63,8 +63,6 @@ function EnhancedTableHead(props) {
         <TableCell>User Name</TableCell>
         <TableCell>User FullName</TableCell>
         <TableCell>User Email</TableCell>
-
-              
       </TableRow>
     </TableHead>
   );
@@ -80,11 +78,10 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  
   let { numSelected } = props;
-  
+
   const data = [props.selectRow];
-  
+
   return (
     <Toolbar
       sx={{
@@ -121,11 +118,13 @@ function EnhancedTableToolbar(props) {
 
       {numSelected > 0 ? (
         <Tooltip title=" Group">
-          <IconButton  onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) DeleteUsers(e, data, props.getGroupID,props.resetCheckbox) } }>
-        
-            <DeleteIcon
-              
-            />
+          <IconButton
+            onClick={(e) => {
+              if (window.confirm("Are you sure you wish to delete this item?"))
+                DeleteUsers(e, data, props.getGroupID, props.resetCheckbox);
+            }}
+          >
+            <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
@@ -143,30 +142,30 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-const DeleteUsers = async (e, data, groupID,reseMethod) => {
+const DeleteUsers = async (e, data, groupID, reseMethod) => {
   e.preventDefault();
-let dataID=data[0];
+  let dataID = data[0];
 
   const thisclickrow = e.currentTarget;
-  
-  const response = await axios.delete(
-    process.env.REACT_APP_API_ADMIN_URL + `/usergroup/${groupID}/groupmembers`,
-    { data:dataID }
-  ).then((response)=>{
-   // thisclickrow.closest("tr").remove();
-    if (response.status === 200) {
-      reseMethod();
-      swal({
-        title: "",
-        text: " Record deleted successfully",
-        icon: "success",
-        button: "ok",
-      });
-     
-    }
-  });
 
- 
+  const response = await axios
+    .delete(
+      process.env.REACT_APP_API_ADMIN_URL +
+        `/usergroup/${groupID}/groupmembers`,
+      { data: dataID }
+    )
+    .then((response) => {
+      // thisclickrow.closest("tr").remove();
+      if (response.status === 200) {
+        reseMethod();
+        swal({
+          title: "",
+          text: " Record deleted successfully",
+          icon: "success",
+          button: "ok",
+        });
+      }
+    });
 };
 export default function ViewGroupDetails(props) {
   const { id } = useParams();
@@ -178,6 +177,7 @@ export default function ViewGroupDetails(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rowsCheck, SetRowsCheck] = React.useState([]);
   const [active, setActive] = React.useState("First");
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -196,7 +196,6 @@ export default function ViewGroupDetails(props) {
   };
 
   const handleClick = (event, name) => {
-    // alert("hii");
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -234,20 +233,22 @@ export default function ViewGroupDetails(props) {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  const { rows,getUsers } = GroupUserFunction(id);
+  const { rows, getUsers } = GroupUserFunction(id);
 
   const handleClickAddView = () => {
     props.method(false);
   };
-  const resetCheckbox=()=>
-  {
+  const resetCheckbox = () => {
     setSelected([]);
     getUsers();
-
-  } 
+  };
   return (
     <Box sx={{ width: "100%" }}>
-      <button type="button" class="next-pre-btn mrg-r-3 fl-right" onClick={handleClickAddView}>
+      <button
+        type="button"
+        class="next-pre-btn mrg-r-3 fl-right"
+        onClick={handleClickAddView}
+      >
         Add Users
       </button>
 
@@ -334,7 +335,6 @@ export default function ViewGroupDetails(props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-     
     </Box>
   );
 }

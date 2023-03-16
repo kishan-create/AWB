@@ -7,21 +7,23 @@ export default function Document_Validation(values) {
     errors.templateName = "Template Name Required";
   }
   if (!values.templateDec.trim()) {
-    errors.templateDec = "Template Address  Required";
+    errors.templateDec = "Template Description  Required";
   }
   if (!values.templateCode.trim()) {
     errors.templateCode = "Template Code  Required";
   }
   
   if (!values.filter1.trim()) {
-    errors.filter1 = "Filter 1  Required";
+    errors.filter1 = "Tag 1  Required";
   }
   if (!values.filter2.trim()) {
-    errors.filter2 = "Filter 2  Required";
+    errors.filter2 = "Tag 2  Required";
   }
 
-  // if (!values.zip.trim()) {
-  //   errors.zip = "Address  Required";
-  // }
+  if (!values.selectedFile.trim()) {
+    errors.selectedFile = "Document  Required";
+  }
+
+
   return errors;
 }

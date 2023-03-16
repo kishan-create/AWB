@@ -1,38 +1,40 @@
-import  { useState } from "react";
+import { useState } from "react";
+import { useRef, useEffect } from "react";
 
 import axios from "axios";
-import swal from "sweetalert2";
+import swal from "sweetalert";
+
 import Document_Validation from "../../validations/Document_Validation";
 
 function Addwizard(selectedOption, previousID, content, selectedFile) {
-
   const [submitted, setSubmitted] = useState(false);
 
   const [showfile, setShowFile] = useState(false);
   const [showtext, setShowText] = useState(true);
-  // const [errors, setErrors] = useState({});
 
+  const [error, setError] = useState("");
+
+
+  // useEffect(() => {
+  //   if (Object.keys(error).length === 0 && submitted) {
+  //     onSubmitfileform();
+  //   }
+  // }, [error]);
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
-    // const test = setErrors(Document_Validation(values));
-
+    
+ 
 
     setSubmitted(true);
-    
+
     onSubmitfileform();
-
-
-
   };
 
-
-  
   const onSubmitfileform = (e) => {
-
-   let formData = new FormData();
-   let contentfile=selectedOption+"."+selectedOption
-   
+ 
+    let formData = new FormData();
+    let contentfile = selectedOption + "." + selectedOption;
 
     if (content != "") {
       formData.append(
@@ -48,20 +50,17 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
     formData.append("docCategoryId", 7);
     formData.append("docSubCategoryId", 9);
 
-    const response = axios.post(
-      process.env.REACT_APP_API_SERVICE_URL + "/document",
-      formData
-    )
-       .then((response) => {
+    const response = axios
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
+      .then((response) => {
         if (response.status === 200) {
           swal({
             title: "",
-            text: "Document Added successfully",
+            text: "Document Uploaded successfully",
             icon: "success",
             button: "ok",
           });
         }
-      
       });
   };
 
@@ -75,7 +74,7 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
     }
   };
 
-  return { handleSubmitFile, HideShowDivs };
+  return { handleSubmitFile, HideShowDivs,error };
 }
 
 export default Addwizard;

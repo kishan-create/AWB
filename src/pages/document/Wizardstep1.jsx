@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useRef, useEffect } from "react";
 import axios from "axios";
+import swal from "sweetalert";
+
 import { Link } from "react-router-dom";
 
 
@@ -13,7 +15,7 @@ import insurnnew from "../../images/insurancenew.svg";
 
 
 export default function Wizardstep1({ next, previous }) {
-  //  const { } =Addwizard(tempid)
+
   const [tempid, setTempid] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
@@ -30,8 +32,13 @@ export default function Wizardstep1({ next, previous }) {
  
 });
 
+useEffect(() => {
+  if (Object.keys(errors).length === 0 && submitted) {
+    onSubmitform();
+  }
+}, [errors]);
 
-  const handleChange = (e) => {
+const handleChange = (e) => {
     const { name, value } = e.target;
     SetValues({
       ...values,
@@ -39,20 +46,19 @@ export default function Wizardstep1({ next, previous }) {
     });
   };
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     
-
     const test = setErrors(Document_Validation(values));
     setSubmitted(true);
-    onSubmitform();
+
   };
   const onSubmitform = (e) => {
-      
+   
     const response = axios.post(
-      "http://dev-cok-alb-submission-01-1655548216.us-east-1.elb.amazonaws.com/submission-svc/docgeneration",
+      process.env.REACT_APP_API_SERVICE_URL + "/docgeneration",
+      
+
       values
     ).then((response) => {
       if (response.status === 200) {
@@ -62,6 +68,13 @@ export default function Wizardstep1({ next, previous }) {
   
       
   next(templateID);
+  swal({
+    title: "",
+    text: "Document Added successfully",
+    icon: "success",
+    button: "ok",
+  });
+
 
       }
     });;
@@ -127,7 +140,7 @@ export default function Wizardstep1({ next, previous }) {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Template Description"
+                          placeholder="Template Code"
                           name="templateCode"
                           onChange={handleChange}
                           aria-label="Date of Submission"
@@ -141,7 +154,7 @@ export default function Wizardstep1({ next, previous }) {
 
                     <div className="p-b-15">
                       <label htmlFor="Submission" className="form-label">
-                        Temporary Description <span className="red"> *</span>
+                        Template Description <span className="red"> *</span>
                       </label>
                       <div className="input-group mb-3">
                         <input
@@ -167,7 +180,7 @@ export default function Wizardstep1({ next, previous }) {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Filter 1"
+                          placeholder="Tag 1"
                           name="filter1"
                           onChange={handleChange}
                           aria-label="Date of Submission"
@@ -188,7 +201,7 @@ export default function Wizardstep1({ next, previous }) {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Filter 2"
+                          placeholder="Tag 2"
                           name="filter2"
                           onChange={handleChange}
                           aria-label="Date of Submission"
@@ -215,11 +228,11 @@ export default function Wizardstep1({ next, previous }) {
             <button
               className="next-pre-btn  mrg-r-3"
               type="submit"
-              // onClick={next}
+             
             >
               Next
             </button>
-            <Link to="/listdocument">
+            <Link to="/document">
             <button
               type="button"
               className="next-pre-btn-secondary mrg-r-3"

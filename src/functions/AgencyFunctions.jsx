@@ -39,7 +39,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
   };
 
   const onSubmitform = (e) => {
-    //console.log(values);
+
     const response = axios
       .post(process.env.REACT_APP_API_SERVICE_URL + "/agency", values)
       .then((response) => {

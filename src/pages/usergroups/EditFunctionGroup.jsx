@@ -12,7 +12,7 @@ const Editgroupfunction = (id) =>{
  });
    
     const [submitted, setSubmitted] = useState(false);
-const [errors, setErrors] = useState({});
+
 const [rows, setUserrows] = useState([]);
 
 
@@ -42,7 +42,8 @@ const [rows, setUserrows] = useState([]);
 
 
 
-   const updateusergroup = async () => {
+   const updateusergroup = async (e) => {
+    e.preventDefault();
    
   const res = await axios.put(
       process.env.REACT_APP_API_ADMIN_URL+`/usergroup/${id}`,

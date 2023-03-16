@@ -201,11 +201,10 @@ export default function AddUsers(props) {
     const filteredRows = rows.filter((row) => {
       return row.userFullName.toLowerCase().includes(searchedVal.toLowerCase());
     });
-    // setRows(filteredRows);
+
     rows = filteredRows;
   };
   const handleClick = (event, name) => {
-    // alert("hii");
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -343,7 +342,6 @@ export default function AddUsers(props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-     
     </Box>
   );
 }

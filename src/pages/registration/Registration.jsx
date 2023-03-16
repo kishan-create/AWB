@@ -13,7 +13,7 @@ const Registration = (registeration_validation) => {
     userPhone: "",
     password: "",
     userFullName: "",
-    // dup:"test"
+    
   });
 
   const [errors, setErrors] = useState({});
@@ -25,7 +25,7 @@ const Registration = (registeration_validation) => {
       onSubmitform();
     }
   }, [errors]);
-  console.log(errors);
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     SetValues({
