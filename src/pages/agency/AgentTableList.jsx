@@ -149,7 +149,7 @@ List Agents
                 if (
                   window.confirm("Are you sure you wish to delete this item?")
                 )
-                  // DeleteAgent(para_id, props.selectedRow,props.resetCheckbox);
+              
                   DeleteAgent(e, data, props.getGroupID, props.resetCheckbox);
               }}
             />

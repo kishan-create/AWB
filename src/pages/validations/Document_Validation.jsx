@@ -20,10 +20,14 @@ export default function Document_Validation(values) {
     errors.filter2 = "Tag 2  Required";
   }
 
-  if (!values.selectedFile.trim()) {
-    errors.selectedFile = "Document  Required";
-  }
+ 
+ // if (!values.selectedFile) {
+  //   errors.selectedFile = "Document  Required";
+  // }
 
+  // if (!values.selectedOption) {
+  //   errors.selectedOption = "Document  Required";
+  // }
 
   return errors;
 }

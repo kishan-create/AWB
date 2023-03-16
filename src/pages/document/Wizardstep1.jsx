@@ -31,6 +31,14 @@ export default function Wizardstep1({ next, previous }) {
  
  
 });
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  SetValues({
+    ...values,
+    [name]: value,
+  });
+};
+
 
 useEffect(() => {
   if (Object.keys(errors).length === 0 && submitted) {
@@ -38,27 +46,21 @@ useEffect(() => {
   }
 }, [errors]);
 
-const handleChange = (e) => {
-    const { name, value } = e.target;
-    SetValues({
-      ...values,
-      [name]: value,
-    });
-  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
     const test = setErrors(Document_Validation(values));
     setSubmitted(true);
+    // onSubmitform()
 
   };
   const onSubmitform = (e) => {
-   
+    
     const response = axios.post(
       process.env.REACT_APP_API_SERVICE_URL + "/docgeneration",
-      
-
+    
       values
     ).then((response) => {
       if (response.status === 200) {

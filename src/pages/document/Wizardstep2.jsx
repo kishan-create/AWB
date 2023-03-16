@@ -34,10 +34,6 @@ export default function Wizardstep1({ previousID, previous }) {
     HideShowDivs(selectedOption);
   };
 
-
- 
-
-
   const HideShowDivs = async (seloptions) => {
     if (seloptions == "SMS" || seloptions == "EMAIL") {
       setShowText(true);

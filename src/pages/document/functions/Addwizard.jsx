@@ -15,12 +15,12 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
   const [error, setError] = useState("");
 
 
-  // useEffect(() => {
-  //   if (Object.keys(error).length === 0 && submitted) {
-  //     onSubmitfileform();
-  //   }
-  // }, [error]);
-
+  useEffect(() => {
+    if (Object.keys(error).length === 0 && submitted) {
+      onSubmitfileform();
+    }
+  }, [error]);
+console.log("ere",error);
   const handleSubmitFile = (e) => {
     e.preventDefault();
     
@@ -28,7 +28,7 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
 
     setSubmitted(true);
 
-    onSubmitfileform();
+    // onSubmitfileform();
   };
 
   const onSubmitfileform = (e) => {
