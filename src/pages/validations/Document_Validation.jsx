@@ -21,13 +21,7 @@ export default function Document_Validation(values) {
   }
 
  
- // if (!values.selectedFile) {
-  //   errors.selectedFile = "Document  Required";
-  // }
-
-  // if (!values.selectedOption) {
-  //   errors.selectedOption = "Document  Required";
-  // }
+   
 
   return errors;
 }

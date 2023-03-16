@@ -116,7 +116,7 @@ EnhancedTableHead.propTypes = {
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
   const data = [props.selectRow];
-  //console.log(data);
+
   return (
     <Toolbar
       sx={{

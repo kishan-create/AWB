@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-
-
-
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
@@ -24,7 +21,7 @@ export default function Wizardstep1({ previousID, previous }) {
 
   
 
-  const { handleSubmitFile, fileData,errors } = Addwizard(selectedOption, previousID,content,selectedFile);
+
 
   useEffect(() => {
     HideShowDivs(selectedOption);
@@ -43,6 +40,8 @@ export default function Wizardstep1({ previousID, previous }) {
       setShowFile(true);
     }
   };
+
+  
   const handleFileInputChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
@@ -55,7 +54,8 @@ export default function Wizardstep1({ previousID, previous }) {
   const handleChange = (value) => {
     setContent(value);
   };
-
+  const { handleSubmitFile, fileData,error } = Addwizard(selectedOption, previousID,content,selectedFile);
+ 
   return (
     <div>
       <div>
@@ -135,7 +135,11 @@ export default function Wizardstep1({ previousID, previous }) {
                               onChange={handleFileInputChange}
                             />
                           </label>
-                       
+                          {error.selectedFile && (
+                      <p className="message">{error.selectedFile}
+                      </p>
+                    )}
+                   
 
                         </div>
                           
@@ -146,9 +150,18 @@ export default function Wizardstep1({ previousID, previous }) {
                       {showtext && (
                         <div>
                           <ReactQuill value={content} onChange={handleChange} />
+                          {error.selectedFile && (
+                      <p className="message">{error.selectedFile}</p>
+                    )}
                         </div>
-                      )}
+                        
+                      )
+                      
+                      }
+
+
                     </div>
+                   
                   </div>
 
                   <div>

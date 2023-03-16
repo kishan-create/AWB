@@ -4,8 +4,7 @@ import { useRef, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 
-import Document_Validation from "../../validations/Document_Validation";
-
+import FileFormValidation from "../../validations/File_upload_validation";
 function Addwizard(selectedOption, previousID, content, selectedFile) {
   const [submitted, setSubmitted] = useState(false);
 
@@ -13,14 +12,18 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
   const [showtext, setShowText] = useState(true);
 
   const [error, setError] = useState("");
-
+  const [values, SetValues] = useState({
+    fileselected: selectedFile,
+    content:content ,
+ 
+  });
 
   useEffect(() => {
     if (Object.keys(error).length === 0 && submitted) {
-      onSubmitfileform();
+     onSubmitfileform();
     }
   }, [error]);
-console.log("ere",error);
+
   const handleSubmitFile = (e) => {
     e.preventDefault();
     
@@ -28,10 +31,12 @@ console.log("ere",error);
 
     setSubmitted(true);
 
-    // onSubmitfileform();
+    const test = setError(FileFormValidation(selectedFile,content));
+
   };
 
   const onSubmitfileform = (e) => {
+    
  
     let formData = new FormData();
     let contentfile = selectedOption + "." + selectedOption;
