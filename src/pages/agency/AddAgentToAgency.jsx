@@ -70,7 +70,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Non Agents
+          Add Agents
         </Typography>
       )}
 
