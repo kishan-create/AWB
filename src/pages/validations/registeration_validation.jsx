@@ -20,16 +20,15 @@ export default function registeration_validation(values) {
     errors.password = "password required";
   } else if (!pwregex.test(values.password)) {
     errors.password =
-      "Use 8 or more characters with a mix of letters, numbers & symbols";
+      "Use 8 or more characters with a mix of letters,Capitals,  numbers & symbols";
   }
 
   if (!values.userPhone.trim()) {
     errors.userPhone = "User phone number required";
   } else if (!numregex.test(values.userPhone)) {
-    errors.userPhone = "Use number only";
+    errors.userPhone = "Invalid Phone Number (10 Digits only)";
   }
-  else if (!numregex.test(values.userPhone))
-   { errors.userPhone = "Invalid Phone Number"; }
+  
   
 
   return errors;

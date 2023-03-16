@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import swal from "sweetalert";
 
 import FileFormValidation from "../../validations/File_upload_validation";
-function Addwizard(selectedOption, previousID, content, selectedFile) {
+function Addwizard(selectedOption, previousID, content, selectedFile,previous) {
   const [submitted, setSubmitted] = useState(false);
 
   const [showfile, setShowFile] = useState(false);
@@ -17,6 +18,7 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
     content:content ,
  
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (Object.keys(error).length === 0 && submitted) {
@@ -36,8 +38,7 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
   };
 
   const onSubmitfileform = (e) => {
-    
- 
+     
     let formData = new FormData();
     let contentfile = selectedOption + "." + selectedOption;
 
@@ -59,14 +60,20 @@ function Addwizard(selectedOption, previousID, content, selectedFile) {
       .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
       .then((response) => {
         if (response.status === 200) {
+          
           swal({
             title: "",
             text: "Document Uploaded successfully",
             icon: "success",
             button: "OK",
-          });
+          }).then(() => {
+            // Redirect to another page using history.push
+            navigate("/document", { replace: true });
+          });;;
+         
         }
       });
+
   };
 
   const HideShowDivs = async (seloptions) => {
