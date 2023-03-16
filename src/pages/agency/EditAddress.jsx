@@ -5,15 +5,26 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import EditAgentfunctions from '../../pages/agency/Functions/Editagentfunctions'
 import EditAddressFunctions from './EditAddressFunctions'
+import CountryStateCountyDropdown from '../common/CountryStateCountyDropdown';
 import { useParams } from 'react-router-dom';
-
+import MultipleAddressValidation from '../validations/Edit_Address_validation';
 export default function EditAddress() {
   const params=useParams();
 
   const {
-    handleChange,values,handleEdit,updateAddress
+    handleChange,values,handleEdit,updateAddress, countries,
+    states,
+    counties,
+    handleCountryChange,
+    handleStateChange,
+    selectedCountry,
+    handleCountryEditChange,
+    selectedState,
+    handlestateEditChange,
+    errors
+
     
-  } = EditAddressFunctions(params.id);
+  } = EditAddressFunctions(params.id, MultipleAddressValidation);
 
 const id =params.id;
 
@@ -32,6 +43,7 @@ const county = [
    { name: "Permenent Addrzess" },
     { name: "Shipping Address", },
   ];
+
 
 
   
@@ -78,6 +90,9 @@ const county = [
 
 
                   </select>
+                  {errors.addrType && (
+                    <p className="message">{errors.addrType}</p>
+                  )}
                   
                   </div>
 
@@ -89,8 +104,11 @@ const county = [
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label">Address Line 1 <span className="red">*</span></label>
                       <div className="input-group mb-3">
-                        <input type="text" name="addrLine1" onChange={handleChange}  value={values.addrLine1}  className="form-control" placeholder="Enter Producer Email" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
+                        <input type="text" name="addrLine1" onChange={handleChange}  value={values.addrLine1}  className="form-control" placeholder="Enter Address" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
                       </div>
+                      {errors.addrLine1 && (
+                    <p className="message">{errors.addrLine1}</p>
+                  )}
                     </div>
                   </div>
   
@@ -98,7 +116,7 @@ const county = [
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" n className="form-label">Address Line 2<span className="red">*</span></label>
                       <div className="input-group mb-3">
-                        <input type="text" name="addrLine2"  onChange={handleChange} value={values.addrLine2} className="form-control" placeholder="Enter producer phone" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
+                        <input type="text" name="addrLine2"  onChange={handleChange} value={values.addrLine2} className="form-control" placeholder="Enter Address" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
                     </div>
                   </div>
@@ -109,18 +127,25 @@ const county = [
                     Country <span className="red">*</span>
                   </label>
                   
+                 
                   <select
-                  defaultValue={values.countryId}
-
                     class="form-control"
                     name="countryId"
-                    onChange={handleChange} 
+                    onChange={handleCountryEditChange}
                     value={values.countryId}
+                   
+                   
                   >
-                    <option value="Select Country">Select</option>
-                    <option value="1">India</option>
-                    <option value="2">USA</option>
+                    <option value="">Select a country</option>
+                    {countries.map((country) => (
+                      <option key={country.dataId} value={country.dataId}>
+                        {country.dataName}
+                      </option>
+                    ))}
                   </select>
+                  {errors.countryId && (
+                    <p className="message">{errors.countryId}</p>
+                  )}
                   
                   </div>
                 
@@ -133,23 +158,29 @@ const county = [
                     State <span className="red">*</span>
                   </label>
                   
-                  <select 
-                  defaultValue={values.stateId}
-
+                  <select
                     class="form-control"
                     name="stateId"
-                    onChange={handleChange} 
+                   
+                    onChange={handlestateEditChange}
+                  
                     value={values.stateId}
+                 
                   >
-                    <option value="Select State">Select</option>
-                    <option value="1">Kerala</option>
-                    <option value="2">TamilNadu</option>
+                    <option value="">Select a state</option>
+                    {states.map((state) => (
+                      <option key={state.dataCode} value={state.dataId}>
+                        {state.dataName}
+                      </option>
+                    ))}
                   </select>
+                  {errors.stateId && (
+                    <p className="message">{errors.stateId}</p>
+                  )}
                   
                   </div>
                 
                 </div>
-
                 <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
 
@@ -157,29 +188,38 @@ const county = [
                     County <span className="red">*</span>
                   </label>
                   
-                  <select 
-                  defaultValue={values.countyId}
-
+                  <select
                     class="form-control"
                     name="countyId"
-                    onChange={handleChange} 
+                  
                     value={values.countyId}
+                    onChange={handleChange}
                   >
-                    <option value="Select Country">Select</option>
-                    <option value="1">Ernamkulam</option>
-                    <option value="2">Trissur</option>
+                    <option value="">Select a County</option>
+                    {counties.map((county) => (
+                      <option key={county.dataCode} value={county.dataId}>
+                        {county.dataName}
+                      </option>
+                    ))}
                   </select>
+                  {errors.countyId && (
+                    <p className="message">{errors.countyId}</p>
+                  )}
                   
                   </div>
                 
                 </div>
 
+             
+
                   <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" n className="form-label">Zipcode<span className="red">*</span></label>
                       <div className="input-group mb-3">
-                        <input type="text" name="zip"  onChange={handleChange} value={values.zip} className="form-control" placeholder="Enter agencyId" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
+                        <input type="text" name="zip"  onChange={handleChange} value={values.zip} className="form-control" placeholder="Enter ZIP Code" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
+                  {errors.zip && <p className="message">{errors.zip}</p>}
+
                     </div>
                   </div>
 
@@ -188,8 +228,26 @@ const county = [
                   
                   <div className="col-12 mt-4">
                   <input type="submit"  className="next-pre-btn mrg-r-3"   value="Update" />
+                  {(() => {
+                              if (params.url === "agent") {
+                                return (
+                                  
+                                   <Link to={"/editproducer/" + params.type}> <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link>
+
+                                );
+                              }
+
+                              else   {
+                                return (
+                                  
+                                   <Link to={"/editagency/" + params.type}> <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link>
+
+                                );
+                              }
+
+                            })()}
                    
-                    <Link to="/listagency"> <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link>
+                    {/* <Link to="/listagency"> <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button></Link> */}
 
                   </div>
                 </div>

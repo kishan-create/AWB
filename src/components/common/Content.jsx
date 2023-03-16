@@ -24,7 +24,7 @@ import AgentDataTable from '../../pages/agency/AgentDataTable';
 import ListAgentsData from '../../pages/agency/ListAgentsData'
 import AgentTable from '../../pages/agents/AgentTable'
 import EditAddress from '../../pages/agency/EditAddress'
-import ListAgentData from '../../pages/agents/ListAgentData'
+// import ListAgentData from '../../pages/agents/ListAgentData'
 import EditAgentAddress from '../../pages/agents/EditAgentAddress'
 
 import AddDocumentWizard from "../../pages/document/AddDocumentWizard";
@@ -33,6 +33,7 @@ import ListDocumentData from "../../pages/document/Includes/ListDocumentData";
 import Users from "../../pages/users/Users";
 import ListAgent from "../../pages/agents/ListAgent";
 import ListAgency from "../../pages/agency/ListAgency";
+import ListAgentData from "../../pages/agents/ListAgentData"
 function Content() {
   return (
     
@@ -44,17 +45,18 @@ function Content() {
   <Route path="/userlist" exact={true} element={<Users/>}/>
   <Route  path="/edituser/:id" exact={true} element={<EditUsers/>} /> 
   <Route  path="/usergroup" exact={true} element={<UserGroup/>} /> 
-  <Route path="/editproducer/:id" exact={true} element={<EditAgent />} />
+  <Route path="/editproducer/:id" exact={true} element={<ListAgentData />} />
   <Route path="/producer" exact={true} element={<Addagent />} />
   <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
-  <Route path="/togroup/:id" exact={true} element={<AddUserstogroup/>}/>
+ 
   <Route path="/agency" exact={true} element={<Addagency/>}/>
   <Route path="/listagency" exact={true} element={<ListAgency />} />
   <Route path="/listagentheaddata/:id" exact={true} element={<ListAgentsData />}/>
   <Route path="/editusergroup/:id" exact={true} element={<AddUserstogroup />} />
   <Route path="/listagent" exact={true} element={<ListAgent />} />
-  <Route path="/editaddress/:id" exact={true} element={<EditAddress />} />
-  <Route path="/listdata/:id" exact={true} element={<ListAgentData />} />
+  {/* <Route path="/editaddress/:id" exact={true} element={<EditAddress />} /> */}
+  <Route path="/editaddress/:id/:type/:url" exact={true} element={<EditAddress />} />
+  {/* <Route path="/listdata/:id" exact={true} element={<ListAgentData />} /> */}
   <Route path="/editagentaddress/:id" exact={true} element={<EditAgentAddress />} />
   <Route path="/document" exact={true} element={<ListDocument />} />
 

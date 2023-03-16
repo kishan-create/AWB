@@ -20,18 +20,20 @@ export default function Addagency() {
   const [adressData, setAddressData] = useState([]);
   const [fileData, setFileData] = useState([]);
   const [listadd, SetListadd] = useState([]);
-  const { handleChange, handleSubmit, values,errors } = AgencyFunctions(
+  const { handleChange, handleSubmit, values,errors,DeleteAddress } = AgencyFunctions(
     Agency_Validation,
     adressData,
     fileData,
     listadd
   );
   const getData = (data) => {
+    console.log(data);
     setAddressData(data);
   };
-  const RemoveAddress = (index) => {
+  const RemoveAddress = (index,addrid) => {
     const rows = [...adressData];
     rows.splice(index, 1);
+    DeleteAddress(addrid);
     setAddressData(rows);
   };
 
@@ -82,7 +84,7 @@ export default function Addagency() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Agency Name"
+                            placeholder="Enter Agency Name"
                             name="agencyName"
                             onChange={handleChange}
                             aria-label="Date of Submission"
@@ -100,7 +102,7 @@ export default function Addagency() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Agency Npn"
+                            placeholder="Enter Agency Npn"
                             name="agencyNpn"
                             onChange={handleChange}
                             aria-label="Date of Submission"
@@ -118,7 +120,7 @@ export default function Addagency() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Agency Fbin"
+                            placeholder="Enter Agency Fbin"
                             name="agencyFbin"
                             onChange={handleChange}
                             aria-label="Date of Submission"
@@ -196,10 +198,10 @@ export default function Addagency() {
                                   {row.addrLine2}
                                 </TableCell>
                                 <TableCell align="right">
-                                {country[row.countryId - 1].name}
+                                 {row.countryId}
                                 </TableCell>
                                 <TableCell align="left">
-                                {state[row.stateId - 1].name}
+                                   { row.stateId}
                                 </TableCell>
                                 <TableCell align="left">
                                   {row.zip}
@@ -212,7 +214,7 @@ export default function Addagency() {
                                           "Are you sure you wish to delete this item?"
                                         )
                                       )
-                                        RemoveAddress(index);
+                                        RemoveAddress(index,row.addressId);
                                     }}
                                   />
                                 </TableCell>

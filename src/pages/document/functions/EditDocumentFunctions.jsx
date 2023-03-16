@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-const EditDocumentfunctions = () => {
+const EditDocumentfunctions = (Document_Validation) => {
   const params = useParams();
 
   const [rows, setUserrows] = useState([]);
@@ -20,6 +20,19 @@ const EditDocumentfunctions = () => {
 
 
   });
+  
+const [submitted, setSubmitted] = useState(false);
+
+useEffect(() => {
+
+
+if (Object.keys(errors).length === 0 && submitted) {
+  onSubmitform();
+}
+
+}, [errors]);
+
+
   useEffect(() => {
     getDocumentbyID(params.id);
     
@@ -66,7 +79,15 @@ const EditDocumentfunctions = () => {
     }
     setPasswordType("password");
   };
+
+
   const updateagents = async (e) => {
+    e.preventDefault();
+    const test = setErrors(Document_Validation(values));
+    setSubmitted(true);
+  
+  };
+  const onSubmitform = async (e) => {
     
     e.preventDefault();
     const res = await axios.put(

@@ -229,11 +229,10 @@ export default function ViewGroupDetails(props) {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
+  const { rows,getUsers } = GroupUserFunction(id);
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  const { rows, getUsers } = GroupUserFunction(id);
 
   const handleClickAddView = () => {
     props.method(false);

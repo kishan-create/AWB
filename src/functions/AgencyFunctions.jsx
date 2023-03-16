@@ -98,6 +98,13 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
       });
   };
 
-  return { handleChange, handleSubmit, values,errors };
+  const DeleteAddress=async(addrid)=>
+{
+  console.log(addrid);
+  const res = await axios.delete(
+    process.env.REACT_APP_API_SERVICE_URL + `/addresses/${addrid}`
+  );
+}
+  return { handleChange, handleSubmit, values,errors,DeleteAddress };
 };
 export default AgencyFunctions;

@@ -14,6 +14,9 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
+import axios from "axios";
+
 
 
 export default function Addagent() {
@@ -23,11 +26,15 @@ export default function Addagent() {
   const [listadd, SetListadd] = useState([]);
 
 
+ 
+
 
   const { handleChange, handleSubmit, values, errors, } = AgentFunctions(Agent_validation,seen,adressData,listadd);
 
   const getData = (data) => {
+    console.log(data);
     setAddressData(data);
+
   };
   const getValue = (value) =>{
     setAddressValue(value);
@@ -67,6 +74,42 @@ const county = [
     { name: "Shipping Address", },
   ];
 
+  
+  const deleteAddress = async (e, id, index) => {
+    console.log(index);
+    console.log(id);
+    e.preventDefault();
+    const thisclickrow = e.currentTarget;
+    swal({
+      title: "Are you sure ??",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          const response = axios
+            .delete(process.env.REACT_APP_API_SERVICE_URL + `/addresses/${id}`)
+            .then((response) => {
+              if (response.status === 200) {
+                swal({
+                  title: "",
+                  text: " Record deleted successfully",
+                  icon: "success",
+                  button: "ok",
+                });
+              }
+              RemoveAddress(index);
+
+            });
+        }
+        else {
+          swal("Your file is safe!");
+        }
+      });
+  };
+
+
    
  
   return (<div>
@@ -89,13 +132,13 @@ const county = [
                   <div className="page-grid-3">
                     <div className="">
                       <label htmlFor="Submission" className="form-label">
-                        Producer Name <span className="red">*</span>
+                        Agent Name <span className="red">*</span>
                       </label>
                       <div className="input-group mb-3">
                       <input
                             type="text"
                             className="form-control"
-                            placeholder="Producer Name"
+                            placeholder="Enter Agent Name"
                             name="producerName"
                             onChange={handleChange}  
                             value={values.producerName}
@@ -107,13 +150,13 @@ const county = [
                     </div>
                     <div className="">
                       <label htmlFor="Submission" className="form-label">
-                      Producer Email <span className="red">*</span>
+                      Agent Email <span className="red">*</span>
                       </label>
                       <div className="input-group mb-3">
                       <input
                             type="email"
                             className="form-control"
-                            placeholder="Email"
+                            placeholder="Enter Agent Email"
                             name="producerEmail"
                             onChange={handleChange}
                             value={values.producerEmail}
@@ -125,13 +168,13 @@ const county = [
                     </div>
                     <div className="">
                       <label htmlFor="Submission" className="form-label">
-                      Producer Phone<span className="red">*</span>
+                      Agent Phone Number<span className="red">*</span>
                       </label>
                       <div className="input-group mb-3">
                       <input
                             type="text"
                             className="form-control"
-                            placeholder="Phone"
+                            placeholder="Enter Agent Phone Number"
                             name="producerPhone"
                             onChange={handleChange}
                             value={values.producerPhone}
@@ -211,27 +254,24 @@ const county = [
                               <TableCell align="right">
                                 {row.addrLine2}
                               </TableCell>
+                            
+                              <TableCell align="left">
+                               {row.countryId}
+                              </TableCell>
+                              <TableCell align="left">
+                                 { row.stateId}
+                              </TableCell>
                               <TableCell align="right">
-                              {country[row.countryId - 1].name}
-                              </TableCell>
-                              <TableCell align="left">
-                              {state[row.stateId - 1].name}
-                              </TableCell>
-                              <TableCell align="left">
-                              {county[row.countyId - 1].name}
+                              {row.countyId}
                               </TableCell>
                               <TableCell align="left">
                                 {row.zip}
                               </TableCell>
                               <TableCell>
                                 <DeleteIcon
-                                  onClick={() => {
-                                    if (
-                                      window.confirm(
-                                        "Are you sure you wish to delete this item?"
-                                      )
-                                    )
-                                      RemoveAddress(index);
+                                   onClick={(e) => {
+
+                                    deleteAddress(e, row.addrId, index);
                                   }}
                                 />
                               </TableCell>
@@ -391,7 +431,7 @@ const county = [
             <div className="col-12 mt-4">
               <input
                 type="submit"
-                value="Submit"
+                value="Save"
                 className="next-pre-btn mrg-r-3"
               />
 
