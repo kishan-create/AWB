@@ -38,7 +38,7 @@ const { tableheader } = AgentsData();
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
-  const data = [props.selectedRow];
+  const data = [props.selectRow];
 
   return (
     <Toolbar
@@ -69,19 +69,22 @@ function EnhancedTableToolbar(props) {
           variant="h6"
           id="tableTitle"
           component="div"
-        ></Typography>
+        >
+          Add Agents
+        </Typography>
       )}
 
       {numSelected > 0 ? (
         <Tooltip title="Add">
-          <IconButton>
-            <Link
-              to={{
-                pathname: `/addagency`,
-              }}
-            >
+          <IconButton
+          
+          onClick={(e) => {
+            if (window.confirm("Are you sure you wish to add this item?"))
+              AgentToagency(e, data, props.AgentId, props.resetCheckbox);
+          }}>
+          
               <AddIcon />
-            </Link>
+          
           </IconButton>
         </Tooltip>
       ) : (
@@ -146,8 +149,41 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+const AgentToagency = async (e, data, AgentId, reseMethod) => {
+
+  
+  var Groupid = AgentId;
+  
+  var gmembers = data[0];
+  
+
+  const userData = {
+    Groupid: Groupid,
+    groupmembers: data[0],
+  };
+
+
+  const response = axios
+    .put(
+      process.env.REACT_APP_API_SERVICE_URL +
+        `/agency/${Groupid}/agents`,gmembers
+
+
+    )
+    .then((response) => {
+      reseMethod();
+      if (response.status === 200) {
+        swal({
+          title: "",
+          text: "Agent Added successfully",
+          icon: "success",
+          button: "ok",
+        });
+      }
+    });
+};
 export default function AddAgentToAgency(props) {
-  const params = useParams();
+  const id = useParams();
 
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -155,14 +191,20 @@ export default function AddAgentToAgency(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setAgentrows] = useState([]);
-  useEffect(() => {
-    getAgents(params.id);
-  }, []);
+  const [rowsCheck, SetRowsCheck] = React.useState([]);
 
+  const [rows, setAgentrows] = useState([]);
+
+
+  useEffect(() => {
+    SetRowsCheck(selected);
+    getAgents(id.id);
+  }, [selected]);
   const getAgents = async (id) => {
     const response = await fetch(
-      process.env.REACT_APP_API_SERVICE_URL + "/producer"
+      
+
+      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/nonagents`
     );
     const data = await response.json();
     setAgentrows(data);
@@ -182,6 +224,11 @@ export default function AddAgentToAgency(props) {
     }
     setSelected([]);
   };
+
+
+  //
+
+  //
 
   const handleClick = (event, producerId) => {
     const selectedIndex = selected.indexOf(producerId);
@@ -225,7 +272,10 @@ export default function AddAgentToAgency(props) {
   const handleClickViewPage = () => {
     props.method(true);
   };
-
+  const resetCheckbox = () => {
+    setSelected([]);
+    getAgents(id.id);
+  };
   return (
     <>
       <>
@@ -239,8 +289,10 @@ export default function AddAgentToAgency(props) {
         <Box sx={{ width: "100%" }}>
           <Paper sx={{ width: "100%", mb: 2 }}>
             <EnhancedTableToolbar
-              numSelected={selected.length}
-              selectedRow={selected}
+         numSelected={selected.length}
+         selectRow={selected}
+         AgentId={id.id}
+         resetCheckbox={resetCheckbox}
             />
             <TableContainer>
               <Table

@@ -16,7 +16,7 @@ export default function TemplateCol() {
     
     
 
-    { field: "filter1", headerName: "Filter 1", width: 130 },
+    { field: "filter1", headerName: "", width: 130 },
     
     { field: "filter2", headerName: "Filter 2", width: 130 },
 

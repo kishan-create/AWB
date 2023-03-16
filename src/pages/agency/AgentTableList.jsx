@@ -25,6 +25,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import TextField from "@mui/material/TextField";
+import swal from "sweetalert";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -34,86 +35,16 @@ import Tabledata from "../../components/common/Tabledata";
 
 import axios from "axios";
 import AgentsData from "./AgentsData";
+
 const {
   descendingComparator,
   getComparator,
   stableSort,
+  
   // EnhancedTableToolbar,
 } = Tabledata();
-
 const { tableheader } = AgentsData();
 
-function EnhancedTableToolbar(props) {
-  const { numSelected, para_id } = props;
-  // const data =[props.selectedRow];
-
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(
-              theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
-            ),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        ></Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            {/* <DeleteIcon onClick ={(e) => DeleteAgent(e,data)} /> */}
-            <DeleteIcon
-              onClick={() => {
-                if (
-                  window.confirm("Are you sure you wish to delete this item?")
-                )
-                  DeleteAgent(para_id, props.selectedRow);
-              }}
-            />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-}
-
-const DeleteAgent = async (para_id, data) => {
-  const res = await axios.delete(
-    process.env.REACT_APP_API_SERVICE_URL + `/agency/${para_id}/agents`,
-    { data }
-  );
-
-  if (res.data.status == 200) {
-    alert("Agent Deleted successfully");
-  }
-};
 
 function EnhancedTableHead(props) {
   const {
@@ -124,6 +55,8 @@ function EnhancedTableHead(props) {
     rowCount,
     onRequestSort,
   } = props;
+
+
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -154,6 +87,10 @@ function EnhancedTableHead(props) {
   );
 }
 
+
+
+
+
 EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
@@ -163,23 +100,163 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+function EnhancedTableToolbar(props) {
+  let { numSelected } = props;
+
+  const data = [props.selectRow];
+
+  return (
+    <Toolbar
+      sx={{
+        pl: { sm: 2 },
+        pr: { xs: 1, sm: 1 },
+        ...(numSelected > 0 && {
+          bgcolor: (theme) =>
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
+        }),
+      }}
+    >
+      {numSelected > 0 ? (
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
+          {numSelected} selected
+        </Typography>
+      ) : (
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+List Agents
+
+
+        </Typography>
+      )}
+
+      {numSelected > 0 ? (
+        <Tooltip title="Delete">
+          <IconButton>
+            <DeleteIcon
+              onClick={(e) => {
+                if (
+                  window.confirm("Are you sure you wish to delete this item?")
+                )
+              
+                  DeleteAgent(e, data, props.getGroupID, props.resetCheckbox);
+              }}
+            />
+          </IconButton>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Filter list">
+          <IconButton>
+            <FilterListIcon />
+          </IconButton>
+        </Tooltip>
+      )}
+    </Toolbar>
+  );
+}
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+};
+
+const DeleteAgent = async (e,data, groupID, reseMethod) => {
+  e.preventDefault();
+
+  let dataID = data[0];
+
+  const thisclickrow = e.currentTarget;
+
+  
+  const response = await axios
+    .delete(
+      process.env.REACT_APP_API_SERVICE_URL + `/agency/${groupID}/agents`,
+
+     
+      { data: dataID }
+    )
+    .then((response) => {
+      
+      if (response.status === 200) {
+        reseMethod();
+        swal({
+          title: "",
+          text: " Record deleted successfully",
+          icon: "success",
+          button: "ok",
+        });
+      }
+    });
+};
 export default function AgentTableList(props) {
+  const id  = useParams();
+
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsCheck, SetRowsCheck] = React.useState([]);
 
-  const params = useParams();
+  
 
   useEffect(() => {
-    getAgents();
+    getAgents(id.id);
   }, []);
 
-  const getAgents = async () => {
+
+useEffect(() => {
+  SetRowsCheck(selected);
+}, [selected]);
+
+const handleSelectAllClick = (event) => {
+  if (event.target.checked) {
+    const newSelected = rows.map((n) => n.producerId);
+    setSelected(newSelected);
+    return;
+  }
+  setSelected([]);
+};
+
+
+
+
+const handleClick = (event, producerId) => {
+  const selectedIndex = selected.indexOf(producerId);
+  let newSelected = [];
+
+  if (selectedIndex === -1) {
+    newSelected = newSelected.concat(selected, producerId);
+  } else if (selectedIndex === 0) {
+    newSelected = newSelected.concat(selected.slice(1));
+  } else if (selectedIndex === selected.length - 1) {
+    newSelected = newSelected.concat(selected.slice(0, -1));
+  } else if (selectedIndex > 0) {
+    newSelected = newSelected.concat(
+      selected.slice(0, selectedIndex),
+      selected.slice(selectedIndex + 1)
+    );
+  }
+
+  setSelected(newSelected);
+};
+
+  const getAgents = async (id) => {
     const response = await fetch(
-      process.env.REACT_APP_API_SERVICE_URL + "/producer"
+    
+      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/agents`
+      
     );
 
     const data = await response.json();
@@ -194,34 +271,7 @@ export default function AgentTableList(props) {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.producerId);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
 
-  const handleClick = (event, producerId) => {
-    const selectedIndex = selected.indexOf(producerId);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, producerId);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -246,6 +296,14 @@ export default function AgentTableList(props) {
     props.method(false);
   };
 
+  const resetCheckbox = () => {
+    setSelected([]);
+    getAgents(id.id);
+  };
+
+
+
+
   return (
     <>
       <>
@@ -256,20 +314,27 @@ export default function AgentTableList(props) {
           Add
         </button>
 
+
+
+
         <Box sx={{ width: "100%" }}>
           <Paper sx={{ width: "100%", mb: 2 }}>
-            <EnhancedTableToolbar
-              numSelected={selected.length}
-              selectedRow={selected}
-              para_id={params.id}
-            />
+          
+     <EnhancedTableToolbar
+          numSelected={selected.length}
+          selectRow={selected}
+          getGroupID={id.id}
+          resetCheckbox={resetCheckbox}
+        />
+
+
             <TableContainer>
               <Table
                 sx={{ minWidth: 750 }}
                 aria-labelledby="tableTitle"
                 size={dense ? "small" : "medium"}
               >
-                <EnhancedTableHead
+             <EnhancedTableHead
                   numSelected={selected.length}
                   order={order}
                   orderBy={orderBy}
@@ -310,15 +375,11 @@ export default function AgentTableList(props) {
                               </div>
                             </TableCell>
 
-                           
-
                             <TableCell>{row.producerName}</TableCell>
 
                             <TableCell>{row.producerEmail}</TableCell>
 
                             <TableCell>{row.producerPhone}</TableCell>
-
-                          
                           </TableRow>
                         </React.Fragment>
                       );
@@ -350,3 +411,9 @@ export default function AgentTableList(props) {
     </>
   );
 }
+
+
+
+
+
+

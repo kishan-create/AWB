@@ -9,9 +9,7 @@ export default function DocumentHeader() {
         <div className="progress-bar-container col-9">
        
         </div>
-        <div className="col-auto">
-          <button type="button" className="btn app-btn-primary">Upload Documents</button>
-        </div>
+      
       </div>
     </div>
   </div>

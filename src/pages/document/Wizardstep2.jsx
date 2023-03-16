@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-
-
-
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Link } from "react-router-dom";
-
-import axios from "axios";
-import swal from "sweetalert2";
 import Addwizard from "./functions/Addwizard";
 
 export default function Wizardstep1({ previousID, previous }) {
@@ -24,7 +18,10 @@ export default function Wizardstep1({ previousID, previous }) {
   const [showtext, setShowText] = useState(true);
   const [showfile, setShowFile] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const { handleSubmitFile, fileData } = Addwizard(selectedOption, previousID,content,selectedFile);
+
+  
+
+
 
   useEffect(() => {
     HideShowDivs(selectedOption);
@@ -33,6 +30,7 @@ export default function Wizardstep1({ previousID, previous }) {
     setSelectedOption(e.target.value);
     HideShowDivs(selectedOption);
   };
+
   const HideShowDivs = async (seloptions) => {
     if (seloptions == "SMS" || seloptions == "EMAIL") {
       setShowText(true);
@@ -42,6 +40,8 @@ export default function Wizardstep1({ previousID, previous }) {
       setShowFile(true);
     }
   };
+
+  
   const handleFileInputChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
@@ -54,7 +54,8 @@ export default function Wizardstep1({ previousID, previous }) {
   const handleChange = (value) => {
     setContent(value);
   };
-
+  const { handleSubmitFile, fileData,error } = Addwizard(selectedOption, previousID,content,selectedFile);
+ 
   return (
     <div>
       <div>
@@ -70,15 +71,20 @@ export default function Wizardstep1({ previousID, previous }) {
                   <div className="add-headd-wizard add-headd-wizard-active ">
                     {" "}
                     Document Form
-                    <div class="bottom-arrow">
+                    <div class="bottom-arrow">.
                       <CheckCircleIcon />
+                    
+
                     </div>
                   </div>
                   <div className="add-headd-wizard">
                     {" "}
                     Upload Document
-                    <div class="bottom-arrow-1">
-                      <CircleIcon />
+                  
+                    <div class="bottom-arrow">
+                    <CheckCircleIcon />
+                   
+                      
                     </div>
                   </div>
                 </div>
@@ -129,17 +135,33 @@ export default function Wizardstep1({ previousID, previous }) {
                               onChange={handleFileInputChange}
                             />
                           </label>
+                          {error.selectedFile && (
+                      <p className="message">{error.selectedFile}
+                      </p>
+                    )}
+                   
+
                         </div>
+                          
                       )}
                     </div>
-
+                        
                     <div>
                       {showtext && (
                         <div>
                           <ReactQuill value={content} onChange={handleChange} />
+                          {error.selectedFile && (
+                      <p className="message">{error.selectedFile}</p>
+                    )}
                         </div>
-                      )}
+                        
+                      )
+                      
+                      }
+
+
                     </div>
+                   
                   </div>
 
                   <div>
@@ -160,7 +182,9 @@ export default function Wizardstep1({ previousID, previous }) {
             <button className="next-pre-btn  mrg-r-3" type="submit">
               Save
             </button>
-            <Link to="/listdocument">
+          
+
+            <Link to="/document">
             <button type="button" className="next-pre-btn-secondary mrg-r-3">
               Cancel{" "}
              

@@ -1,4 +1,4 @@
-// import Editagents from "./EditAgents";
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import TemplateFullTable from './TemplateFullTable';
 import EditDocument from "./EditDocument";

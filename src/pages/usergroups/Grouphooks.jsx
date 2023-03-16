@@ -15,7 +15,7 @@ const Grouphooks = () => {
  }
   
 
-console.log(rows);  
+
 return{rows}
 }
 export default Grouphooks;

@@ -1,8 +1,6 @@
 import React,{ useState } from 'react'
-
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import EditDocumentfunctions from './functions/EditDocumentFunctions';
+import { Link } from "react-router-dom";
 import Document_Validation from './../validations/Document_Validation'
 
 export default function EditDocument() {
@@ -23,9 +21,6 @@ export default function EditDocument() {
                 <div className="app-card-body p-2 p-lg-4">
 
 
-
-
-                  
                 </div>
                 <form onSubmit={updateagents} noValidate>
                 <div className="app-card-body p-2 p-lg-4">
@@ -40,6 +35,11 @@ export default function EditDocument() {
                       <label htmlFor="Submission" className="form-label">Template Name <span className="red">*</span></label>
                       <div className="input-group mb-3">
                         <input type="text" name="templateName" value={values.templateName} onChange={handleChange} className="form-control"  aria-label="Enter Producer Name" aria-describedby="basic-addon1" />
+                        {errors.templateName && (
+                            <p className="message validation-sty">
+                              {errors.templateName}
+                            </p>
+                          )}
                       </div>
                     {errors.templateName && (<p className="message validation-sty" >{errors.templateName}</p>)}
 
@@ -70,7 +70,7 @@ export default function EditDocument() {
 
                   <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">filter1<span className="red">*</span></label>
+                      <label htmlFor="Submission" n className="form-label">Tag 1<span className="red">*</span></label>
                       <div className="input-group mb-3">
                         <input type="text" name="filter1"  onChange={handleChange} value={values.filter1} className="form-control"  aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
@@ -81,7 +81,7 @@ export default function EditDocument() {
 
                   <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">filter2<span className="red">*</span></label>
+                      <label htmlFor="Submission" n className="form-label">Tag 2<span className="red">*</span></label>
                       <div className="input-group mb-3">
                         <input type="text" name="filter2"  onChange={handleChange} value={values.filter2} className="form-control"  aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
                       </div>
@@ -94,8 +94,9 @@ export default function EditDocument() {
                   
                   <div className="col-12 mt-4">
                     <button type="submit" className="next-pre-btn mrg-r-3">Update</button>
-                   
-                    <button type="button" className="btn btn-link">Cancel</button>
+                    <Link to="/document">
+                    <button type="button" className="next-pre-btn-secondary mrg-r-3">Cancel</button>
+                   </Link>
                   </div>
                 </div>
                 </form>

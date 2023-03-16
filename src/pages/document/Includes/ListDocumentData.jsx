@@ -1,12 +1,5 @@
 import * as React from "react";
-// import { useState, useEffect } from "react";
-// import AgentsData from "./AgentDataTable";
 
-// import AgentDataTable from "./AgentDataTable";
-
-// import filter_list from '../../images/filter_list.svg';
-// import exportsvg from '../../images/export.svg';
-// import add_circle from '../../images/add_circle.svg';
 import DocumentTabs from "../DocumentTabs";
 
 

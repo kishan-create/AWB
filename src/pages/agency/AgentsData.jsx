@@ -41,9 +41,7 @@ export default function AgentsData() {
     
       
     };
-    // return(<>
-    // {console.log(rows)}
-    // </>)
+ 
 
   }
   
