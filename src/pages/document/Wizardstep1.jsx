@@ -125,7 +125,7 @@ export default function Wizardstep1({ next, previous }) {
                       </div>
 
                       <label htmlFor="options">
-                        Template-Code :<span className="red"> *</span>
+                        Template Code :<span className="red"> *</span>
                       </label>
                       <div className="input-group mb-3">
                         <input
