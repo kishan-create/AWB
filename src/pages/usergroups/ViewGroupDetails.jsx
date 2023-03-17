@@ -162,6 +162,7 @@ EnhancedTableToolbar.propTypes = {
 //           text: " Record deleted successfully",
 //           icon: "success",
 //           button: "ok",
+
 //         });
 //       }
 //     });
@@ -201,6 +202,7 @@ const DeleteUsers = async (e, data, groupID, reseMethod) => {
           text: " Record deleted successfully",
           icon: "success",
           button: "ok",
+
         });
       }
     });

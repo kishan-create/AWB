@@ -28,6 +28,7 @@ import EditMultipleAddress from "../../pages/agency/EditMultipleAddress";
 import EditMultipleAddressAgent from "../../pages/agents/EditMultipleAddressAgent";
 import Multiplefileupload from "./../../components/common/Multiplefileupload";
 import { useParams } from 'react-router-dom';
+import DownloadIcon from '@mui/icons-material/Download';
 const {
   descendingComparator,
   getComparator,
@@ -53,16 +54,14 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <div className="form-check"></div>
-        </TableCell>
+       
 
         {headercells.map((column, cid) =>
           column.isFieldDisplay == "N" ? (
             ""
           ) : (
-            <TableCell key={cid}>{column.displayName}</TableCell>
-          )
+              <TableCell key={cid}>{column.displayName}</TableCell>
+            )
         )}
         <TableCell></TableCell>
       </TableRow>
@@ -90,7 +89,7 @@ export default function AwbTableChild(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { rows, columns, getRows, getAgencyAddress } = AwbTableFunctions(props);
+  const { rows, columns, getRows, getAgencyAddress, downloaddocument } = AwbTableFunctions(props);
   const [adressData, setAddressData] = React.useState([]);
   const [listadd, SetListadd] = React.useState([]);
   const [isHalfShown, setIsHalfShown] = React.useState(false);
@@ -172,10 +171,11 @@ export default function AwbTableChild(props) {
             text: "Document Added successfully",
             icon: "success",
             button: "OK",
+
           });
         }
         getRows();
-       // getAgencyAddress(test);
+        // getAgencyAddress(test);
       });
   };
 
@@ -190,6 +190,8 @@ export default function AwbTableChild(props) {
   //Delete a user
   const Rowdelete = async (e, id) => {
     e.preventDefault();
+     let URL=props.baseURL + `/${props.DeleteURL}/${id}`;
+    URL = URL.replace(/\s+/g, '')
     swal({
       title: "Are you sure?",
       text: "You want to delete this Entry?",
@@ -203,7 +205,7 @@ export default function AwbTableChild(props) {
       buttons: ["No", "Yes"],
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(props.baseURL + `/${props.tableRow}/${id}`).then((res) => {
+        axios.delete(URL).then((res) => {
           getRows();
           swal({
             title: "Done!",
@@ -244,7 +246,7 @@ export default function AwbTableChild(props) {
                   method={getRows}
                 />
               );
-            }  else if (props.displayName === "Documents") {
+            } else if (props.displayName === "Documents") {
               return (
                 <Link to="">
                   <button
@@ -257,8 +259,8 @@ export default function AwbTableChild(props) {
                   </button>
                 </Link>
               );
-            } 
-            
+            }
+
             else {
               return (
                 <Link to="">
@@ -297,21 +299,21 @@ export default function AwbTableChild(props) {
                         <TableRow>
                           {columns.map((column, ckey) =>
                             column.isFieldDisplay == "N" ? (
-                              <TableCell></TableCell>
+                              ""
                             ) : (
-                              <TableCell key={ckey}>
-                                {row[column.fieldName]}
-                              </TableCell>
-                            )
+                                <TableCell key={ckey}>
+                                  {row[column.fieldName]}
+                                </TableCell>
+                              )
                           )}
                           <TableCell>
                             {(() => {
                               if (props.displayName === "Agent Address") {
                                 return (
-                                  
+
                                   <Link
                                     to={{
-                                          pathname: `/editaddress/${row[props.id]}/${params.id}/agent`,
+                                      pathname: `/editaddress/${row[props.id]}/${params.id}/agent`,
 
                                       data: row[props.id], // your data array of objects
                                     }}
@@ -320,13 +322,26 @@ export default function AwbTableChild(props) {
                                   </Link>
                                 );
                               }
-
-                              else   {
+                              else if (props.displayName === "Documents") {
                                 return (
+
                                   
+
+                                  <Link      onClick={() => {
+
+                                    downloaddocument(row.docId, row.orginalFileName);
+                                  }}>
+                                    <DownloadIcon />
+                                  </Link>
+                                );
+                              }
+
+                              else {
+                                return (
+
                                   <Link
                                     to={{
-                                          pathname: `/editaddress/${row[props.id]}/${params.id}/agency`,
+                                      pathname: `/editaddress/${row[props.id]}/${params.id}/agency`,
 
                                       data: row[props.id], // your data array of objects
                                     }}

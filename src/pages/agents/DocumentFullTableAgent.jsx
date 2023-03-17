@@ -210,6 +210,7 @@ export default function DocumentFullTableAgent(id) {
                   text: " Record deleted successfully",
                   icon: "success",
                   button: "OK",
+
                 });
               }
               setIsHalfShown(false);
@@ -259,6 +260,7 @@ export default function DocumentFullTableAgent(id) {
             text: "Document Added successfully",
             icon: "success",
             button: "OK",
+
           });
         }
         getAgencyAddress(test);

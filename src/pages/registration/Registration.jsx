@@ -59,6 +59,7 @@ const Registration = (registeration_validation) => {
             text: "User Added successfully",
             icon: "success",
             button: "ok",
+
           }).then(() => {
             // Redirect to another page using history.push
             navigate("/userlist", { replace: true });

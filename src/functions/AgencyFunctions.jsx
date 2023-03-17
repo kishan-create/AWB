@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import http from "../components/common/http-common";
 import {useNavigate} from 'react-router-dom';
 
-const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
+const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, setAddressData) => {
   const [values, SetValues] = useState({
     agencyName: "",
     agencyNpn: "",
@@ -51,8 +51,17 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
           SetReturnValue({
             agencyId: response.data.agencyId,
           });
+          
 
           submitAddress(response.data.agencyId);
+          swal({
+            title: "",
+            text: "Agency Added successfully",
+            icon: "success",
+            button: "OK",
+
+          });
+          navigate('/listagency', {replace: true});
          
         }
       });
@@ -94,18 +103,56 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
             text: "Agency Added successfully",
             icon: "success",
             button: "OK",
+
           });
           navigate('/listagency', {replace: true});
         }
       });
   };
 
-  const DeleteAddress=async(addrid)=>
+  const RemoveAddress = (index) => {
+   
+
+    const rows = [...adressData];
+    rows.splice(index, 1);
+    setAddressData(rows);
+  };
+
+  const DeleteAddress=async(index,addrid )=>
 {
-  const res = await axios.delete(
-    process.env.REACT_APP_API_SERVICE_URL + `/addresses/${addrid}`
-  );
+  swal({
+    title: "Are you sure to Delete ??",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      const res =  axios.delete(
+        process.env.REACT_APP_API_SERVICE_URL + `/addresses/${addrid}`
+      )
+    .then((response) => {
+      // thisclickrow.closest("tr").remove();
+      if (response.status === 200) {
+        swal({
+          title: "",
+          text: " Record deleted successfully",
+          icon: "success",
+          button: "ok",
+
+        });
+        RemoveAddress(index);
+      }
+    });
+    }
+  });
+  
+ 
+
 }
+
+
+
   return { handleChange, handleSubmit, values,errors,DeleteAddress };
 };
 export default AgencyFunctions;

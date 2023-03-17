@@ -74,6 +74,7 @@ const updateusergroup = async (e) => {
 //         text: "User Group Updated successfully",
 //         icon: "success",
 //         button: "ok",
+
 //       });
 //     }
 //   }
@@ -95,6 +96,7 @@ const onSubmitform = (e) => {
           text: "User Group Updated successfully",
           icon: "success",
           button: "OK",
+
         });
        
       }

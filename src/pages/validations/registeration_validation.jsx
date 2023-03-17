@@ -17,7 +17,7 @@ export default function registeration_validation(values) {
   }
 
   if (!values.password.trim()) {
-    errors.password = "password required";
+    errors.password = "Password required";
   } else if (!pwregex.test(values.password)) {
     errors.password =
       "Use 8 or more characters with a mix of letters,Capitals,  numbers & symbols";

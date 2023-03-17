@@ -91,6 +91,7 @@ const Edituserfunctions = (id,registeration_validation) => {
         text: "User Edited successfully",
         icon: "success",
         button: "ok",
+
       }).then(() => {
         navigate("/userlist", { replace: true });
       });

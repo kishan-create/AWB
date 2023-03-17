@@ -20,98 +20,70 @@ import axios from "axios";
 
 
 export default function Addagent() {
-  const [seen,setSeen] = useState([]);
+  const [seen, setSeen] = useState([]);
   const [adressData, setAddressData] = useState([]);
-  const[addressvalue, setAddressValue] = useState([]);
+  const [addressvalue, setAddressValue] = useState([]);
   const [listadd, SetListadd] = useState([]);
 
 
- 
 
 
-  const { handleChange, handleSubmit, values, errors, } = AgentFunctions(Agent_validation,seen,adressData,listadd);
+
+  const { handleChange, handleSubmit, values, errors, DeleteAddress } = AgentFunctions(
+    Agent_validation,
+    seen,
+    adressData,
+    listadd,
+    setAddressData,);
 
   const getData = (data) => {
     console.log(data);
     setAddressData(data);
 
   };
-  const getValue = (value) =>{
+  const getValue = (value) => {
     setAddressValue(value);
   }
 
-   const getAddressDataLatest=(listaddress) =>
-  {
+  const getAddressDataLatest = (listaddress) => {
     SetListadd(listaddress);
   }
 
-  const RemoveAddress = (index) => {
-    const rows = [...adressData];
-    rows.splice(index, 1);
-    setAddressData(rows);
-  };
   const handleChangeFileUploads = (data) => {
-       setSeen(data)
-   };
+    setSeen(data)
+  };
 
-   const country = [
+  const country = [
     { name: "India" },
-  { name: "Us" }
-];
+    { name: "Us" }
+  ];
   const state = [
     { name: "Kerala" },
-  { name: "Tamilnadu" },
-];
+    { name: "Tamilnadu" },
+  ];
 
-const county = [
-  { name: "Ernamkulam" },
-{ name: "Trissur" },
-];
+  const county = [
+    { name: "Ernamkulam" },
+    { name: "Trissur" },
+  ];
   const addressType = [
     { name: "Work Address" },
-  { name: "Billing Address"},
-   { name: "Permenent Addrzess" },
+    { name: "Billing Address" },
+    { name: "Permenent Addrzess" },
     { name: "Shipping Address", },
   ];
 
-  
-  const deleteAddress = async (e, id, index) => {
-    console.log(index);
-    console.log(id);
-    e.preventDefault();
-    const thisclickrow = e.currentTarget;
-    swal({
-      title: "Are you sure ??",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-      .then((willDelete) => {
-        if (willDelete) {
-          const response = axios
-            .delete(process.env.REACT_APP_API_SERVICE_URL + `/addresses/${id}`)
-            .then((response) => {
-              if (response.status === 200) {
-                swal({
-                  title: "",
-                  text: " Record deleted successfully",
-                  icon: "success",
-                  button: "OK",
-                });
-              }
-              RemoveAddress(index);
 
-            });
-        }
-        else {
-          swal("Your file is safe!");
-        }
-      });
+
+  const RemoveAddress = (index, addrid) => {
+    const rows = [...adressData];
+    rows.splice(index, 1);
+    DeleteAddress(addrid);
+    setAddressData(rows);
   };
 
 
-   
- 
+
   return (<div>
     <AgencyHeader />
     <div>
@@ -135,54 +107,54 @@ const county = [
                         Agent Name <span className="red">*</span>
                       </label>
                       <div className="input-group mb-3">
-                      <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter Agent Name"
-                            name="producerName"
-                            onChange={handleChange}  
-                            value={values.producerName}
-                            aria-label="Date of Submission"
-                            aria-describedby="basic-addon1"
-                          />
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Agent Name"
+                          name="producerName"
+                          onChange={handleChange}
+                          value={values.producerName}
+                          aria-label="Date of Submission"
+                          aria-describedby="basic-addon1"
+                        />
                       </div>
-                       {errors.producerName && (<p className="message">{errors.producerName}</p>)}
+                      {errors.producerName && (<p className="message">{errors.producerName}</p>)}
                     </div>
                     <div className="">
                       <label htmlFor="Submission" className="form-label">
-                      Agent Email <span className="red">*</span>
+                        Agent Email <span className="red">*</span>
                       </label>
                       <div className="input-group mb-3">
-                      <input
-                            type="email"
-                            className="form-control"
-                            placeholder="Enter Agent Email"
-                            name="producerEmail"
-                            onChange={handleChange}
-                            value={values.producerEmail}
-                            aria-label="Date of Submission"
-                            aria-describedby="basic-addon1"
-                          />
+                        <input
+                          type="email"
+                          className="form-control"
+                          placeholder="Enter Agent Email"
+                          name="producerEmail"
+                          onChange={handleChange}
+                          value={values.producerEmail}
+                          aria-label="Date of Submission"
+                          aria-describedby="basic-addon1"
+                        />
                       </div>
-                       {errors.producerEmail && (<p className="message">{errors.producerEmail}</p>)}
+                      {errors.producerEmail && (<p className="message">{errors.producerEmail}</p>)}
                     </div>
                     <div className="">
                       <label htmlFor="Submission" className="form-label">
-                      Agent Phone Number<span className="red">*</span>
+                        Agent Phone Number<span className="red">*</span>
                       </label>
                       <div className="input-group mb-3">
-                      <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter Agent Phone Number"
-                            name="producerPhone"
-                            onChange={handleChange}
-                            value={values.producerPhone}
-                            aria-label="Date of Submission"
-                            aria-describedby="basic-addon1"
-                          />
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Agent Phone Number"
+                          name="producerPhone"
+                          onChange={handleChange}
+                          value={values.producerPhone}
+                          aria-label="Date of Submission"
+                          aria-describedby="basic-addon1"
+                        />
                       </div>
-                       {errors.producerPhone && (<p className="message">{errors.producerPhone}</p>)}
+                      {errors.producerPhone && (<p className="message">{errors.producerPhone}</p>)}
                     </div>
                   </div>
                 </div>
@@ -245,7 +217,7 @@ const county = [
                               }}
                             >
                               <TableCell component="th" scope="row">
-                              {addressType[row.addrType - 1].name}
+                                {addressType[row.addrType - 1].name}
 
                               </TableCell>
                               <TableCell align="right">
@@ -254,24 +226,25 @@ const county = [
                               <TableCell align="right">
                                 {row.addrLine2}
                               </TableCell>
-                            
+
                               <TableCell align="left">
-                               {row.countryId}
+                                {row.countryId}
                               </TableCell>
                               <TableCell align="left">
-                                 { row.stateId}
+                                {row.stateId}
                               </TableCell>
                               <TableCell align="right">
-                              {row.countyId}
+                                {row.countyId}
                               </TableCell>
                               <TableCell align="left">
                                 {row.zip}
                               </TableCell>
                               <TableCell>
                                 <DeleteIcon
-                                   onClick={(e) => {
+                                  onClick={(e) => {
 
-                                    deleteAddress(e, row.addrId, index);
+                                    DeleteAddress(index, row.addressId);
+
                                   }}
                                 />
                               </TableCell>
@@ -411,14 +384,14 @@ const county = [
                         <h4 className="add-headd-sub">Upload Files</h4>
 
                         <div className="page-grid-2 p-tb-50">
-                            <div className="choose-file-sty">
-                            <Multiplefileupload handleChangeFileUploads={handleChangeFileUploads}/>
-                            </div> 
-                            <div>
-                              <div className="upload-righ-icon"></div>
-                              
-                            </div>
-                      </div>
+                          <div className="choose-file-sty">
+                            <Multiplefileupload handleChangeFileUploads={handleChangeFileUploads} />
+                          </div>
+                          <div>
+                            <div className="upload-righ-icon"></div>
+
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -449,5 +422,5 @@ const county = [
       </form>
     </div>
   </div>
-);
+  );
 }

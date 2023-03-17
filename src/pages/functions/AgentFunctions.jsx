@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {useNavigate} from 'react-router-dom';
-const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
+const AgentFunctions = (Agent_validation, seen, adressData, listadd, setAddressData) => {
   const [values, SetValues] = useState({
     producerName: "",
     producerEmail: "",
@@ -53,6 +53,14 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
           });
 
           submitAddress(response.data.producerId);
+          swal({
+            title: "",
+            text: "Agent Added successfully",
+            icon: "success",
+            button: "ok",
+
+          });
+        navigate('/listagent', {replace: true});
         }
       });
   };
@@ -92,6 +100,7 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
             text: "Agent Added successfully",
             icon: "success",
             button: "ok",
+
           });
         navigate('/listagent', {replace: true});
 
@@ -109,7 +118,48 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
       //   }
       // });
   };
+  const RemoveAddress = (index) => {
+   
 
-  return { handleChange, values, handleSubmit, errors, adressData };
+    const rows = [...adressData];
+    rows.splice(index, 1);
+    setAddressData(rows);
+  };
+
+  const DeleteAddress=async(index,addrid )=>
+{
+  swal({
+    title: "Are you sure to Delete ??",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      const res =  axios.delete(
+        process.env.REACT_APP_API_SERVICE_URL + `/addresses/${addrid}`
+      )
+    .then((response) => {
+      // thisclickrow.closest("tr").remove();
+      if (response.status === 200) {
+        swal({
+          title: "",
+          text: " Record deleted successfully",
+          icon: "success",
+          button: "ok",
+
+        });
+        RemoveAddress(index);
+      }
+    });
+    }
+  });
+  
+ 
+
+}
+
+
+  return { handleChange, values, handleSubmit, errors, adressData ,DeleteAddress};
 };
 export default AgentFunctions;

@@ -177,6 +177,7 @@ EnhancedTableHead.propTypes = {
 //           text: "Agent Added successfully",
 //           icon: "success",
 //           button: "ok",
+
 //         });
 //       }
 //     });
@@ -199,7 +200,7 @@ const AgentToagency = async (e, data, AgentId, reseMethod) => {
 
   swal({
     title: "Are you sure ",
-    text: "you wish to add this item?",
+    text: "You wish to add this item?",
    
     showCancelButton: true,
     confirmButtonColor: "#2e4153",
@@ -224,6 +225,7 @@ const AgentToagency = async (e, data, AgentId, reseMethod) => {
             text: "Agent Added successfully",
             icon: "success",
             button: "ok",
+
           });
         }
       });

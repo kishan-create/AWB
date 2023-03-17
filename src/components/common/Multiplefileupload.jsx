@@ -168,9 +168,7 @@ export default function Multiplefileupload(props)
                               {row.name}
                             </TableCell>
                             <TableCell align="right" className="p-l-1" >
-                            <div>   <a onClick={() => downloadTxtFile()}>
-                            <DownloadIcon/>
-                                        </a>
+                            <div>  
                                         {" "}
                                         <a onClick={(e) => deleteFile()}>
                                         <DeleteIcon/>
@@ -186,7 +184,7 @@ export default function Multiplefileupload(props)
                             <div className="td-sample-txt1">.</div>
                             </TableCell>
                             <TableCell align="right"  className="p-l-1"> 
-                                <DownloadIcon/> 
+                                {/* <DownloadIcon/>  */}
                                 <DeleteIcon/> 
                             </TableCell> 
                           </TableRow>
@@ -195,7 +193,7 @@ export default function Multiplefileupload(props)
                             <div className="td-sample-txt1">.</div>
                             </TableCell>
                             <TableCell align="right"  className="p-l-1"> 
-                                <DownloadIcon/> 
+                                {/* <DownloadIcon/>  */}
                                 <DeleteIcon/> 
                             </TableCell> 
                           </TableRow>
@@ -204,7 +202,7 @@ export default function Multiplefileupload(props)
                             <div className="td-sample-txt1">.</div>
                             </TableCell>
                             <TableCell align="right"  className="p-l-1"> 
-                                <DownloadIcon/> 
+                                {/* <DownloadIcon/>  */}
                                 <DeleteIcon/> 
                             </TableCell> 
                           </TableRow>
@@ -213,7 +211,7 @@ export default function Multiplefileupload(props)
                             <div className="td-sample-txt1">.</div>
                             </TableCell>
                             <TableCell align="right"  className="p-l-1"> 
-                                <DownloadIcon/> 
+                                {/* <DownloadIcon/>  */}
                                 <DeleteIcon/> 
                             </TableCell> 
                           </TableRow>

@@ -57,35 +57,47 @@ useEffect(() => {
 
   };
   const onSubmitform = (e) => {
-    
-    const response = axios.post(
-      process.env.REACT_APP_API_SERVICE_URL + "/docgeneration",
-    
-      values
-    ).then((response) => {
-      if (response.status === 200) {
-                 let templateID= response.data.templateId;
-                 setTempid(templateID);
-           
+    const response = axios
+      .post(
+        process.env.REACT_APP_API_SERVICE_URL + "/docgeneration",
+
+        values
+      )
+      .then((response) => {
+        if (response.status === 208) {
+          setErrors({ ...errors, templateName: "Duplicate entry found with same template name or template code" });
+          // setErrors({ ...errors, templateName: "Duplicate entry found with same template name or template code" });
   
-      
-  next(templateID);
-  swal({
-    title: "",
-    text: "Document Added successfully",
-    icon: "success",
-    button: "ok",
-  });
-
-
-      }
-    });;
+        }
 
 
 
-    
+        if (response.status === 200) {
+          let templateID = response.data.templateId;
+          setTempid(templateID);
+
+          next(templateID);
+          swal({
+            title: "",
+            text: "Document Added successfully",
+            icon: "success",
+            button: "OK",
+          });
+        }
+      })
+      .catch(function (error) {
+        let dupmsg = error.response.data.apierror.message;
+
+        if (
+          error.response.data.apierror.status ===
+          "ALREADY_REPORTED"
+        ) {
+          setErrors({ ...errors, templateCode: "Template Code already exist" });
+          setErrors({ ...errors, templateName: "Template Name already exist" });
+
+        }
+      });
   };
-
 
  
   return (
