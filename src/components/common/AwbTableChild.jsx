@@ -25,7 +25,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import EditMultipleAddress from "../../pages/agency/EditMultipleAddress";
 
-// import EditMultipleAddress from "../../pages/agents/EditMultipleAddressAgent";
+import EditMultipleAddressAgent from "../../pages/agents/EditMultipleAddressAgent";
 import Multiplefileupload from "./../../components/common/Multiplefileupload";
 import { useParams } from 'react-router-dom';
 const {
@@ -171,7 +171,7 @@ export default function AwbTableChild(props) {
             title: "",
             text: "Document Added successfully",
             icon: "success",
-            button: "ok",
+            button: "OK",
           });
         }
         getRows();
@@ -225,7 +225,7 @@ export default function AwbTableChild(props) {
 
           <h4 class="add-headd-sub1 fl-left">{props.displayName}</h4>
           {(() => {
-            if (props.displayName === "Address") {
+            if (props.displayName === "Agency Address") {
               return (
                 <EditMultipleAddress
                   agencyID={props.paramid}
@@ -234,7 +234,17 @@ export default function AwbTableChild(props) {
                   method={getRows}
                 />
               );
-            } else if (props.displayName === "Documents") {
+            }
+            else if (props.displayName === "Agent Address") {
+              return (
+                <EditMultipleAddressAgent
+                  agencyID={props.paramid}
+                  addressData={getData}
+                  latestAddress={getAddressDataLatest}
+                  method={getRows}
+                />
+              );
+            }  else if (props.displayName === "Documents") {
               return (
                 <Link to="">
                   <button
@@ -247,7 +257,9 @@ export default function AwbTableChild(props) {
                   </button>
                 </Link>
               );
-            } else {
+            } 
+            
+            else {
               return (
                 <Link to="">
                   <button type="button" class="next-pre-btn mrg-r-3 fl-right">

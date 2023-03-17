@@ -12,11 +12,11 @@ export default function AgentsData() {
       const tableheader = [
     
   
-        { field: 'producerName', headerName: 'Producer Name', width: 130 },
+        { field: 'producerName', headerName: 'Agent Name', width: 130 },
        
-        { field: 'producerEmail', headerName: 'Producer Email', width: 130 },
+        { field: 'producerEmail', headerName: 'Agent Email', width: 130 },
   
-        { field: 'producerPhone', headerName: 'Producer Phone', width: 130 },
+        { field: 'producerPhone', headerName: 'Agent Phone', width: 130 },
   
       
   

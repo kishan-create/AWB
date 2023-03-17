@@ -8,7 +8,7 @@ const Editagentfunctions = (id, Agency_Validation) => {
   const [passwordType, setPasswordType] = useState("password");
   const [passwordInput, setPasswordInput] = useState("");
   const [values, SetValues] = useState({
-    agencyId: "",
+    // agencyId: "",
     agencyName: "",
     agencyNpn: "",
     agencyFbin: "",
@@ -50,7 +50,7 @@ useEffect(() => {
 
     if (response.status == 200) {
       SetValues({
-        agencyId: 1,
+        // agencyId: 1,
         agencyName: response.data.agencyName,
         agencyNpn: response.data.agencyNpn,
         agencyFbin: response.data.agencyFbin,

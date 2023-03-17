@@ -174,7 +174,7 @@ const EditAddressFunctions = (id, MultipleAddressValidation) => {
             title: "",
             text: "Address Updated successfully",
             icon: "success",
-            button: "ok",
+            button: "OK",
           });
         }
       });

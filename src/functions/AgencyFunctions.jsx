@@ -53,10 +53,12 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
           });
 
           submitAddress(response.data.agencyId);
+         
         }
       });
   };
   const submitAddress = (agencyID) => {
+    console.log("address");
     listadd.map((listaddress, key) => {
       listaddress.agencyId = agencyID;
     });
@@ -91,7 +93,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
             title: "",
             text: "Agency Added successfully",
             icon: "success",
-            button: "ok",
+            button: "OK",
           });
           navigate('/listagency', {replace: true});
         }
@@ -100,7 +102,6 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd) => {
 
   const DeleteAddress=async(addrid)=>
 {
-  console.log(addrid);
   const res = await axios.delete(
     process.env.REACT_APP_API_SERVICE_URL + `/addresses/${addrid}`
   );

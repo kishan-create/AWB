@@ -117,10 +117,9 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Add To Group">
+        <Tooltip title="Add Users to User Group">
           <IconButton
             onClick={(e) => {
-              if (window.confirm("Are you sure you wish to add this item?"))
                 UserTogroups(e, data, props.userid, props.resetCheckbox);
             }}
           >
@@ -142,14 +141,32 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
+
+
+
 const UserTogroups = async (e, data, userid, reseMethod) => {
+  e.preventDefault();
   var Groupid = userid;
   var gmembers = data[0];
   const userData = {
     Groupid: Groupid,
     groupmembers: data[0],
   };
-  const response = axios
+
+
+  swal({
+    title: "Are you sure ",
+    text: "you wish to add this item?",
+   
+    showCancelButton: true,
+    confirmButtonColor: "#2e4153",
+    confirmButtonText: "Yes",
+    closeOnConfirm: false,
+    buttons: true,
+    buttons: ["No", "Yes"],
+  }).then((willDelete) => {
+    if (willDelete) {
+      const response = axios
     .post(
       process.env.REACT_APP_API_ADMIN_URL +
         `/usergroup/${Groupid}/groupmembers`,
@@ -167,8 +184,9 @@ const UserTogroups = async (e, data, userid, reseMethod) => {
         });
       }
     });
+    }
+  });
 };
-
 export default function AddUsers(props) {
   const { id } = useParams();
 

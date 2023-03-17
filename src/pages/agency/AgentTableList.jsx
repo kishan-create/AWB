@@ -142,13 +142,11 @@ List Agents
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
+        <Tooltip title="Delete Agent from Agency">
           <IconButton>
             <DeleteIcon
               onClick={(e) => {
-                if (
-                  window.confirm("Are you sure you wish to delete this item?")
-                )
+               
               
                   DeleteAgent(e, data, props.getGroupID, props.resetCheckbox);
               }}
@@ -170,6 +168,36 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
+// const DeleteAgent = async (e,data, groupID, reseMethod) => {
+//   e.preventDefault();
+
+//   let dataID = data[0];
+
+//   const thisclickrow = e.currentTarget;
+
+  
+//   const response = await axios
+//     .delete(
+//       process.env.REACT_APP_API_SERVICE_URL + `/agency/${groupID}/agents`,
+
+     
+//       { data: dataID }
+//     )
+//     .then((response) => {
+      
+//       if (response.status === 200) {
+//         reseMethod();
+//         swal({
+//           title: "",
+//           text: " Record deleted successfully",
+//           icon: "success",
+//           button: "ok",
+//         });
+//       }
+//     });
+// };
+
+
 const DeleteAgent = async (e,data, groupID, reseMethod) => {
   e.preventDefault();
 
@@ -177,8 +205,21 @@ const DeleteAgent = async (e,data, groupID, reseMethod) => {
 
   const thisclickrow = e.currentTarget;
 
-  
-  const response = await axios
+
+  swal({
+    title: "Are you sure",
+    text: "You want to delete this Entry?",
+    type: "warning",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#2e4153",
+    confirmButtonText: "Yes",
+    closeOnConfirm: false,
+    buttons: true,
+    buttons: ["No", "Yes"],
+  }).then((willDelete) => {
+    if (willDelete) {
+      const response =  axios
     .delete(
       process.env.REACT_APP_API_SERVICE_URL + `/agency/${groupID}/agents`,
 
@@ -197,6 +238,8 @@ const DeleteAgent = async (e,data, groupID, reseMethod) => {
         });
       }
     });
+    }
+  });
 };
 export default function AgentTableList(props) {
   const id  = useParams();
