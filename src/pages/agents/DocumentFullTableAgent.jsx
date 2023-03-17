@@ -224,16 +224,16 @@ export default function DocumentFullTableAgent(id) {
 
 
   const uploaddocument = async (id, filename) => {
-    const response = await axios
-      .get(process.env.REACT_APP_API_SERVICE_URL + `/document/download/${id}`)
-      .then(response => {
-        const blob = new Blob([response.data], { type: 'application/octet-stream' });
-        saveAs(blob, filename);
-
-      })
-
-
-
+    try {
+      const response = await axios.get(process.env.REACT_APP_API_SERVICE_URL + `/document/download/${id}`, {
+        responseType: 'blob'
+      });
+  
+      const blob = new Blob([response.data], { type: 'application/octet-stream' });
+      saveAs(blob, filename);
+    } catch (error) {
+      console.log(error);
+    }
 
 
   };

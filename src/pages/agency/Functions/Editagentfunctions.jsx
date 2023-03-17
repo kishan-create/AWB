@@ -81,7 +81,12 @@ const onSubmitform = (e) => {
     values)
     .then((responseuser) => {
 
-      if (responseuser.status === 200) {
+      if (responseuser.status === 208) {
+        setErrors({ ...errors, agencyName: "Agency Name already exist" });
+
+      }
+
+      else if (responseuser.status === 200) {
 
        
         swal({
