@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { useRef, useEffect } from "react";
 import axios from "axios";
@@ -7,92 +5,80 @@ import swal from "sweetalert";
 
 import { Link } from "react-router-dom";
 
-
 import Document_Validation from "../validations/Document_Validation";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
 
-
 export default function Wizardstep1({ next, previous }) {
-
   const [tempid, setTempid] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
-
-   const [values, SetValues] = useState({
-
-    templateName:"", 
-  templateDec: "",
-  templateCode: "",
-  filter1: "",
-  filter2: "",
- 
- 
-});
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  SetValues({
-    ...values,
-    [name]: value,
+  const [values, SetValues] = useState({
+    templateName: "",
+    templateDec: "",
+    templateCode: "",
+    filter1: "",
+    filter2: "",
   });
-};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    SetValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
-
-useEffect(() => {
-  if (Object.keys(errors).length === 0 && submitted) {
-    onSubmitform();
-  }
-}, [errors]);
-
-
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && submitted) {
+      onSubmitform();
+    }
+  }, [errors]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const test = setErrors(Document_Validation(values));
     setSubmitted(true);
-  
-
   };
   const onSubmitform = (e) => {
-    
-    const response = axios.post(
-      process.env.REACT_APP_API_SERVICE_URL + "/docgeneration",
-    
-      values
-    ).then((response) => {
-      if (response.status === 200) {
-                 let templateID= response.data.templateId;
-                 setTempid(templateID);
-           
-  
-      
-  next(templateID);
-  swal({
-    title: "",
-    text: "Document Added successfully",
-    icon: "success",
-    button: "ok",
-  });
+    const response = axios
+      .post(
+        process.env.REACT_APP_API_SERVICE_URL + "/docgeneration",
 
+        values
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          let templateID = response.data.templateId;
+          setTempid(templateID);
 
-      }
-    });;
+          next(templateID);
+          swal({
+            title: "",
+            text: "Document Added successfully",
+            icon: "success",
+            button: "ok",
+          });
+        }
+      })
+      .catch(function (error) {
+        let dupmsg = error.response.data.apierror.message;
 
-
-
-    
+        if (
+          error.response.data.apierror.message ===
+          "Duplicate entry found with same template name or template code."
+        ) {
+          setErrors({ ...errors, templateCode: "Template Code already exist" });
+        }
+      });
   };
 
-
- 
   return (
     <div>
       <div>
-              
-        <form noValidate encType="multipart/form-data"   onSubmit={handleSubmit} >
+        <form noValidate encType="multipart/form-data" onSubmit={handleSubmit}>
           <div className=" ">
             <div className=" " role="alert">
               <div class="inner p-15">
@@ -130,8 +116,11 @@ useEffect(() => {
                             aria-describedby="basic-addon1"
                             value={values.templateName}
                           />
-                    {errors.templateName && (<p className="message validation-sty" >{errors.templateName}</p>)}
-
+                          {errors.templateName && (
+                            <p className="message validation-sty">
+                              {errors.templateName}
+                            </p>
+                          )}
                         </div>
                       </div>
 
@@ -149,8 +138,11 @@ useEffect(() => {
                           aria-describedby="basic-addon1"
                           value={values.templateCode}
                         />
-                    {errors.templateCode && (<p className="message validation-sty">{errors.templateCode}</p>)}
-
+                        {errors.templateCode && (
+                          <p className="message validation-sty">
+                            {errors.templateCode}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -169,8 +161,11 @@ useEffect(() => {
                           aria-describedby="basic-addon1"
                           value={values.templateDec}
                         />
-                    {errors.templateDec && (<p className="message validation-sty">{errors.templateDec}</p>)}
-
+                        {errors.templateDec && (
+                          <p className="message validation-sty">
+                            {errors.templateDec}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -189,9 +184,11 @@ useEffect(() => {
                           aria-describedby="basic-addon1"
                           value={values.filter1}
                         />
-                                                {errors.filter1 && (<p className="message validation-sty">{errors.filter1}</p>)}
-
-          
+                        {errors.filter1 && (
+                          <p className="message validation-sty">
+                            {errors.filter1}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -210,8 +207,11 @@ useEffect(() => {
                           aria-describedby="basic-addon1"
                           value={values.filter2}
                         />
-                         {errors.filter2 && (<p className="message validation-sty">{errors.filter2}</p>)}
-
+                        {errors.filter2 && (
+                          <p className="message validation-sty">
+                            {errors.filter2}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -224,23 +224,14 @@ useEffect(() => {
             </div>
           </div>
 
-
-
           <div className="p-l-15">
-            <button
-              className="next-pre-btn  mrg-r-3"
-              type="submit"
-             
-            >
+            <button className="next-pre-btn  mrg-r-3" type="submit">
               Next
             </button>
             <Link to="/document">
-            <button
-              type="button"
-              className="next-pre-btn-secondary mrg-r-3"
-            >
-              Cancel{" "}
-            </button>
+              <button type="button" className="next-pre-btn-secondary mrg-r-3">
+                Cancel{" "}
+              </button>
             </Link>
           </div>
         </form>
