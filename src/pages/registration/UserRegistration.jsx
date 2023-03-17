@@ -48,25 +48,6 @@ export default function UserRegistration() {
 
                   <div className="email mb-3">
                     <label className="sr-only" htmlFor="signup-email">
-                    User Full Name
-                    </label>
-                    <input
-                      onChange={handleChange}
-                      value={values.userFullName}
-                      id="userFullName"
-                      name="userFullName"
-                      type="text"
-                      className="form-control signup-name"
-                      placeholder="Enter User Full name"
-                      
-                    />
-                    {errors.userFullName && (
-                      <p className="message">{errors.userFullName}</p>
-                    )}
-                  </div>
-
-                  <div className="email mb-3">
-                    <label className="sr-only" htmlFor="signup-email">
                       {" "}
                       User Email
                     </label>
@@ -84,6 +65,27 @@ export default function UserRegistration() {
                       <p className="message">{errors.userEmail}</p>
                     )}
                   </div>
+
+                  <div className="email mb-3">
+                    <label className="sr-only" htmlFor="signup-email">
+                    User Full Name
+                    </label>
+                    <input
+                      onChange={handleChange}
+                      value={values.userFullName}
+                      id="userFullName"
+                      name="userFullName"
+                      type="text"
+                      className="form-control signup-name"
+                      placeholder="Enter User Full name"
+                      
+                    />
+                    {errors.userFullName && (
+                      <p className="message">{errors.userFullName}</p>
+                    )}
+                  </div>
+
+                
 
            
 
