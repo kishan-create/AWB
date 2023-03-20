@@ -18,7 +18,8 @@ export default function EditAddressTable() {
           <div className="inner">
             <div className="table-responsive">
          
-            <AwbTable tableHeader="DOCUMENT" tableRow={"document/orgintype/AGENCY/orgintypeid/"+params.id} id="docId" baseURL={process.env.REACT_APP_API_SERVICE_URL} displayName="Documents"/>
+            <AwbTable tableHeader="DOCUMENT" DeleteURL="document" tableRow={"document/orgintype/AGENCY/orgintypeid/"+params.id} id="docId" baseURL={process.env.REACT_APP_API_SERVICE_URL} displayName="Documents"/>
+
             </div>
           </div>
         </div>

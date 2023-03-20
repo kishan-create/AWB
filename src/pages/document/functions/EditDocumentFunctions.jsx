@@ -102,6 +102,7 @@ if (Object.keys(errors).length === 0 && submitted) {
         text: "Document Updated successfully",
         icon: "success",
         button: "OK",
+
       });
 
 

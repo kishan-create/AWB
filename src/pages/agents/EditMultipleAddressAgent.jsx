@@ -143,17 +143,18 @@ const agencyID = params.id
             countyId: "",
             zip: "",
           };
-          setInputFields((prevState) => [...prevState, data]);
-          setbtnCount(btnCount + 1);
-          props.addressData(inputFields);
-          SetlistAddress([...listaddress,{
-            agyAddrTypeCode : response.data.addrType,
-            agencyId : "",
-            addressId:response.data.addrId
+          // setInputFields((prevState) => [...prevState, data]);
+          // setbtnCount(btnCount + 1);
+          // props.addressData(inputFields);
+          // SetlistAddress([...listaddress,{
+          //   agyAddrTypeCode : response.data.addrType,
+          //   agencyId : "",
+          //   addressId:response.data.addrId
 
-          }])
+          // }])
 
-      submitAddress( listaddress, agencyID);
+          submitAddress( response.data.addrType,agencyID,response.data.addrId);
+
       
 
 
@@ -167,13 +168,16 @@ const agencyID = params.id
   }
 
 
-  const submitAddress = () => {
-  // console.log(listaddress);
-  listaddress.map((listaddkey, key) => {
-    listaddkey.producerId = agencyID;
-  });
+  const submitAddress = (addtype,agencyid,adid) => {
+    let addvalue=[{
+      agyAddrTypeCode:addtype,
+      producerId:agencyid,
+       addressId:adid,
+       }];
+      
+  
     const response = axios
-      .post(process.env.REACT_APP_API_SERVICE_URL + "/produceraddr", listaddress)
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/produceraddr", addvalue)
       .then((response) => {
         if (response.status === 200) {
             setIsSubmitting(false);

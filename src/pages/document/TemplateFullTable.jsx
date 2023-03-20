@@ -226,6 +226,7 @@ export default function TemplateFullTable() {
                 text: " Record deleted successfully",
                 icon: "success",
                 button: "OK",
+
               });
             }
           });
@@ -234,15 +235,21 @@ export default function TemplateFullTable() {
       }
     });
   };
-  const uploaddocument = async (id, filename) => {
-    const response = await axios
-      .get(process.env.REACT_APP_API_SERVICE_URL + `/document/download/${id}`)
-      .then((response) => {
-        const blob = new Blob([response.data], {
-          type: "application/octet-stream",
-        });
-        saveAs(blob, filename);
+ 
+
+  const downloaddocument = async (id, filename) => {
+    try {
+      const response = await axios.get(process.env.REACT_APP_API_SERVICE_URL + `/document/download/${id}`, {
+        responseType: 'blob'
       });
+  
+      const blob = new Blob([response.data], { type: 'application/octet-stream' });
+      saveAs(blob, filename);
+    } catch (error) {
+      console.log(error);
+    }
+
+
   };
 
   const handleSubmitFile = (e) => {
@@ -279,6 +286,7 @@ export default function TemplateFullTable() {
             text: "Document Added successfully",
             icon: "success",
             button: "OK",
+
           });
         }
         getDocumentAddress(test);
@@ -365,7 +373,7 @@ export default function TemplateFullTable() {
                                             </Link>
                                             <Link
                                               onClick={() => {
-                                                uploaddocument(
+                                                downloaddocument(
                                                   row.docId,
                                                   row.orginalFileName
                                                 );

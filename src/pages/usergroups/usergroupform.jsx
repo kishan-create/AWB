@@ -60,6 +60,7 @@ const Usergroupform = (usergroup_validation) => {
           text: "User Group Details added successfully",
           icon: "success",
           button: "OK",
+
         }).then(() => {
          
           navigate('/grouplist', {replace: true});

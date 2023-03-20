@@ -89,13 +89,7 @@ const agencyID = params.id
   //  getAllCountryName();
     props.latestAddress(listaddress);
   }, [listaddress, errors]);
-  const getAllCountryName = async () => {
-    const response = http.get("/lookupdata/2").then((response) => {
-      if (response.status === 200) {
-        SetCountryName(response.data);
-      }
-    });
-  };
+
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
     //subtitle.style.color = "#f00";
@@ -148,17 +142,12 @@ const agencyID = params.id
             countyId: "",
             zip: "",
           };
-          setInputFields((prevState) => [...prevState, data]);
-          setbtnCount(btnCount + 1);
-          props.addressData(inputFields);
-          SetlistAddress([...listaddress,{
-            agyAddrTypeCode : response.data.addrType,
-            agencyId : "",
-            addressId:response.data.addrId
+          //setInputFields((prevState) => [...prevState, data]);
+         // setbtnCount(btnCount + 1);
+          //props.addressData(inputFields);
+       
 
-          }])
-
-      submitAddress( listaddress, agencyID);
+      submitAddress( response.data.addrType,agencyID,response.data.addrId);
       
 
 
@@ -172,13 +161,17 @@ const agencyID = params.id
   }
 
 
-  const submitAddress = () => {
-   
-    listaddress.map((listaddkey, key) => {
-      listaddkey.agencyId = agencyID;
-    });
+  const submitAddress = (addtype,agencyid,adid) => {
+ let addvalue=[{
+agyAddrTypeCode:addtype,
+ agencyId:agencyid,
+ addressId:adid,
+ }];
+
+ 
+
     const response = axios
-      .post(process.env.REACT_APP_API_SERVICE_URL + "/agencyaddr", listaddress)
+      .post(process.env.REACT_APP_API_SERVICE_URL + "/agencyaddr",addvalue)
       .then((response) => {
         if (response.status === 200) {
             setIsSubmitting(false);

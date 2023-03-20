@@ -85,6 +85,7 @@ export default function Wizardstep1({ next, previous }) {
       });
   };
 
+ 
   return (
     <div>
       <div>
@@ -134,29 +135,7 @@ export default function Wizardstep1({ next, previous }) {
                         </div>
                       </div>
 
-                      <label htmlFor="options">
-                        Template Code :<span className="red"> *</span>
-                      </label>
-                      <div className="input-group mb-3">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Template Code"
-                          name="templateCode"
-                          onChange={handleChange}
-                          aria-label="Date of Submission"
-                          aria-describedby="basic-addon1"
-                          value={values.templateCode}
-                        />
-                        {errors.templateCode && (
-                          <p className="message validation-sty">
-                            {errors.templateCode}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="p-b-15">
+                      <div className="p-b-15">
                       <label htmlFor="Submission" className="form-label">
                         Template Description <span className="red"> *</span>
                       </label>
@@ -179,6 +158,27 @@ export default function Wizardstep1({ next, previous }) {
                       </div>
                     </div>
 
+
+                      <label htmlFor="options">
+                        Template-Code :<span className="red"> *</span>
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Template Code"
+                          name="templateCode"
+                          onChange={handleChange}
+                          aria-label="Date of Submission"
+                          aria-describedby="basic-addon1"
+                          value={values.templateCode}
+                        />
+                    {errors.templateCode && (<p className="message validation-sty">{errors.templateCode}</p>)}
+
+                      </div>
+                    </div>
+
+                   
                     <div className="p-b-15">
                       <label htmlFor="Submission" className="form-label">
                         Tag 1<span className="red"> *</span>

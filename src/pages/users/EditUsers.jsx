@@ -42,17 +42,7 @@ export default function EditUsers() {
                     )}
                     </div>
                   </div>
-                  <div className="row gx-2 gy-2">
-                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" className="form-label">User full Name <span className="red">*</span></label>
-                      <div className="input-group mb-3">
-                        <input type="text" name="userFullName" onChange={handleChange}  value={values.userFullName}  className="form-control" placeholder="Enter User full Name" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
-                      </div>
-                      {errors.userFullName && (
-                      <p className="message">{errors.userFullName}</p>
-                    )}
-                    </div>
-                  </div>
+
                   <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" className="form-label">User Email<span className="red">*</span></label>
@@ -64,6 +54,18 @@ export default function EditUsers() {
                     )}
                     </div>
                   </div>
+                  <div className="row gx-2 gy-2">
+                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                      <label htmlFor="Submission" className="form-label">User full Name <span className="red">*</span></label>
+                      <div className="input-group mb-3">
+                        <input type="text" name="userFullName" onChange={handleChange}  value={values.userFullName}  className="form-control" placeholder="Enter User full Name" aria-label="Enter Full Name" aria-describedby="basic-addon1" />
+                      </div>
+                      {errors.userFullName && (
+                      <p className="message">{errors.userFullName}</p>
+                    )}
+                    </div>
+                  </div>
+               
                   <div className="row gx-2 gy-2">
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                       <label htmlFor="Submission" n className="form-label">User Phone number<span className="red">*</span></label>

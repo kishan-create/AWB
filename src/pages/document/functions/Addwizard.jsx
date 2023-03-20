@@ -66,6 +66,7 @@ function Addwizard(selectedOption, previousID, content, selectedFile,previous) {
             text: "Document Uploaded successfully",
             icon: "success",
             button: "OK",
+
           }).then(() => {
             // Redirect to another page using history.push
             navigate("/document", { replace: true });

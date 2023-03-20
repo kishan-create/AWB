@@ -24,18 +24,14 @@ export default function Addagency() {
     Agency_Validation,
     adressData,
     fileData,
-    listadd
+    listadd,
+    setAddressData,
   );
   const getData = (data) => {
     console.log(data);
     setAddressData(data);
   };
-  const RemoveAddress = (index,addrid) => {
-    const rows = [...adressData];
-    rows.splice(index, 1);
-    DeleteAddress(addrid);
-    setAddressData(rows);
-  };
+
 
   const handleChangeFileUploads = (data) => {
     setFileData(data);
@@ -118,7 +114,7 @@ export default function Addagency() {
                         </label>
                         <div className="input-group mb-3">
                           <input
-                            type="text"
+                            type="number"
                             className="form-control"
                             placeholder="Enter Agency Fbin"
                             name="agencyFbin"
@@ -209,12 +205,8 @@ export default function Addagency() {
                                 <TableCell>
                                   <DeleteIcon
                                     onClick={() => {
-                                      if (
-                                        window.confirm(
-                                          "Are you sure you wish to delete this item?"
-                                        )
-                                      )
-                                        RemoveAddress(index,row.addressId);
+                                  
+                                      DeleteAddress(index,row.addressId);
                                     }}
                                   />
                                 </TableCell>

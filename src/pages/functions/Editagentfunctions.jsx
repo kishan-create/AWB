@@ -103,7 +103,11 @@ const onSubmitform = (e) => {
     values)
     .then((responseuser) => {
 
-      if (responseuser.status === 200) {
+      if (responseuser.status === 208) {
+        setErrors({ ...errors, producerEmail: "Email Address already exist" });
+
+      }
+      else if (responseuser.status === 200) {
 
        
         swal({
@@ -111,6 +115,7 @@ const onSubmitform = (e) => {
           text: "Agent Updated successfully",
           icon: "success",
           button: "OK",
+
         });
        
       }
