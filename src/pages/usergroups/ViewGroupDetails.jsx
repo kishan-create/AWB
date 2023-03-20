@@ -330,7 +330,7 @@ export default function ViewGroupDetails(props) {
                       key={index}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox" className="td-left">
+                      <TableCell padding="checkbox" >
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
