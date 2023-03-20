@@ -469,7 +469,7 @@ export default function TemplateFullTable() {
                                     Select Document file:
                                     <input
                                       type="file"
-                                      accept=".dotx"
+                                      accept=".docx"
                                       onChange={handleFileInputChange}
                                     />
                                   </label>

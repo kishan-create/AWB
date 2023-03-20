@@ -32,7 +32,7 @@ export default function Addagent() {
   const { handleChange, handleSubmit, values, errors, } = AgentFunctions(Agent_validation,seen,adressData,listadd);
 
   const getData = (data) => {
-    console.log(data);
+ 
     setAddressData(data);
 
   };

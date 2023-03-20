@@ -156,7 +156,7 @@ const UserTogroups = async (e, data, userid, reseMethod) => {
 
   swal({
     title: "Are you sure ",
-    text: "you wish to add this item?",
+    text: "You wish to add this item?",
    
     showCancelButton: true,
     confirmButtonColor: "#2e4153",
@@ -180,7 +180,7 @@ const UserTogroups = async (e, data, userid, reseMethod) => {
           title: "",
           text: "User Added successfully",
           icon: "success",
-          button: "ok",
+          button: "OK",
         });
       }
     });

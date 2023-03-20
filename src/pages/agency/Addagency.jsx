@@ -92,7 +92,7 @@ export default function Addagency() {
                             value={values.agencyName}
                           />
                         </div>
-                         {errors.agencyName && (<p className="message">{errors.agencyName}</p>)}
+                         {errors.agencyName && (<p className="message">{errors.agencyName}</p>)}
                       </div>
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
@@ -110,7 +110,7 @@ export default function Addagency() {
                             value={values.agencyNpn}
                           />
                         </div>
-                         {errors.agencyNpn && (<p className="message">{errors.agencyNpn}</p>)}
+                         {errors.agencyNpn && (<p className="message">{errors.agencyNpn}</p>)}
                       </div>
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
@@ -128,7 +128,7 @@ export default function Addagency() {
                             value={values.agencyFbin}
                           />
                         </div>
-                         {errors.agencyFbin && (<p className="message">{errors.agencyFbin}</p>)}
+                         {errors.agencyFbin && (<p className="message">{errors.agencyFbin}</p>)}
                       </div>
                     </div>
                   </div>

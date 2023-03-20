@@ -88,7 +88,7 @@ const updateAgent = async (e) => {
 //             title: "",
 //             text: "Agent Updated successfully",
 //             icon: "success",
-//             button: "ok",
+//             button: "OK",
 //           });
 //         }
 //       });

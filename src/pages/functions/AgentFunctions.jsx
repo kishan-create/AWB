@@ -91,23 +91,16 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd) => {
             title: "",
             text: "Agent Added successfully",
             icon: "success",
-            button: "ok",
-          });
-        navigate('/listagent', {replace: true});
-
+            button: "OK",
+          }).then(() => {
+            // Redirect to another page using history.push
+            navigate("/listagent", { replace: true });
+          });;;
         }
-      })
-      // .catch(function (error) {
-      //   let dupmsg = error.response.data.apierror.message;
+      }
+      )
 
-      //   if (
-      //     error.response.data.apierror.message ===
-      //     "Duplicate entry found with same agent email"
-      //   ) {
-      //     setErrors({ ...errors, producerEmail: "Duplicate entry found with same agent email" });
-        
-      //   }
-      // });
+
   };
 
   return { handleChange, values, handleSubmit, errors, adressData };

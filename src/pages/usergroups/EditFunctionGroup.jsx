@@ -73,7 +73,7 @@ const updateusergroup = async (e) => {
 //         title: "",
 //         text: "User Group Updated successfully",
 //         icon: "success",
-//         button: "ok",
+//         button: "OK",
 //       });
 //     }
 //   }

@@ -90,7 +90,7 @@ const Edituserfunctions = (id,registeration_validation) => {
         title: "",
         text: "User Edited successfully",
         icon: "success",
-        button: "ok",
+        button: "OK",
       }).then(() => {
         navigate("/userlist", { replace: true });
       });
