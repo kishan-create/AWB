@@ -220,7 +220,8 @@ export default function AddAgentToAgency(props) {
     const response = await fetch(
       
 
-      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/agents`
+      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/nonagents`
+
 
     );
     const data = await response.json();

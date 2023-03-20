@@ -282,7 +282,7 @@ export default function ViewGroupDetails(props) {
     getUsers();
   };
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%" }} >
       <button
         type="button"
         class="next-pre-btn mrg-r-3 fl-right"
