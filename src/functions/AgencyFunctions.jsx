@@ -97,16 +97,16 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, setAd
       .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
       .then((response) => {
        
-         if (response.status === 200) {
-          swal({
-            title: "",
-            text: "Agency Added successfully",
-            icon: "success",
-            button: "OK",
+        //  if (response.status === 200) {
+        //   swal({
+        //     title: "",
+        //     text: "Agency Added successfully",
+        //     icon: "success",
+        //     button: "OK",
 
-          });
-          navigate('/listagency', {replace: true});
-        }
+        //   });
+        //   navigate('/listagency', {replace: true});
+        // }
       });
   };
 
@@ -138,7 +138,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, setAd
           title: "",
           text: " Record deleted successfully",
           icon: "success",
-          button: "ok",
+          button: "OK",
 
         });
         RemoveAddress(index);

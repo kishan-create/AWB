@@ -57,7 +57,7 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd, setAddressD
             title: "",
             text: "Agent Added successfully",
             icon: "success",
-            button: "ok",
+            button: "OK",
 
           });
         navigate('/listagent', {replace: true});
@@ -94,20 +94,20 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd, setAddressD
       .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
       .then((responseuser) => {
        
-        if (responseuser.status === 200) {
-          swal({
-            title: "",
-            text: "Agent Added successfully",
-            icon: "success",
-            button: "OK",
-          }).then(() => {
-            // Redirect to another page using history.push
-            navigate("/listagent", { replace: true });
-          });;;
-        }
-      }
-      )
+        // if (responseuser.status === 200) {
+        //   swal({
+        //     title: "",
+        //     text: "Agent Added successfully",
+        //     icon: "success",
+        //     button: "OK",
 
+        //   });
+        // navigate('/listagent', {replace: true});
+
+        // }
+      })
+      // .catch(function (error) {
+      //   let dupmsg = error.response.data.apierror.message;
 
   };
   const RemoveAddress = (index) => {
@@ -138,7 +138,7 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd, setAddressD
           title: "",
           text: " Record deleted successfully",
           icon: "success",
-          button: "ok",
+          button: "OK",
 
         });
         RemoveAddress(index);

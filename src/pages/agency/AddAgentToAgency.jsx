@@ -252,7 +252,8 @@ export default function AddAgentToAgency(props) {
     const response = await fetch(
       
 
-      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/nonagents`
+      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/agents`
+
     );
     const data = await response.json();
     setAgentrows(data);
