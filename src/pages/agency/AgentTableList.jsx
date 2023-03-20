@@ -300,7 +300,8 @@ const handleClick = (event, producerId) => {
   const getAgents = async (id) => {
     const response = await fetch(
     
-      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/nonagents`
+      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/agents`
+
     );
 
     const data = await response.json();
