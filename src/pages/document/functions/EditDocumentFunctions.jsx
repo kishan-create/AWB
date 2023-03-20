@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import Document_Validation from "../../validations/Document_Validation";
 const EditDocumentfunctions = (Document_Validation) => {
   const params = useParams();
 
@@ -26,17 +27,38 @@ const [submitted, setSubmitted] = useState(false);
 useEffect(() => {
 
 
-if (Object.keys(errors).length === 0 && submitted) {
-  onSubmitform();
-}
+  if (Object.keys(errors).length === 0 && submitted) {
+    onSubmitform();
+  }
+  
+  }, [errors]);
 
-}, [errors]);
+  
+  
+    useEffect(() => {
+      getDocumentbyID(params.id);
+      
+    }, []);
 
 
-  useEffect(() => {
-    getDocumentbyID(params.id);
+
+// useEffect(() => {
+
+
+// if (Object.keys(errors).length === 0 && submitted) {
+//   getDocumentbyID(params.id);
+//   onSubmitform();
+
+// }
+
+// }, [errors]);
+
+
+  // useEffect(() => {
+  //   getDocumentbyID(params.id);
+  //   // onSubmitform();
     
-  }, []);
+  // }, []);
   const id =params.id;
   const handlePasswordChange = (evnt) => {
     setPasswordInput(evnt.target.value);
@@ -82,14 +104,16 @@ if (Object.keys(errors).length === 0 && submitted) {
 
 
   const updateagents = async (e) => {
+   
     e.preventDefault();
     const test = setErrors(Document_Validation(values));
     setSubmitted(true);
+   
   
   };
   const onSubmitform = async (e) => {
     
-    e.preventDefault();
+   
     const res = await axios.put(
       process.env.REACT_APP_API_SERVICE_URL +`/docgeneration/${id}`,
       values

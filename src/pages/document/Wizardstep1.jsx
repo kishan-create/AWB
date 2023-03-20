@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useRef, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import { useParams } from "react-router-dom";
+
 
 import { Link } from "react-router-dom";
 
@@ -11,6 +13,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
 
 export default function Wizardstep1({ next, previous }) {
+  const params = useParams();
   const [tempid, setTempid] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
@@ -35,6 +38,34 @@ export default function Wizardstep1({ next, previous }) {
       onSubmitform();
     }
   }, [errors]);
+
+  // useEffect(() => {
+  //   getDocumentbyID(id);
+    
+  // }, []);
+  // const getDocumentbyID = async (id) => {
+  
+  //   const response = await axios.get(
+  //     process.env.REACT_APP_API_SERVICE_URL +`/docgeneration/${id}`
+     
+  //   );
+   
+
+  //   if (response.status == 200) {
+  //     SetValues({
+  //       templateId: id,
+  //       templateName: response.data.templateName,
+  //       templateDec: response.data.templateDec,
+  //       templateCode: response.data.templateCode,
+  //       filter1: response.data.filter1,
+  //       filter2: response.data.filter2,
+
+   
+  //     });
+  //   }
+  // };
+ 
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,6 +92,20 @@ export default function Wizardstep1({ next, previous }) {
         if (response.status === 200) {
           let templateID = response.data.templateId;
           setTempid(templateID);
+
+          SetValues({
+         
+            templateName: response.data.templateName,
+            templateDec: response.data.templateDec,
+            templateCode: response.data.templateCode,
+            filter1: response.data.filter1,
+            filter2: response.data.filter2,
+    
+       
+          });
+
+          
+       
 
           next(templateID);
           swal({

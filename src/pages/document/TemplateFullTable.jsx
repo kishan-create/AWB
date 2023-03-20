@@ -113,6 +113,9 @@ export default function TemplateFullTable() {
   const params = useParams();
   const test = params.id;
 
+
+ 
+
   useEffect(() => {
     getDocumentAddress(params.id);
     HideShowDivs(selectedOption);
@@ -209,7 +212,7 @@ export default function TemplateFullTable() {
     e.preventDefault();
     const thisclickrow = e.currentTarget;
     swal({
-      title: "Are you sure ??",
+      title: "Are you sure to delete ??",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -246,7 +249,7 @@ export default function TemplateFullTable() {
       const blob = new Blob([response.data], { type: 'application/octet-stream' });
       saveAs(blob, filename);
     } catch (error) {
-      console.log(error);
+     
     }
 
 
@@ -290,6 +293,8 @@ export default function TemplateFullTable() {
           });
         }
         getDocumentAddress(test);
+        setSelectedFile(null)
+        handleButtonClick();
       });
   };
 
@@ -505,9 +510,7 @@ export default function TemplateFullTable() {
                     </div>
                   </div>
                   <div className="p-l-15 m-b-50 ">
-                    <button className="next-pre-btn  mrg-r-3" type="button">
-                      Back
-                    </button>
+                
                     <button className="next-pre-btn  mrg-r-3" type="submit">
                       Save
                     </button>

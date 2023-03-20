@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from "axios";
 const Edituserfunctions = () => {
     const params = useParams();
-    //console.log(params);
+
     const [rows, setUserrows] = useState([]);
     const [passwordType, setPasswordType] = useState("password");
   const [passwordInput, setPasswordInput] = useState("shany");
