@@ -180,7 +180,7 @@ const UserTogroups = async (e, data, userid, reseMethod) => {
           title: "",
           text: "User Added successfully",
           icon: "success",
-          button: "ok",
+          button: "OK",
 
         });
       }

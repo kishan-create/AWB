@@ -176,7 +176,7 @@ EnhancedTableHead.propTypes = {
 //           title: "",
 //           text: "Agent Added successfully",
 //           icon: "success",
-//           button: "ok",
+//           button: "OK",
 
 //         });
 //       }
@@ -224,7 +224,7 @@ const AgentToagency = async (e, data, AgentId, reseMethod) => {
             title: "",
             text: "Agent Added successfully",
             icon: "success",
-            button: "ok",
+            button: "OK",
 
           });
         }
@@ -254,7 +254,8 @@ export default function AddAgentToAgency(props) {
     const response = await fetch(
       
 
-      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/nonagents`
+      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/agents`
+
     );
     const data = await response.json();
     setAgentrows(data);

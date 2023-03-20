@@ -191,7 +191,7 @@ EnhancedTableToolbar.propTypes = {
 //           title: "",
 //           text: " Record deleted successfully",
 //           icon: "success",
-//           button: "ok",
+//           button: "OK",
 
 //         });
 //       }
@@ -235,7 +235,7 @@ const DeleteAgent = async (e,data, groupID, reseMethod) => {
           title: "",
           text: " Record deleted successfully",
           icon: "success",
-          button: "ok",
+          button: "OK",
 
         });
       }
@@ -300,8 +300,7 @@ const handleClick = (event, producerId) => {
   const getAgents = async (id) => {
     const response = await fetch(
     
-      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/agents`
-      
+      process.env.REACT_APP_API_SERVICE_URL +`/agency/${id}/nonagents`
     );
 
     const data = await response.json();

@@ -58,7 +58,7 @@ const Registration = (registeration_validation) => {
             title: "",
             text: "User Added successfully",
             icon: "success",
-            button: "ok",
+            button: "OK",
 
           }).then(() => {
             // Redirect to another page using history.push
