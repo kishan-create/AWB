@@ -344,7 +344,7 @@ export default function ViewGroupDetails(props) {
                         id={labelId}
                         scope="row"
                         padding="none"
-                        className="td-left"
+                       
                       >
                         {row.userName}
                       </TableCell>
