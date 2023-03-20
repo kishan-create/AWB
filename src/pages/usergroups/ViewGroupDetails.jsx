@@ -330,7 +330,7 @@ export default function ViewGroupDetails(props) {
                       key={index}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell padding="checkbox" className="td-left">
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
@@ -344,11 +344,12 @@ export default function ViewGroupDetails(props) {
                         id={labelId}
                         scope="row"
                         padding="none"
+                        className="td-left"
                       >
                         {row.userName}
                       </TableCell>
-                      <TableCell align="right">{row.userFullName}</TableCell>
-                      <TableCell align="right">{row.userEmail}</TableCell>
+                      <TableCell align="left">{row.userFullName}</TableCell>
+                      <TableCell align="left">{row.userEmail}</TableCell>
                     </TableRow>
                   );
                 })}
