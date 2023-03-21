@@ -41,7 +41,7 @@ export default function Multiplefileupload(props)
     const filesSelected = (event) => {
       const file = event.target.files[0];
 
-      // Check if file size is less than 1MB
+     
       if (file.size > 1024 * 1024 *10) {
         swal(" File size must be less than 10MB!", {
           icon: "warning",
@@ -127,6 +127,7 @@ export default function Multiplefileupload(props)
      // selectedFiles.splice(index2, 1);
       setValidFiles([...validFiles]);
       setSelectedFiles([...validFiles]);
+
       // if (index3 !== -1) {
       //   unsupportedFiles.splice(index3, 1);
       //   setUnsupportedFiles([...unsupportedFiles]);
@@ -158,6 +159,10 @@ export default function Multiplefileupload(props)
     //     return { rows: updatedRows };
     //   })
     // };
+
+
+    console.log(validFiles);
+    console.log(selectedFiles);
 
   
 
