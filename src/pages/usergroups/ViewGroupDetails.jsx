@@ -162,7 +162,6 @@ EnhancedTableToolbar.propTypes = {
 //           text: " Record deleted successfully",
 //           icon: "success",
 //           button: "OK",
-
 //         });
 //       }
 //     });
@@ -202,7 +201,6 @@ const DeleteUsers = async (e, data, groupID, reseMethod) => {
           text: " Record deleted successfully",
           icon: "success",
           button: "OK",
-
         });
       }
     });
@@ -332,7 +330,7 @@ export default function ViewGroupDetails(props) {
                       key={index}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell padding="checkbox" >
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
@@ -346,11 +344,12 @@ export default function ViewGroupDetails(props) {
                         id={labelId}
                         scope="row"
                         padding="none"
+                       
                       >
                         {row.userName}
                       </TableCell>
-                      <TableCell align="right">{row.userFullName}</TableCell>
-                      <TableCell align="right">{row.userEmail}</TableCell>
+                      <TableCell align="left">{row.userFullName}</TableCell>
+                      <TableCell align="left">{row.userEmail}</TableCell>
                     </TableRow>
                   );
                 })}

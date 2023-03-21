@@ -13,7 +13,7 @@ export default function EditUsers() {
     handlePasswordChange,passwordType,passwordInput,togglePassword,values,handleChange,updateUsers, errors
     
   } = Edituserfunctions(params.id, edit_user_validation);
-  // } = Edituserfunctions(params.id,registeration_validation);
+  
   return (
     <div className="app-wrapper mt-4">
         <div className="app-content pt-2 p-md-2">

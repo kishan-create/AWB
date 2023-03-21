@@ -74,7 +74,6 @@ const updateusergroup = async (e) => {
 //         text: "User Group Updated successfully",
 //         icon: "success",
 //         button: "OK",
-
 //       });
 //     }
 //   }

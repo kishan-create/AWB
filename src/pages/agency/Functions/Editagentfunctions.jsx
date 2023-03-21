@@ -94,7 +94,6 @@ const onSubmitform = (e) => {
           text: "Agency Updated successfully",
           icon: "success",
           button: "OK",
-
         });
        
       }

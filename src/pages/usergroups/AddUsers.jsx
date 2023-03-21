@@ -181,7 +181,6 @@ const UserTogroups = async (e, data, userid, reseMethod) => {
           text: "User Added successfully",
           icon: "success",
           button: "OK",
-
         });
       }
     });
@@ -334,8 +333,8 @@ export default function AddUsers(props) {
                       >
                         {row.userName}
                       </TableCell>
-                      <TableCell align="right">{row.userFullName}</TableCell>
-                      <TableCell align="right">{row.userEmail}</TableCell>
+                      <TableCell align="left">{row.userFullName}</TableCell>
+                      <TableCell align="left">{row.userEmail}</TableCell>
                     </TableRow>
                   );
                 })}

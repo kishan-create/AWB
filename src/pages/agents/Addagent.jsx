@@ -29,15 +29,9 @@ export default function Addagent() {
 
 
 
-  const { handleChange, handleSubmit, values, errors, DeleteAddress } = AgentFunctions(
-    Agent_validation,
-    seen,
-    adressData,
-    listadd,
-    setAddressData,);
 
   const getData = (data) => {
-    console.log(data);
+ 
     setAddressData(data);
 
   };
@@ -73,14 +67,31 @@ export default function Addagent() {
     { name: "Shipping Address", },
   ];
 
+  const confirmedAddress = (index) => {
+    const rows = [...adressData];
+    rows.splice(index, 1);
+ 
+    setAddressData(rows);
+     
+   
+  };
+
 
 
   const RemoveAddress = (index, addrid) => {
-    const rows = [...adressData];
-    rows.splice(index, 1);
-    DeleteAddress(addrid);
-    setAddressData(rows);
+   
+    DeleteAddress(addrid, index);
+   
   };
+
+  
+  const { handleChange, handleSubmit, values, errors, DeleteAddress } = AgentFunctions(
+    Agent_validation,
+    seen,
+    adressData,
+    listadd,
+    setAddressData,
+    confirmedAddress,);
 
 
 
@@ -182,6 +193,9 @@ export default function Addagent() {
                         <AddmultipleAdress
                           addressData={getData}
                           latestAddress={getAddressDataLatest}
+                          addressarray={adressData}                        
+
+                          
                         />
                       </div>
 
@@ -243,7 +257,7 @@ export default function Addagent() {
                                 <DeleteIcon
                                   onClick={(e) => {
 
-                                    DeleteAddress(index, row.addressId);
+                                    RemoveAddress(index, row.addressId);
 
                                   }}
                                 />

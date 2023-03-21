@@ -1,60 +1,85 @@
-
-
 import React, { useState } from "react";
 import { useRef, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import { useParams } from "react-router-dom";
+
 
 import { Link } from "react-router-dom";
-
 
 import Document_Validation from "../validations/Document_Validation";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
 
-
-export default function Wizardstep1({ next, previous }) {
-
+export default function Wizardstep1({ next, previous,previousID ,teID,prevID}) {
+  const params = useParams();
   const [tempid, setTempid] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
-
-   const [values, SetValues] = useState({
-
-    templateName:"", 
-  templateDec: "",
-  templateCode: "",
-  filter1: "",
-  filter2: "",
- 
- 
-});
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  SetValues({
-    ...values,
-    [name]: value,
+  const [values, SetValues] = useState({
+    templateName: "",
+    templateDec: "",
+    templateCode: "",
+    filter1: "",
+    filter2: "",
   });
-};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    SetValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && submitted) {
+      onSubmitform();
+    }
+  }, [errors]);
 
 
-useEffect(() => {
-  if (Object.keys(errors).length === 0 && submitted) {
-    onSubmitform();
-  }
-}, [errors]);
 
+
+
+
+  useEffect(() => {
+    if(prevID ){
+    getDocumentbyID(prevID);
+    }
+  }, []);
+  const getDocumentbyID = async (id) => {
+  
+    const response = await axios.get(
+      process.env.REACT_APP_API_SERVICE_URL +`/docgeneration/${id}`
+     
+    );
+   
+
+    if (response.status == 200) {
+      SetValues({
+        templateId: id,
+        templateName: response.data.templateName,
+        templateDec: response.data.templateDec,
+        templateCode: response.data.templateCode,
+        filter1: response.data.filter1,
+        filter2: response.data.filter2,
+
+   
+      });
+    }
+  };
+ 
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const test = setErrors(Document_Validation(values));
     setSubmitted(true);
-  
-
   };
   const onSubmitform = (e) => {
     const response = axios
@@ -76,7 +101,18 @@ useEffect(() => {
           let templateID = response.data.templateId;
           setTempid(templateID);
 
-          next(templateID);
+          SetValues({
+         
+            templateName: response.data.templateName,
+            templateDec: response.data.templateDec,
+            templateCode: response.data.templateCode,
+            filter1: response.data.filter1,
+            filter2: response.data.filter2,
+    
+       
+          });
+
+        next(templateID);
           swal({
             title: "",
             text: "Document Added successfully",
@@ -103,8 +139,7 @@ useEffect(() => {
   return (
     <div>
       <div>
-              
-        <form noValidate encType="multipart/form-data"   onSubmit={handleSubmit} >
+        <form noValidate encType="multipart/form-data" onSubmit={handleSubmit}>
           <div className=" ">
             <div className=" " role="alert">
               <div class="inner p-15">
@@ -141,9 +176,14 @@ useEffect(() => {
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
                             value={values.templateName}
+                            
+                          
                           />
-                    {errors.templateName && (<p className="message validation-sty" >{errors.templateName}</p>)}
-
+                          {errors.templateName && (
+                            <p className="message validation-sty">
+                              {errors.templateName}
+                            </p>
+                          )}
                         </div>
                       </div>
 
@@ -162,8 +202,11 @@ useEffect(() => {
                           aria-describedby="basic-addon1"
                           value={values.templateDec}
                         />
-                    {errors.templateDec && (<p className="message validation-sty">{errors.templateDec}</p>)}
-
+                        {errors.templateDec && (
+                          <p className="message validation-sty">
+                            {errors.templateDec}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -203,9 +246,11 @@ useEffect(() => {
                           aria-describedby="basic-addon1"
                           value={values.filter1}
                         />
-                                                {errors.filter1 && (<p className="message validation-sty">{errors.filter1}</p>)}
-
-          
+                        {errors.filter1 && (
+                          <p className="message validation-sty">
+                            {errors.filter1}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -224,8 +269,11 @@ useEffect(() => {
                           aria-describedby="basic-addon1"
                           value={values.filter2}
                         />
-                         {errors.filter2 && (<p className="message validation-sty">{errors.filter2}</p>)}
-
+                        {errors.filter2 && (
+                          <p className="message validation-sty">
+                            {errors.filter2}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -238,23 +286,14 @@ useEffect(() => {
             </div>
           </div>
 
-
-
           <div className="p-l-15">
-            <button
-              className="next-pre-btn  mrg-r-3"
-              type="submit"
-             
-            >
+            <button className="next-pre-btn  mrg-r-3" type="submit">
               Next
             </button>
             <Link to="/document">
-            <button
-              type="button"
-              className="next-pre-btn-secondary mrg-r-3"
-            >
-              Cancel{" "}
-            </button>
+              <button type="button" className="next-pre-btn-secondary mrg-r-3">
+                Cancel{" "}
+              </button>
             </Link>
           </div>
         </form>

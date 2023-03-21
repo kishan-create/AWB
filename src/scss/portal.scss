@@ -588,7 +588,7 @@ progress {
   color: #6c757d;
 }
 .blockquote-footer::before {
-  content: "— ";
+  content: "— ";
 }
 
 .img-fluid {
@@ -12053,14 +12053,15 @@ body {
   padding: 15px;
 }
 
-.css-1i36psw {
-   text-align:left !important;
-}
-.MuiTableRow-root td{
-   text-align:left !important;
 
-}
+
+.MuiTableRow-root td{   text-align:left !important;}
 
 .width-40 {
   width: 40%;
+}
+
+
+.td-left  {
+  text-align: left !important;
 }

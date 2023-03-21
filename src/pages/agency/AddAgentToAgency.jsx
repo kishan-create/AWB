@@ -148,40 +148,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-// const AgentToagency = async (e, data, AgentId, reseMethod) => {
 
-  
-//   var Groupid = AgentId;
-  
-//   var gmembers = data[0];
-  
-
-//   const userData = {
-//     Groupid: Groupid,
-//     groupmembers: data[0],
-//   };
-
-
-//   const response = axios
-//     .put(
-//       process.env.REACT_APP_API_SERVICE_URL +
-//         `/agency/${Groupid}/agents`,gmembers
-
-
-//     )
-//     .then((response) => {
-//       reseMethod();
-//       if (response.status === 200) {
-//         swal({
-//           title: "",
-//           text: "Agent Added successfully",
-//           icon: "success",
-//           button: "OK",
-
-//         });
-//       }
-//     });
-// };
 
 
 
@@ -225,7 +192,6 @@ const AgentToagency = async (e, data, AgentId, reseMethod) => {
             text: "Agent Added successfully",
             icon: "success",
             button: "OK",
-
           });
         }
       });

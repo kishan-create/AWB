@@ -16,23 +16,39 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteConfirm from "../../components/common/DeleteConfirm";
 import Multiplefileupload from "../../components/common/Multiplefileupload";
 import { Link } from "react-router-dom";
+
 export default function Addagency() {
+ 
+ 
   const [adressData, setAddressData] = useState([]);
   const [fileData, setFileData] = useState([]);
   const [listadd, SetListadd] = useState([]);
-  const { handleChange, handleSubmit, values,errors,DeleteAddress } = AgencyFunctions(
-    Agency_Validation,
-    adressData,
-    fileData,
-    listadd,
-    setAddressData,
-  );
+  const[deleteid,SetDeleteid]=useState("");
+  
+ 
   const getData = (data) => {
-    console.log(data);
+    
     setAddressData(data);
+    //getAllAdresses();
+    SetDeleteid("");
   };
-
-
+  const confirmedAddress = (index) => {
+    const rows = [...adressData];
+    rows.splice(index, 1);
+ 
+    setAddressData(rows);
+     
+   
+  };
+  
+  const RemoveAddress = (index,addrid) => {
+    DeleteAddress(index,addrid);
+    //confirmedAddress(index);
+    
+  };
+  
+ 
+  
   const handleChangeFileUploads = (data) => {
     setFileData(data);
   };
@@ -53,6 +69,14 @@ export default function Addagency() {
    { name: "Permenent Addrzess" },
     { name: "Shipping Address", },
   ];
+  const { handleChange, handleSubmit, values,errors,DeleteAddress} = AgencyFunctions(
+    Agency_Validation,
+    adressData,
+    fileData,
+    listadd,
+    confirmedAddress
+  
+  );
   return (
     <div>
       <AgencyHeader />
@@ -67,7 +91,7 @@ export default function Addagency() {
                   className="app-card alert alert-dismissible shadow-sm mb-4"
                   role="alert"
                 >
-                  <div class="inner p-15">
+                  <div className="inner p-15">
                     <div className="add-headd-wizard add-headd-wizard-active "> Basic Information </div>
 
 
@@ -114,7 +138,7 @@ export default function Addagency() {
                         </label>
                         <div className="input-group mb-3">
                           <input
-                            type="number"
+                            type="text"
                             className="form-control"
                             placeholder="Enter Agency Fbin"
                             name="agencyFbin"
@@ -152,7 +176,7 @@ export default function Addagency() {
                           <AddmultipleAdress
                             addressData={getData}
                             latestAddress={getAddressDataLatest}
-                          />
+                            addressarray={adressData}                         />
                         </div>
 
                       </div>
@@ -185,7 +209,7 @@ export default function Addagency() {
                                 }}
                               >
                                 <TableCell component="th" scope="row">
-                                {addressType[row.addrType - 1].name}
+                                {row.addrType}
                                 </TableCell>
                                 <TableCell align="right">
                                   {row.addrLine1}
@@ -205,8 +229,8 @@ export default function Addagency() {
                                 <TableCell>
                                   <DeleteIcon
                                     onClick={() => {
-                                  
-                                      DeleteAddress(index,row.addressId);
+                                      
+                                        RemoveAddress(index,row.addressId);
                                     }}
                                   />
                                 </TableCell>

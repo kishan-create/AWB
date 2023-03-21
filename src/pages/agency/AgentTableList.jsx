@@ -192,7 +192,6 @@ EnhancedTableToolbar.propTypes = {
 //           text: " Record deleted successfully",
 //           icon: "success",
 //           button: "OK",
-
 //         });
 //       }
 //     });
@@ -236,7 +235,6 @@ const DeleteAgent = async (e,data, groupID, reseMethod) => {
           text: " Record deleted successfully",
           icon: "success",
           button: "OK",
-
         });
       }
     });
@@ -315,8 +313,6 @@ const handleClick = (event, producerId) => {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

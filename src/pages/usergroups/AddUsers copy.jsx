@@ -184,7 +184,6 @@ const UserTogroups = async (e, data) => {
       text: "User Added successfully",
       icon: "success",
       button: "OK",
-
     });
   }
 };

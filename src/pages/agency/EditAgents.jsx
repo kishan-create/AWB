@@ -65,19 +65,7 @@ export default function Editagents() {
 
                     </div>
                   </div>
-{/* 
-                  <div className="row gx-2 gy-2">
-                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                      <label htmlFor="Submission" n className="form-label">Agency Type<span className="red">*</span></label>
-                      <div className="input-group mb-3">
-                        <input type="text" name="agencyType"  onChange={handleChange} value={values.agencyType} className="form-control" placeholder="Enter agencyId" aria-label="Enter agent Phone" aria-describedby="basic-addon1" />
-                      </div>
-                    </div>
-                  </div> */}
 
-                             
-                  
-                  
                   <div className="col-12 mt-4">
                   <input type="submit"  className="next-pre-btn mrg-r-3"   value="Update" />
                    

@@ -232,7 +232,7 @@ export default function DocumentFullTableAgent(id) {
       const blob = new Blob([response.data], { type: 'application/octet-stream' });
       saveAs(blob, filename);
     } catch (error) {
-      console.log(error);
+ 
     }
 
 

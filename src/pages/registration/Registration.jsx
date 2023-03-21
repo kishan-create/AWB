@@ -13,7 +13,6 @@ const Registration = (registeration_validation) => {
     userPhone: "",
     password: "",
     userFullName: "",
-    
   });
 
   const [errors, setErrors] = useState({});
@@ -25,7 +24,7 @@ const Registration = (registeration_validation) => {
       onSubmitform();
     }
   }, [errors]);
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     SetValues({
@@ -45,7 +44,6 @@ const Registration = (registeration_validation) => {
     const response = axios
       .post(process.env.REACT_APP_API_ADMIN_URL + "/user", values)
       .then((responseuser) => {
- 
         if (responseuser.status === 200) {
           SetValues({
             userName: "",
@@ -59,12 +57,10 @@ const Registration = (registeration_validation) => {
             text: "User Added successfully",
             icon: "success",
             button: "OK",
-
           }).then(() => {
             // Redirect to another page using history.push
             navigate("/userlist", { replace: true });
-          });;;
-         
+          });
         }
       })
       .catch(function (error) {
@@ -75,7 +71,6 @@ const Registration = (registeration_validation) => {
           "Duplicate entry found with same user email id."
         ) {
           setErrors({ ...errors, userEmail: "Email already exist" });
-        
         }
       });
   };
