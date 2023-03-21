@@ -6,7 +6,13 @@ import axios from "axios";
 import swal from "sweetalert";
 
 import FileFormValidation from "../../validations/File_upload_validation";
-function Addwizard(selectedOption, previousID, content, selectedFile,previous) {
+function Addwizard(
+  selectedOption,
+  previousID,
+  content,
+  selectedFile,
+  previous
+) {
   const [submitted, setSubmitted] = useState(false);
 
   const [showfile, setShowFile] = useState(false);
@@ -15,30 +21,27 @@ function Addwizard(selectedOption, previousID, content, selectedFile,previous) {
   const [error, setError] = useState("");
   const [values, SetValues] = useState({
     fileselected: selectedFile,
-    content:content ,
- 
+    content: content,
   });
   const navigate = useNavigate();
 
   useEffect(() => {
     if (Object.keys(error).length === 0 && submitted) {
-     onSubmitfileform();
+      onSubmitfileform();
     }
   }, [error]);
 
+
+
+
   const handleSubmitFile = (e) => {
     e.preventDefault();
-    
- 
-
     setSubmitted(true);
 
-    const test = setError(FileFormValidation(selectedFile,content));
-
+    const test = setError(FileFormValidation(selectedFile, content));
   };
 
   const onSubmitfileform = (e) => {
-     
     let formData = new FormData();
     let contentfile = selectedOption + "." + selectedOption;
 
@@ -60,21 +63,17 @@ function Addwizard(selectedOption, previousID, content, selectedFile,previous) {
       .post(process.env.REACT_APP_API_SERVICE_URL + "/document", formData)
       .then((response) => {
         if (response.status === 200) {
-          
           swal({
             title: "",
             text: "Document Uploaded successfully",
             icon: "success",
             button: "OK",
-
           }).then(() => {
             // Redirect to another page using history.push
             navigate("/document", { replace: true });
-          });;;
-         
+          });
         }
       });
-
   };
 
   const HideShowDivs = async (seloptions) => {
@@ -87,7 +86,7 @@ function Addwizard(selectedOption, previousID, content, selectedFile,previous) {
     }
   };
 
-  return { handleSubmitFile, HideShowDivs,error };
+  return { handleSubmitFile, HideShowDivs, error };
 }
 
 export default Addwizard;

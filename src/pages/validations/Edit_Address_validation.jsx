@@ -4,7 +4,7 @@ var zipregex = /^[0-9.-]*$/;
 
 export default function MultipleAddressValidation(values) {
   let errors = {};
-  console.log(values);
+
 
   
   if (!values.addrLine1.trim()) {

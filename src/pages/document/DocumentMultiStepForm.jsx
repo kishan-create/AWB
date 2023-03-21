@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import Addwizard from "./functions/Addwizard";
 import TemplateFullTable from "./TemplateFullTable";
+import axios from "axios";
+import swal from "sweetalert";
 import Wizardstep1 from "./Wizardstep1";
 import Wizardstep2 from "./Wizardstep2";
 
 export default function DocumentMultiStepForm() {
+
+  const [values, SetValues] = useState({
+    templateName: "",
+    templateDec: "",
+    templateCode: "",
+    filter1: "",
+    filter2: "",
+  });
 
   const [step, setStep] = useState(1);
   const[preID,SetPreID]=useState("");
@@ -14,14 +24,18 @@ export default function DocumentMultiStepForm() {
   };
 
   const prevStep = () => {
+    
     setStep(step - 1);
+
   };
+
+  
 
   return (
     <>
       {step === 1 && (
         <div id="section-1">
-          <Wizardstep1 next={nextStep} previous={prevStep} />
+          <Wizardstep1 next={nextStep} previous={prevStep}  prevID  ={preID}/>
         </div>
       )}
 

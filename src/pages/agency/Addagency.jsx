@@ -28,7 +28,7 @@ export default function Addagency() {
     setAddressData,
   );
   const getData = (data) => {
-    console.log(data);
+
     setAddressData(data);
   };
 

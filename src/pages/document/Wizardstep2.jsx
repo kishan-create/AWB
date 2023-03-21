@@ -7,8 +7,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Link } from "react-router-dom";
 import Addwizard from "./functions/Addwizard";
+import Wizardstep1 from "./Wizardstep1";
 
-export default function Wizardstep1({ previousID, previous }) {
+export default function Wizardstep2({ previousID, previous }) {
   const [selectedOption, setSelectedOption] = useState("");
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -19,6 +20,7 @@ export default function Wizardstep1({ previousID, previous }) {
   const [showfile, setShowFile] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  
   
 
 
@@ -55,9 +57,12 @@ export default function Wizardstep1({ previousID, previous }) {
     setContent(value);
   };
   const { handleSubmitFile, fileData,error } = Addwizard(selectedOption, previousID,content,selectedFile);
+
  
   return (
+   
     <div>
+     
       <div>
         <form
           noValidate
