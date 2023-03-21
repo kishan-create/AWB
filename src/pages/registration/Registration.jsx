@@ -68,10 +68,11 @@ const Registration = (registeration_validation) => {
 
         if (
           error.response.data.apierror.message ===
-          "Duplicate entry found with same user email id."
+          "Duplicate entry found with same user email id or user name"
         ) {
           setErrors({ ...errors, userEmail: "Email already exist" });
         }
+        
       });
   };
 

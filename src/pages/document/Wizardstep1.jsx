@@ -39,18 +39,22 @@ export default function Wizardstep1({ next, previous,previousID ,teID,prevID}) {
     if (Object.keys(errors).length === 0 && submitted) {
       onSubmitform();
     }
+    else if(prevID)
+    {
+      getDocumentbyID(prevID);
+      }
   }, [errors]);
 
 
+ 
 
 
 
-
-  useEffect(() => {
-    if(prevID ){
-    getDocumentbyID(prevID);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if(prevID !=null){
+  //   getDocumentbyID(prevID);
+  //   }
+  // }, []);
   const getDocumentbyID = async (id) => {
   
     const response = await axios.get(
@@ -81,58 +85,101 @@ export default function Wizardstep1({ next, previous,previousID ,teID,prevID}) {
     const test = setErrors(Document_Validation(values));
     setSubmitted(true);
   };
-  const onSubmitform = (e) => {
+  const saveTemplate =() =>
+  {
     const response = axios
-      .post(
-        process.env.REACT_APP_API_SERVICE_URL + "/docgeneration",
+    .post(
+      process.env.REACT_APP_API_SERVICE_URL + "/docgeneration",
 
-        values
-      )
-      .then((response) => {
-        if (response.status === 208) {
-          setErrors({ ...errors, templateName: "Duplicate entry found with same template name or template code" });
-          // setErrors({ ...errors, templateName: "Duplicate entry found with same template name or template code" });
-  
-        }
+      values
+    )
+    .then((response) => {
+      if (response.status === 208) {
+        setErrors({ ...errors, templateName: "Duplicate entry found with same template name or template code" });
+        // setErrors({ ...errors, templateName: "Duplicate entry found with same template name or template code" });
+
+      }
 
 
 
-        if (response.status === 200) {
-          let templateID = response.data.templateId;
-          setTempid(templateID);
+      if (response.status === 200) {
+        let templateID = response.data.templateId;
+        setTempid(templateID);
 
-          SetValues({
-         
-            templateName: response.data.templateName,
-            templateDec: response.data.templateDec,
-            templateCode: response.data.templateCode,
-            filter1: response.data.filter1,
-            filter2: response.data.filter2,
-    
+        SetValues({
        
-          });
+          templateName: response.data.templateName,
+          templateDec: response.data.templateDec,
+          templateCode: response.data.templateCode,
+          filter1: response.data.filter1,
+          filter2: response.data.filter2,
+  
+     
+        });
 
-        next(templateID);
-          swal({
-            title: "",
-            text: "Document Added successfully",
-            icon: "success",
-            button: "OK",
-          });
-        }
-      })
-      .catch(function (error) {
-        let dupmsg = error.response.data.apierror.message;
+      next(templateID);
+        swal({
+          title: "",
+          text: "Document Added successfully",
+          icon: "success",
+          button: "OK",
+        });
+      }
+    })
+    .catch(function (error) {
+      let dupmsg = error.response.data.apierror.message;
 
-        if (
-          error.response.data.apierror.status ===
-          "ALREADY_REPORTED"
-        ) {
-          setErrors({ ...errors, templateCode: "Template Code already exist" });
-          setErrors({ ...errors, templateName: "Template Name already exist" });
+      if (
+        error.response.data.apierror.status ===
+        "ALREADY_REPORTED"
+      ) {
+        setErrors({ ...errors, templateCode: "Template Code already exist" });
+        setErrors({ ...errors, templateName: "Template Name already exist" });
 
-        }
+      }
+    });
+  }
+  const updateTemplate=async(e) =>
+  {
+    // e.preventDefault();
+    
+
+    // const test = setErrors(Document_Validation(values));
+    setSubmitted(true);
+
+     const res = await axios.put(
+      process.env.REACT_APP_API_SERVICE_URL +`/docgeneration/${prevID}`,
+      values
+    )
+    .then((response) => {
+      next(prevID);
+  
+    if (response.status == 200) {
+      swal({
+        title: "",
+        text: "Document Updated successfully",
+        icon: "success",
+        button: "OK",
+
       });
+
+
+    }
+  });
+  }
+
+
+  
+  const onSubmitform = (e) => {
+    // e.preventDefault();
+    if(prevID!=="")
+    {
+      updateTemplate();
+    }
+    else {
+      saveTemplate();
+    }
+   
   };
 
  
