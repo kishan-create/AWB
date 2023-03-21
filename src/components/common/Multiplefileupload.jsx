@@ -38,28 +38,47 @@ export default function Multiplefileupload(props)
      props.handleChangeFileUploads(selectedFiles);
     }, [selectedFiles]);
     
-    const filesSelected = () => {
-      const files = fileInputRef.current.files;
-      if (files.length) {
-        let filteredArray = [];
-        for (var index = 0; index < files.length; index++) {
-          let exists = false;
-          for (var i = 0; i < selectedFiles.length; i++) {
-            if (selectedFiles[i].name === files[index].name) {
-              exists = true;
-              break;
-            }
-          }
-          if (!exists) {
-            filteredArray.push(files[index]);
-          }
-        }
-        handleFiles(filteredArray);
-  
+    const filesSelected = (event) => {
+      const file = event.target.files[0];
+
+      // Check if file size is less than 1MB
+      if (file.size > 1024 * 1024 *10) {
+        swal(" File size must be less than 10MB!", {
+          icon: "warning",
+        });
+        // alert('File size must be less than 10MB');
+        event.target.value = ''; // clear file input
+      } else {
+        const files = fileInputRef.current.files;
+        handleFiles(files);
       }
+     
+
+
+
+
+
+      // if (files.length) {
+      //   let filteredArray = [];
+      //   for (var index = 0; index < files.length; index++) {
+      //     let exists = false;
+      //     for (var i = 0; i < selectedFiles.length; i++) {
+      //       if (selectedFiles[i].name === files[index].name) {
+      //         exists = true;
+      //         break;
+      //       }
+      //     }
+      //     if (!exists) {
+      //       filteredArray.push(files[index]);
+      //     }
+      //   }
+      //   handleFiles(filteredArray);
+  
+      // }
       
     };
   
+
     const handleFiles = (files) => {
       for (let i = 0; i < files.length; i++) {
         if (validateFile(files[i])) {
@@ -99,30 +118,59 @@ export default function Multiplefileupload(props)
       element.click();
   }
   
-    const removeFile = (name) => {
-      const index = validFiles.findIndex((e) => e.name === name);
-      const index2 = selectedFiles.findIndex((e) => e.name === name);
-      const index3 = unsupportedFiles.findIndex((e) => e.name === name);
+    const removeFile = (index) => {
+     // const index = validFiles.findIndex((e) => e.name === name);
+      //const index2 = selectedFiles.findIndex((e) => e.name === name);
+     // const index3 = unsupportedFiles.findIndex((e) => e.name === name);
       validFiles.splice(index, 1);
-      selectedFiles.splice(index2, 1);
+      //selectedFiles.splicw
+     // selectedFiles.splice(index2, 1);
       setValidFiles([...validFiles]);
-      setSelectedFiles([...selectedFiles]);
-      if (index3 !== -1) {
-        unsupportedFiles.splice(index3, 1);
-        setUnsupportedFiles([...unsupportedFiles]);
-      }
+      setSelectedFiles([...validFiles]);
+      // if (index3 !== -1) {
+      //   unsupportedFiles.splice(index3, 1);
+      //   setUnsupportedFiles([...unsupportedFiles]);
+      // }
     };
 
-    const deleteFile = () =>{
+
+
+//     const removeFile = (index) => {
+   
+
+//       const rows = [...validFiles];
+//       if (index !== -1){
+//         rows.splice(index, 1);
+//         setValidFiles(rows);
+//       }
+// console.log(rows);
+// console.log(validFiles);
+    
+//     };
+// console.log(validFiles);
+
+
+    // const removeFile=(rowId) =>{
+    //   const rows = [...validFiles];
+
+    //   setValidFiles(validFiles => {
+    //     const updatedRows = validFiles.rows.filter(row => row.name !== rowId);
+    //     return { rows: updatedRows };
+    //   })
+    // };
+
+  
+
+    const deleteFile = (index) =>{
         swal({
-            title: "Are you sure ??",
+            title: "Are you sure to delete ??",
             icon: "warning",
             buttons: true,
             dangerMode: true,
         })
         .then((willDelete) => {
           if (willDelete) {
-            removeFile();
+            removeFile(index);
             swal(" Your  file has been deleted!", {
               icon: "success",
             });
@@ -131,6 +179,7 @@ export default function Multiplefileupload(props)
           }
         });
     }
+
   
     return (
       <div>
@@ -142,7 +191,7 @@ export default function Multiplefileupload(props)
                   <label for="file" class="btn choosefile-attach-txt">
                   <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <g> <path fill="none" d="M0 0h24v24H0z"/> <path d="M14.828 7.757l-5.656 5.657a1 1 0 1 0 1.414 1.414l5.657-5.656A3 3 0 1 0 12 4.929l-5.657 5.657a5 5 0 1 0 7.071 7.07L19.071 12l1.414 1.414-5.657 5.657a7 7 0 1 1-9.9-9.9l5.658-5.656a5 5 0 0 1 7.07 7.07L12 16.244A3 3 0 1 1 7.757 12l5.657-5.657 1.414 1.414z"/> </g> </svg>  
 
-                    Add Documents</label>
+                    Add Documents (Max File Size : 10 mb)</label>
                 <input ref={fileInputRef} type="file"  id="file"  className="file opacity-0"  onChange={filesSelected}></input>
          
                 </div>
@@ -159,7 +208,7 @@ export default function Multiplefileupload(props)
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {validFiles.map((row) => (
+                        {validFiles.map((row, index) => (
                           <TableRow
                             key={row.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -170,7 +219,7 @@ export default function Multiplefileupload(props)
                             <TableCell align="right" className="p-l-1" >
                             <div>  
                                         {" "}
-                                        <a onClick={(e) => deleteFile()}>
+                                        <a onClick={(e) => deleteFile(index)}>
                                         <DeleteIcon/>
                                         </a>
                                       
