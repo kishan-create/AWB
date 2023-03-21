@@ -209,15 +209,15 @@ export default function Addagency() {
                                 }}
                               >
                                 <TableCell component="th" scope="row">
-                                {row.addrType}
+                                {addressType[row.addrType - 1].name}
                                 </TableCell>
-                                <TableCell align="right">
+                                <TableCell align="left">
                                   {row.addrLine1}
                                 </TableCell>
-                                <TableCell align="right">
+                                <TableCell align="left">
                                   {row.addrLine2}
                                 </TableCell>
-                                <TableCell align="right">
+                                <TableCell align="left">
                                  {row.countryId}
                                 </TableCell>
                                 <TableCell align="left">

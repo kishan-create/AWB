@@ -40,6 +40,8 @@ export default function AddmultipleAdress(props) {
     selectedState,
     handleStateChange,
     counties,
+    setSelectedCountry,
+    setSelectedState
   } = CountryStateCountyDropdown();
   const [name, SetName] = useState("shanu");
   const [errors, setErrors] = useState({});
@@ -112,6 +114,8 @@ export default function AddmultipleAdress(props) {
   }
 
   function closeModal() {
+    setSelectedCountry("");
+    setSelectedState("");
     setIsOpen(false);
   }
   const handleChangeDrop = (index, evnt) => {};

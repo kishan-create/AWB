@@ -9,7 +9,7 @@ export default () => (
       <Tab> Agency Details</Tab>
       <Tab>Address</Tab>
       <Tab>Documents</Tab>
-      <Tab>Add Agent</Tab>
+      <Tab>Agents</Tab>
 
     </TabList>
 
