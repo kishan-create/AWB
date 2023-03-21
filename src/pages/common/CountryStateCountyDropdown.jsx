@@ -42,6 +42,6 @@ const handleCountryChange=async(event)=> {
   }
 
  
-return{countries,selectedCountry,handleCountryChange,states,selectedState,handleStateChange,counties}
+return{countries,selectedCountry,handleCountryChange,states,selectedState,handleStateChange,counties,setSelectedCountry}
 }
 export default CountryStateCountyDropdown;
