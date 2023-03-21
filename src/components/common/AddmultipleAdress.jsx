@@ -69,6 +69,7 @@ export default function AddmultipleAdress(props) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   function openModal() {
     setIsOpen(true);
+    //GetAllCountries();
     let data = {
       addrType: 0,
       addrLine1: "",
@@ -80,6 +81,8 @@ export default function AddmultipleAdress(props) {
       zip: "",
       addressId:0
     };
+    //selectedCountry=0;
+   // console.log(props.addressarray);
  //   console.log(inputFields);
     // inputs.addressId=response.data.addrId;
     //setInputFields(props.addressarray);
@@ -150,8 +153,8 @@ export default function AddmultipleAdress(props) {
             addrLine1: "",
             addrLine2: "",
 
-            countryId: response.data.countryId,
-            stateId: response.data.stateId,
+            countryId: 0,
+            stateId: 0,
             countyId: "",
             zip: "",
             addressId:response.data.addrId

@@ -44,7 +44,7 @@ export default function EditMultipleAddress(props) {
     states,
     selectedState,
     handleStateChange,
-    counties,
+    counties,setSelectedCountry,setSelectedState
   } = CountryStateCountyDropdown();
   const [name, SetName] = useState("shanu");
   const [errors, setErrors] = useState({});
@@ -97,6 +97,8 @@ const agencyID = params.id
 
   function closeModal() {
     props.method(agencyID);
+    setSelectedCountry("");
+    setSelectedState("");
 
     setIsOpen(false);
   }
