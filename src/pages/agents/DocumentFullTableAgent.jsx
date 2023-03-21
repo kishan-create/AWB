@@ -205,6 +205,7 @@ export default function DocumentFullTableAgent(id) {
             .then((response) => {
               if (response.status === 200) {
                 getAgencyAddress(test);
+
                 swal({
                   title: "",
                   text: " Record deleted successfully",
@@ -213,7 +214,6 @@ export default function DocumentFullTableAgent(id) {
 
                 });
               }
-              setIsHalfShown(false);
             });
         }
         else {
@@ -232,7 +232,7 @@ export default function DocumentFullTableAgent(id) {
       const blob = new Blob([response.data], { type: 'application/octet-stream' });
       saveAs(blob, filename);
     } catch (error) {
-      console.log(error);
+ 
     }
 
 
@@ -264,6 +264,8 @@ export default function DocumentFullTableAgent(id) {
           });
         }
         getAgencyAddress(test);
+        handleButtonClick();
+
 
 
 

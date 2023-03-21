@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {useNavigate} from 'react-router-dom';
-const AgentFunctions = (Agent_validation, seen, adressData, listadd, setAddressData) => {
+const AgentFunctions = (Agent_validation, seen, adressData, listadd, setAddressData, confirmedAddress) => {
   const [values, SetValues] = useState({
     producerName: "",
     producerEmail: "",
@@ -118,7 +118,7 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd, setAddressD
     setAddressData(rows);
   };
 
-  const DeleteAddress=async(index,addrid )=>
+  const DeleteAddress=async(addrid, index )=>
 {
   swal({
     title: "Are you sure to Delete ??",
@@ -127,7 +127,9 @@ const AgentFunctions = (Agent_validation, seen, adressData, listadd, setAddressD
     dangerMode: true,
   })
   .then((willDelete) => {
+
     if (willDelete) {
+      confirmedAddress(index);
       const res =  axios.delete(
         process.env.REACT_APP_API_SERVICE_URL + `/addresses/${addrid}`
       )

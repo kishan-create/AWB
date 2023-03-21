@@ -314,8 +314,6 @@ const handleClick = (event, producerId) => {
     setOrderBy(property);
   };
 
-
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

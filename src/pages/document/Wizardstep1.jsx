@@ -12,7 +12,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CircleIcon from "@mui/icons-material/Circle";
 import insurnnew from "../../images/insurancenew.svg";
 
-export default function Wizardstep1({ next, previous }) {
+export default function Wizardstep1({ next, previous,previousID ,teID,prevID}) {
   const params = useParams();
   const [tempid, setTempid] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -33,37 +33,45 @@ export default function Wizardstep1({ next, previous }) {
     });
   };
 
+  
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitted) {
       onSubmitform();
     }
   }, [errors]);
 
-  // useEffect(() => {
-  //   getDocumentbyID(id);
-    
-  // }, []);
-  // const getDocumentbyID = async (id) => {
+
+
+
+
+
+  useEffect(() => {
+    if(prevID ){
+    getDocumentbyID(prevID);
+    }
+  }, []);
+  const getDocumentbyID = async (id) => {
   
-  //   const response = await axios.get(
-  //     process.env.REACT_APP_API_SERVICE_URL +`/docgeneration/${id}`
+    const response = await axios.get(
+      process.env.REACT_APP_API_SERVICE_URL +`/docgeneration/${id}`
      
-  //   );
+    );
    
 
-  //   if (response.status == 200) {
-  //     SetValues({
-  //       templateId: id,
-  //       templateName: response.data.templateName,
-  //       templateDec: response.data.templateDec,
-  //       templateCode: response.data.templateCode,
-  //       filter1: response.data.filter1,
-  //       filter2: response.data.filter2,
+    if (response.status == 200) {
+      SetValues({
+        templateId: id,
+        templateName: response.data.templateName,
+        templateDec: response.data.templateDec,
+        templateCode: response.data.templateCode,
+        filter1: response.data.filter1,
+        filter2: response.data.filter2,
 
    
-  //     });
-  //   }
-  // };
+      });
+    }
+  };
  
 
 
@@ -104,10 +112,7 @@ export default function Wizardstep1({ next, previous }) {
        
           });
 
-          
-       
-
-          next(templateID);
+        next(templateID);
           swal({
             title: "",
             text: "Document Added successfully",
@@ -171,6 +176,8 @@ export default function Wizardstep1({ next, previous }) {
                             aria-label="Date of Submission"
                             aria-describedby="basic-addon1"
                             value={values.templateName}
+                            
+                          
                           />
                           {errors.templateName && (
                             <p className="message validation-sty">

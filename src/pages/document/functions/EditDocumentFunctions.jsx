@@ -113,8 +113,7 @@ useEffect(() => {
   };
   const onSubmitform = async (e) => {
     
-   
-    const res = await axios.put(
+      const res = await axios.put(
       process.env.REACT_APP_API_SERVICE_URL +`/docgeneration/${id}`,
       values
     )

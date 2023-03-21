@@ -151,6 +151,10 @@ export default function AwbTableChild(props) {
   const handleChangeFileUploads = (data) => {
     setSeen(data);
   };
+
+  const handleButtonClick = () => {
+    setIsHalfShown(!isHalfShown);
+  };
   const submitFiles = (test) => {
     let formData = new FormData();
 
@@ -175,13 +179,12 @@ export default function AwbTableChild(props) {
           });
         }
         getRows();
+        handleButtonClick();
         // getAgencyAddress(test);
       });
   };
 
-  const handleButtonClick = () => {
-    setIsHalfShown(!isHalfShown);
-  };
+ 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.

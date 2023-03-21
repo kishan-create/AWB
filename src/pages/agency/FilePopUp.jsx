@@ -60,7 +60,7 @@ export default function FilePopUp(id) {
     setSeen(data)
 };
 
- console.log(seen);
+
 
   const onSubmitform = (inputs,btncount) => {
     const response = axios
