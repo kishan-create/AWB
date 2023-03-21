@@ -6,7 +6,7 @@ var zipregex = /^[0-9.-]*$/;
 
   let errors = {};
 
-  if (!values.addrType.trim()) {
+  if (!values.addrType) {
     errors.addrType = "Address Type Required";
   }
   if (!values.addrLine1.trim()) {

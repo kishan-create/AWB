@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import http from "../components/common/http-common";
 import {useNavigate} from 'react-router-dom';
 
-const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, setAddressData) => {
+const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, confirmedAddress) => {
   const [values, SetValues] = useState({
     agencyName: "",
     agencyNpn: "",
@@ -16,7 +16,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, setAd
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
-   
+    
     if (Object.keys(errors).length === 0 && isSubmitting) {
       onSubmitform();
     }
@@ -110,13 +110,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, setAd
       });
   };
 
-  const RemoveAddress = (index) => {
-   
-
-    const rows = [...adressData];
-    rows.splice(index, 1);
-    setAddressData(rows);
-  };
+ 
 
   const DeleteAddress=async(index,addrid )=>
 {
@@ -128,6 +122,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, setAd
   })
   .then((willDelete) => {
     if (willDelete) {
+     confirmedAddress(index);
       const res =  axios.delete(
         process.env.REACT_APP_API_SERVICE_URL + `/addresses/${addrid}`
       )
@@ -141,7 +136,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, setAd
           button: "OK",
 
         });
-        RemoveAddress(index);
+//RemoveAddress(index);
       }
     });
     }
