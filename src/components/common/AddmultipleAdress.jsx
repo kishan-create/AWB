@@ -49,7 +49,7 @@ export default function AddmultipleAdress(props) {
   // const [address1,setAddress1]=useState("");
   const [inputFields, setInputFields] = useState([
     {
-      addrType: "",
+      addrType: 0,
       addrLine1: "",
       addrLine2: "",
 
@@ -67,8 +67,30 @@ export default function AddmultipleAdress(props) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   function openModal() {
     setIsOpen(true);
+    let data = {
+      addrType: 0,
+      addrLine1: "",
+      addrLine2: "",
+
+      countryId: 0,
+      stateId: 0,
+      countyId: "",
+      zip: "",
+      addressId:0
+    };
+ //   console.log(inputFields);
+    // inputs.addressId=response.data.addrId;
+    //setInputFields(props.addressarray);
+  //  if(props.addressarray.length > 0){
+      setInputFields(props.addressarray);
+      setInputFields((prevState) => [...prevState, data]);
+   // }
+   
+    setbtnCount(props.addressarray.length);
+   
   }
   useEffect(() => {
+   
     if (Object.keys(errors).length === 0 && isSubmitting) {
       onSubmitform(inputFields[btnCount], btnCount);
     }
@@ -84,6 +106,7 @@ export default function AddmultipleAdress(props) {
     });
   };
   function afterOpenModal() {
+
     // references are now sync'd and can be accessed.
     //subtitle.style.color = "#f00";
   }
@@ -101,6 +124,7 @@ export default function AddmultipleAdress(props) {
     submitEachAddress(inputFields[btnCount], btnCount);
   };
   const submitEachAddress = (inputs, btnCount) => {
+ 
     let error = MultipleAddressValidation(
       inputs,
       selectedCountry,
@@ -118,7 +142,7 @@ export default function AddmultipleAdress(props) {
       .then((response) => {
         if (response.status === 200) {
           let data = {
-            addrType: "",
+            addrType: 0,
             addrLine1: "",
             addrLine2: "",
 
@@ -129,9 +153,15 @@ export default function AddmultipleAdress(props) {
             addressId:response.data.addrId
           };
           inputs.addressId=response.data.addrId;
+          //setInputFields(props.addressarray);
           setInputFields((prevState) => [...prevState, data]);
+         {/* setInputFields((prevState) => {
+            const indexToRemove = 1; // Replace with the index you want to remove
+            const newState = [...prevState];
+            newState.splice(indexToRemove, 1);
+            return newState;
+          });*/}
         
-          setbtnCount(btnCount + 1);
           props.addressData(inputFields);
           SetlistAddress([
             ...listaddress,
@@ -142,6 +172,7 @@ export default function AddmultipleAdress(props) {
             },
           ]);
           setIsSubmitting(false);
+       //   setbtnCount(btnCount + 1);
           closeModal();
         }
       });
@@ -149,8 +180,8 @@ export default function AddmultipleAdress(props) {
 
   return (
     <div>
-      <div class="col-12">
-        <button onClick={openModal} type="button" class="btn btn-link">
+      <div className="col-12">
+        <button onClick={openModal} type="button" className="btn btn-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -173,18 +204,18 @@ export default function AddmultipleAdress(props) {
       >
         <div>
           <div>
-            <div class="row gx-2 gy-2">
-              <div class="col-12 mb-3"></div>
+            <div className="row gx-2 gy-2">
+              <div className="col-12 mb-3"></div>
             </div>
             <div className="row gx-2 gy-2">
               <div className="page-grid-3">
                 <div className="">
-                  <label htmlFor="Submission" class="form-label">
-                    Agency address Type <span class="red">*</span>
+                  <label htmlFor="Submission" className="form-label">
+                    Agency address Type <span className="red">*</span>
                   </label>
 
                   <select
-                    class="form-control"
+                    className="form-control"
                     name="addrType"
                     onChange={(evnt) => handleChange(btnCount, evnt)}
                     defaultValue={inputFields.addrType}
@@ -200,7 +231,7 @@ export default function AddmultipleAdress(props) {
                   )}
                 </div>
 
-                <div class="">
+                <div className="">
                   <label htmlFor="Submission" className="form-label">
                     {" "}
                     Address line 1<span className="red">*</span>
@@ -246,7 +277,7 @@ export default function AddmultipleAdress(props) {
                   </label>
 
                   <select
-                    class="form-control"
+                    className="form-control"
                     name="countryId"
                     onChange={handleCountryChange}
                     value={selectedCountry}
@@ -267,7 +298,7 @@ export default function AddmultipleAdress(props) {
                     State <span className="red">*</span>
                   </label>
                   <select
-                    class="form-control"
+                    className="form-control"
                     name="stateId"
                     value={selectedState}
                     onChange={handleStateChange}
@@ -289,7 +320,7 @@ export default function AddmultipleAdress(props) {
                     County <span className="red">*</span>
                   </label>
                   <select
-                    class="form-control"
+                    className="form-control"
                     name="countyId"
                     disabled={!selectedState}
                     value={inputFields.countyId}
@@ -332,10 +363,10 @@ export default function AddmultipleAdress(props) {
             <div className="row gx-2 gy-4"></div>
           </div>
 
-          <div class="col-12">
+          <div className="col-12">
             <button
               type="button"
-              class="next-pre-btn mrg-r-3"
+              className="next-pre-btn mrg-r-3"
               onClick={addAddress}
             >
               Save
