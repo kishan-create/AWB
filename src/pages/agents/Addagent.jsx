@@ -234,10 +234,10 @@ export default function Addagent() {
                                 {addressType[row.addrType - 1].name}
 
                               </TableCell>
-                              <TableCell align="right">
+                              <TableCell align="left">
                                 {row.addrLine1}
                               </TableCell>
-                              <TableCell align="right">
+                              <TableCell align="left">
                                 {row.addrLine2}
                               </TableCell>
 
