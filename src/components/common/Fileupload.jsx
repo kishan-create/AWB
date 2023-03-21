@@ -89,7 +89,7 @@ function Fileupload() {
       handleFiles(filteredArray);
 
     }
-   console.log(selectedFiles);
+ 
 
     
     
