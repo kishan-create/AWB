@@ -23,7 +23,7 @@ export default function DocumentMultiStepForm() {
     SetPreID(templateID);
   };
 
-  const prevStep = () => {
+  const prevStep = (previd) => {
     
     setStep(step - 1);
 

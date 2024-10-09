@@ -104,7 +104,6 @@ const agencyID = params.id
     props.method(agencyID);
     setSelectedCountry("");
     setSelectedState("");
-
     setIsOpen(false);
   }
   const handleChangeDrop = (index, evnt) => {};

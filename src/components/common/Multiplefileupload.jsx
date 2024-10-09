@@ -39,6 +39,7 @@ export default function Multiplefileupload(props)
     }, [selectedFiles]);
     
     const filesSelected = (event) => {
+
       const file = event.target.files[0];
 
      
@@ -50,6 +51,7 @@ export default function Multiplefileupload(props)
         event.target.value = ''; // clear file input
       } else {
         const files = fileInputRef.current.files;
+        
         handleFiles(files);
       }
      
@@ -118,7 +120,7 @@ export default function Multiplefileupload(props)
       element.click();
   }
   
-    const removeFile = (index) => {
+    const removeFile = (index, event) => {
      // const index = validFiles.findIndex((e) => e.name === name);
       //const index2 = selectedFiles.findIndex((e) => e.name === name);
      // const index3 = unsupportedFiles.findIndex((e) => e.name === name);
@@ -127,6 +129,9 @@ export default function Multiplefileupload(props)
      // selectedFiles.splice(index2, 1);
       setValidFiles([...validFiles]);
       setSelectedFiles([...validFiles]);
+
+      // event.target.value = ''; // clear file input
+
 
       // if (index3 !== -1) {
       //   unsupportedFiles.splice(index3, 1);
@@ -166,7 +171,7 @@ export default function Multiplefileupload(props)
 
   
 
-    const deleteFile = (index) =>{
+    const deleteFile = (index, event) =>{
         swal({
             title: "Are you sure to delete ??",
             icon: "warning",
@@ -175,7 +180,7 @@ export default function Multiplefileupload(props)
         })
         .then((willDelete) => {
           if (willDelete) {
-            removeFile(index);
+            removeFile(index, event);
             swal(" Your  file has been deleted!", {
               icon: "success",
             });

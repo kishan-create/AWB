@@ -11,7 +11,6 @@ export default function ListAgent() {
         <div className="app-card alert alert-dismissible p-0 shadow-sm mb-4" role="alert">
           <div className="inner">
             <div className="table-responsive">
-         
             <AwbTable tableHeader="AGENT" tableRow="producer" id="producerId" baseURL={process.env.REACT_APP_API_SERVICE_URL} displayName="Agent"/>
             </div>
           </div>

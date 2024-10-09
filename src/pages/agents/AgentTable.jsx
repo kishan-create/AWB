@@ -96,6 +96,8 @@ export default function AgentTable() {
     getAgentlists();
   }, []);
 
+
+
   const getAgentlists = async () => {
     const response = await fetch(
       process.env.REACT_APP_API_SERVICE_URL + "/producer"
@@ -162,6 +164,7 @@ export default function AgentTable() {
 
   return (
     <div>
+      
       <AgencyHeader/>
       <div className="app-wrapper mt-4">
         <div className="app-content pt-2 p-md-2">
@@ -174,6 +177,7 @@ export default function AgentTable() {
                 <div className="table-responsive">
                   <>
                     <>
+       
                       <Box sx={{ width: "100%" }}>
                         <Paper sx={{ width: "100%", mb: 2 }}>
                           <EnhancedTableToolbar numSelected={selected.length} />
@@ -184,9 +188,11 @@ export default function AgentTable() {
                               type="button"
                               class="next-pre-btn mrg-r-3 fl-right"
                             >
-                              + Add Agent
+                              + Add Agent 
                             </button>
                           </Link>
+                          
+    
                           <TableContainer>
                             <Table
                               sx={{ minWidth: 750 }}

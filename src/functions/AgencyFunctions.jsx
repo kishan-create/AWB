@@ -67,7 +67,7 @@ const AgencyFunctions = (Agency_Validation, adressData, fileData, listadd, confi
       });
   };
   const submitAddress = (agencyID) => {
-    console.log("address");
+   
     listadd.map((listaddress, key) => {
       listaddress.agencyId = agencyID;
     });

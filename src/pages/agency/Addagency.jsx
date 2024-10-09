@@ -98,7 +98,7 @@ export default function Addagency() {
                     <div className="page-grid-3">
                       <div className="">
                         <label htmlFor="Submission" className="form-label">
-                          Agency Name <span className="red">*</span>
+                          Agency Name<span className="red">*</span>
                         </label>
                         <div className="input-group mb-3">
                           <input
@@ -201,7 +201,7 @@ export default function Addagency() {
                           <TableBody>
                             {adressData.map((row, index) => (
                               <TableRow
-                                key={row.addrType}
+                                key={index}
                                 sx={{
                                   "&:last-child td, &:last-child th": {
                                     border: 0,

@@ -10773,6 +10773,12 @@ button.close:focus {
   border-radius: 5px;
   
 }
+.next-pre-btn-search {
+  
+
+  padding: 0.3rem 1.8rem !important;
+  
+}
 .swal-title {
   color: rgba(0,0,0,.65);
   font-weight: 600;
@@ -12436,6 +12442,25 @@ body {
   padding-bottom: 20px;
   color: #2e4153;
 }
+.page-grid-newfour {
+  float: left;
+  width: 100%;
+  display: block;
+  margin-top: 0px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-columns: 30% 30% 30% 10% !important;
+
+  gap: 20px 20px;
+  grid-auto-rows: minmax(0px, auto);
+ 
+}
+.search-popup-p20{
+  padding-top: 8px;
+  margin-left: -10px;
+
+}
+
 @media only screen and (max-width:1200px){
 .add-headd-wizard {
   font-size: 13px;
@@ -12463,6 +12488,7 @@ body {
   display: flex;
 }
 }
+
 @media only screen and (max-width: 980px){
 .progress-bar-container {
   position: relative;
@@ -12482,7 +12508,21 @@ body {
   padding-bottom: 30px;
   padding-top: 30px;
 }
+.page-grid-newfour {
+  float: left;
+  width: 100%;
+  display: block;
+  margin-top: 0px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-columns: 50% 50% 50% 20% !important;
+
+  gap: 20px 20px;
+  grid-auto-rows: minmax(0px, auto);
+  
 }
+}
+
 @media only screen and (max-width: 786px){
 .bottom-arrow {
      
@@ -12540,3 +12580,38 @@ body {
   width: 100%;
   padding-top: 5px;
 }
+
+
+.modelcount {
+  margin-top: 100px;
+  margin-left: 20%;
+}
+.css-o4b71y-MuiAccordionSummary-content{
+
+  height: 350px;
+  overflow: scroll;
+
+}
+
+
+.css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root.Mui-focusVisible {
+ background-color: #fff !important;
+}
+.form-control {
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  height: 2.2rem !important;
+  border-color: #9ca0a8;
+  color: #5d6778;
+  margin-top: 5px;
+  font-size: 11px !important;
+  
+  }
+
+  .page-grid-margin {
+    margin-bottom: 15px !important;
+
+  }
+  .label-margin-bt{
+    margin-bottom: -2px !important;
+  }

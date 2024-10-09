@@ -24,6 +24,8 @@ import Tabledata from "../../components/common/Tabledata";
 import axios from "axios";
 import swal from "sweetalert";
 import EditMultipleAddress from "../../pages/agents/EditMultipleAddressAgent";
+import Search from "../../components/common/Search"
+import AccordionPanel from "../common/Accordian"
 const {
   descendingComparator,
   getComparator,
@@ -86,8 +88,11 @@ export default function AwbTable(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { rows, columns, getRows } = AwbTableFunctions(props);
+  const { rows, columns, getRows, searchparameter } = AwbTableFunctions(props);
   const [adressData, setAddressData] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState([]);
+  const [searchdata,setSearchData] = React.useState([]);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -131,6 +136,9 @@ export default function AwbTable(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  const getSearchData = (data) =>{
+    setSearchData(data)
+  }
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
@@ -172,6 +180,10 @@ export default function AwbTable(props) {
       }
     });
   };
+  const handleSearch = (query) => {
+    // Call API to get search results based on query
+    // Update searchResults state with results
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -198,6 +210,10 @@ export default function AwbTable(props) {
             );
           }
         })()}
+
+<AccordionPanel tableRow = {props.tableRow} colums ={columns}  searchdata={getSearchData} search ={searchparameter} />
+
+
 
         <TableContainer>
           <Table

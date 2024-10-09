@@ -34,31 +34,44 @@ import Users from "../../pages/users/Users";
 import ListAgent from "../../pages/agents/ListAgent";
 import ListAgency from "../../pages/agency/ListAgency";
 import ListAgentData from "../../pages/agents/ListAgentData"
+import Sample from "../../pages/agents/sample"
+import Newsample from "../../pages/agents/Newsample"
+import Save from  "../../pages/agents/save"
+
 function Content() {
   return (
-    
 
-  <Routes>
-   <Route path="/" exact={true} element={<Users/>}/>
-  <Route path="/user" exact={true} element={<UserRegistration/>}/>
-  <Route path="/login" exact={true} element={<Login/>}/>
-  <Route path="/userlist" exact={true} element={<Users/>}/>
-  <Route  path="/edituser/:id" exact={true} element={<EditUsers/>} /> 
-  <Route  path="/usergroup" exact={true} element={<UserGroup/>} /> 
-  <Route path="/editproducer/:id" exact={true} element={<ListAgentData />} />
-  <Route path="/producer" exact={true} element={<Addagent />} />
-  <Route path="/grouplist" exact={true} element={<ListGroups/>}/>
- 
-  <Route path="/agency" exact={true} element={<Addagency/>}/>
-  <Route path="/listagency" exact={true} element={<ListAgency />} />
-  <Route path="/listagentheaddata/:id" exact={true} element={<ListAgentsData />}/>
-  <Route path="/editusergroup/:id" exact={true} element={<AddUserstogroup />} />
-  <Route path="/listagent" exact={true} element={<ListAgent />} />
-  {/* <Route path="/editaddress/:id" exact={true} element={<EditAddress />} /> */}
-  <Route path="/editaddress/:id/:type/:url" exact={true} element={<EditAddress />} />
-  {/* <Route path="/listdata/:id" exact={true} element={<ListAgentData />} /> */}
-  <Route path="/editagentaddress/:id" exact={true} element={<EditAgentAddress />} />
-  <Route path="/document" exact={true} element={<ListDocument />} />
+
+    <Routes>
+      <Route path="/" exact={true} element={<Users />} />
+      <Route path="/user" exact={true} element={<UserRegistration />} />
+      <Route path="/login" exact={true} element={<Login />} />
+      <Route path="/userlist" exact={true} element={<Users />} />
+      <Route path="/edituser/:id" exact={true} element={<EditUsers />} />
+      <Route path="/usergroup" exact={true} element={<UserGroup />} />
+      <Route path="/editproducer/:id" exact={true} element={<ListAgentData />} />
+      <Route path="/producer" exact={true} element={<Addagent />} />
+      <Route path="/grouplist" exact={true} element={<ListGroups />} />
+
+      <Route path="/agency" exact={true} element={<Addagency />} />
+      <Route path="/listagency" exact={true} element={<ListAgency />} />
+      <Route path="/listagentheaddata/:id" exact={true} element={<ListAgentsData />} />
+      <Route path="/editusergroup/:id" exact={true} element={<AddUserstogroup />} />
+      <Route path="/listagent" exact={true} element={<ListAgent />} />
+      {/* <Route path="/editaddress/:id" exact={true} element={<EditAddress />} /> */}
+      <Route path="/editaddress/:id/:type/:url" exact={true} element={<EditAddress />} />
+      {/* <Route path="/listdata/:id" exact={true} element={<ListAgentData />} /> */}
+      <Route path="/editagentaddress/:id" exact={true} element={<EditAgentAddress />} />
+      <Route path="/document" exact={true} element={<ListDocument />} />
+      <Route path="/sampleid" exact={true} element={<Sample />} />
+      <Route path="/sampleid/Newsample" exact={true} element={<Newsample />} />
+      <Route path="/sampleid/Save" exact={true} element={<Save />} />
+
+      
+
+
+
+
 
 
       <Route
@@ -72,7 +85,7 @@ function Content() {
         exact={true}
         element={<AddDocumentWizard />}
       />
- <Route
+      <Route
         path="/editagency/:id"
         exact={true}
         element={<ListAgentsData />}
@@ -82,9 +95,9 @@ function Content() {
         exact={true}
         element={<EditUsergroup />}
       />
-      
+
     </Routes>
-    
+
   );
 }
 

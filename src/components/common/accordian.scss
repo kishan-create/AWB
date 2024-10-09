@@ -1,0 +1,21 @@
+.validation-tooltip {
+     color: red;
+     font-size: 11px;
+     position: relative;
+     cursor: pointer;
+     text-transform: none;
+     line-height: 1;
+     -webkit-user-select: none;
+     user-select: none;
+     border: 1px solid #ccc;
+     border-radius: 0.3ch;
+     box-shadow: 0 0.5em 1em -0.5em rgba(14, 19, 29, 0.404);
+     background: white;
+     text-align: center;
+     min-width: 3em;
+     max-width: 450px;
+     white-space: nowrap;
+     overflow: auto;
+     padding: 1.0ch 1.9ch;
+     margin-top: -12px;
+     }

@@ -23,11 +23,13 @@ const AwbTableFunctions = (props) => {
     else {
       setUserrows(data);
     }
+
   };
   const getColumns = async () => {
     const response = await fetch(process.env.REACT_APP_API_SERVICE_URL + "/tableconfig/pagecode" + "/" + props.tableHeader + "/componentcode/TABLE");
     const data = await response.json();
     SetColumns(data);
+    
   };
 
   const getFullResponse = async (ID) => {
@@ -83,9 +85,13 @@ const AwbTableFunctions = (props) => {
 
   };
 
+  const searchparameter = (data) =>{
+    setUserrows(data)
+  }
+
 
  
-  return { rows, columns, getRows, getAgencyAddress, downloaddocument };
+  return { rows, columns, getRows, getAgencyAddress, downloaddocument, searchparameter };
     };
     export default AwbTableFunctions;
 
